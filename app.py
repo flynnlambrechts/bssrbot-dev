@@ -17,6 +17,7 @@ from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
 from shopen import *
 from shopen import con
+global con
 
 '''from dbhelper import DBHelper
 
@@ -81,6 +82,7 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 
 def get_bot_response(message_text):
+    global con
     global message
     message = message_text.lower()
     global response
@@ -97,6 +99,7 @@ def get_bot_response(message_text):
         response.append("You're welcome!")
     elif checkForShopen(message):
         response = response + checkForShopen(message)
+        con.close()
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     else:
@@ -125,7 +128,6 @@ def checkForShopen(message):
         response = response + close_shopen()
     elif "check" in message:
         response = response + get_shopen()
-    con.close()
     return response
 
 
