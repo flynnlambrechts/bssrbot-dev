@@ -4,17 +4,8 @@ import psycopg2
 import time
 import datetime
 
-
-ENV = "HEROKU"
-if ENV == "LOCAL":
-    con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-    print("Local Database opened successfully")
-if ENV == "HEROKU":
-    DATABASE_URL =  os.environ['DATABASE_URL']
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
-else:
-    print("ENV specified wrong.")
-    
+from app import con
+global con   
 
 global person
 person = str("Wendy")
@@ -28,6 +19,8 @@ date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
+    connectToDB()
+    connectcursor
     cur = con.cursor()
     response = ""
     try: 
@@ -46,6 +39,7 @@ def create_shopen():
     return response
 
 def insert_shopen():
+    connectToDB()
     global person
     global current_time, end_time, date
     response = ""
@@ -65,6 +59,7 @@ def insert_shopen():
 
 
 def open_shopen():
+    connectToDB()
     global person
     global current_time, end_time, date
     cur = con.cursor()
@@ -78,6 +73,7 @@ def open_shopen():
     return "Shop has been opened"
 
 def close_shopen():
+    connectToDB()
     global person
     unix = int(time.time())
     current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
@@ -90,6 +86,7 @@ def close_shopen():
     return "Shop has been closed"
 
 def get_shopen():
+    connectToDB()
     cur = con.cursor()
     cur.execute('''SELECT * FROM shopen''')
     rows = cur.fetchall()
