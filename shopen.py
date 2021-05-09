@@ -16,10 +16,10 @@ person = str("Wendy")
 
 global current_time, end_time, date
 unix = int(time.time(TIMEZONE))
-current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
-date_and_time = datetime.datetime.fromtimestamp(unix)
+current_time = str(datetime.datetime.now(TIMEZONE).strftime('%H:%M:%S'))
+date_and_time = datetime.datetime.now(TIMEZONE)
 end_time = date_and_time + datetime.timedelta(hours=3) #closes shop after 3 hours
-date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d'))
+date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
