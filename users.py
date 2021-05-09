@@ -52,9 +52,17 @@ def view_users():
     rows = cur.fetchall()
     for row in rows:
         print("full_name =", row[0])
+        full_name = str(row[0])
         print("first_name =", row[1])
+        first_name = str(row[1])
         print("last_name =", row[2])
+        last_name = str(row[2])
         print("PSID =", row[3], "\n")
+        PSID = str(row[3])
+    response = response + full_name ", " + first_name ", " + last_name ", " + PSID
+    return response
+        
+    
         
     
 
