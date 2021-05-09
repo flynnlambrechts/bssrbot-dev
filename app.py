@@ -114,11 +114,7 @@ def get_bot_response(message_text):
         response = response + getjoke()
     elif "show me users" in message:
         #view_users()
-        response = response + "check logs1: " + view_users()
-    elif message == "add me":
-        full_name, first_name, last_name, PSID = getdetails(message)
-        insert_user(full_name, first_name, last_name, PSID)
-        response = response + "added you"
+        response = response + "check logs1: " + view_users():
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
@@ -153,6 +149,10 @@ def getdetails(message):
     PSID = int(recipient_id)
     return full_name, first_name, last_name, PSID
 
+def adduser():
+    full_name, first_name, last_name, PSID = getdetails(message)
+    insert_user(full_name, first_name, last_name, PSID)
+    
 
 def checkIfGreeting(message):
     possibleGreetings = ["hello", "hi", "help", "hey"]
@@ -191,7 +191,7 @@ def send_message(recipient_id, response):
     global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
-    #insert_user(str('Joe Mama'), str('Joe'), str('Mama'), int('420'))
+    adduser() #adds user to database
     return "success"
 
 
