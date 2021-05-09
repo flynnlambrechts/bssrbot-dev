@@ -130,6 +130,7 @@ def get_shopen():
         else:
             response = response + "Sorry, shop closed :("
     except Exception as error:
+        response = ""
         response = response + "Fail: " + str(type(error))
     return response
 
