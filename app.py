@@ -65,10 +65,12 @@ def receive_message():
                         print(message_text)
                         response_sent_text = get_bot_response(message_text)
                         send_message(recipient_id, response_sent_text)
+                        con.close()
                     #if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
                         response_sent_nontext = "Nice pic!"
                         send_message(recipient_id, response_sent_nontext)
+                        con.close()
         except TypeError:
             print('PING!')
     #con.close()
