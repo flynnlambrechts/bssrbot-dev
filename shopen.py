@@ -133,7 +133,7 @@ def get_shopen():
         
         if timeTillClose(end_time) >= datetime.timedelta(minutes=0):
             if value == "True":
-                response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strptime('%I:%M %p')) + "."
+                response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
                 response = response + "Sorry, shop closed :("
         else:
