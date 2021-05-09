@@ -20,7 +20,7 @@ date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
-    connectToDB()
+    global con
     cur = con.cursor()
     response = ""
     try: 
@@ -36,11 +36,10 @@ def create_shopen():
         con.commit()
     except Exception as error:
         response = response + "Fail: " + str(type(error))
-    con.close()
     return response
 
 def insert_shopen():
-    connectToDB()
+    global con
     global person
     global current_time, end_time, date
     response = ""
@@ -55,12 +54,11 @@ def insert_shopen():
         con.commit()
     except Exception as error:
         response = response + "Fail: " + str(type(error))
-    con.close()
     return response
 
 
 def open_shopen():
-    connectToDB()
+    global con
     global person
     global current_time, end_time, date
     cur = con.cursor()
@@ -70,10 +68,10 @@ def open_shopen():
             (person,current_time,end_time,'true',date))
     print("Shopen updated successfully")
     con.commit()
-    con.close()
     return "Shop has been opened"
 
 def close_shopen():
+    global con
     global person
     unix = int(time.time())
     current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
@@ -83,11 +81,10 @@ def close_shopen():
             (person, current_time,'false'))
     print("Shopen updated successfully")
     con.commit()
-    con.close()
     return "Shop has been closed"
 
 def get_shopen():
-    connectToDB()
+    global con
     cur = con.cursor()
     cur.execute('''SELECT * FROM shopen''')
     rows = cur.fetchall()
@@ -102,7 +99,6 @@ def get_shopen():
         print("value =", row[3])
         response = response + " value = " + str(row[3])
         print("date =", row[4], "\n")
-    con.close()
     return response
         
 

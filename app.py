@@ -18,6 +18,7 @@ from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
 from shopen import *
 from connectdb import connectToDB
+connectToDB()
 from connectdb import con
 global con
 
@@ -102,7 +103,7 @@ def get_bot_response(message_text):
         response = response + checkForEasterEggs(message)
     else:
         response = response + "Sorry, I don't understand"
-        con.close()
+        #con.close()
     return response
 
 
@@ -133,8 +134,10 @@ def checkForShopen(message):
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
+    global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
+    con.close()
     return "success"
 
 
