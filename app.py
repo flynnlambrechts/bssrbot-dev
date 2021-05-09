@@ -17,6 +17,8 @@ from utils import wit_response
 from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
 from shopen import *
+from connectdb import con
+global con
 
 global week
 week = 1 ### work out how to define the week
@@ -28,17 +30,7 @@ bot = Bot(ACCESS_TOKEN)
 flynn_id = "m_bTL21NIhMZzHHCSOYymKdklxKBtona4_wMjcO42dp0FzeQZu367t8TLnsdDkusnEFT5-LjUTcxLpNjXbfkgQ_Q"
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
-def connectToDB():
-    global con
-    ENV = "HEROKU"
-    if ENV == "LOCAL":
-        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-        print("Local Database opened successfully")
-    if ENV == "HEROKU":
-        DATABASE_URL =  os.environ['DATABASE_URL']
-        con = psycopg2.connect(DATABASE_URL, sslmode='require')
-    else:
-        print("ENV specified wrong.")
+
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])

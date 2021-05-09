@@ -4,7 +4,7 @@ import psycopg2
 import time
 import datetime
 
-from app import con
+from connectdb import con
 global con   
 
 global person
