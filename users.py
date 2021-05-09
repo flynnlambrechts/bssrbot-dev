@@ -13,30 +13,33 @@ def create_users():
     response = ""
     try:
         cur.execute('''CREATE TABLE users (
-            first_name VARCHAR(50) PRIMARY KEY NOT NULL,
-            last_name VARCHAR(50) PRIMARY KEY NOT NULL,
+            full_name VARCHAR(100) PRIMARY KEY NOT NUll,
+            first_name VARCHAR(50) NOT NULL,
+            last_name VARCHAR(50) NOT NULL,
             PSID INTEGER NOT NULL
             )''')
         print("Table created successfully")
         con.commit()
     except Exception as error:
-        response = response + "Fail in adding user: " + str(error)
+        response = response + "Fail in adding users table: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
     return response
 
-def insert_user(first_name, last_name, PSID):
+def insert_user(full_name, first_name, last_name, PSID):
     global con
+    response = ""
     try:
         cur = con.cursor()
         cur.execute('''INSERT INTO users (
+            full_name,
             first_name,
             last_name,
             room_number)
-            VALUES (%s,%s,%s)''',
-                    (first_name, last_name, PSID))
+            VALUES (%s,%s,%s,%s)''',
+                    (full_name, first_name, last_name, PSID))
         print("User data inserted successfully")
     except Exception as error:
-        response = response + "Fail: " + str(error)
+        response = response + "Fail in insert user: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
 
 create_users()
