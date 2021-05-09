@@ -2,7 +2,6 @@
 import pyjokes
 
 def getjoke():
-    the_joke = pyjokes.get_joke(language="en",category="neutral")
-    print(the_joke)
+    the_joke = str(pyjokes.get_joke(language="en",category="neutral"))
+    return the_joke
 
-getjoke()
