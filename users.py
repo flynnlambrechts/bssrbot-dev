@@ -12,7 +12,7 @@ def create_users():
     cur = con.cursor()
     response = ""
     try:
-        cur.execute('''CREATE TABLE ressies (
+        cur.execute('''CREATE TABLE users (
             first_name VARCHAR(50) PRIMARY KEY NOT NULL,
             last_name VARCHAR(50) PRIMARY KEY NOT NULL,
             PSID INTEGER NOT NULL
@@ -20,7 +20,7 @@ def create_users():
         print("Table created successfully")
         con.commit()
     except Exception as error:
-        response = response + "Fail: " + str(error)
+        response = response + "Fail in adding user: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
     return response
 
@@ -28,7 +28,7 @@ def insert_user(first_name, last_name, PSID):
     global con
     try:
         cur = con.cursor()
-        cur.execute('''INSERT INTO ressies (
+        cur.execute('''INSERT INTO users (
             first_name,
             last_name,
             room_number)
@@ -40,3 +40,4 @@ def insert_user(first_name, last_name, PSID):
         print("Error: " + str(error) + "\n" + str(type(error)))
 
 create_users()
+con.close()

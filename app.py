@@ -22,6 +22,7 @@ from connectdb import connectToDB
 connectToDB()
 from connectdb import con
 global con
+from users import *
 
 global week
 week = 1 ### work out how to define the week
