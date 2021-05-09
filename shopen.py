@@ -15,9 +15,9 @@ global person
 person = str("Wendy")
 
 global current_time, end_time, date
-current_time = str(datetime.datetime.now(TIMEZONE).strftime('%H:%M:%S'))
+current_time = datetime.datetime.now(TIMEZONE).strftime('%H:%M:%S')
 date_and_time = datetime.datetime.now(TIMEZONE)
-end_time = date_and_time + datetime.timedelta(hours=3) #closes shop after 3 hours
+end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%H:%M:%S') #closes shop after 3 hours
 date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
@@ -92,15 +92,23 @@ def get_shopen():
     rows = cur.fetchall()
     response = ""
     for row in rows:
+        '''
         print("person =", row[0])
-        response = response  + "Person = " + str(row[0]) + "\n"
         print("start_time =", row[1])
-        response = response  + " start_time = " + str(row[1]) + "\n"
         print("end_time =", row[2])
-        response = response + " end_time = " + str(row[2]) + "\n"
         print("value =", row[3])
-        response = response + " value = " + str(row[3])
         print("date =", row[4], "\n")
+        '''
+        person = row[0]
+        start_time = row[1]
+        end_time = row[2]
+        value = row[3]
+        date = row[4]
+    if value == "True":
+        response = response + "Yes shop was opened by " + person +
+        " at " + start_time.strftime('%I:%M %p')
+    elif value == "False":
+        response = response + "Sorry, shop closed :("
     return response
         
 
