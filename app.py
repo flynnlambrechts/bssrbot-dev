@@ -114,8 +114,8 @@ def getname(message):
     USER_ID = recipient_id
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
+    name = ""
     if "my name" in message:
-        name = ""
         # sending get request and saving the response as response object
         r = requests.get(url = URL)
         # extracting data in json format
@@ -138,6 +138,7 @@ def checkIfGreeting(message):
 
 def checkForShopen(message):
     global con
+    name = getname(message)
     response = ""
     ''' USED FOR NEW DB
     if "dookie:create table" in message:
@@ -146,11 +147,9 @@ def checkForShopen(message):
         response = response + insert_shopen()
     '''
     if "i would like to open the shop" in message:
-        name = getname(message)
         response = response + open_shopen(name)
     elif "i would like to close the shop" in message:
         ##add feature where only person who opened can close
-        name = getname(message)
         response = response + close_shopen(name)
     elif "shopen" in message:
         response = response + get_shopen()
