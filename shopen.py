@@ -15,9 +15,15 @@ global person
 person = str("Wendy")
 
 global current_time, end_time, date
+'''
 current_time = datetime.datetime.now(TIMEZONE).strftime('%H:%M:%S')
 date_and_time = datetime.datetime.now(TIMEZONE)
 end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%H:%M:%S') #closes shop after 3 hours
+'''
+
+date_and_time = datetime.datetime.now(TIMEZONE)
+current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
+end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
 date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
@@ -85,7 +91,14 @@ def close_shopen():
     con.commit()
     return "Shop has been closed"
 
+def timeTillClose(end_time):
+    current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
+    close_time = datetime.datetime.strptime(end_time,'%Y-%m-%d %H:%M:%S')
+    remaining_time = close_time - current_time
+    return remaining_time
+
 def get_shopen():
+    #if before end time:
     global con
     cur = con.cursor()
     cur.execute('''SELECT * FROM shopen''')
@@ -104,12 +117,15 @@ def get_shopen():
         end_time = row[2]
         value = str(row[3])
         date = row[4]
-    if value == "True":
-        response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
-    elif value == "False":
+    
+    if timeTillClose(end_time) >= datetime.timedelta(minutes=0):
+        if value == "True":
+            response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
+        elif value == "False":
+            response = response + "Sorry, shop closed :("
+    else:
         response = response + "Sorry, shop closed :("
     return response
-        
 
 
 
