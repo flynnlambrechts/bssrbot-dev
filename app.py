@@ -71,7 +71,7 @@ def receive_message():
                         send_message(recipient_id, response_sent_nontext)
         except TypeError:
             print('PING!')
-    con.close()
+    #con.close()
     return "Message Processed"
 
 def log(message):
