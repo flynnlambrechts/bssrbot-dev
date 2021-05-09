@@ -109,6 +109,9 @@ def get_bot_response(message_text):
         response = response + getname(message)
     elif "joke" in message:
         response = response + getjoke()
+    elif "show me users" in message:
+        view_users()
+        response = response + "check logs"
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
@@ -181,7 +184,7 @@ def send_message(recipient_id, response):
     global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
-    insert_user(getdetails())
+    #insert_user(getdetails())
     con.close()
     return "success"
 

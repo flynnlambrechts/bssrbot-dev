@@ -27,6 +27,7 @@ def create_users():
 
 def insert_user(full_name, first_name, last_name, PSID):
     global con
+    connectToDB()
     response = ""
     try:
         cur = con.cursor()
@@ -41,6 +42,21 @@ def insert_user(full_name, first_name, last_name, PSID):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
+
+def view_users():
+    global con
+    connectToDB()
+    response = ""
+    cur.execute('''SELECT * FROM users''')
+    rows = cur.fetchall()
+    for row in rows:
+        print("full_name =", row[0])
+        print("first_name =", row[1])
+        print("last_name =", row[2])
+        print("PSID =", row[3], "\n"))
+        con.close()
+    
+
 
 #create_users()
 #con.close()
