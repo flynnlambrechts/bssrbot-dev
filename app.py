@@ -122,7 +122,8 @@ def getname(message):
         data = r.json()
         first_name = data['first_name']
         last_name = data['last_name']
-    return str(first_name) + str(last_name)
+        name = str(first_name) + " " + str(last_name)
+    return name
     
 
 
@@ -145,10 +146,12 @@ def checkForShopen(message):
         response = response + insert_shopen()
     '''
     if "i would like to open the shop" in message:
-        response = response + open_shopen()
+        name = getname(message)
+        response = response + open_shopen(name)
     elif "i would like to close the shop" in message:
         ##add feature where only person who opened can close
-        response = response + close_shopen()
+        name = getname(message)
+        response = response + close_shopen(name)
     elif "shopen" in message:
         response = response + get_shopen()
     return response

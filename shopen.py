@@ -72,10 +72,11 @@ def insert_shopen():
     return response
 
 
-def open_shopen():
+def open_shopen(name):
     try: 
         global con
         global person
+        person = name
         global index
         global current_time, end_time, date
         cur = con.cursor()
@@ -90,10 +91,11 @@ def open_shopen():
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
 
-def close_shopen():
+def close_shopen(name):
     try:
         global con
         global person
+        person = name
         global index
         unix = int(time.time())
         current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
