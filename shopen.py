@@ -10,7 +10,7 @@ if ENV == "LOCAL":
     print("Local Database opened successfully")
 if ENV == "HEROKU":
     DATABASE_URL =  os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
 else:
     print("ENV specified wrong.")
     
