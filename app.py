@@ -7,6 +7,7 @@ import random
 import time
 import calendar
 import pytz
+import psycopg2
 
 
 from flask import Flask, request
