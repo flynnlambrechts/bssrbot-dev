@@ -98,7 +98,6 @@ def get_bot_response(message_text):
         response.append("You're welcome!")
     elif checkForShopen(message):
         response = response + checkForShopen(message)
-        con.close()
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     else:
@@ -117,23 +116,17 @@ def checkIfGreeting(message):
 
 def checkForShopen(message):
     global con
-    connectToDB()
     response = ""
     if "create table" in message:
         response = response  + create_shopen()
-        con.close()
     elif "insert" in message:
         response = response + insert_shopen()
-        con.close()
     elif "open" in message:
         response = response + open_shopen()
-        con.close()
     elif "close" in message:
         response = response + close_shopen()
-        con.close()
     elif "check" in message:
         response = response + get_shopen()
-        con.close()
     return response
 
 
