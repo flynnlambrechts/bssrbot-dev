@@ -79,21 +79,24 @@ def open_shopen():
         con.commit()
         return "Shop has been opened"
     except Exception as error:
-        return "fail"
-        #response = response + "Fail: " + str(type(error))
+        return "Fail: " + str(type(error))
 
 def close_shopen():
-    global con
-    global person
-    unix = int(time.time())
-    current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
-    cur = con.cursor()
-    cur.execute('''UPDATE shopen SET
-        person= %s, end_time = %s, value = %s''',
-            (person, current_time,'false'))
-    print("Shopen updated successfully")
-    con.commit()
-    return "Shop has been closed"
+    try:
+        global con
+        global person
+        unix = int(time.time())
+        current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+        cur = con.cursor()
+        cur.execute('''UPDATE shopen SET
+            person= %s, end_time = %s, value = %s''',
+                (person, current_time,'false'))
+        print("Shopen updated successfully")
+        con.commit()
+        return "Shop has been closed"
+    except Exception as error:
+        return "Fail: " + str(type(error))
+        
 
 def timeTillClose(end_time):
     current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
