@@ -44,11 +44,11 @@ def insert_user(full_name, first_name, last_name, PSID):
         print("User may be already added: " + str(error) + "\n" + str(type(error)))
 
 def view_users():
+    response = ""
     try: 
         connectToDB()
         global con
         cur = con.cursor()
-        response = ""
         cur.execute('''SELECT * FROM users''')
         rows = cur.fetchall()
         for row in rows:
