@@ -44,8 +44,9 @@ def insert_user(full_name, first_name, last_name, PSID):
         print("Error: " + str(error) + "\n" + str(type(error)))
 
 def view_users():
-    global con
     connectToDB()
+    global con
+    cur = con.cursor()
     response = ""
     cur.execute('''SELECT * FROM users''')
     rows = cur.fetchall()
