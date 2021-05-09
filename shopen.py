@@ -84,7 +84,7 @@ def open_shopen(name):
                 (index,name,current_time,end_time,'true',date))
         print("Shopen updated successfully")
         con.commit()
-        return "Shop has been opened!"
+        return "Shop has been opened! \nShop will be automatically closed in 3hours."
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
