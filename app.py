@@ -97,7 +97,7 @@ def get_bot_response(message_text):
         #response = "Ok i will tell you what {} is".format(str(value))
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
-        response = response + "Hello! Welcome to the Basser Bot! I'm here to help you with all your dino and calendar needs."
+        response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen?")
     elif message == "thx" or message == "thanks" or message == "thank you" or message == "thankyou":
         response = response + "You're welcome!"
@@ -158,6 +158,9 @@ def checkForShopen(message):
         response = response + close_shopen(name)
     elif "shopen" in message:
         response = response + get_shopen()
+    elif "calalogue" in message:
+        shop_catalogue = u"No catalogue. \U0001F4A9"
+        response = response + shop_catalogue
     return response
 
 
