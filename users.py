@@ -16,8 +16,8 @@ def create_users():
             full_name VARCHAR(100) PRIMARY KEY NOT NUll,
             first_name VARCHAR(50) NOT NULL,
             last_name VARCHAR(50) NOT NULL,
-            PSID VARCHAR(200) NOT NULL
-            )''')
+            PSID VARCHAR(200) NOT NULL 
+            ) ON CONFLICT DO NOTHING''')
         print("User Table created successfully")
         con.commit()
     except Exception as error:
@@ -38,7 +38,8 @@ def insert_user(full_name, first_name, last_name, PSID):
             PSID)
             VALUES (%s,%s,%s,%s)
             ON CONFLICT DO NOTHING''', (full_name, first_name, last_name, str(PSID)))
-        print("User data inserted successfully")
+        print("User data for " + first_name + " inserted successfully")
+        con.commit()
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
