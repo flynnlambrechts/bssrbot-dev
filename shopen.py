@@ -4,6 +4,7 @@ import psycopg2
 import time
 import datetime
 
+
 ENV = "HEROKU"
 if ENV == "LOCAL":
     con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
@@ -42,7 +43,6 @@ def create_shopen():
         con.commit()
     except Exception as error:
         response = response + "Fail: " + str(type(error))
-    con.close()
     return response
 
 def insert_shopen():
@@ -55,7 +55,7 @@ def insert_shopen():
             (person,current_time,end_time,'true',date))
     print("Shopen data inserted successfully")
     con.commit()
-    con.close()
+    #con.close()
     return "Shop row inserted"
 
 
