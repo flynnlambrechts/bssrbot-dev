@@ -102,6 +102,7 @@ def get_bot_response(message_text):
         response = response + checkForEasterEggs(message)
     else:
         response = response + "Sorry, I don't understand"
+        con.close()
     return response
 
 
