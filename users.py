@@ -55,7 +55,7 @@ def view_users():
         print("first_name =", row[1])
         print("last_name =", row[2])
         print("PSID =", row[3], "\n")
-        con.close()
+        
     
 
 
