@@ -18,7 +18,7 @@ def create_users():
             last_name VARCHAR(50) NOT NULL,
             PSID INTEGER NOT NULL
             )''')
-        print("Table created successfully")
+        print("User Table created successfully")
         con.commit()
     except Exception as error:
         response = response + "Fail in adding users table: " + str(error)
@@ -34,7 +34,7 @@ def insert_user(full_name, first_name, last_name, PSID):
             full_name,
             first_name,
             last_name,
-            room_number)
+            PSID)
             VALUES (%s,%s,%s,%s)''',
                     (full_name, first_name, last_name, PSID))
         print("User data inserted successfully")
