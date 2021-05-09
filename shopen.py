@@ -28,16 +28,22 @@ date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d'))
 
 def create_shopen():
     cur = con.cursor()
-    cur.execute('''CREATE TABLE shopen
-        (person VARCHAR(50) NOT NULL PRIMARY KEY,
-        start_time TIME NOT NULL,
-        end_time TIME NOT NULL,
-        value BOOLEAN NOT NULL,
-        date DATE NOT NULL)
-        ''')
-    print("Table created successfully")
-    con.commit()
-    return "Table Created."
+    response = ""
+    try: 
+        cur.execute('''CREATE TABLE shopen
+            (person VARCHAR(50) NOT NULL PRIMARY KEY,
+            start_time TIME NOT NULL,
+            end_time TIME NOT NULL,
+            value BOOLEAN NOT NULL,
+            date DATE NOT NULL)
+            ''')
+        print("Table created successfully")
+        response = response + "Table created."
+        con.commit()
+    except Exception as error:
+        response = response + "Fail: " + str(type(error))
+    con.close()
+    return response
 
 def insert_shopen():
     global person
@@ -49,6 +55,7 @@ def insert_shopen():
             (person,current_time,end_time,'true',date))
     print("Shopen data inserted successfully")
     con.commit()
+    con.close()
     return "Shop row inserted"
 
 
