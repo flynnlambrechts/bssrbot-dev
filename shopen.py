@@ -87,7 +87,6 @@ def close_shopen():
             (person, current_time,'false'))
     print("Shopen updated successfully")
     con.commit()
-    con.close()
     return "Shop has been closed"
 
 def get_shopen():
@@ -105,7 +104,6 @@ def get_shopen():
         print("value =", row[3])
         response = response + " value = " + str(row[3])
         print("date =", row[4], "\n")
-    con.close()
     return response
         
 

@@ -16,6 +16,7 @@ from utils import wit_response
 from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
 from shopen import *
+from shopen import con
 
 '''from dbhelper import DBHelper
 
@@ -124,6 +125,7 @@ def checkForShopen(message):
         response = response + close_shopen()
     elif "check" in message:
         response = response + get_shopen()
+    con.close()
     return response
 
 
