@@ -39,8 +39,8 @@ def insert_user(full_name, first_name, last_name, PSID):
                     (full_name, first_name, last_name, PSID))
         print("User data inserted successfully")
     except Exception as error:
-        response = response + "Fail in insert user: " + str(error)
+        #response = response + "Fail in insert user: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
 
-create_users()
-con.close()
+#create_users()
+#con.close()

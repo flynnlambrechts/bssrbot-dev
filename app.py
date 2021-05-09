@@ -129,7 +129,19 @@ def getname(message):
     name = str(first_name) + " " + str(last_name)
     #print("NAME: " + "'" + name + "'")
     return name
-    
+
+def getdetails(message):
+    global recipient_id
+    USER_ID = recipient_id
+    global ACCESS_TOKEN
+    URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
+    r = requests.get(url = URL)
+    data = r.json()
+    first_name = data['first_name']
+    last_name = data['last_name']
+    full_name = str(first_name) + " " + str(last_name)
+    PSID = recipient_id
+    return full_name, first_name, last_name, PSID
 
 
 def checkIfGreeting(message):
@@ -169,6 +181,7 @@ def send_message(recipient_id, response):
     global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
+    insert_user(getdetails())
     con.close()
     return "success"
 
