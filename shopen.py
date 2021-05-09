@@ -124,14 +124,16 @@ def get_shopen():
             print("date =", row[4], "\n")
             '''
             person = str(row[0])
-            start_time = row[1]
-            end_time = row[2]
+            start_time_string = row[1]
+            start_time = datetime.datetime.strptime(str(start_time_string),'%Y-%m-%d %H:%M:%S')
+            end_time_string = row[2]
+            end_time = datetime.datetime.strptime(str(end_time_string),'%Y-%m-%d %H:%M:%S')
             value = str(row[3])
             date = row[4]
         
         if timeTillClose(end_time) >= datetime.timedelta(minutes=0):
             if value == "True":
-                response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
+                response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strptime('%I:%M %p')) + "."
             elif value == "False":
                 response = response + "Sorry, shop closed :("
         else:
