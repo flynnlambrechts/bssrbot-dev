@@ -46,7 +46,7 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
-       log(output) #entire output good for finding sender ids what message contains etc
+       #log(output) #entire output good for finding sender ids what message contains etc
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
@@ -113,7 +113,7 @@ def getname(message):
     global recipient_id
     USER_ID = recipient_id
     global ACCESS_TOKEN
-    URL = "GET https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
+    URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     if "my name" in message:
         name = ""
         # sending get request and saving the response as response object
