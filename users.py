@@ -41,7 +41,7 @@ def insert_user(full_name, first_name, last_name, PSID):
         print("User data inserted successfully")
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
-        print("Error: " + str(error) + "\n" + str(type(error)))
+        print("User may be already added: " + str(error) + "\n" + str(type(error)))
 
 def view_users():
     connectToDB()

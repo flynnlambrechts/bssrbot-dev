@@ -143,7 +143,7 @@ def getdetails(message):
     first_name = data['first_name']
     last_name = data['last_name']
     full_name = str(first_name) + " " + str(last_name)
-    PSID = recipient_id
+    PSID = int(recipient_id)
     return full_name, first_name, last_name, PSID
 
 
@@ -184,7 +184,7 @@ def send_message(recipient_id, response):
     global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
-    #insert_user(getdetails())
+    insert_user(getdetails(message))
     con.close()
     return "success"
 
