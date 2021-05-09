@@ -110,8 +110,8 @@ def get_bot_response(message_text):
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
-        view_users()
-        response = response + "check logs"
+        #view_users()
+        response = response + "check logs: " + viewusers()
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
