@@ -82,7 +82,7 @@ def open_shopen():
         return "Shop has been opened"
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
-        return "Fail: " + str(error))
+        return "Fail: " + str(error)
 
 def close_shopen():
     try:
