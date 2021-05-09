@@ -65,6 +65,7 @@ def view_users():
         if str((error)) == "connection already closed":
             connectToDB()
             print("reconnecting")
+            response = response + "reconnect"
         else:
             print("Error Viewing: " + str(error) + "\n" + str(type(error)))
     return response
