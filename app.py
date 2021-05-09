@@ -121,15 +121,19 @@ def checkForShopen(message):
     response = ""
     if "create table" in message:
         response = response  + create_shopen()
+        con.close()
     elif "insert" in message:
         response = response + insert_shopen()
+        con.close()
     elif "open" in message:
         response = response + open_shopen()
+        con.close()
     elif "close" in message:
         response = response + close_shopen()
+        con.close()
     elif "check" in message:
         response = response + get_shopen()
-    con.close()
+        con.close()
     return response
 
 
