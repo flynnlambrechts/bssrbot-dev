@@ -19,10 +19,18 @@ def checkForEasterEggs(message):
         response = response + "A really commited vego most likely with a hickey on his neck."
     elif "mitch" in message or "mitch kerrison" in message or "mitchy" in message:
         response = response + "Did you mean: 'Booty Mitch'?"
+    elif "flynn" in message or "flynn lambrechts" in message:
+        response = response + "Sick Lad"
+    elif "sidd" in message:
+        response = response + "Best med student."    
+    elif "mackenzie" in message or "mackenzie travers" in message or "kenz" in message:
+        response = response + "Hey gang member..."
     elif "dumptruck" in message or "dumpy" in message:
-        response = response + "Did you mean 'Mitch Kerrison'?"
+        response = response + "Did you mean: 'Mitch Kerrison'?"
     elif "507" in message:
         response = response + "The best fresher box in town."
+    elif "525" in message:
+        response = response + "Did you mean: 'the hallway'?"
     elif "baxter" in message:
         response  = response  + "Get rekt Baxter."
     elif "goldstein" in message:
@@ -37,4 +45,10 @@ def checkForEasterEggs(message):
         response  = response  + "Penthouse baby!!"
     elif "joe" in message:
         response  = response  + "Who's Joe?"
+    elif "can you hold my basketball" in message or "can you look after my basketball" in message:
+        response  = response  + "Okay Benny G with the smooth moves."
+    elif "em col" in message:
+        response  = response  + "Hold my bball?"
+    elif "floor 4" in message or "floor four" in message:
+        response  = response  + "the second best floor"
     return response

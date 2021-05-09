@@ -1,28 +1,41 @@
 import sqlite3
+import time
+import datetime
+
+openness = 1
+
+conn = sqlite3.connect('bssrbot.db')
+c = conn.cursor()
+
+def create_table():
+    c.execute("CREATE TABLE IF NOT EXISTS stuffToPlot(unix REAL, datestamp TEXT, keyword TEXT, value REAL)")
+
+#manually enter data
+def data_entry():
+    c.execute("INSERT INTO stuffToPlot VALUES(180902,'2021-08-11 13:53:39','Shopen',1)")
+    conn.commit()
+    c.close()
+    conn.close()
 
 
-class DBHelper:
-    def __init__(self, dbname="todo.sqlite"):
-        self.dbname = dbname
-        self.conn = sqlite3.connect(dbname)
+def dynamic_data_entry():
+    unix = int(time.time())
+    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+    keyword = 'Python'
+    value = openness
 
-    def setup(self):
-        stmt = "CREATE TABLE IF NOT EXISTS items (description text)"
-        self.conn.execute(stmt)
-        self.conn.commit()
+    c.execute("INSERT INTO stuffToPlot (unix, datestamp, keyword, value) VALUES (?, ?, ?, ?)",
+          (unix, date, keyword, value))
 
-    def add_item(self, item_text):
-        stmt = "INSERT INTO items (description) VALUES (?)"
-        args = (item_text, )
-        self.conn.execute(stmt, args)
-        self.conn.commit()
+    conn.commit()
 
-    def delete_item(self, item_text):
-        stmt = "DELETE FROM items WHERE description = (?)"
-        args = (item_text, )
-        self.conn.execute(stmt, args)
-        self.conn.commit()
+create_table() #only run once
 
-    def get_items(self):
-        stmt = "SELECT description FROM items"
-        return [x[0] for x in self.conn.execute(stmt)]
+for i in range(2):
+    dynamic_data_entry()
+    time.sleep(1)
+#data_entry()
+
+
+c.close()
+conn.close()

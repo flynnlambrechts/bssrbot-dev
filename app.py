@@ -15,7 +15,13 @@ from pymessenger.bot import Bot
 from utils import wit_response
 from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
+from shopen import *
 
+'''from dbhelper import DBHelper
+
+db = DBHelper()
+db.setup()
+'''
 global week
 week = 1 ### work out how to define the week
 
@@ -88,6 +94,8 @@ def get_bot_response(message_text):
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. What's the calendar for this week? \n4. What's happening on Thursday? \n5. Is shopen?")
     elif message == "thx" or message == "thanks" or message == "thank you":
         response.append("You're welcome!")
+    elif checkForShopen(message):
+        response = response + checkForShopen(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     else:
@@ -104,12 +112,27 @@ def checkIfGreeting(message):
                 return True      
     return False
 
+def checkForShopen(message):
+    response = ""
+    if "create table" in message:
+        response = response  + create_shopen()
+    elif "insert" in message:
+        response = response + insert_shopen()
+    elif "open" in message:
+        response = response + open_shopen()
+    elif "close" in message:
+        response = response + close_shopen()
+    elif "check" in message:
+        response = response + get_shopen()
+    return response
+
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     return "success"
+
 
 if __name__ == "__main__":
     app.run()
