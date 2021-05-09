@@ -43,7 +43,7 @@ def create_shopen():
         response = response + "Table created."
         con.commit()
     except Exception as error:
-        response = response + "Fail: " + str(error))
+        response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
     return response
 
@@ -62,7 +62,7 @@ def insert_shopen():
         response  = response + "Shop row inserted"
         con.commit()
     except Exception as error:
-        response = response + "Fail: " + str(error))
+        response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
     return response
 
@@ -99,7 +99,7 @@ def close_shopen():
         return "Shop has been closed"
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
-        return "Fail: " + str(error))
+        return "Fail: " + str(error)
         
 
 def timeTillClose(end_time):
@@ -139,7 +139,7 @@ def get_shopen():
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = ""
-        response = response + "Fail: " + str(error))
+        response = response + "Fail: " + str(error)
     return response
 
 
