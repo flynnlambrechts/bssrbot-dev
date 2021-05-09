@@ -1,4 +1,5 @@
 #connect DB
+import os
 import psycopg2
 
 def connectToDB():
@@ -12,3 +13,5 @@ def connectToDB():
         con = psycopg2.connect(DATABASE_URL, sslmode='require')
     else:
         print("ENV specified wrong.")
+
+connectToDB()
