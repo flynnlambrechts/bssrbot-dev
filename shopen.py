@@ -3,6 +3,9 @@ import psycopg2
 
 import time
 import datetime
+import pytz
+
+TIMEZONE = pytz.timezone('Australia/Sydney')
 
 from connectdb import connectToDB
 from connectdb import con
