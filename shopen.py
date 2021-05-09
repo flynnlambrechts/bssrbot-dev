@@ -82,7 +82,7 @@ def close_shopen():
     global con
     global person
     unix = int(time.time())
-    current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
+    current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S')
     cur = con.cursor()
     cur.execute('''UPDATE shopen SET
         person= %s, end_time = %s, value = %s''',
