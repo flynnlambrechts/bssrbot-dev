@@ -142,5 +142,5 @@ def get_shopen():
         response = response + "Fail: " + str(error)
     return response
 
-
+#frick
 
