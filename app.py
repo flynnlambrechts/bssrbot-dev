@@ -17,6 +17,7 @@ from utils import wit_response
 from TheScrape2 import checkForDino
 from EasterEggs import checkForEasterEggs
 from shopen import *
+from connectdb import connectToDB
 from connectdb import con
 global con
 
