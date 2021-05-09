@@ -63,6 +63,7 @@ def insert_shopen():
         con.commit()
     except Exception as error:
         response = response + "Fail: " + str(type(error))
+        print(error)
     return response
 
 
@@ -80,6 +81,7 @@ def open_shopen():
         con.commit()
         return "Shop has been opened"
     except Exception as error:
+        print(error)
         return "Fail: " + str(type(error))
 
 def close_shopen():
@@ -96,6 +98,7 @@ def close_shopen():
         con.commit()
         return "Shop has been closed"
     except Exception as error:
+        print(error)
         return "Fail: " + str(type(error))
         
 
@@ -134,6 +137,7 @@ def get_shopen():
         else:
             response = response + "Sorry, shop closed :("
     except Exception as error:
+        print(error)
         response = ""
         response = response + "Fail: " + str(type(error))
     return response
