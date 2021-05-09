@@ -63,8 +63,6 @@ def view_users():
     return response
         
     
-        
-    
 
 
 #create_users()
