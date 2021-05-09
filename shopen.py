@@ -19,7 +19,6 @@ date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
-    connectToDB()
     connectcursor
     cur = con.cursor()
     response = ""
@@ -39,7 +38,6 @@ def create_shopen():
     return response
 
 def insert_shopen():
-    connectToDB()
     global person
     global current_time, end_time, date
     response = ""
@@ -59,7 +57,6 @@ def insert_shopen():
 
 
 def open_shopen():
-    connectToDB()
     global person
     global current_time, end_time, date
     cur = con.cursor()
@@ -73,7 +70,6 @@ def open_shopen():
     return "Shop has been opened"
 
 def close_shopen():
-    connectToDB()
     global person
     unix = int(time.time())
     current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
@@ -86,7 +82,6 @@ def close_shopen():
     return "Shop has been closed"
 
 def get_shopen():
-    connectToDB()
     cur = con.cursor()
     cur.execute('''SELECT * FROM shopen''')
     rows = cur.fetchall()
