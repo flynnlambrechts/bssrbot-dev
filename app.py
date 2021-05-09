@@ -8,7 +8,7 @@ import time
 import calendar
 import pytz
 import psycopg2
-
+import requests
 
 from flask import Flask, request
 from pymessenger.bot import Bot
@@ -112,9 +112,15 @@ def get_bot_response(message_text):
 def getname(message):
     global recipient_id
     USER_ID = recipient_id
+    global ACCESS_TOKEN
+    URL = "GET https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     if "my name" in message:
-        name == "USER_NAME"
-        return name
+        name = ""
+        # sending get request and saving the response as response object
+        r = requests.get(url = URL)
+        # extracting data in json format
+        data = r.json()
+    return str(data)
         #GET https://graph.facebook.com/v2.6/<USER_ID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=<ACCESS_TOKEN>
     
 
