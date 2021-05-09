@@ -99,13 +99,13 @@ def get_shopen():
         print("value =", row[3])
         print("date =", row[4], "\n")
         '''
-        person = row[0]
+        person = str(row[0])
         start_time = row[1]
         end_time = row[2]
-        value = row[3]
+        value = str(row[3])
         date = row[4]
     if value == "True":
-        response = response + "Yes shop was opened by " + person + " at " #+ start_time.strftime('%I:%M %p')
+        response = response + "Yes, shop was opened by " + person + " at " #+ start_time.strftime('%I:%M %p')
     elif value == "False":
         response = response + "Sorry, shop closed :("
     return response
