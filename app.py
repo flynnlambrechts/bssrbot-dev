@@ -114,11 +114,7 @@ def get_bot_response(message_text):
         response = response + getjoke()
     elif "show me users" in message:
         #view_users()
-        if view_users() == "reconnect":
-            view_users()
-            response = response + "reconnected: check logs: " + view_users()
-        else:
-            response = response + "check logs1: " + view_users()
+        response = response + "check logs1: " + view_users()
     elif message == "add me":
         full_name, first_name, last_name, PSID = getdetails(message)
         insert_user(full_name, first_name, last_name, PSID)
