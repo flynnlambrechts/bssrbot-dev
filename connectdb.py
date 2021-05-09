@@ -14,5 +14,5 @@ def connectToDB():
     else:
         print("ENV specified wrong.")
 
-#connectToDB()
+connectToDB()
 #con.close()
