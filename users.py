@@ -62,7 +62,7 @@ def view_users():
             last_name = str(row[2])
             print("PSID =", row[3], "\n")
             PSID = str(row[3])
-            response = response + full_name + ", " + first_name + ", " + last_name + ", " + PSID
+            response = response + full_name + ", " + first_name + ", " + last_name + ", " + PSID + "\n"
     except Exception as error:
         if str((error)) == "connection already closed":
             response = response + "con closed"
