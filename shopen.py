@@ -105,7 +105,7 @@ def close_shopen():
 def timeTillClose(end_time):
     current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
     close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S')
-    remaining_time = close_time - current_time
+    remaining_time = close_time - datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S')
     return remaining_time
 
 def get_shopen():
