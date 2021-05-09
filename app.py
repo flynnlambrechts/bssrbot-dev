@@ -159,7 +159,7 @@ def checkForShopen(message):
     elif "shopen" in message:
         response = response + get_shopen()
     elif "calalogue" in message:
-        shop_catalogue = u"No catalogue. \U0001F4A9"
+        shop_catalogue = str(u"No catalogue. \U0001F4A9")
         response = response + shop_catalogue
     return response
 
