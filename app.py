@@ -123,6 +123,7 @@ def getname(message):
         first_name = data['first_name']
         last_name = data['last_name']
         name = str(first_name) + " " + str(last_name)
+    print("NAME: " + "'" + name + "'")
     return name
     
 

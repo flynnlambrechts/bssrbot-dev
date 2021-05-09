@@ -75,7 +75,6 @@ def insert_shopen():
 def open_shopen(name):
     try: 
         global con
-        global person
         person = name
         global index
         global current_time, end_time, date
@@ -83,7 +82,7 @@ def open_shopen(name):
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, start_time = %s, end_time = %s, value = %s,
             date = %s''',
-                (index,person,current_time,end_time,'true',date))
+                (index,name,current_time,end_time,'true',date))
         print("Shopen updated successfully")
         con.commit()
         return "Shop has been opened!"
@@ -94,7 +93,6 @@ def open_shopen(name):
 def close_shopen(name):
     try:
         global con
-        global person
         person = name
         global index
         unix = int(time.time())
@@ -102,7 +100,7 @@ def close_shopen(name):
         cur = con.cursor()
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, end_time = %s, value = %s''',
-                (index, person, current_time,'false'))
+                (index, name, current_time,'false'))
         print("Shopen updated successfully")
         con.commit()
         return "Shop has been closed!"
