@@ -46,12 +46,13 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
        output = request.get_json()
-       #log(output) entire output good for finding sender ids what message contains etc
+       log(output) entire output good for finding sender ids what message contains etc
        for event in output['entry']:
           messaging = event['messaging']
           for message in messaging:
             if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
+                global recipient_id
                 recipient_id = message['sender']['id']
                 
                 #if it has text
@@ -101,10 +102,19 @@ def get_bot_response(message_text):
         response = response + checkForShopen(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
+    elif getname(message):
+        response = response + getname(message)
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
     return response
+
+def getname(message):
+    global recipient_id
+    USER_ID = recipient_id
+    if "my name" in message:
+        #GET https://graph.facebook.com/v2.6/<USER_ID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=<ACCESS_TOKEN>
+    
 
 
 def checkIfGreeting(message):
@@ -119,15 +129,18 @@ def checkIfGreeting(message):
 def checkForShopen(message):
     global con
     response = ""
-    if "create table" in message:
+    ''' USED FOR NEW DB
+    if "dookie:create table" in message:
         response = response  + create_shopen()
-    elif "insert" in message:
+    elif "dookie:insert row" in message:
         response = response + insert_shopen()
-    elif "open" in message:
+    '''
+    if "i would like to open the shop" in message:
         response = response + open_shopen()
-    elif "close" in message:
+    elif "i would like to close the shop" in message:
+        ##add feature where only person who opened can close
         response = response + close_shopen()
-    elif "check" in message:
+    elif "shopen" in message:
         response = response + get_shopen()
     return response
 
