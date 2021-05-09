@@ -4,7 +4,7 @@ import psycopg2
 import time
 import datetime
 
-ENV = "LOCAL"
+ENV = "HEROKU"
 if ENV == "LOCAL":
     con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
     print("Local Database opened successfully")
