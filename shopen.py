@@ -44,6 +44,7 @@ def create_shopen():
         con.commit()
     except Exception as error:
         response = response + "Fail: " + str(type(error))
+        print(error)
     return response
 
 def insert_shopen():
