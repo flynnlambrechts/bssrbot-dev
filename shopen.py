@@ -48,15 +48,20 @@ def create_shopen():
 def insert_shopen():
     global person
     global current_time, end_time, date
-    cur = con.cursor()
-    cur.execute('''INSERT INTO shopen (
-        person, start_time, end_time, value, date)
-        VALUES (%s,%s,%s,%s,%s)''',
-            (person,current_time,end_time,'true',date))
-    print("Shopen data inserted successfully")
-    con.commit()
+    response = ""
+    try:
+        cur = con.cursor()
+        cur.execute('''INSERT INTO shopen (
+            person, start_time, end_time, value, date)
+            VALUES (%s,%s,%s,%s,%s)''',
+                (person,current_time,end_time,'true',date))
+        print("Shopen data inserted successfully")
+        response  = response + "Shop row inserted"
+        con.commit()
+    except Exception as error:
+        response = response + "Fail: " + str(type(error))
     #con.close()
-    return "Shop row inserted"
+    return response
 
 
 def open_shopen():
@@ -69,7 +74,7 @@ def open_shopen():
             (person,current_time,end_time,'true',date))
     print("Shopen updated successfully")
     con.commit()
-    con.close()
+    
     return "Shop has been opened"
 
 def close_shopen():
