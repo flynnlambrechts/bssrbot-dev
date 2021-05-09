@@ -184,7 +184,7 @@ def send_message(recipient_id, response):
     global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
-    #insert_user(str(Joe Mama), str(Joe), str(Mama), int(420))
+    insert_user(str(Joe Mama), str(Joe), str(Mama), int(420))
     insert_user(getdetails(message))
     con.close()
     return "success"
