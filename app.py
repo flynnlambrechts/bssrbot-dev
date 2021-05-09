@@ -38,6 +38,8 @@ TIMEZONE = pytz.timezone('Australia/Sydney')
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
+    global con
+    connectToDB()
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.""" 
@@ -69,6 +71,7 @@ def receive_message():
                         send_message(recipient_id, response_sent_nontext)
         except TypeError:
             print('PING!')
+    con.close()
     return "Message Processed"
 
 def log(message):
@@ -189,7 +192,6 @@ def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     #insert_user(str('Joe Mama'), str('Joe'), str('Mama'), int('420'))
-    con.close()
     return "success"
 
 
