@@ -120,8 +120,9 @@ def getname(message):
         r = requests.get(url = URL)
         # extracting data in json format
         data = r.json()
-    return str(data)
-        #GET https://graph.facebook.com/v2.6/<USER_ID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=<ACCESS_TOKEN>
+        first_name = data['first_name']
+        last_name = data['last_name']
+    return str(first_name) + str(last_name)
     
 
 
