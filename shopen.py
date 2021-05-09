@@ -34,8 +34,8 @@ def create_shopen():
     try: 
         cur.execute('''CREATE TABLE shopen
             (person VARCHAR(50) NOT NULL PRIMARY KEY,
-            start_time TIME NOT NULL,
-            end_time TIME NOT NULL,
+            start_time VARCHAR(50) NOT NULL,
+            end_time VARCHAR(50) NOT NULL,
             value BOOLEAN NOT NULL,
             date DATE NOT NULL)
             ''')
