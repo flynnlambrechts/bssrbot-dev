@@ -36,11 +36,12 @@ def insert_user(full_name, first_name, last_name, PSID):
             first_name,
             last_name,
             PSID)
-            VALUES (%s,%s,%s,%s)''', (full_name, first_name, last_name, str(PSID)))
+            VALUES (%s,%s,%s,%s)
+            ON CONFLICT DO NOTHING/UPDATE''', (full_name, first_name, last_name, str(PSID)))
         print("User data inserted successfully")
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
-        print("User may be already added: " + str(error) + "\n" + str(type(error)))
+        print("User may be already added: " + str(error) + " type: " + str(type(error)))
 
 def view_users():
     connectToDB()
@@ -65,7 +66,7 @@ def view_users():
         if str((error)) == "connection already closed":
             response = response + "con closed"
         else:
-            print("Error Viewing: " + str(error) + "\n" + str(type(error)))
+            print("Error Viewing: " + str(error) + " type: " + str(type(error)))
     return response
         
     
