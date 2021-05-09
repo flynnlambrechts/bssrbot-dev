@@ -102,7 +102,7 @@ def get_bot_response(message_text):
         response = response + checkForShopen(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
-    elif getname(message):
+    elif "my name" in message:
         response = response + getname(message)
     else:
         response = response + "Sorry, I don't understand"
@@ -115,15 +115,14 @@ def getname(message):
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     name = ""
-    if "my name" in message:
-        # sending get request and saving the response as response object
-        r = requests.get(url = URL)
-        # extracting data in json format
-        data = r.json()
-        first_name = data['first_name']
-        last_name = data['last_name']
-        name = str(first_name) + " " + str(last_name)
-    print("NAME: " + "'" + name + "'")
+    # sending get request and saving the response as response object
+    r = requests.get(url = URL)
+    # extracting data in json format
+    data = r.json()
+    first_name = data['first_name']
+    last_name = data['last_name']
+    name = str(first_name) + " " + str(last_name)
+    #print("NAME: " + "'" + name + "'")
     return name
     
 

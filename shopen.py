@@ -12,7 +12,7 @@ from connectdb import con
 global con   
 
 global person
-person = str("Wendy")
+person = str("Mike Hunt")
 
 global index
 index = int(1)
@@ -75,7 +75,6 @@ def insert_shopen():
 def open_shopen(name):
     try: 
         global con
-        person = name
         global index
         global current_time, end_time, date
         cur = con.cursor()
@@ -93,7 +92,6 @@ def open_shopen(name):
 def close_shopen(name):
     try:
         global con
-        person = name
         global index
         unix = int(time.time())
         current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
