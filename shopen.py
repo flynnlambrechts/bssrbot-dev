@@ -15,7 +15,7 @@ global person
 person = str("Wendy")
 
 global current_time, end_time, date
-unix = int(time.time())
+unix = int(time.time(TIMEZONE))
 current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%H:%M:%S'))
 date_and_time = datetime.datetime.fromtimestamp(unix)
 end_time = date_and_time + datetime.timedelta(hours=3) #closes shop after 3 hours
@@ -94,11 +94,11 @@ def get_shopen():
     response = ""
     for row in rows:
         print("person =", row[0])
-        response = response  + "Person = " + str(row[0])
+        response = response  + "Person = " + str(row[0]) + "\n"
         print("start_time =", row[1])
-        response = response  + " start_time = " + str(row[1])
+        response = response  + " start_time = " + str(row[1]) + "\n"
         print("end_time =", row[2])
-        response = response + " end_time = " + str(row[2])
+        response = response + " end_time = " + str(row[2]) + "\n"
         print("value =", row[3])
         response = response + " value = " + str(row[3])
         print("date =", row[4], "\n")
