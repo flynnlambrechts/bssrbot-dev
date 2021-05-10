@@ -27,10 +27,13 @@ from users import * #for viewing users
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
-Admin_ID = ["4409117335852974"] #id of users with powerful permissions
+Admin_ID = ["4409117335852974" #Flynn
+            ] #id of users with powerful permissions
 bot = Bot(ACCESS_TOKEN) #not sure
 TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
+#Developer: Flynn
+#Contributors: Ethan, Yas, Zoe
 
 
 #We will receive messages that Facebook sends our bot at this endpoint 
@@ -102,7 +105,7 @@ def get_bot_response(message_text):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen?")
     elif message == "thx" or message == "thanks" or message == "thank you" or message == "thankyou":
-        response = response + "You're welcome!"
+        response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
     elif checkForEasterEggs(message):
