@@ -93,6 +93,7 @@ def verify_fb_token(token_sent):
 
 def get_bot_response(message_text):
     global con
+    global Admin_ID
     global recipient_id
     global message
     message = message_text.lower()
@@ -120,7 +121,7 @@ def get_bot_response(message_text):
         if recipient_id in Admin_ID: 
             response = response + "Users: \n" + view_users()
         else:
-            response = response + "You shall not, PASS: " + str(recipient_id)
+            response = response + "You shall not, PASS: \n" + str(recipient_id)
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
