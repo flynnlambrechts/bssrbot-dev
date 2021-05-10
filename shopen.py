@@ -76,14 +76,17 @@ def open_shopen(name):
     try: 
         global con
         global index
-        global current_time, end_time, date
+        date_and_time = datetime.datetime.now(TIMEZONE)
+        current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
+        end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
+        date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
         cur = con.cursor()
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, start_time = %s, end_time = %s, value = %s,
             date = %s''',
                 (index,name,current_time,end_time,'true',date))
-        print("Shopen updated successfully")
-        con.commit()
+        con.commit() #
+        print("Shopen updated successfully") #
         return "Shop has been opened! \nShop will be automatically closed in 3hours."
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
@@ -93,12 +96,12 @@ def close_shopen(name):
     try:
         global con
         global index
-        unix = int(time.time())
-        current_time = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+        global TIMEZONE
+        current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
         cur = con.cursor()
         cur.execute('''UPDATE shopen1 SET
             index=%s, person= %s, end_time = %s, value = %s''',
-                (index, name, current_time,'false'))
+                (index, name, str(current_time),'false'))
         print("Shopen updated successfully")
         con.commit()
         return "Shop has been closed!"
@@ -110,7 +113,8 @@ def close_shopen(name):
 def timeTillClose(end_time):
     current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
     close_time = datetime.datetime.strptime(str(end_time),'%Y-%m-%d %H:%M:%S')
-    remaining_time = close_time - datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S')
+    remaining_time = (close_time.timestamp()) - (datetime.datetime.strptime(str(current_time),'%Y-%m-%d %H:%M:%S').timestamp()) #
+    print(str(remaining_time)) #
     return remaining_time
 
 def get_shopen():
@@ -136,7 +140,7 @@ def get_shopen():
             value = str(row[4])
             date = row[5]
         
-        if timeTillClose(end_time) >= datetime.timedelta(minutes=0):
+        if int(timeTillClose(end_time)) >= 0:
             if value == "True":
                 response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
