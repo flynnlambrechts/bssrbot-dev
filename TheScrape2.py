@@ -63,13 +63,13 @@ def checkForDino(message):
     if checkForDay(message):
         print("day found")
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-        if current_day > int(checkForDay(mesage)):
+        if current_day > int(checkForDay(message)):
             week = week + 1
-            day = str(week_days[int(checkForDay(mesage))])
+            day = str(week_days[int(checkForDay(message))])
             current_day = int(checkForDay(message))
         else:
             current_day = int(checkForDay(message))
-            day = str(week_days[int(checkForDay(mesage))])
+            day = str(week_days[int(checkForDay(message))])
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
         if time < 10:
