@@ -60,15 +60,15 @@ def checkForDino(message):
                 week = week + 1
                 print(str(week) + "week")
                 column = 1
-    elif checkForDay(message):
+    if checkForDay(message):
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-        if current_day > checkForDay(mesage):
+        if current_day > int(checkForDay(mesage)):
             week = week + 1
-            day = str(week_days[checkForDay(mesage)])
-            current_day = checkForDay(message)
+            day = str(week_days[int(checkForDay(mesage))])
+            current_day = int(checkForDay(message))
         else:
-            current_day = checkForDay(message)
-            day = str(week_days[checkForDay(mesage)])
+            current_day = int(checkForDay(message))
+            day = str(week_days[int(checkForDay(mesage))])
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
         if time < 10:
