@@ -113,22 +113,21 @@ def get_bot_response(message_text):
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif "my name" in message:
-        response = response + getname(message)
+        response = response + getname()
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
         if recipient_id in Admin_ID: 
             response = response + "Users: \n" + view_users()
         else:
-            response = response + "You shall not, PASS"
+            response = response + "You shall not, PASS: " + str(recipient_id)
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
     return response
 
-def getname(message):
+def getname():
     global recipient_id
-    USER_ID = recipient_id
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     name = ""
@@ -142,7 +141,7 @@ def getname(message):
     #print("NAME: " + "'" + name + "'")
     return name
 
-def getdetails(message):
+def getdetails():
     global recipient_id
     USER_ID = recipient_id
     global ACCESS_TOKEN
@@ -156,7 +155,7 @@ def getdetails(message):
     return full_name, first_name, last_name, PSID
 
 def adduser():
-    full_name, first_name, last_name, PSID = getdetails(message)
+    full_name, first_name, last_name, PSID = getdetails()
     insert_user(full_name, first_name, last_name, PSID)
     
 
@@ -171,7 +170,7 @@ def checkIfGreeting(message):
 
 def checkForShopen(message):
     global con
-    name = getname(message)
+    name = getname()
     response = ""
 ##only use once----------------------------------
 #    if "dookie:create table" in message:#        |
