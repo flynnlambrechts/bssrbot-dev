@@ -11,6 +11,7 @@ Database: postgresql - stores information input by users
 ## To Do
 Dino - done
 Shopen - done
+Add shop catalogue
 Calendar
 Wildcat of the week nominations
 Ressies
@@ -24,10 +25,11 @@ Ressies
 
 ## Capabilities
 Return meal from Dino, breakfast, lunch and dinner
+ - including tomorrow and days of week
 Crack a joke
 Greetings
 Process pleasantries
-Get user name
+Get user's name
 Shopen
 Easter Eggs
 

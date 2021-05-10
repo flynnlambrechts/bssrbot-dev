@@ -66,6 +66,7 @@ def view_users():
     except Exception as error:
         if str((error)) == "connection already closed":
             response = response + "con closed"
+            connectToDB()
         else:
             print("Error Viewing: " + str(error) + " type: " + str(type(error)))
     return response
