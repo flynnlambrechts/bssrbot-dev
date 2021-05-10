@@ -1,38 +1,35 @@
   
 #Python libraries that we need to import for our bot
 
-import os, sys
-from datetime import *
-import random
-import time
-import calendar
-import pytz
-import psycopg2
-import requests
+import os, sys #for heroku env
+from datetime import * #for time proccessing
+import random #for random generation
+import time #for time
+#import calendar #not neccessary
+import pytz #timezone
+import psycopg2 #database stuff
+import requests #for sending get request
 
-from flask import Flask, request
-from pymessenger.bot import Bot
+from flask import Flask, request #flask
+from pymessenger.bot import Bot #not sure
 
-from utils import wit_response
-from TheScrape2 import checkForDino
-from EasterEggs import checkForEasterEggs
-from shopen import *
-from jokes import getjoke
-from connectdb import connectToDB
+from utils import wit_response #for nlp
+from TheScrape2 import checkForDino #for scraping htmls
+from EasterEggs import checkForEasterEggs #self explanatory
+from shopen import * #for all shopen related
+from jokes import getjoke #for jokes
+from connectdb import connectToDB #to connect to postgresql db
 connectToDB()
 from connectdb import con
 global con
-from users import *
-
-global week
-week = 1 ### work out how to define the week
+from users import * #for viewing users
 
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
-Admin_ID = ["4409117335852974"]
-bot = Bot(ACCESS_TOKEN)
-TIMEZONE = pytz.timezone('Australia/Sydney')
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
+Admin_ID = ["4409117335852974"] #id of users with powerful permissions
+bot = Bot(ACCESS_TOKEN) #not sure
+TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
 
 
@@ -72,9 +69,8 @@ def receive_message():
                         response_sent_nontext = "Nice pic!"
                         send_message(recipient_id, response_sent_nontext)
                         con.close()
-        except TypeError:
-            print('PING!')
-    #con.close()
+        except TypeError: #if anti-idling add on pings bot we wont get an error
+            print('PING!') 
     return "Message Processed"
 
 def log(message):
@@ -90,7 +86,6 @@ def verify_fb_token(token_sent):
 
 
 #chooses a message to send to the user
-
 def get_bot_response(message_text):
     global con
     global Admin_ID
@@ -101,8 +96,7 @@ def get_bot_response(message_text):
     response = ""
     global value, entity
     entity, value = wit_response(message) #prev message_text
-    if entity == 'mealtype:mealtype':
-        #response = "Ok i will tell you what {} is".format(str(value))
+    if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
@@ -124,10 +118,9 @@ def get_bot_response(message_text):
             response = response + "You shall not, PASS: \n" + str(recipient_id)
     else:
         response = response + "Sorry, I don't understand"
-        #con.close()
     return response
 
-def getname():
+def getname(): #gets user full name in format "F_name L_name"
     global recipient_id
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
@@ -142,9 +135,8 @@ def getname():
     #print("NAME: " + "'" + name + "'")
     return name
 
-def getdetails():
+def getdetails(): #gets user PSID and name details
     global recipient_id
-    USER_ID = recipient_id
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     r = requests.get(url = URL)
@@ -155,12 +147,12 @@ def getdetails():
     PSID = int(recipient_id)
     return full_name, first_name, last_name, PSID
 
-def adduser():
+def adduser(): #adds user to DB
     full_name, first_name, last_name, PSID = getdetails()
     insert_user(full_name, first_name, last_name, PSID)
     
 
-def checkIfGreeting(message):
+def checkIfGreeting(message): #checks if the user sends a greeting
     possibleGreetings = ["hello", "hi", "help", "hey"]
     message_elements = message.split()
     for word in message_elements:
@@ -170,7 +162,6 @@ def checkIfGreeting(message):
     return False
 
 def checkForShopen(message):
-    global con
     name = getname()
     response = ""
 ##only use once----------------------------------
@@ -187,14 +178,13 @@ def checkForShopen(message):
     elif "shopen" in message:
         response = response + get_shopen()
     elif "catalogue" in message:
-        shop_catalogue = "No catalogue." + u"\U0001F4A9"
+        shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
         response = response + str(shop_catalogue)
     return response
 
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
-    global con
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     adduser() #adds user to database

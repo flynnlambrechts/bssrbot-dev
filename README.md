@@ -22,4 +22,14 @@ Ressies
 3. In the thescrape2 find what week of the year corresponds to current menu week and update subtract value
 4. (Optional) Reduce multiples of 4 in thescrape2 to only possible values
 
+## Capabilities
+Return meal from Dino, breakfast, lunch and dinner
+Crack a joke
+Greetings
+Process pleasantries
+Get user name
+Shopen
+Easter Eggs
+
+
 Github# bssrbot-dev
