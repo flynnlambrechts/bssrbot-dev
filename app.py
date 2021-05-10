@@ -30,6 +30,7 @@ week = 1 ### work out how to define the week
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+Admin_ID = [4409117335852974]
 bot = Bot(ACCESS_TOKEN)
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
@@ -92,6 +93,7 @@ def verify_fb_token(token_sent):
 
 def get_bot_response(message_text):
     global con
+    global recipient_id
     global message
     message = message_text.lower()
     global response
@@ -115,8 +117,10 @@ def get_bot_response(message_text):
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
-        #view_users()
-        response = response + "check logs1: " + view_users()
+        if recipient_id in Admin_ID: 
+            response = response + "Users: \n" + view_users()
+        else:
+            response = response + "You shall not, PASS"
     else:
         response = response + "Sorry, I don't understand"
         #con.close()
