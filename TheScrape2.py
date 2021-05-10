@@ -61,6 +61,7 @@ def checkForDino(message):
                 print(str(week) + "week")
                 column = 1
     if checkForDay(message):
+        print("day found")
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         if current_day > int(checkForDay(mesage)):
             week = week + 1
