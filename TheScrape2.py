@@ -53,7 +53,7 @@ def checkForDino(message):
                 #response = response + "Sorry, I do not have the menu for next week yet!"
                 return response
                 week = 1
-                print(str(week) + "week")
+                print(str(week) + " week")
                 column = 1
             else:
                 week = week + 1
@@ -63,9 +63,14 @@ def checkForDino(message):
         print("day found")
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         if current_day > int(checkForDay(message)):
-            week = week + 1
-            day = str(week_days[int(checkForDay(message))])
+            if week==4:
+                week = 1
+                print(str(week) + " week")
+            else:
+                week = week + 1
+                print(str(week) + " week")
             current_day = int(checkForDay(message))
+            day = str(week_days[int(checkForDay(message))])
         else:
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])

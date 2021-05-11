@@ -33,5 +33,10 @@ Database: postgresql - stores information input by users
 - Shopen
 - Easter Eggs
 
+## Work On
+- day next week
+- connecting to DB see baxtabot
+- calendar
+
 
 Github# bssrbot-dev
