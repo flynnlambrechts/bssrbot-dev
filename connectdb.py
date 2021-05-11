@@ -3,6 +3,7 @@ import os
 import psycopg2
 
 global con
+con = None
 
 def connectToDB():
     global con
