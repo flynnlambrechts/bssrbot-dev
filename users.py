@@ -5,10 +5,13 @@ from connectdb import connectToDB
 from connectdb import con
 global con
 
+global DATABASE_URL
+DATABASE_URL =  os.environ['DATABASE_URL']
 
 def create_users():
     #global con
     #connectToDB()
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = con.cursor()
     response = ""
@@ -31,6 +34,7 @@ def create_users():
 def insert_user(full_name, first_name, last_name, PSID):
     #global con
     #connectToDB()
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     response = ""
     try:
@@ -53,6 +57,7 @@ def view_users():
     #connectToDB()
     response = ""
     #global con
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try: 
         connectToDB()
