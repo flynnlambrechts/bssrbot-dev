@@ -11,6 +11,9 @@ from connectdb import connectToDB
 from connectdb import con
 global con   
 
+global DATABASE_URL
+DATABASE_URL =  os.environ['DATABASE_URL']
+
 global person
 person = str("Mike Hunt")
 
@@ -33,6 +36,7 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 def create_shopen():
     #global con
     #connectToDB()
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = con.cursor()
     response = ""
@@ -60,6 +64,7 @@ def insert_shopen():
     global index
     global current_time, end_time, date
     #connectToDB()
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     response = ""
     try:
@@ -80,6 +85,7 @@ def insert_shopen():
 
 def open_shopen(name):
     #connectToDB()
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try: 
         global index
@@ -101,6 +107,7 @@ def open_shopen(name):
     con.close()
 
 def close_shopen(name):
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try:
         global index
@@ -127,6 +134,7 @@ def timeTillClose(end_time):
     return remaining_time
 
 def get_shopen():
+    global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try:
         cur = con.cursor()
