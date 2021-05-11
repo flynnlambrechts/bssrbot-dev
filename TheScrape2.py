@@ -41,7 +41,6 @@ def checkForDino(message):
     current_day = datetime.now(TIMEZONE).weekday()
     time = datetime.now(TIMEZONE).time().hour
     day = "Today"
-    
     #See if user is asking about tomorrow
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
@@ -60,7 +59,7 @@ def checkForDino(message):
                 week = week + 1
                 print(str(week) + "week")
                 column = 1
-    if checkForDay(message):
+    if checkForCalendar(message):
         print("day found")
         week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         if current_day > int(checkForDay(message)):

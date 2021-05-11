@@ -2,6 +2,8 @@
 import os
 import psycopg2
 
+global con
+
 def connectToDB():
     global con
     ENV = "HEROKU"
@@ -14,5 +16,5 @@ def connectToDB():
     else:
         print("ENV specified wrong.")
 
-connectToDB()
+#connectToDB()
 #con.close()

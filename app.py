@@ -1,46 +1,47 @@
   
 #Python libraries that we need to import for our bot
 
-import os, sys #for heroku env
-from datetime import * #for time proccessing
-import random #for random generation
-import time #for time
-#import calendar #not neccessary
-import pytz #timezone
-import psycopg2 #database stuff
-import requests #for sending get request
+import os, sys                          #for heroku env
+from datetime import *                  #for time proccessing
+import random                           #for random generation
+import time                             #for time
+#import calendar                        #not neccessary
+import pytz                             #timezone
+import psycopg2                         #database stuff
+import requests                         #for sending get request
 
-from flask import Flask, request #flask
-from pymessenger.bot import Bot #not sure
+from flask import Flask, request        #flask
+from pymessenger.bot import Bot         #not sure
 
-from utils import wit_response #for nlp
-from TheScrape2 import checkForDino #for scraping htmls
+from utils import wit_response          #for nlp
+from TheScrape2 import checkForDino     #for scraping htmls
 from EasterEggs import checkForEasterEggs #self explanatory
-from shopen import * #for all shopen related
-from jokes import getjoke #for jokes
-from connectdb import connectToDB #to connect to postgresql db
-connectToDB()
+from shopen import *                    #for all shopen related
+from jokes import getjoke               #for jokes
+from connectdb import connectToDB       #to connect to postgresql db
+#connectToDB()
 from connectdb import con
 global con
-from users import * #for viewing users
+from users import *                     #for viewing users
+from getmenuweek import checkForDay
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
-Admin_ID = ["4409117335852974" #Flynn
-            ] #id of users with powerful permissions
+Admin_ID = ["4409117335852974", #Flynn-DEV
+            "3760608700732342" #Flynn-REAL
+            ] #id of users with powerful permission
 bot = Bot(ACCESS_TOKEN) #not sure
 TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
 #Developer: Flynn
-#Contributors: Ethan, Yas, Zoe
+#Contributors: Ethan, Jas, Zoe
 
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
     global con
-    connectToDB()
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.""" 
@@ -66,12 +67,12 @@ def receive_message():
                         print(message_text)
                         response_sent_text = get_bot_response(message_text)
                         send_message(recipient_id, response_sent_text)
-                        con.close()
+                        #con.close()
                     #if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
                         response_sent_nontext = "Nice pic!"
                         send_message(recipient_id, response_sent_nontext)
-                        con.close()
+                        #con.close()
         except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
@@ -108,6 +109,8 @@ def get_bot_response(message_text):
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
+    elif checkForCalendar(message):
+        response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif "my name" in message:
@@ -167,18 +170,18 @@ def checkIfGreeting(message): #checks if the user sends a greeting
 def checkForShopen(message):
     name = getname()
     response = ""
-##only use once----------------------------------
+##----only use once---------or do in terminal-----
 #    if "dookie:create table" in message:#        |
 #        response = response  + create_shopen()#  |
 #    elif "dookie:insert row" in message:#        |
 #        response = response + insert_shopen()#   |
-##-----------------------------------------------
+##------------------------------------------------
     if "i would like to open the shop" in message:
         response = response + open_shopen(name)
     elif "i would like to close the shop" in message:
         ##add feature where only person who opened can close
         response = response + close_shopen(name)
-    elif "shopen" in message:
+    elif "shopen" in message or "shop" in message:
         response = response + get_shopen()
     elif "catalogue" in message:
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji

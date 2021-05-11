@@ -32,6 +32,7 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 def create_shopen():
     global con
+    connectToDB()
     cur = con.cursor()
     response = ""
     try: 
@@ -49,6 +50,7 @@ def create_shopen():
     except Exception as error:
         response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
+    con.close()
     return response
 
 def insert_shopen():
@@ -56,6 +58,7 @@ def insert_shopen():
     global person
     global index
     global current_time, end_time, date
+    connectToDB()
     response = ""
     try:
         cur = con.cursor()
@@ -69,10 +72,12 @@ def insert_shopen():
     except Exception as error:
         response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
+    con.close()
     return response
 
 
 def open_shopen(name):
+    connectToDB()
     try: 
         global con
         global index
@@ -91,8 +96,10 @@ def open_shopen(name):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
+    con.close()
 
 def close_shopen(name):
+    connectToDB()
     try:
         global con
         global index
@@ -108,6 +115,7 @@ def close_shopen(name):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
+    con.close()
         
 
 def timeTillClose(end_time):
@@ -118,6 +126,7 @@ def timeTillClose(end_time):
     return remaining_time
 
 def get_shopen():
+    connectToDB()
     try:
         global con
         cur = con.cursor()
@@ -142,7 +151,7 @@ def get_shopen():
         
         if int(timeTillClose(end_time)) >= 0:
             if value == "True":
-                response = response + "Yes, shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
+                response = response + "Shop was opened by " + person + " at " + str(start_time.strftime('%I:%M %p')) + "."
             elif value == "False":
                 response = response + "Sorry, shop closed :("
         else:
@@ -151,6 +160,7 @@ def get_shopen():
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = ""
         response = response + "Fail: " + str(error)
+    con.close()
     return response
 
 

@@ -1,4 +1,4 @@
-# bssrbot
+# BssrBot 3.2.1
 > Basser's Dino Menu, Shop and Calendar Assistant
 
 ## Requirements
@@ -9,12 +9,12 @@ NewRelic https://elements.heroku.com/addons/newrelic - Prevents code from idling
 Database: postgresql - stores information input by users
 
 ## To Do
-Dino - done
-Shopen - done
-Add shop catalogue
-Calendar
-Wildcat of the week nominations
-Ressies
+- Dino - done
+- Shopen - done
+- Add shop catalogue
+- Calendar
+- Wildcat of the week nominations
+- Ressies
 
 
 ## To Update menu
@@ -24,14 +24,14 @@ Ressies
 4. (Optional) Reduce multiples of 4 in thescrape2 to only possible values
 
 ## Capabilities
-Return meal from Dino, breakfast, lunch and dinner
- - including tomorrow and days of week
-Crack a joke
-Greetings
-Process pleasantries
-Get user's name
-Shopen
-Easter Eggs
+- Return meal from Dino, breakfast, lunch and dinner
+ 	- including tomorrow and days of week
+- Crack a joke
+- Greetings
+- Process pleasantries
+- Get user's name
+- Shopen
+- Easter Eggs
 
 
 Github# bssrbot-dev

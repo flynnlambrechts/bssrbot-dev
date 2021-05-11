@@ -5,10 +5,10 @@ from connectdb import connectToDB
 from connectdb import con
 global con
 
-connectToDB()
 
 def create_users():
     global con
+    connectToDB()
     cur = con.cursor()
     response = ""
     try:
@@ -20,9 +20,11 @@ def create_users():
             ) ON CONFLICT DO NOTHING''')
         print("User Table created successfully")
         con.commit()
+        
     except Exception as error:
         response = response + "Fail in adding users table: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
+    con.close()
     return response
 
 def insert_user(full_name, first_name, last_name, PSID):
@@ -43,6 +45,7 @@ def insert_user(full_name, first_name, last_name, PSID):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
+    con.close()
 
 def view_users():
     connectToDB()
@@ -66,9 +69,10 @@ def view_users():
     except Exception as error:
         if str((error)) == "connection already closed":
             response = response + "con closed"
-            connectToDB()
+            #connectToDB()
         else:
             print("Error Viewing: " + str(error) + " type: " + str(type(error)))
+    con.close()
     return response
         
     
