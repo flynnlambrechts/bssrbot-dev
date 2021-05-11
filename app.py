@@ -109,10 +109,10 @@ def get_bot_response(message_text):
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
-'''
+    '''
     elif checkForCalendar(message):
         response = response + checkForCalendar(message)
-'''
+    '''
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif "my name" in message:
