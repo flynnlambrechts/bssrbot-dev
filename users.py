@@ -5,6 +5,7 @@ from connectdb import connectToDB
 from connectdb import con
 global con
 
+import os
 global DATABASE_URL
 DATABASE_URL =  os.environ['DATABASE_URL']
 
