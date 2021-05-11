@@ -34,7 +34,7 @@ Database: postgresql - stores information input by users
 - Easter Eggs
 
 ## Work On
-- day next week
+- day next week and week = 4
 - connecting to DB see baxtabot
 - calendar
 
