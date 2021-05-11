@@ -31,8 +31,9 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
-    global con
-    connectToDB()
+    #global con
+    #connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = con.cursor()
     response = ""
     try: 
@@ -54,11 +55,12 @@ def create_shopen():
     return response
 
 def insert_shopen():
-    global con
+    #global con
     global person
     global index
     global current_time, end_time, date
-    connectToDB()
+    #connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     response = ""
     try:
         cur = con.cursor()
@@ -77,9 +79,9 @@ def insert_shopen():
 
 
 def open_shopen(name):
-    connectToDB()
+    #connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try: 
-        global con
         global index
         date_and_time = datetime.datetime.now(TIMEZONE)
         current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
@@ -99,9 +101,8 @@ def open_shopen(name):
     con.close()
 
 def close_shopen(name):
-    connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try:
-        global con
         global index
         global TIMEZONE
         current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
@@ -126,9 +127,8 @@ def timeTillClose(end_time):
     return remaining_time
 
 def get_shopen():
-    connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try:
-        global con
         cur = con.cursor()
         cur.execute('''SELECT * FROM shopen1''')
         rows = cur.fetchall()

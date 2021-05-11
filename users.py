@@ -7,8 +7,9 @@ global con
 
 
 def create_users():
-    global con
-    connectToDB()
+    #global con
+    #connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = con.cursor()
     response = ""
     try:
@@ -28,8 +29,9 @@ def create_users():
     return response
 
 def insert_user(full_name, first_name, last_name, PSID):
-    global con
-    connectToDB()
+    #global con
+    #connectToDB()
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     response = ""
     try:
         cur = con.cursor()
@@ -48,9 +50,10 @@ def insert_user(full_name, first_name, last_name, PSID):
     con.close()
 
 def view_users():
-    connectToDB()
+    #connectToDB()
     response = ""
-    global con
+    #global con
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try: 
         connectToDB()
         cur = con.cursor()
