@@ -183,6 +183,11 @@ def checkForShopen(message):
     con = getCon()
     name = getname()
     response = ""
+
+    global shop_catalogue
+    if shop_catalogue == None:
+        shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
+    
 ##----only use once---------or do in terminal-----
 #    if "dookie:create table" in message:#        |
 #        response = response  + create_shopen()#  |
@@ -196,11 +201,8 @@ def checkForShopen(message):
         response = response + close_shopen(name, con)
     elif "shopen" in message or ("shop" in message and ("catalogue" not in message or "sell" not in message)):
         response = response + get_shopen(con)
+        response = response + "/n/n" + shop_catalogue
     elif "catalogue" in message or ("shop" in message and "sell" in message):
-        global shop_catalogue
-        if shop_catalogue == None:
-            shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
-        else:
             response = response + str(shop_catalogue)
     con.close()
     return response
