@@ -86,7 +86,7 @@ def getDay(message): #here is where we get the day and current_day and sometimes
         day = "Tomorrow"
         current_day+=1
         time = 0
-        reponse = response + "Tomorrow"
+        #response = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
             if week==4:
