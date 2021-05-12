@@ -18,10 +18,10 @@ from TheScrape2 import checkForDino     #for scraping htmls
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from jokes import getjoke               #for jokes
-from connectdb import connectToDB       #to connect to postgresql db
-#connectToDB()
-from connectdb import con
-global con
+##from connectdb import connectToDB       #to connect to postgresql db
+###connectToDB()
+##from connectdb import con
+##global con
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
 
