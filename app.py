@@ -111,7 +111,7 @@ def get_bot_response(message_text):
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen?")
+        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue?")
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
@@ -194,7 +194,7 @@ def checkForShopen(message):
     elif "i would like to close the shop" in message:
         ##add feature where only person who opened can close
         response = response + close_shopen(name, con)
-    elif "shopen" in message or "shop" in message:
+    elif "shopen" in message or ("shop" in message and "catalogue" not in messsage) or ("shop" in message and "sell" not in messsage):
         response = response + get_shopen(con)
     elif "catalogue" in message or ("shop" in message and "sell" in message):
         global shop_catalogue
