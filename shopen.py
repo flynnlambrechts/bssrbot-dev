@@ -7,8 +7,8 @@ import pytz
 
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
-from connectdb import con # change to db
-from connectdb import db
+##from connectdb import con # change to db
+##from connectdb import db
 
 global person
 person = str("Mike Hunt")

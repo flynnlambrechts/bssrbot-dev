@@ -1,7 +1,6 @@
 #users
 import psycopg2
 
-from connectdb import con 
 
 
 def insert_user(full_name, first_name, last_name, PSID, con):
