@@ -35,6 +35,17 @@ TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 #Contributors: Ethan, Jas, Zoe
 
 
+def getCon(): #gets the connection  to the database when required
+    if "HEROKU" in os.environ:
+        DATABASE_URL =  os.environ['DATABASE_URL']
+        con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
+        print("Local Database opened successfully")
+    return con
+
+
+
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
@@ -85,12 +96,6 @@ def verify_fb_token(token_sent):
 
 #chooses a message to send to the user
 def get_bot_response(message_text):
-    if "HEROKU" in os.environ:
-        DATABASE_URL =  os.environ['DATABASE_URL']
-        con = psycopg2.connect(DATABASE_URL, sslmode='require')
-    else:
-        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-        print("Local Database opened successfully")
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     global Admin_ID
     global recipient_id
@@ -108,8 +113,8 @@ def get_bot_response(message_text):
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen?")
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
-    elif checkForShopen(message, con):
-        response = response + checkForShopen(message, con)
+    elif checkForShopen(message):
+        response = response + checkForShopen(message)
     #elif checkForCalendar(message):
         #response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
@@ -119,15 +124,17 @@ def get_bot_response(message_text):
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
+        con = getCon()
         if recipient_id in Admin_ID: 
             response = response + "Users: \n" + view_users(con)
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
+        con.close()
     else:
         response = response + "Sorry, I don't understand: " + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-    adduser(con) #adds user to database
-    con.close()
+    #adduser(con) #adds user to database
+    #con.close()
     return response
 
 def getname(): #gets user full name in format "F_name L_name"
@@ -171,7 +178,8 @@ def checkIfGreeting(message): #checks if the user sends a greeting
                 return True      
     return False
 
-def checkForShopen(message, con):
+def checkForShopen(message):
+    con = getCon()
     name = getname()
     response = ""
 ##----only use once---------or do in terminal-----
@@ -190,6 +198,7 @@ def checkForShopen(message, con):
     elif "catalogue" in message:
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
         response = response + str(shop_catalogue)
+    con.close()
     return response
 
 
@@ -197,6 +206,9 @@ def checkForShopen(message, con):
 def send_message(recipient_id, response):
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
+    con = getCon()
+    adduser(con)
+    con.close()
     return "success"
 
 
