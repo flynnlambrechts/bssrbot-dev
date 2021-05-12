@@ -77,6 +77,10 @@ def getDay(message): #here is where we get the day and current_day and sometimes
     global day
     global week
     global column
+
+    current_day = datetime.now(TIMEZONE).weekday()
+    day = "Today"
+    
     #See if user is asking about tomorrow
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
@@ -112,10 +116,10 @@ def getDay(message): #here is where we get the day and current_day and sometimes
         else:
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])
-    #otherwise must be today:
-    else:
-        current_day = datetime.now(TIMEZONE).weekday()
-        day = "Today"
+
+    #otherwise must be today: and day and current_day are not updated from todays values
+
+        
 
 
 
