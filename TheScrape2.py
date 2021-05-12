@@ -86,12 +86,9 @@ def getDay(message): #here is where we get the day and current_day and sometimes
         day = "Tomorrow"
         current_day+=1
         time = 0
-        #response = response + "Tomorrow"
         ## this will need to be changed to either go to next page or say that the menu hasnt been updated
         if current_day==7:
             if week==4:
-                #response = response + "Sorry, I do not have the menu for next week yet!"
-                #return response
                 week = 1
                 print(str(week) + " week")
                 column = 1
@@ -117,10 +114,7 @@ def getDay(message): #here is where we get the day and current_day and sometimes
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])
 
-    #otherwise must be today: and day and current_day are not updated from todays values
-
-        
-
+    #otherwise must be today: and day and current_day are not updated from todays value
 
 
 

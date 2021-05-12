@@ -35,7 +35,7 @@ Database: postgresql - stores information input by users
 
 ## Work On
 - day next week and week = 4
-- why does Monday lunch work but not lunch Monday
+- why does Monday lunch work but not lunch Monday - SOLVED
 - connecting to DB see baxtabot
 - calendar
 

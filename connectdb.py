@@ -2,9 +2,8 @@
 import os
 import psycopg2
 
-global con
-con = None
 
+'''
 def connectToDB():
     global con
     ENV = "HEROKU"
@@ -19,3 +18,14 @@ def connectToDB():
 
 #connectToDB()
 #con.close()
+'''
+
+
+if "HEROKU" in os.environ:
+    DATABASE_URL =  os.environ['DATABASE_URL']
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+else:
+    con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
+    print("Local Database opened successfully")
+
+##con

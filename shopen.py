@@ -7,13 +7,8 @@ import pytz
 
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
-from connectdb import connectToDB
 from connectdb import con
-global con   
 
-import os
-global DATABASE_URL
-DATABASE_URL =  os.environ['DATABASE_URL']
 
 global person
 person = str("Mike Hunt")
@@ -35,8 +30,6 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
-    #global con
-    #connectToDB()
     global DATABASE_URL
     con = psycopg2.connect(DATABASE_URL, sslmode='require')
     cur = con.cursor()
@@ -108,8 +101,10 @@ def open_shopen(name):
     con.close()
 
 def close_shopen(name):
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+##    global DATABASE_URL
+##    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con
+    con
     try:
         global index
         global TIMEZONE
