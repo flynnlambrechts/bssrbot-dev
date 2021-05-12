@@ -8,7 +8,6 @@ import pytz
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
 from connectdb import con
-DATABASE_URL =  os.environ['DATABASE_URL'] #ready to delete
 
 global person
 person = str("Mike Hunt")
@@ -30,8 +29,9 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
 def create_shopen():
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con 
+    con                                                             #CONNECT DB
+
     cur = con.cursor()
     response = ""
     try: 
@@ -49,17 +49,17 @@ def create_shopen():
     except Exception as error:
         response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
-    con.close()
+    con.close()                                                     #DISCONNECT DB
     return response
 
 def insert_shopen():
-    #global con
     global person
     global index
     global current_time, end_time, date
-    #connectToDB()
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    
+    global con 
+    con                                                             #CONNECT DB
+    
     response = ""
     try:
         cur = con.cursor()
@@ -73,14 +73,14 @@ def insert_shopen():
     except Exception as error:
         response = response + "Fail: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
-    con.close()
+    con.close()                                                     #DISCONNECT DB
     return response
 
 
 def open_shopen(name):
-    #connectToDB()
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con 
+    con                                                             #CONNECT DB
+
     try: 
         global index
         date_and_time = datetime.datetime.now(TIMEZONE)
@@ -98,13 +98,12 @@ def open_shopen(name):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
-    con.close()
+    con.close()                                                     #DISCONNECT DB
 
 def close_shopen(name):
-##    global DATABASE_URL
-##    con = psycopg2.connect(DATABASE_URL, sslmode='require')
-    global con
-    con
+    global con 
+    con                                                             #CONNECT DB
+
     try:
         global index
         global TIMEZONE
@@ -119,7 +118,7 @@ def close_shopen(name):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
-    con.close()
+    con.close()                                                     #DISCONNECT DB
         
 
 def timeTillClose(end_time):
@@ -130,8 +129,9 @@ def timeTillClose(end_time):
     return remaining_time
 
 def get_shopen():
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con 
+    con                                                             #CONNECT DB
+
     try:
         cur = con.cursor()
         cur.execute('''SELECT * FROM shopen1''')
@@ -164,7 +164,7 @@ def get_shopen():
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = ""
         response = response + "Fail: " + str(error)
-    con.close()
+    con.close()                                                     #DISCONNECT DB
     return response
 
 

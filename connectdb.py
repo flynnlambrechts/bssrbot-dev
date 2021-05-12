@@ -2,6 +2,15 @@
 import os
 import psycopg2
 
+if "HEROKU" in os.environ:
+    DATABASE_URL =  os.environ['DATABASE_URL']
+    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+else:
+    con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
+    print("Local Database opened successfully")
+
+##con
+
 
 '''
 def connectToDB():
@@ -19,13 +28,3 @@ def connectToDB():
 #connectToDB()
 #con.close()
 '''
-
-
-if "HEROKU" in os.environ:
-    DATABASE_URL =  os.environ['DATABASE_URL']
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
-else:
-    con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-    print("Local Database opened successfully")
-
-##con

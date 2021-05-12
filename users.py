@@ -1,19 +1,12 @@
 #users
 import psycopg2
 
-##from connectdb import connectToDB
-##from connectdb import con
-##global con
-
-import os
-global DATABASE_URL
-DATABASE_URL =  os.environ['DATABASE_URL']
+from connectdb import con
 
 def create_users():
-    #global con
-    #connectToDB()
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con 
+    con                                                             #CONNECT DB
+
     cur = con.cursor()
     response = ""
     try:
@@ -29,14 +22,13 @@ def create_users():
     except Exception as error:
         response = response + "Fail in adding users table: " + str(error)
         print("Error: " + str(error) + "\n" + str(type(error)))
-    con.close()
+    con.close()                                                     #DISCONNECT DB
     return response
 
 def insert_user(full_name, first_name, last_name, PSID):
-    #global con
-    #connectToDB()
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    global con 
+    con                                                             #CONNECT DB
+
     response = ""
     try:
         cur = con.cursor()
@@ -52,16 +44,15 @@ def insert_user(full_name, first_name, last_name, PSID):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
-    con.close()
+    con.close()                                                     #DISCONNECT DB
+
 
 def view_users():
-    #connectToDB()
+    global con 
+    con                                                             #CONNECT DB
+
     response = ""
-    #global con
-    global DATABASE_URL
-    con = psycopg2.connect(DATABASE_URL, sslmode='require')
     try: 
-        connectToDB()
         cur = con.cursor()
         cur.execute('''SELECT * FROM users''')
         rows = cur.fetchall()
@@ -78,14 +69,8 @@ def view_users():
     except Exception as error:
         if str((error)) == "connection already closed":
             response = response + "con closed"
-            #connectToDB()
         else:
-            print("Error Viewing: " + str(error) + " type: " + str(type(error)))
-    con.close()
+            print("Error in Viewing Users: \n" + str(error) + " type: " + str(type(error)))
+    con.close()                                                     #DISCONNECT DB
     return response
         
-    
-
-
-#create_users()
-#con.close()
