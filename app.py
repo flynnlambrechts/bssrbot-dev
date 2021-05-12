@@ -38,7 +38,6 @@ TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
 def receive_message():
-    #global con
     if request.method == 'GET':
         """Before allowing people to message your bot, Facebook has implemented a verify token
         that confirms all requests that your bot receives came from Facebook.""" 
@@ -64,12 +63,10 @@ def receive_message():
                         print(message_text)
                         response_sent_text = get_bot_response(message_text)
                         send_message(recipient_id, response_sent_text)
-                        #con.close()
                     #if user sends us a GIF, photo,video, or any other non-text item
                     if message['message'].get('attachments'):
                         response_sent_nontext = "Nice pic!"
                         send_message(recipient_id, response_sent_nontext)
-                        #con.close()
         except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"

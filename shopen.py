@@ -7,9 +7,6 @@ import pytz
 
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
-##from connectdb import con # change to db
-##from connectdb import db
-
 global person
 person = str("Mike Hunt")
 
@@ -30,9 +27,6 @@ date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 
 
 def open_shopen(name, con):
-    #global con 
-    #con                                                             #CONNECT DB
-
     try: 
         global index
         date_and_time = datetime.datetime.now(TIMEZONE)
@@ -50,12 +44,8 @@ def open_shopen(name, con):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
-    #con.close()                                                     #DISCONNECT DB
 
 def close_shopen(name, con):
-    #global con 
-    #con                                                             #CONNECT DB
-
     try:
         global index
         global TIMEZONE
@@ -70,7 +60,6 @@ def close_shopen(name, con):
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         return "Fail: " + str(error)
-    #con.close()                                                     #DISCONNECT DB
         
 
 def timeTillClose(end_time):
@@ -81,9 +70,6 @@ def timeTillClose(end_time):
     return remaining_time
 
 def get_shopen(con):
-    #global con 
-    #con                                                             #CONNECT DB
-
     try:
         cur = con.cursor()
         cur.execute('''SELECT * FROM shopen1''')
@@ -116,7 +102,6 @@ def get_shopen(con):
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = ""
         response = response + "Fail: " + str(error)
-    #con.close()                                                     #DISCONNECT DB
     return response
 
 
@@ -139,7 +124,6 @@ def get_shopen(con):
 ##    except Exception as error:
 ##        response = response + "Fail: " + str(error)
 ##        print("Error: " + str(error) + "\n" + str(type(error)))
-##    con.close()                                                     #DISCONNECT DB
 ##    return response
 ##
 ##def insert_shopen():
@@ -147,8 +131,6 @@ def get_shopen(con):
 ##    global index
 ##    global current_time, end_time, date
 ##    
-##    global con 
-##    con                                                             #CONNECT DB
 ##    
 ##    response = ""
 ##    try:
@@ -163,7 +145,6 @@ def get_shopen(con):
 ##    except Exception as error:
 ##        response = response + "Fail: " + str(error)
 ##        print("Error: " + str(error) + "\n" + str(type(error)))
-##    con.close()                                                     #DISCONNECT DB
 ##    return response
 
 
