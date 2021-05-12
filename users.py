@@ -1,9 +1,9 @@
 #users
 import psycopg2
 
-from connectdb import connectToDB
-from connectdb import con
-global con
+##from connectdb import connectToDB
+##from connectdb import con
+##global con
 
 import os
 global DATABASE_URL
