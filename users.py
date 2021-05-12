@@ -1,7 +1,7 @@
 #users
 import psycopg2
 
-from connectdb import con
+from connectdb import con 
 
 def create_users():
     global con 
