@@ -11,8 +11,8 @@ Database: postgresql - stores information input by users
 ## To Do
 - Dino - done
 - Shopen - done
-- Add shop catalogue
-- Calendar
+- Add shop catalogue -done
+- Calendar - working on it
 - Wildcat of the week nominations
 - Ressies
 
@@ -32,12 +32,13 @@ Database: postgresql - stores information input by users
 - Get user's name
 - Shopen
 - Easter Eggs
+- Shop catalogue 
 
 ## Work On
-- day next week and week = 4
+- day next week and week = 4 - SOLVED
 - why does Monday lunch work but not lunch Monday - SOLVED
-- connecting to DB see baxtabot
-- calendar
+- connecting to DB - SOLVED
+- calendar - IN PROGRESS
 
 
 Github# bssrbot-dev

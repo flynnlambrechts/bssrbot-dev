@@ -18,6 +18,7 @@ from TheScrape2 import checkForDino     #for scraping htmls
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from jokes import getjoke               #for jokes
+from shop_catalogue import shop_catalogue 
 
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
@@ -196,8 +197,11 @@ def checkForShopen(message):
     elif "shopen" in message or "shop" in message:
         response = response + get_shopen(con)
     elif "catalogue" in message:
-        shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
-        response = response + str(shop_catalogue)
+        global shop_catalogue
+        if shop_catalogue = None:
+            shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
+        else:
+            response = response + str(shop_catalogue)
     con.close()
     return response
 
