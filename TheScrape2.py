@@ -37,7 +37,7 @@ def checkForDino(message):
     #global response
     response = ""
     
-    getDay() #checks for days
+    getDay(message) #checks for days
     
     #handling if meal is non-specified
     if value == "dino" in message or "cooking good looking" in message:
@@ -72,7 +72,7 @@ def checkForDino(message):
         response = response + dinnermenu()
     return response
 
-def getDay(): #here is where we get the day and current_day and sometimes week
+def getDay(message): #here is where we get the day and current_day and sometimes week
     global current_day
     global day
     global week
