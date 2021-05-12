@@ -37,7 +37,8 @@ def checkForDino(message):
     #global response
     response = ""
     
-
+    getDay() #checks for days
+    
     #handling if meal is non-specified
     if value == "dino" in message or "cooking good looking" in message:
         time = datetime.now(TIMEZONE).time().hour
@@ -78,22 +79,22 @@ def getDay(): #here is where we get the day and current_day and sometimes week
     global column
     #See if user is asking about tomorrow
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
-    day = "Tomorrow"
-    current_day+=1
-    time = 0
-    reponse = response + "Tomorrow"
-    ## this will need to be changed to either go to next page or say that the menu hasnt been updated
-    if current_day==7:
-        if week==4:
-            #response = response + "Sorry, I do not have the menu for next week yet!"
-            return response
-            week = 1
-            print(str(week) + " week")
-            column = 1
-        else:
-            week = week + 1
-            print(str(week) + "week")
-            column = 1
+        day = "Tomorrow"
+        current_day+=1
+        time = 0
+        reponse = response + "Tomorrow"
+        ## this will need to be changed to either go to next page or say that the menu hasnt been updated
+        if current_day==7:
+            if week==4:
+                #response = response + "Sorry, I do not have the menu for next week yet!"
+                #return response
+                week = 1
+                print(str(week) + " week")
+                column = 1
+            else:
+                week = week + 1
+                print(str(week) + "week")
+                column = 1
     #check if user has asked about a day of the week
     elif checkForDay(message):
         print("day found")
