@@ -3,31 +3,10 @@ import psycopg2
 
 from connectdb import con 
 
-def create_users():
-    global con 
-    con                                                             #CONNECT DB
 
-    cur = con.cursor()
-    response = ""
-    try:
-        cur.execute('''CREATE TABLE users (
-            full_name VARCHAR(100) PRIMARY KEY NOT NUll,
-            first_name VARCHAR(50) NOT NULL,
-            last_name VARCHAR(50) NOT NULL,
-            PSID VARCHAR(200) NOT NULL 
-            ) ON CONFLICT DO NOTHING''')
-        print("User Table created successfully")
-        con.commit()
-        
-    except Exception as error:
-        response = response + "Fail in adding users table: " + str(error)
-        print("Error: " + str(error) + "\n" + str(type(error)))
-    con.close()                                                     #DISCONNECT DB
-    return response
-
-def insert_user(full_name, first_name, last_name, PSID):
-    global con 
-    con                                                             #CONNECT DB
+def insert_user(full_name, first_name, last_name, PSID, con):
+    #global con 
+    #con                                                             #CONNECT DB
 
     response = ""
     try:
@@ -44,12 +23,12 @@ def insert_user(full_name, first_name, last_name, PSID):
     except Exception as error:
         #response = response + "Fail in insert user: " + str(error)
         print("User may be already added: " + str(error) + " type: " + str(type(error)))
-    con.close()                                                     #DISCONNECT DB
+    #con.close()                                                     #DISCONNECT DB
 
 
-def view_users():
-    global con 
-    con                                                             #CONNECT DB
+def view_users(con):
+    #global con 
+    #con                                                             #CONNECT DB
 
     response = ""
     try: 
@@ -71,6 +50,29 @@ def view_users():
             response = response + "con closed"
         else:
             print("Error in Viewing Users: \n" + str(error) + " type: " + str(type(error)))
-    con.close()                                                     #DISCONNECT DB
+    #con.close()                                                     #DISCONNECT DB
     return response
-        
+
+
+##def create_users():
+##    global con 
+##    con                                                             #CONNECT DB
+##
+##    cur = con.cursor()
+##    response = ""
+##    try:
+##        cur.execute('''CREATE TABLE users (
+##            full_name VARCHAR(100) PRIMARY KEY NOT NUll,
+##            first_name VARCHAR(50) NOT NULL,
+##            last_name VARCHAR(50) NOT NULL,
+##            PSID VARCHAR(200) NOT NULL 
+##            ) ON CONFLICT DO NOTHING''')
+##        print("User Table created successfully")
+##        con.commit()
+##        
+##    except Exception as error:
+##        response = response + "Fail in adding users table: " + str(error)
+##        print("Error: " + str(error) + "\n" + str(type(error)))
+##    con.close()                                                     #DISCONNECT DB
+##    return response
+
