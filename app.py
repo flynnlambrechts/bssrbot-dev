@@ -194,7 +194,7 @@ def checkForShopen(message):
     elif "i would like to close the shop" in message:
         ##add feature where only person who opened can close
         response = response + close_shopen(name, con)
-    elif "shopen" in message or ("shop" in message and "catalogue" not in message) or ("shop" in message and "sell" not in message):
+    elif "shopen" in message or ("shop" in message and ("catalogue" not in message or "sell" not in message)):
         response = response + get_shopen(con)
     elif "catalogue" in message or ("shop" in message and "sell" in message):
         global shop_catalogue
