@@ -8,7 +8,7 @@ import pytz
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
 from connectdb import con
-
+DATABASE_URL =  os.environ['DATABASE_URL'] #ready to delete
 
 global person
 person = str("Mike Hunt")
