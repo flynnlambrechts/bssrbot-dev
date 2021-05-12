@@ -105,7 +105,7 @@ def get_bot_response(message_text):
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen?")
-    elif message == "thx" or message == "thanks" or message == "thank you" or message == "thankyou":
+    elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
@@ -123,7 +123,7 @@ def get_bot_response(message_text):
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
     else:
-        response = response + "Sorry, I don't understand"
+        response = response + "Sorry, I don't understand: " + message
     return response
 
 def getname(): #gets user full name in format "F_name L_name"
