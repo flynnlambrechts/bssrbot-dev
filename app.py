@@ -17,6 +17,7 @@ from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
+from calendar1 import get_events
 from jokes import getjoke               #for jokes
 from shop_catalogue import shop_catalogue 
 
@@ -212,10 +213,8 @@ def checkForCalendar(message):
     or "what's on" in message \
     or "whats on" in message \
     or "what is on" in message:
-        response = response + "Events are: \n"
         con = getCon()
-
-
+        response = response + get_events(message, con)
         con.close()
     return response
 
