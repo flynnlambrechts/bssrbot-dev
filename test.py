@@ -1,5 +1,10 @@
+Admin_ID = ["4409117335852974", #Flynn-DEV
+            "3760608700732342" #Flynn-REAL
+            ]
 
-DATABASE_URL =  "www.google.com"
-db = (DATABASE_URL, "sslmode='require'")
+recipient_id = "3760608700732342"
 
-print(db)
+if recipient_id in Admin_ID:
+        print('yay')
+else:
+        print('nay')

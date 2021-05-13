@@ -116,8 +116,8 @@ def get_bot_response(message_text):
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
         response = response + checkForShopen(message)
-    #elif checkForCalendar(message):
-        #response = response + checkForCalendar(message)
+    elif checkForCalendar(message):
+        response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif "my name" in message:
@@ -126,7 +126,7 @@ def get_bot_response(message_text):
         response = response + getjoke()
     elif "show me users" in message:
         con = getCon()
-        if recipient_id in Admin_ID: 
+        if str(recipient_id) in Admin_ID: 
             response = response + "Users: \n" + view_users(con)
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
@@ -134,8 +134,6 @@ def get_bot_response(message_text):
     else:
         response = response + "Sorry, I don't understand: " + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-    #adduser(con) #adds user to database
-    #con.close()
     return response
 
 def getname(): #gets user full name in format "F_name L_name"
@@ -206,6 +204,21 @@ def checkForShopen(message):
             response = response + str(shop_catalogue)
     con.close()
     return response
+
+def checkForCalendar(message):
+    response = ""
+    if "events" in message \
+    or "event" in message \
+    or "what's on" in message \
+    or "whats on" in message \
+    or "what is on" in message:
+        response = response + "Events are: \n"
+        con = getCon()
+
+
+        con.close()
+    return response
+
 
 
 #uses PyMessenger to send response to user

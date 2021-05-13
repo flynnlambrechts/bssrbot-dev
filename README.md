@@ -1,4 +1,4 @@
-# BssrBot 3.2.1
+# BssrBot 3.2.2
 > Basser's Dino Menu, Shop and Calendar Assistant
 
 ## Requirements
@@ -35,9 +35,6 @@ Database: postgresql - stores information input by users
 - Shop catalogue 
 
 ## Work On
-- day next week and week = 4 - SOLVED
-- why does Monday lunch work but not lunch Monday - SOLVED
-- connecting to DB - SOLVED
 - calendar - IN PROGRESS
 
 
