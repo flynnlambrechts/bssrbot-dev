@@ -36,6 +36,6 @@ Database: postgresql - stores information input by users
 
 ## Work On
 - calendar - IN PROGRESS
-
+- putting menu in db
 
 Github# bssrbot-dev

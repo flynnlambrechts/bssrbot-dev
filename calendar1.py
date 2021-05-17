@@ -74,14 +74,14 @@ def get_events(message, con):
     global weekofterm
     global column_value
     global day
-##try:
-    cur  = con.cursor()
-    getDay(message)
-    cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
-    row = cur.fetchone()
-    response = response + f"Events on {day}: \n" + str(row[column_value])
-##except Exception as error:
-##    print("Error: " + str(error) + "\n" + str(type(error)))
-##    response = response + "Error in getting events: \n" + str(error)
+    try:
+        cur  = con.cursor()
+        getDay(message)
+        cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
+        row = cur.fetchone()
+        response = response + f"Events on {day}: \n" + str(row[column_value])
+    except Exception as error:
+        print("Error: " + str(error) + "\n" + str(type(error)))
+        response = response + "Error in getting events: \n" + str(error)
     return response
     

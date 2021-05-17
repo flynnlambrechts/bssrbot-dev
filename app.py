@@ -60,7 +60,7 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-##    try:
+    try:
         #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
@@ -80,8 +80,8 @@ def receive_message():
                 if message['message'].get('attachments'):
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
-##    except TypeError: #if anti-idling add on pings bot we wont get an error
-##        print('PING!') 
+    except TypeError: #if anti-idling add on pings bot we wont get an error
+        print('PING!') 
     return "Message Processed"
 
 def log(message):
@@ -112,7 +112,7 @@ def get_bot_response(message_text):
         response = response + checkForDino(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue?")
+        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message):
@@ -133,7 +133,7 @@ def get_bot_response(message_text):
             response = response + "You shall not, PASS: \n" + str(recipient_id)
         con.close()
     else:
-        response = response + "Sorry, I don't understand: " + message
+        response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
     return response
 
