@@ -9,7 +9,7 @@ from getmenuweek import checkForDay
 
 week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
-column_value = 0
+#column_value = 0
 '''
 def getevent(day, message):
     global week_days
@@ -32,9 +32,11 @@ def getDay(message):
     weekofterm = (int(x.strftime("%W"))-18) #WEEK OF TERM
     
     day = "Today"
+    column_value = int(current_day) + 2
+    
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
-        column_value = int(current_day) + 1
+        column_value = int(current_day) + 3
         if current_day==7: #if sunday
             weekofterm+=1
             column_value = 2 #sets column to monday the next week
