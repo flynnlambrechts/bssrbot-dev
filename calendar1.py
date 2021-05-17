@@ -28,7 +28,7 @@ def getDay(message):
     global day
 
     current_day = datetime.now(TIMEZONE).weekday()
-    x = datetime.datetime.now(TIMEZONE)
+    x = datetime.now(TIMEZONE)
     weekofterm = (int(x.strftime("%W"))-18) #WEEK OF TERM
     
     day = "Today"
