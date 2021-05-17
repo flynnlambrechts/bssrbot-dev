@@ -75,7 +75,7 @@ def get_events(message, con):
 ##try:
     cur  = con.cursor()
     getDay(message)
-    cur.execute('''SELECT * FROM calendar WHERE week = %s''',weekofterm)
+    cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
     row = cur.fetchone()
     response = response + f"Events on {day}: \n" + row[column_value]
 ##except Exception as error:
