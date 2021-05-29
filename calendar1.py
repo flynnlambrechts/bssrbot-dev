@@ -29,7 +29,7 @@ def getDay(message):
 
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
-    weekofterm = (int(x.strftime("%W"))-18) #ZERO WEEK HERE
+    weekofterm = (int(x.strftime("%W"))-20) #ZERO WEEK HERE
     
     day = "Today"
     column_value = int(current_day) + 2
@@ -79,10 +79,10 @@ def get_events(message, con):
         getDay(message)
         cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
         row = cur.fetchone()
-        if row[column_value] is None:
-            response = f"No events on {day}." 
-        else:
+        if row[column_value]:
             response = response + f"Events on {day}: \n" + str(row[column_value])
+        else:
+            response = f"No events on {day}." 
     except Exception as error:
         print("Error: " + str(error) + "\n" + str(type(error)))
         response = response + "Error in getting events: \n" + str(error)
