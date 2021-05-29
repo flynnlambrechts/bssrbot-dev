@@ -75,6 +75,7 @@ def get_events(message, con):
     global column_value
     global day
 ##    try:
+    row = []
     cur  = con.cursor()
     getDay(message)
     cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
