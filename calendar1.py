@@ -79,10 +79,11 @@ def get_events(message, con):
     getDay(message)
     cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
     row = cur.fetchone()
-    if row[column_value] != None:
-        response = response + f"Events on {day}: \n" + str(row[column_value])
+    if row[column_value] is None:
+        response = f"No events on {day}."
     else:
-        response = f"No events on {day}." 
+        response = response + f"Events on {day}: \n" + str(row[column_value])
+         
 ##    except Exception as error:
 ##        print("Error: " + str(error) + "\n" + str(type(error)))
 ##        response = response + "Error in getting events: \n" + str(error)
