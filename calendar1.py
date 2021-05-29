@@ -29,7 +29,7 @@ def getDay(message):
 
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
-    weekofterm = (int(x.strftime("%W"))-18) #WEEK OF TERM
+    weekofterm = (int(x.strftime("%W"))-20) #ZERO WEEK HERE
     
     day = "Today"
     column_value = int(current_day) + 2

@@ -15,6 +15,7 @@ from pymessenger.bot import Bot         #not sure
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
+from TheScrape2 import dinotimes        #pulls the dino times from the scrape
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from calendar1 import get_events
@@ -121,6 +122,9 @@ def get_bot_response(message_text):
         response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
+    elif "time" in message:
+        global dinotimes
+        response = response + dinotimes
     elif "my name" in message:
         response = response + getname()
     elif "joke" in message:
