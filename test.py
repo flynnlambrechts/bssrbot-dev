@@ -1,5 +1,5 @@
-number = 6
-if number % 2 ==0:
-        print("even")
+row = []
+if row is []:
+        print("yay")
 else:
-        print("odd")
+        print("bad")
