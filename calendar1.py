@@ -80,8 +80,8 @@ def get_events(message, con):
     getDay(message)
     cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
     row = cur.fetchone()
-    print(row)
-    if row[column_value] is "None":
+    print(str(row) + "- ROW THING")
+    if str(row[column_value]) == "":
         response = f"No events on {day}."
     else:
         response = response + f"Events on {day}: \n" + str(row[column_value])
