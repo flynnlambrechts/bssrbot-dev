@@ -56,6 +56,6 @@ Database: postgresql - stores information input by users
 	add next week
 	maybe add week number
 - putting menu in db
-
+- getting dessert
 
 Github# bssrbot-dev
