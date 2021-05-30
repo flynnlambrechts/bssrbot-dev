@@ -82,7 +82,7 @@ def get_events(message, con):
     row = cur.fetchone()
     print(str(row) + "- ROW THING")
     print(str(weekofterm) + " week")
-    if str(row) == "None":
+    if str(row[column_value]) == "null":
         response = f"No events on {day}."
     else:
         response = response + f"Events on {day}: \n" + str(row[column_value])
