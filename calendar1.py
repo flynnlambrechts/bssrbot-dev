@@ -104,7 +104,7 @@ def get_events(message, con):
         getDay(message)
         if checkfornumber(message): # checks if user is asking for a specific week
             weekofterm = checkfornumber(message)
-        elif "next" in message:
+        if "next" in message:
             weekofterm+=1
         cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
         row = cur.fetchone()

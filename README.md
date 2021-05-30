@@ -44,7 +44,11 @@ Database: postgresql - stores information input by users
 - Shop catalogue
 - Dinotimes
 - Dino Feedback link
-- 
+- Calendar
+	- Week by week
+	- Days
+	- Week numbers
+	- next week
 
 ## Work On
 - calendar - IN PROGRESS
@@ -52,7 +56,6 @@ Database: postgresql - stores information input by users
 	add next week
 	maybe add week number
 - putting menu in db
-- adding Dinotimes
-- fix dino feedback link
+
 
 Github# bssrbot-dev
