@@ -107,7 +107,7 @@ def get_events(message, con):
         cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
         row = cur.fetchone()
         headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
-        response = response + "Events This Week:\n"
+        response = response + f"Event in Week {weekofterm}:\n"
         for i in range(1,9):
             if "null" in str(row[i]): ### THIS WILL ALSO NEED TO BE CHANGED
                 response = response + headers[i-1] + "No Events" + "\n\n"
