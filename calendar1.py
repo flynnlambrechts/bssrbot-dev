@@ -36,10 +36,11 @@ def getDay(message):
     
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
-        column_value = int(current_day) + 3
-        if current_day==7: #if sunday
-            weekofterm+=1
+        if int(current_day) == 7: #if sunday
+            weekofterm += 1
             column_value = 2 #sets column to monday the next week
+        else:
+            column_value = int(current_day) + 3
     elif "week" in message: #add for next week or week number
         day = "This week"
         column_value = 1
@@ -82,7 +83,7 @@ def get_events(message, con):
     row = cur.fetchone()
     print(str(row) + "- ROW THING")
     print(str(weekofterm) + " week")
-    if str(row[column_value]) == "null":
+    if str(row[column_value]) == "null": #this can be changed to "is None" next time
         response = f"No events on {day}."
     else:
         response = response + f"Events on {day}: \n" + str(row[column_value])
