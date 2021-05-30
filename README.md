@@ -28,6 +28,9 @@ Database: postgresql - stores information input by users
 	\copy calendar FROM <path_to_calednar.csv> WITH (FORMAT CSV);
 2. Go to calendar1 and zero week in getaway function
 3. Push changes
+### Formatting Calendar
+- Make sure have a zero row at top with days in
+- change nulls to blanks and then update line in calendar1
 
 ## Capabilities
 - Return meal from Dino, breakfast, lunch and dinner
@@ -40,6 +43,8 @@ Database: postgresql - stores information input by users
 - Easter Eggs
 - Shop catalogue
 - Dinotimes
+- Dino Feedback link
+- 
 
 ## Work On
 - calendar - IN PROGRESS

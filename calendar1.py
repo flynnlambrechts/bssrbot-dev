@@ -36,17 +36,17 @@ def getDay(message):
     
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
-        print(current_day)
+        #print(current_day)
         if int(current_day) == 6: #if sunday
             weekofterm+=1
             column_value = 2 #sets column to monday the next week
         else:
             column_value = int(current_day) + 3
-        print(column_value)
-    elif "week" in message: #add for next week or week number
-        day = "This week"
-        column_value = 1
-        #add for each day
+        #print(column_value)
+##    elif "week" in message: #add for next week or week number
+##        day = "This week"
+##        column_value = 1
+##        #add for each day
     elif checkForDay(message):
         print("day found")
         global week_days
@@ -78,17 +78,26 @@ def get_events(message, con):
     global column_value
     global day
 ##    try:
-    row = []
-    cur  = con.cursor()
-    getDay(message)
-    cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
-    row = cur.fetchone()
-    print(str(row) + "- ROW THING")
-    print(str(weekofterm) + " week")
-    if str(row[column_value]) == "null": #this can be changed to "is None" next time
-        response = f"No events on {day}."
+    if "week" in message:
+        cur  = con.cursor()
+        getDay(message)
+        cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
+        row = cur.fetchone()
+        headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
+        for i in range(1, 9):    
+            response = response + headers[i] + "\n" + row[i] + "\n\n"
     else:
-        response = response + f"Events on {day}: \n" + str(row[column_value])
+        row = []
+        cur  = con.cursor()
+        getDay(message)
+        cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
+        row = cur.fetchone()
+        #print(str(row) + "- ROW THING")
+        #print(str(weekofterm) + " week")
+        if str(row[column_value]) == "null": #this can be changed to "is None" next time
+            response = f"No events on {day}."
+        else:
+            response = response + f"Events on {day}: \n" + str(row[column_value])
          
 ##    except Exception as error:
 ##        print("Error: " + str(error) + "\n" + str(type(error)))
