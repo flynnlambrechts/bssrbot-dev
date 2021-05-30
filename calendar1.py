@@ -84,8 +84,8 @@ def get_events(message, con):
         cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
         row = cur.fetchone()
         headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
-        for i in range(1, 9):    
-            response = response + headers[i] + "\n" + row[i] + "\n\n"
+        for i in range(1,9):    
+            response = response + headers[i-1] + "\n" + row[i] + "\n\n"
     else:
         row = []
         cur  = con.cursor()
