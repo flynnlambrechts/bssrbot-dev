@@ -37,11 +37,12 @@ def getDay(message):
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
         day = "Tomorrow"
         print(current_day)
-        if int(current_day) == 7: #if sunday
-            weekofterm += 1
+        if int(current_day) == 6: #if sunday
+            weekofterm+=1
             column_value = 2 #sets column to monday the next week
         else:
             column_value = int(current_day) + 3
+        print(column_value)
     elif "week" in message: #add for next week or week number
         day = "This week"
         column_value = 1
