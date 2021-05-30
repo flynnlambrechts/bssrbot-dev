@@ -62,6 +62,7 @@ def getDay(message):
 
 
 def checkfornumber(message):
+    weeknumber = ""
     if "one" in message or "1" in message:
         weeknumber = 1
     elif "two" in message or "2" in message:
