@@ -222,10 +222,16 @@ def checkForCalendar(message):
         con.close()
     return response
 
+def checkforhugo(recipient_id):
+    if recipient_id == "5443690809005509":
+        
+
 
 
 #uses PyMessenger to send response to user
 def send_message(recipient_id, response):
+    if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
+        response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
     bot.send_text_message(recipient_id, response)
     con = getCon()
