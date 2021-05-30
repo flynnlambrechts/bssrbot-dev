@@ -43,10 +43,6 @@ def getDay(message):
         else:
             column_value = int(current_day) + 3
         #print(column_value)
-##    elif "week" in message: #add for next week or week number
-##        day = "This week"
-##        column_value = 1
-##        #add for each day
     elif checkForDay(message):
         print("day found")
         global week_days
@@ -62,6 +58,31 @@ def getDay(message):
             current_day = int(checkForDay(message))
             column_value = current_day + 2
             day = str(week_days[int(checkForDay(message))])
+
+
+
+def checkfornumber(message):
+    if "one" in message or "1" in message:
+        weeknumber = 1
+    elif "two" in message or "2" in message:
+        weeknumber = 2
+    elif "three" in message or "3" in message:
+        weeknumber = 3
+    elif "four" in message or "4" in message:
+        weeknumber = 4
+    elif "five" in message or "5" in message:
+        weeknumber = 5
+    elif "six" in message or "6" in message:
+        weeknumber = 6
+    elif "seven" in message or "7" in message:
+        weeknumber = 7
+    elif "eight" in message or "8" in message:
+        weeknumber = 8
+    elif "nine" in message or "9" in message:
+        weeknumber = 9
+    elif "ten" in message or "10" in message:
+        weeknumber = 10
+    return weeknumber
 ###COLUMNS:
 ##0 - week
 ##1 - wholeweek
@@ -81,14 +102,17 @@ def get_events(message, con):
     if "week" in message:
         cur  = con.cursor()
         getDay(message)
+        if checkfornumber(message): # checks if user is asking for a specific week
+            weekofterm = checkfornumber(message)
         cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
         row = cur.fetchone()
         headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
+        response = response + "Events This Week:\n"
         for i in range(1,9):
             if "null" in str(row[i]): ### THIS WILL ALSO NEED TO BE CHANGED
-                response = response + headers[i-1] + "No Events" + "\n"
+                response = response + headers[i-1] + "No Events" + "\n\n"
             else:
-                response = response + headers[i-1] + row[i] + "\n"
+                response = response + headers[i-1] + row[i] + "\n\n"
     else:
         row = []
         cur  = con.cursor()

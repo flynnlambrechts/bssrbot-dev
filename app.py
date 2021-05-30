@@ -214,7 +214,7 @@ def checkForCalendar(message):
     response = ""
     if "events" in message \
     or "event" in message \
-    or "what's on" in message \
+    or """what's on""" in message \
     or "whats on" in message \
     or "what is on" in message:
         con = getCon()
