@@ -29,7 +29,7 @@ def getDay(message):
 
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
-    weekofterm = (int(x.strftime("%W"))-20) #ZERO WEEK HERE
+    weekofterm = (int(x.strftime("%W"))-21) #ZERO WEEK HERE
     
     day = "Today"
     column_value = int(current_day) + 2
@@ -111,7 +111,7 @@ def get_events(message, con):
             headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
             response = response + f"Events in Week {weekofterm}:\n"
             for i in range(1,9):
-                if "null" in str(row[i]): ### THIS WILL ALSO NEED TO BE CHANGED
+                if str(row[i]) is None: ### THIS WILL ALSO NEED TO BE CHANGED
                     response = response + headers[i-1] + "No Events" + "\n\n"
                 else:
                     response = response + headers[i-1] + row[i] + "\n\n"
@@ -123,7 +123,7 @@ def get_events(message, con):
             row = cur.fetchone()
             #print(str(row) + "- ROW THING")
             #print(str(weekofterm) + " week")
-            if str(row[column_value]) == "null": #this can be changed to "is None" next time
+            if str(row[column_value]) is None: #this can be changed to "is None" next time
                 response = f"No events on {day}."
             else:
                 response = response + f"Events on {day}: \n" + str(row[column_value])
