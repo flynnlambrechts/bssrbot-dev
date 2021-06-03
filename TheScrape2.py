@@ -244,12 +244,13 @@ def getinfo(column):
     #print(soup.body.prettify())
 
     #print(soup.title) #prints the table title if it has one
-
-    menu_table = soup.find("table", attrs={"class": "dataframe"})
-    menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+    try:
+        menu_table = soup.find("table", attrs={"class": "dataframe"})
+        menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+    except: AttributeError:
+        menu_table = soup.find("table", attrs={"class": "t1"})
+        menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
     #---------------------------------------------------------------------#
-
-    
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
