@@ -233,7 +233,7 @@ def getinfo(column):
     global row
     #-----------------------Opening the HTML file--------------------------#
     HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
-    print(str(HTMLFile))
+    #print(str(HTMLFile))
     # Reading the file
     index = HTMLFile.read()
       
