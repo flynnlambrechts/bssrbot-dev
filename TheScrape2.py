@@ -247,7 +247,7 @@ def getinfo(column):
     try:
         menu_table = soup.find("table", attrs={"class": "dataframe"})
         menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
-    except: AttributeError:
+    except AttributeError:
         menu_table = soup.find("table", attrs={"class": "t1"})
         menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
     #---------------------------------------------------------------------#
