@@ -25,7 +25,7 @@ page = str(7)
 
 global week
 week = getmenuweek()
-print(str(week) + " week 0")
+print(str(week) + " week thescrape2")
 
 
 #define the dino times here used throughout
@@ -41,6 +41,8 @@ def checkForDino(message):
     global day_value #day of week 1-7 inclusive
     global day #name of the day e.g. monday, wedneday, tomorrow, today
     global week #week of cycle
+    week = getmenuweek()
+    print(str(week) + " week checkfordino")
     global breakfasttime, lunchtime, dinnertime, dinotimes
     global entity, value
     entity, value = wit_response(message)
