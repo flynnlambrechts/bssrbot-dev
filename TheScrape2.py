@@ -25,6 +25,7 @@ page = str(7)
 
 global week
 week = getmenuweek()
+print(str(week) + " week 0")
 
 
 #define the dino times here used throughout
@@ -100,7 +101,7 @@ def getDay(message): #here is where we get the day and current_day and sometimes
     global day
     global week
     global column
-
+    print(str(week) + " week a")
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
     

@@ -23,6 +23,7 @@ def getmenuweek():
             else:
                     #print("Nah")
                     menuweek = week
+    print(str(menuweek) + "week -1")
     return menuweek
 
 #print(getmenuweek())
