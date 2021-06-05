@@ -146,6 +146,7 @@ def breakfastmenu():
     global column
     global Range
     global page
+    global week
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -171,6 +172,7 @@ def lunchmenu():
     global column
     global Range
     global page
+    global week
     page = str((2*(week-1)+1.5))
     Range = int("2")
     response = ""
@@ -196,6 +198,7 @@ def dinnermenu():
     global column
     global Range
     global page
+    global week
     page = str((2*(week-1)+2))
     Range = int("7")
     response = ""
@@ -254,7 +257,8 @@ def getinfo(column):
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+            #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+            plain_text  =  str(td).replace(r"\n","").strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
             info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
         else:
             print("none!")
