@@ -258,8 +258,9 @@ def getinfo(column):
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
             #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
-            plain_text  =  str(td).replace(r"\n","").strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
-            info.append(plain_text.replace("<td>","").replace("</td>","").replace("amp;",""))
+            stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
+            plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
+            info.append(plain_text)
         else:
             print("none!")
     #print(str(row) + str(column) + "row column")
