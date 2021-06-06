@@ -208,8 +208,9 @@ def dinnermenu():
     for i in range(1,Range):
         try:
             header = ""
-            column = 0
+            column = 0 #set to first column to get header
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -222,8 +223,12 @@ def dinnermenu():
             print('NOK')
     return response
 
+def addemojis(header):
+    header = header.replace("salad", u"salad \U0001F957")
+    header = header.replace("egg", u"egg \U0001F95A")
+    return header
 
-def columnlist():
+def columnlist(): #gets the info from each column as a list
     global row
     global column
     rowcontents = []
