@@ -228,8 +228,7 @@ def dinnermenu():
 
 def addemojis(header):
     header = header.replace("salad", u"salad \U0001F957")
-    header = header.replace("egg", u"egg \U0001F95A")
-    if "vegetatrian option" in header:
+    if "vegetarian option" in header:
         header = header.replace("vegetarian option", u"vegetarian option\U0001F966")
     else:
         header = header.replace("vegetarian", u"vegetarian \U0001F966")
@@ -238,6 +237,11 @@ def addemojis(header):
     return header
 
 def addemojiscontent(content):
+    content = content.replace("egg", u"egg \U0001F95A")
+    content = content.replace("pancake", u"pancake \U0001f95e")
+    content = content.replace("pizza", u"pizza \U0001f355")
+    content = content.replace("sushi", u"sushi \U0001f363")
+    content = content.replace("chicken", u"chicken \U0001F357")
     return content
 
 def columnlist(): #gets the info from each column as a list
