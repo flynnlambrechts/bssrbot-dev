@@ -226,8 +226,9 @@ def dinnermenu():
 def addemojis(header):
     header = header.replace("salad", u"salad \U0001F957")
     header = header.replace("egg", u"egg \U0001F95A")
-    header = header.replace("vegetarian", u"vegetarian \U0001F966")
-    header = header.replace("main course", u"main course \U0001F37D")
+    header = header.replace("vegetarian option", u"vegetarian option\U0001F966").replace("vegetarian", u"vegetarian \U0001F966")
+    header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
+    header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
     return header
 
 def columnlist(): #gets the info from each column as a list
