@@ -220,7 +220,7 @@ def dinnermenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
-                content = addemojis(content)
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
@@ -237,7 +237,7 @@ def addemojis(header):
     header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
     return header
 
-def addemojis(content):
+def addemojiscontent(content):
     return content
 
 def columnlist(): #gets the info from each column as a list
