@@ -240,7 +240,7 @@ def addemojis(header):
     header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
     header = header.replace("soup", u"soup \U0001f372")
     header = header.replace("the dessert station", u"the dessert station \U0001f370")
-    header = header.replace("additonal vegetables", u"additional vegetables \U0001F966")
+    header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
     return header
 
 def addemojiscontent(content):
