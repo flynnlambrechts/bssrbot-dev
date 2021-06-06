@@ -56,6 +56,10 @@ def checkForDino(message):
         time = datetime.now(TIMEZONE).time().hour
         if "time" in message:
             response = response + dinotimes
+        elif day == "Tomorrow":
+            response = response + (f"Breakfast Tomorrow: \n")
+            day_value = current_day + 2
+            response = response + breakfastmenu()
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
