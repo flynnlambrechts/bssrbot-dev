@@ -166,6 +166,7 @@ def breakfastmenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
@@ -178,7 +179,7 @@ def lunchmenu():
     global page
     global week
     page = str((2*(week-1)+1.5))
-    Range = int("2")
+    Range = int("3")
     response = ""
     for i in range(0,Range):
         try:
@@ -193,6 +194,7 @@ def lunchmenu():
                 column = day_value
             content = content + columnlist()[i]
             if content != "":
+                content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
