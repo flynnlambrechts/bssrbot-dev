@@ -158,6 +158,7 @@ def breakfastmenu():
             header = ""
             column = 0
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -184,6 +185,7 @@ def lunchmenu():
             header = ""
             column = 0
             header = header + columnlist()[i]
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
