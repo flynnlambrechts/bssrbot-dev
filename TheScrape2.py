@@ -207,7 +207,7 @@ def dinnermenu():
     global page
     global week
     page = str((2*(week-1)+2))
-    Range = int("7")
+    Range = int("8")
     response = ""
     for i in range(1,Range):
         try:
@@ -236,6 +236,7 @@ def addemojis(header):
         header = header.replace("vegetarian", u"vegetarian \U0001F966")
     header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
     header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
+    header = header.replace("soup", u"soup \U0001f372")
     return header
 
 def addemojiscontent(content):
