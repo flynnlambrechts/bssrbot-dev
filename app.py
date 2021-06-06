@@ -222,8 +222,14 @@ def checkForCalendar(message):
         con.close()
     return response
 
-def checkForKill(message):
-    if "dino wrong" in message and 
+
+# def checkForKill(message):
+#     if "dino wrong" in message and str(recipient_id) in Admin_ID:
+#         con = getCon()
+#         killswitch(message, con)
+#         con.close()
+
+
 
 
 #uses PyMessenger to send response to user
