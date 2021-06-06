@@ -221,6 +221,8 @@ def dinnermenu():
             else:
                 column = day_value
             content = content + columnlist()[i]
+            if header == "vegetables":
+                content = ""
             if content != "":
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
@@ -237,6 +239,7 @@ def addemojis(header):
     header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
     header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
     header = header.replace("soup", u"soup \U0001f372")
+    header = header.replace("the dessert station", u"the dessert station \U0001f370")
     return header
 
 def addemojiscontent(content):
