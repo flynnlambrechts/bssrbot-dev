@@ -242,6 +242,7 @@ def addemojiscontent(content):
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")
+    content = content.replace("honey", u"honey \U0001F36F")
     return content
 
 def columnlist(): #gets the info from each column as a list
