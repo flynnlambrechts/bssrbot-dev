@@ -70,7 +70,9 @@ def checkForDino(message):
             day_value = current_day + 1
             response = response + dinnermenu()
         else: 
-            response = response + "No more meals today :)"
+            response = response + (f"Breakfast Tomorrow: \n")
+            day_value = current_day + 2
+            response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
             response = response + "Breakfast at dino is at " + breakfasttime 
@@ -233,7 +235,7 @@ def dinnermenu():
 def addemojis(header):
     header = header.replace("salad", u"salad \U0001F957")
     if "vegetarian option" in header:
-        header = header.replace("vegetarian option", u"vegetarian option\U0001F966")
+        header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
     else:
         header = header.replace("vegetarian", u"vegetarian \U0001F331")
     header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
@@ -244,7 +246,7 @@ def addemojis(header):
     return header
 
 def addemojiscontent(content):
-    content = content.replace("egg", u"egg \U0001F95A")
+    #content = content.replace("egg", u"egg \U0001F95A")
     content = content.replace("pancake", u"pancake \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
