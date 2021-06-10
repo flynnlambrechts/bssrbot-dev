@@ -71,11 +71,11 @@ def checkForDino(message):
             response = response + lunchmenu()
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
-            day_value = current_day + 1
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 1
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = current_day + 2
+            day_value = current_day + 1
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
