@@ -118,7 +118,7 @@ def webhook():
 """
 
 #app.debug = True
-messenger = Messenger(os.environ['VERIFY_TOKEN'])
+messenger = Messenger(os.environ['VERIFY_TOKEN']) 
 #----------------------------------------------------------------------------------------------
 
 
@@ -132,7 +132,7 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
-        messenger.handle(request.get_json(force=True)) #tryna do buttons
+        #messenger.handle(request.get_json(force=True)) #tryna do buttons
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
@@ -158,6 +158,29 @@ def receive_message():
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
+#----------------------------------------------------------------------------------------------
+# @app.route('/webhook', methods=['GET', 'POST'])
+# def webhook():
+#     if request.method == 'GET':
+#         if (request.args.get('hub.verify_token') == os.environ.get('FB_VERIFY_TOKEN')):
+#             return request.args.get('hub.challenge')
+#         raise ValueError('FB_VERIFY_TOKEN does not match.')
+#     elif request.method == 'POST':
+#         messenger.handle(request.get_json(force=True))
+#     return ''
+
+
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+    if request.method == 'GET':
+        if request.args.get('hub.verify_token') == os.environ.get('VERIFY_TOKEN'):
+            messenger.init_bot()
+            return request.args.get('hub.challenge')
+        raise ValueError('FB_VERIFY_TOKEN does not match.')
+    elif request.method == 'POST':
+        messenger.handle(request.get_json(force=True))
+    return ''
+#----------------------------------------------------------------------------------------------
 
 def log(message):
     print(message)
