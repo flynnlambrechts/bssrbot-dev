@@ -48,6 +48,8 @@ def getCon(): #gets the connection  to the database when required
     return con
 
 
+#app.debug = True
+messenger = Messenger(os.environ['VERIFY_TOKEN'])
 
 #We will receive messages that Facebook sends our bot at this endpoint 
 @app.route("/", methods=['GET', 'POST'])
@@ -59,6 +61,7 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
+        messenger.handle(request.get_json(force=True)) #tryna do buttons
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
@@ -298,11 +301,10 @@ class Messenger(BaseMessenger):
         messenger.set_messenger_profile(messenger_profile.to_dict())
 
 
-app = Flask(__name__)
-app.debug = True
-messenger = Messenger(os.environ.get('FB_PAGE_TOKEN'))
 
 
+
+"""
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
     if request.method == 'GET':
@@ -313,6 +315,7 @@ def webhook():
     elif request.method == 'POST':
         messenger.handle(request.get_json(force=True))
     return 
+"""
 #----------------------------------------------------------------------------------------------
 
 
