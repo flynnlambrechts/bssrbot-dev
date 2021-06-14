@@ -13,6 +13,7 @@ import requests                         #for sending get request
 from flask import Flask, request        #flask
 #from pymessenger.bot import Bot         #not sure
 from pymessenger import Bot
+from pymessenger import __init__
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
