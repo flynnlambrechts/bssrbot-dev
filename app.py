@@ -255,7 +255,7 @@ def send_message(recipient_id, response):
 def send_other(recipient_id, response):
     print("sending other")
     text = response
-    buttons = "payload":{
+    buttons = {"payload":{
         "template_type":"button",
         "text":"What do you want to do next?",
         "buttons":[
@@ -263,7 +263,7 @@ def send_other(recipient_id, response):
             "type":"web_url",
             "url":"https://www.messenger.com",
             "title":"Visit Messenger"
-          }]}
+          }]}}
     bot.send_button_message(recipient_id, text, buttons)
     return "other sent"
 
