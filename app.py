@@ -47,78 +47,7 @@ def getCon(): #gets the connection  to the database when required
         print("Local Database opened successfully")
     return con
 
-#-------------------RED VENTED----------------------------------------------------------
-#import os
-#from flask import Flask, request
-from fbmessenger import BaseMessenger
-from fbmessenger import quick_replies
-from fbmessenger.elements import Text
-from fbmessenger.thread_settings import GreetingText, GetStartedButton, MessengerProfile
 
-class Messenger(BaseMessenger):
-    def __init__(self, page_access_token):
-        self.page_access_token = page_access_token
-        super(Messenger, self).__init__(self.page_access_token)
-
-    def message(self, message):
-        response = Text(text= str(message['message']['text']))
-        action = response.to_dict()
-        res = self.send(action)
-        app.logger.debug('Response: {}'.format(res))
-
-    def delivery(self, message):
-        pass
-
-    def read(self, message):
-        pass
-
-    def account_linking(self, message):
-        pass
-
-    def postback(self, message):
-        payload = message['postback']['payload']
-
-        if 'start' in payload:
-            quick_reply_1 = quick_replies.QuickReply(title='Location', content_type='location')
-            quick_replies_set = quick_replies.QuickReplies(quick_replies=[
-                quick_reply_1
-            ])
-            text = {'text': 'Share your location'}
-            text['quick_replies'] = quick_replies_set.to_dict()
-            self.send(text)
-
-    def optin(self, message):
-        pass
-
-    def init_bot(self):
-        greeting_text = GreetingText('Welcome to weather bot')
-        messenger_profile = MessengerProfile(greetings=[greeting_text])
-        messenger.set_messenger_profile(messenger_profile.to_dict())
-
-        get_started = GetStartedButton(payload='start')
-
-        messenger_profile = MessengerProfile(get_started=get_started)
-        messenger.set_messenger_profile(messenger_profile.to_dict())
-
-
-
-
-
-"""
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    if request.method == 'GET':
-        if request.args.get('hub.verify_token') == os.environ['VERIFY_TOKEN']:
-            messenger.init_bot()
-            return request.args.get('hub.challenge')
-        raise ValueError('FB_VERIFY_TOKEN does not match.')
-    elif request.method == 'POST':
-        messenger.handle(request.get_json(force=True))
-    return 
-"""
-
-#app.debug = True
-messenger = Messenger(os.environ['VERIFY_TOKEN']) 
 #----------------------------------------------------------------------------------------------
 
 
@@ -136,7 +65,7 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
-        log(output) #entire output good for finding sender ids what message contains etc
+        # log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
             for message in messaging:
@@ -155,32 +84,13 @@ def receive_message():
                 elif message['message'].get('attachments'):
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
+                    attachment_type = 'image'
+                    attachment_path = "image.jpg"
+                    send_picture(recipient_id, attachment_type, attachment_path)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
-#----------------------------------------------------------------------------------------------
-# @app.route('/webhook', methods=['GET', 'POST'])
-# def webhook():
-#     if request.method == 'GET':
-#         if (request.args.get('hub.verify_token') == os.environ.get('FB_VERIFY_TOKEN')):
-#             return request.args.get('hub.challenge')
-#         raise ValueError('FB_VERIFY_TOKEN does not match.')
-#     elif request.method == 'POST':
-#         messenger.handle(request.get_json(force=True))
-#     return ''
 
-
-@app.route('/webhook', methods=['GET', 'POST'])
-def webhook():
-    if request.method == 'GET':
-        if request.args.get('hub.verify_token') == os.environ.get('VERIFY_TOKEN'):
-            messenger.init_bot()
-            return request.args.get('hub.challenge')
-        raise ValueError('FB_VERIFY_TOKEN does not match.')
-    elif request.method == 'POST':
-        messenger.handle(request.get_json(force=True))
-    return ''
-#----------------------------------------------------------------------------------------------
 
 def log(message):
     print(message)
@@ -339,7 +249,9 @@ def send_message(recipient_id, response):
     con.close()
     return "success"
 
-
+def send_picture(recipient_id, attachment_type, attachment_path)
+    bot.send_attachment(recipient_id, attachment_type, attachment_path)
+    return "image sent"
 
 
 
