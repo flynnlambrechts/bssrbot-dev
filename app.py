@@ -85,10 +85,14 @@ def receive_message():
                 elif message['message'].get('attachments'):
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
+
                     attachment_type = 'image'
                     attachment_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
                     response = "hello"
                     send_picture(recipient_id, response)
+
+                    response_sent_nontext = "Nice pic!"
+                    send_message(recipient_id, response_sent_nontext)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
@@ -254,7 +258,8 @@ def send_message(recipient_id, response):
     return "success"
 
 def send_picture(recipient_id, response):
-    bot.send_text_message(recipient_id, response)
+    elements = {}
+    bot.send_generic_message(recipient_id, elements)
     return "image sent"
 
 
