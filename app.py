@@ -249,7 +249,7 @@ def send_message(recipient_id, response):
     con.close()
     return "success"
 
-def send_picture(recipient_id, attachment_type, attachment_path)
+def send_picture(recipient_id, attachment_type, attachment_path):
     bot.send_attachment(recipient_id, attachment_type, attachment_path)
     return "image sent"
 
