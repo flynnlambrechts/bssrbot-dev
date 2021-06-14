@@ -83,7 +83,7 @@ def receive_message():
                     send_message(recipient_id, response_sent_text)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 elif message['message'].get('attachments'):
-
+                    response = "Hello"
                     send_other(recipient_id, response)
 
                     # response_sent_nontext = "Nice pic!"
