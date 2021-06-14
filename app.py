@@ -89,6 +89,7 @@ def receive_message():
                     attachment_type = 'image'
                     attachment_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
                     response = "hello"
+                    elements = {}
                     send_picture(recipient_id, response)
 
                     response_sent_nontext = "Nice pic!"
@@ -257,8 +258,8 @@ def send_message(recipient_id, response):
 
     return "success"
 
-def send_picture(recipient_id, response):
-    elements = {}
+def send_picture(recipient_id, elements):
+    
     bot.send_generic_message(recipient_id, elements)
     return "image sent"
 
