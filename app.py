@@ -84,14 +84,10 @@ def receive_message():
                 #if user sends us a GIF, photo,video, or any other non-text item
                 elif message['message'].get('attachments'):
 
-                    attachment_type = 'image'
-                    attachment_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
-                    response = "hello"
-                    elements = {}
-                    send_picture(recipient_id, elements)
+                    send_other(recipient_id, response)
 
-                    response_sent_nontext = "Nice pic!"
-                    send_message(recipient_id, response_sent_nontext)
+                    # response_sent_nontext = "Nice pic!"
+                    # send_message(recipient_id, response_sent_nontext)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!') 
     return "Message Processed"
@@ -256,10 +252,20 @@ def send_message(recipient_id, response):
 
     return "success"
 
-def send_picture(recipient_id, elements):
-    
-    bot.send_generic_message(recipient_id, elements)
-    return "image sent"
+def send_other(recipient_id, response):
+    print("sending other")
+    text = response
+    buttons = "payload":{
+        "template_type":"button",
+        "text":"What do you want to do next?",
+        "buttons":[
+          {
+            "type":"web_url",
+            "url":"https://www.messenger.com",
+            "title":"Visit Messenger"
+          }]}
+    bot.send_button_message(recipient_id, text, buttons)
+    return "other sent"
 
 
 
