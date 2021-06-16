@@ -270,7 +270,7 @@ def send_other(recipient_id, response):
                     }
     ]
     message = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
-    bot.send_button_message(recipient_id, message, url_button)
+    bot.send_button_message(recipient_id, "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup", url_button)
     return "other sent"
 
 
