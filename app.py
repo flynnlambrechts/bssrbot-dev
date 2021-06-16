@@ -254,12 +254,21 @@ def send_message(recipient_id, response):
     return "success"
 
 def send_other(recipient_id, response):
-    elements = []
-    element = Element(title="test", image_url="<arsenal_logo.png>", subtitle="subtitle", item_url="http://arsenal.com")
-    elements.append(element)
-
-    bot.send_generic_message(recipient_id, elements)
+    
+##    elements = []
+##    element = Element(title="test", image_url="<arsenal_logo.png>", subtitle="subtitle", item_url="http://arsenal.com")
+##    elements.append(element)
+##
+##    bot.send_generic_message(recipient_id, elements)
     # bot.send_button_message(recipient_id, text, buttons)
+
+     url_button = [
+                {
+                  "type": "web_url",
+                  "url": "google.com",
+                  "title": "google",
+                }]
+    bot.send_button_message(recipient_id, "message to send with button", url_button)
     return "other sent"
 
 
