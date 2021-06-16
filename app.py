@@ -265,11 +265,12 @@ def send_other(recipient_id, response):
     url_button = [
                     {
                         "type": "web_url",
-                        "url": "google.com",
-                        "title": "google"
+                        "url": "https://bit.ly/3hVT0DX",
+                        "title": "Leave Feedback"
                     }
     ]
-    bot.send_button_message(recipient_id, "message to send with button", url_button)
+    message = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
+    bot.send_button_message(recipient_id, message, url_button)
     return "other sent"
 
 
