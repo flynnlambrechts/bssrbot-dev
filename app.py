@@ -269,8 +269,8 @@ def send_other(recipient_id, response):
                         "title": "Leave Feedback"
                     }
     ]
-    message = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
-    bot.send_button_message(recipient_id, "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup", url_button)
+    text = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
+    bot.send_button_message(recipient_id, text, url_button)
     return "other sent"
 
 
