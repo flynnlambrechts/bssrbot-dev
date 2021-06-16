@@ -248,7 +248,7 @@ def send_message(recipient_id, response):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    print("test')
+    print("test")
     if url_button != []:
         text = str(response)
         bot.send_button_message(recipient_id, text, url_button)
