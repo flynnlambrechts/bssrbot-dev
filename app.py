@@ -142,6 +142,8 @@ def get_bot_response(message_text):
         response = response + getname()
     elif "joke" in message:
         response = response + getjoke()
+    elif "test" in message:
+        response = response + "testing"
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
@@ -252,6 +254,10 @@ def send_message(recipient_id, response):
     if url_button != []:
         text = str(response)
         bot.send_button_message(recipient_id, text, url_button)
+    elif response == "testing":
+        quick_reply_message = "What's your favorite House in Game of Thrones?"
+        quick_rep_option = (["Stark","stark_payload"],["Lannister","lan_payload"],["Targaryan","tar_payload"],["none","None"])
+        bot.send_quickreply(recipient_id,quick_reply_message,quick_rep_option)
     else:
         bot.send_text_message(recipient_id, response)
     con = getCon()
