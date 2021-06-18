@@ -261,7 +261,7 @@ def send_message(recipient_id, response):
 
 def send_other(recipient_id, response):
     params = {
-           "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+           "access_token": os.environ["ACCESS_TOKEN"]
     }
 
     headers = {
