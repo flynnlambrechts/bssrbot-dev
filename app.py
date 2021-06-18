@@ -267,13 +267,13 @@ def send_other(recipient_id, response):
     headers = {
             "Content-Type": "application/json"
     }
-
+    message_text = "QUICK"
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
                 },
                 "message": {
-                    "text": message_text
+                    "text": message_text,
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Search",
