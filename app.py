@@ -294,8 +294,13 @@ def send_other(recipient_id, response):
                             "content_type":"text",
                             "title":"Dino",
                             "payload":"Dino"
-                            },
-                    ]}
+                            }],
+                    "buttons":[{
+                        "type": "web_url",
+                        "url": "https://bit.ly/3hVT0DX",
+                        "title": "Leave Feedback"
+                        }]
+                }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     return "other sent"
