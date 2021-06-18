@@ -278,16 +278,15 @@ def send_other(recipient_id, response):
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Search",
-                            "payload":"www.google.com",
-                            #"image_url":"http://example.com/img/red.png"
+                            "payload":"<www.google.com",
+                            "image_url":"http://example.com/img/red.png"
+                            },
+                            {
+                            "content_type":"location"
                             },
                             {
                             "content_type":"text",
-                            "title":"Lunch",
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Dinner",
+                            "title":"Something Else",
                             "payload":"www.google.com"
                             }
                     ]}
