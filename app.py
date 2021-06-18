@@ -289,7 +289,7 @@ def send_other(recipient_id, response):
                             "content_type":"text",
                             "title":"Dinner",
                             "payload":"Dinner"
-                            }
+                            },
                             {
                             "content_type":"text",
                             "title":"Dino",
