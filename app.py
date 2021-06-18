@@ -142,8 +142,6 @@ def get_bot_response(message_text):
         response = response + getname()
     elif "joke" in message:
         response = response + getjoke()
-    elif "test" in message:
-        response = response + "testing"
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
@@ -254,20 +252,48 @@ def send_message(recipient_id, response):
     if url_button != []:
         text = str(response)
         bot.send_button_message(recipient_id, text, url_button)
-    elif response == "testing":
-        quick_reply_message = "What's your favorite House in Game of Thrones?"
-        quick_rep_option = (["Stark","stark_payload"],["Lannister","lan_payload"],["Targaryan","tar_payload"],["none","None"])
-        bot.send_quickreply(recipient_id,quick_reply_message,quick_rep_option)
     else:
         bot.send_text_message(recipient_id, response)
     con = getCon()
     adduser(con)
     con.close()
-
     return "success"
 
 def send_other(recipient_id, response):
-    
+    params = {
+           "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+
+    headers = {
+            "Content-Type": "application/json"
+    }
+
+    data = json.dumps({
+               "recipient": {
+                      "id": recipient_id
+               },
+               "message": {
+                  "text": message_text
+                  "quick_replies":[{
+                            "content_type":"text",
+                            "title":"Search",
+                            "payload":"<POSTBACK_PAYLOAD>",
+                            "image_url":"http://example.com/img/red.png"
+                            },
+                            {
+                             "content_type":"location"
+                            },
+                            {
+                             "content_type":"text",
+                             "title":"Something Else",
+                             "payload":"<POSTBACK_PAYLOAD>"
+                             }
+                   ]
+               }
+    })
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+
+
 ##    elements = []
 ##    element = Element(title="test", image_url="<arsenal_logo.png>", subtitle="subtitle", item_url="http://arsenal.com")
 ##    elements.append(element)
@@ -275,15 +301,15 @@ def send_other(recipient_id, response):
 ##    bot.send_generic_message(recipient_id, elements)
     # bot.send_button_message(recipient_id, text, buttons)
 
-    url_button = [
-                    {
-                        "type": "web_url",
-                        "url": "https://bit.ly/3hVT0DX",
-                        "title": "Leave Feedback"
-                    }
-    ]
-    text = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
-    bot.send_button_message(recipient_id, text, url_button)
+##    url_button = [
+##                    {
+##                        "type": "web_url",
+##                        "url": "https://bit.ly/3hVT0DX",
+##                        "title": "Leave Feedback"
+##                    }
+##    ]
+##    text = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
+##    bot.send_button_message(recipient_id, text, url_button)
     return "other sent"
 
 
