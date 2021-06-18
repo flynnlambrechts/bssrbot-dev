@@ -275,11 +275,11 @@ def send_other(recipient_id, response):
                 },
                 "message": {
                     "text": message_text,
-                    "buttons":[{
-                            "type": "web_url",
-                            "url": "https://bit.ly/3hVT0DX",
-                            "title": "Leave Feedback"
-                            }],
+                    # "buttons":[{
+                    #         "type": "web_url",
+                    #         "url": "https://bit.ly/3hVT0DX",
+                    #         "title": "Leave Feedback"
+                    #         }],
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Breakfast",
