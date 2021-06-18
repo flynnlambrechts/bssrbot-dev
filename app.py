@@ -269,17 +269,24 @@ def send_other(recipient_id, response):
             "Content-Type": "application/json"
     }
     message_text = str(response)
+
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
                 },
                 "message": {
-                    "text": message_text,
-                    # "buttons":[{
-                    #         "type": "web_url",
-                    #         "url": "https://bit.ly/3hVT0DX",
-                    #         "title": "Leave Feedback"
-                    #         }],
+                    "attachment":{
+                        "type":"template",
+                        "payload":{
+                            "template_type":"button",
+                            "text":"What do you want to do next?",
+                            "buttons":[{
+                                "type": "web_url",
+                                "url": "https://bit.ly/3hVT0DX",
+                                "title": "Leave Feedback"
+                                }]
+                        }
+                    },
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Breakfast",
@@ -300,9 +307,44 @@ def send_other(recipient_id, response):
                             "title":"Dino",
                             "payload":"Dino"
                             }]
-                    
                 }
     })
+########################################################
+    # data = json.dumps({
+    #             "recipient": {
+    #                 "id": recipient_id
+    #             },
+    #             "message": {
+    #                 "text": message_text,
+    #                 # "buttons":[{
+    #                 #         "type": "web_url",
+    #                 #         "url": "https://bit.ly/3hVT0DX",
+    #                 #         "title": "Leave Feedback"
+    #                 #         }],
+    #                 "quick_replies":[{
+    #                         "content_type":"text",
+    #                         "title":"Breakfast",
+    #                         "payload":"Breakfast"
+    #                         },
+    #                         {
+    #                         "content_type":"text",
+    #                         "title":"Lunch",
+    #                         "payload":"Lunch"
+    #                         },
+    #                         {
+    #                         "content_type":"text",
+    #                         "title":"Dinner",
+    #                         "payload":"Dinner"
+    #                         },
+    #                         {
+    #                         "content_type":"text",
+    #                         "title":"Dino",
+    #                         "payload":"Dino"
+    #                         }]
+                    
+    #             }
+    # })
+################################################################
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
     return "other sent"
 
