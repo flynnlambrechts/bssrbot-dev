@@ -9,6 +9,7 @@ import time                             #for time
 import pytz                             #timezone
 import psycopg2                         #database stuff
 import requests                         #for sending get request
+import json
 
 from flask import Flask, request        #flask
 #from pymessenger.bot import Bot         #not sure
@@ -68,7 +69,7 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
-        # log(output) #entire output good for finding sender ids what message contains etc
+        log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
             for message in messaging:
