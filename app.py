@@ -284,10 +284,10 @@ def send_other(recipient_id, response):
                              "content_type":"location"
                             },
                             {
-                             "content_type":"text",
-                             "title":"Something Else",
-                             "payload":"<POSTBACK_PAYLOAD>"
-                             }
+                            "content_type":"text",
+                            "title":"Something Else",
+                            "payload":"<POSTBACK_PAYLOAD>"
+                            }
                     ]}
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
