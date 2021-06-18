@@ -278,35 +278,21 @@ def send_other(recipient_id, response):
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Breakfast",
-                            "payload":"www.google.com",
-                            "image_url":"http://example.com/img/red.png"
+                            "payload":"Breakfast"
                             },
                             {
                             "content_type":"text",
                             "title":"Lunch",
-                            "payload":"www.google.com"
+                            "payload":"Lunch"
+                            },
+                            {
+                            "content_type":"text",
+                            "title":"Dinner",
+                            "payload":"Dinner"
                             }
                     ]}
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-
-
-##    elements = []
-##    element = Element(title="test", image_url="<arsenal_logo.png>", subtitle="subtitle", item_url="http://arsenal.com")
-##    elements.append(element)
-##
-##    bot.send_generic_message(recipient_id, elements)
-    # bot.send_button_message(recipient_id, text, buttons)
-
-##    url_button = [
-##                    {
-##                        "type": "web_url",
-##                        "url": "https://bit.ly/3hVT0DX",
-##                        "title": "Leave Feedback"
-##                    }
-##    ]
-##    text = "Dinner Today: \n Main Course:\n Roast turkey\n\n Vegarian:\nChicpeas \n\n Deset:\nSoup"
-##    bot.send_button_message(recipient_id, text, url_button)
     return "other sent"
 
 
