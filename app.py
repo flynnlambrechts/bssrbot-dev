@@ -277,8 +277,8 @@ def send_other(recipient_id, response):
                     "text": message_text,
                     "quick_replies":[{
                             "content_type":"text",
-                            "title":"Breakfast",
-                            #"payload":"www.google.com",
+                            "title":"Search",
+                            "payload":"www.google.com",
                             #"image_url":"http://example.com/img/red.png"
                             },
                             {
@@ -288,11 +288,7 @@ def send_other(recipient_id, response):
                             {
                             "content_type":"text",
                             "title":"Dinner",
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Something Else",
-                            #"payload":"www.google.com"
+                            "payload":"www.google.com"
                             }
                     ]}
     })
