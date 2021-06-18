@@ -269,12 +269,12 @@ def send_other(recipient_id, response):
     }
 
     data = json.dumps({
-               "recipient": {
-                      "id": recipient_id
-               },
-               "message": {
-                  "text": message_text
-                  "quick_replies":[{
+                "recipient": {
+                    "id": recipient_id
+                },
+                "message": {
+                    "text": message_text
+                    "quick_replies":[{
                             "content_type":"text",
                             "title":"Search",
                             "payload":"<POSTBACK_PAYLOAD>",
@@ -288,8 +288,8 @@ def send_other(recipient_id, response):
                              "title":"Something Else",
                              "payload":"<POSTBACK_PAYLOAD>"
                              }
-                   ]
-               }
+                    ]
+                }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
