@@ -268,7 +268,7 @@ def send_other(recipient_id, response):
     headers = {
             "Content-Type": "application/json"
     }
-    message_text = "QUICK"
+    message_text = str("QUICK")
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
@@ -278,16 +278,13 @@ def send_other(recipient_id, response):
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Search",
-                            "payload":"<POSTBACK_PAYLOAD>",
+                            "payload":"www.google.com",
                             "image_url":"http://example.com/img/red.png"
-                            },
-                            {
-                             "content_type":"location"
                             },
                             {
                             "content_type":"text",
                             "title":"Something Else",
-                            "payload":"<POSTBACK_PAYLOAD>"
+                            "payload":"www.google.com"
                             }
                     ]}
     })
