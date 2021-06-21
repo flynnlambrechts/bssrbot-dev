@@ -143,6 +143,11 @@ def get_bot_response(message_text):
         response = response + dinotimes
     elif "latemeal" in message or "late" in message:
         response = "Order a late meal here:"
+        buttons = [{
+                "type": "web_url",
+                "url": "https://user.resi.inloop.com.au/home",
+                "title": "Latemeal"
+                }]
     elif "my name" in message:
         response = response + getname()
     elif "joke" in message:
