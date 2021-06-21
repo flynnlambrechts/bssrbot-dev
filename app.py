@@ -90,7 +90,7 @@ def receive_message():
                     #send_other(recipient_id, response)
                     buttons = []
                     response_sent_nontext = "Nice pic!"
-                    send_message(recipient_id, response_sent_nontext)
+                    send_message(recipient_id, response_sent_nontext, buttons)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!')
     except:
@@ -289,7 +289,7 @@ def send_buttons(recipient_id, response, buttons): #change to send button messag
     #             "title": "Latemeal"
     #             }
     #             ]
-    print(type(buttons))
+    #print(type(buttons))
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
