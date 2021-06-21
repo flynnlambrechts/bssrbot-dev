@@ -105,16 +105,20 @@ def checkForDino(message):
 def checkForButton(message):
     if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-        url_button = [
+        url_buttons = [{
+                    "type": "web_url",
+                    "url": "https://bit.ly/3hVT0DX",
+                    "title": "Leave Feedback"
+                    },
                     {
-                        "type": "web_url",
-                        "url": "https://bit.ly/3hVT0DX",
-                        "title": "Leave Feedback"
+                    "type": "web_url",
+                    "url": "https://user.resi.inloop.com.au/home",
+                    "title": "Latemeal"
                     }
-        ]
+                    ]
     else:
-        url_button = []
-    return url_button
+        url_buttons = []
+    return url_buttons
 
 def getDay(message): #here is where we get the day and current_day and sometimes week
     global current_day
