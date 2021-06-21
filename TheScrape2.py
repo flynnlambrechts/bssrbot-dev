@@ -49,7 +49,7 @@ def checkForDino(message):
     #global response
     response = ""
     
-    getDay(message) #checks for days
+    getDay(message) #checks for days and creates current_day
     
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
@@ -59,6 +59,8 @@ def checkForDino(message):
         elif day == "Tomorrow":
             response = response + (f"Dino Breakfast Tomorrow: \n")
             day_value = current_day + 1
+            print(current_day)
+            print(day_value)
             response = response + breakfastmenu()
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
@@ -72,10 +74,13 @@ def checkForDino(message):
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 1
+            #day_value = current_day + 1 #maybe should be this?????
             response = response + dinnermenu()
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
-            day_value = current_day + 1
+            day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
+            print(current_day)
+            print(day_value)
             response = response + breakfastmenu()
     elif value == "breakfast":
         if "time" in message:
@@ -100,6 +105,8 @@ def checkForDino(message):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu()
+    #if "time" not in message: #adds feedback link to end of response unless user is asking for time
+        #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
 
 def checkForButton(message):
@@ -250,6 +257,10 @@ def dinnermenu():
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
+    if "Oven roast barramundi" in response:
+        response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
+    elif "Roast turkey" in response:
+        response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
     return response
 
 def addemojis(header):
@@ -267,7 +278,7 @@ def addemojis(header):
 
 def addemojiscontent(content):
     #content = content.replace("egg", u"egg \U0001F95A")
-    content = content.replace("pancake", u"pancake \U0001f95e")
+    content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")

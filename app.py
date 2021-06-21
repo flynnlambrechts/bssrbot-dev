@@ -12,9 +12,9 @@ import requests                         #for sending get request
 import json
 
 from flask import Flask, request        #flask
-#from pymessenger.bot import Bot         #not sure
-from pymessenger import Bot
-from pymessenger import __init__
+from pymessenger.bot import Bot         #not sure
+#from pymessenger import Bot
+#from pymessenger import __init__
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
@@ -65,7 +65,6 @@ def receive_message():
         return verify_fb_token(token_sent)
     #if the request was not get, it must be POST and we can just proceed with sending a message back to user
     else:
-        #messenger.handle(request.get_json(force=True)) #tryna do buttons
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
@@ -239,6 +238,7 @@ def checkForCalendar(message):
     or "event" in message \
     or "whats on" in message \
     or "what’s on" in message \
+    or "what's on" in message \
     or "what is on" in message:
         con = getCon()
         response = response + get_events(message, con)
@@ -259,7 +259,7 @@ def send_message(recipient_id, response, buttons):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    print("test")
+    #print("test")
     if buttons != []:
         #text = str(response)
         #bot.send_button_message(recipient_id, text, url_button)
