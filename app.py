@@ -82,14 +82,14 @@ def receive_message():
                 if message['message'].get('text'):
                     message_text = message['message']['text']
                     print(message_text)
-                    response_sent_text = get_bot_response(message_text)
-                    send_message(recipient_id, response_sent_text)
+                    response_sent_text, buttons = get_bot_response(message_text)
+                    send_message(recipient_id, response_sent_text, buttons)
                 #if user sends us a GIF, photo,video, or any other non-text item
                 elif message['message'].get('attachments'):
                     #response = "Hello"
                     #send_other(recipient_id, response)
-                    global feedback_button
-                    feedback_button = []
+                    global buttons
+                    buttons = []
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
     except TypeError: #if anti-idling add on pings bot we wont get an error
@@ -122,12 +122,12 @@ def get_bot_response(message_text):
     response = ""
     global value, entity
     entity, value = wit_response(message) #prev message_text
-    global feedback_button
-    feedback_button = []
+    global buttons
+    buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
         response = response + checkForDino(message)
-        feedback_button = checkForButton(message)
+        buttons = checkForButton(message)
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
@@ -158,7 +158,7 @@ def get_bot_response(message_text):
     else:
         response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
-    return response
+    return response, buttons
 
 def getname(): #gets user full name in format "F_name L_name"
     global recipient_id
@@ -251,15 +251,15 @@ def checkForCalendar(message):
 
 #formerly uses PyMessenger to send response to user
 #now routes to send message with or without buttons
-def send_message(recipient_id, response):
+def send_message(recipient_id, response, buttons):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
     print("test")
-    if feedback_button != []:
+    if buttons != []:
         #text = str(response)
         #bot.send_button_message(recipient_id, text, url_button)
-        send_buttons(recipient_id, response)
+        send_buttons(recipient_id, response, buttons)
     else:
         #bot.send_text_message(recipient_id, response)
         send_nonbuttons(recipient_id, response)
@@ -270,7 +270,7 @@ def send_message(recipient_id, response):
 
 
 #sends response with quick replies and button
-def send_buttons(recipient_id, response): #change to send button message
+def send_buttons(recipient_id, response, buttons): #change to send button message
     params = {
            "access_token": os.environ["ACCESS_TOKEN"]
     }
@@ -279,17 +279,18 @@ def send_buttons(recipient_id, response): #change to send button message
             "Content-Type": "application/json"
     }
     #message_text = str(response)
-    buttons = [{
-                "type": "web_url",
-                "url": "https://bit.ly/3hVT0DX",
-                "title": "Leave Feedback"
-                },
-                {
-                "type": "web_url",
-                "url": "https://user.resi.inloop.com.au/home",
-                "title": "Latemeal"
-                }
-                ]
+    # buttons = [{
+    #             "type": "web_url",
+    #             "url": "https://bit.ly/3hVT0DX",
+    #             "title": "Leave Feedback"
+    #             },
+    #             {
+    #             "type": "web_url",
+    #             "url": "https://user.resi.inloop.com.au/home",
+    #             "title": "Latemeal"
+    #             }
+    #             ]
+    print(type(buttons))
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
