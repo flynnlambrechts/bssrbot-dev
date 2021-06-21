@@ -69,7 +69,7 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
     try:
-        log(output) #entire output good for finding sender ids what message contains etc
+        #log(output) #entire output good for finding sender ids what message contains etc
         for event in output['entry']:
             messaging = event['messaging']
             for message in messaging:
@@ -292,7 +292,13 @@ def send_buttons(recipient_id, response): #change to send button message
                                 "type": "web_url",
                                 "url": "https://bit.ly/3hVT0DX",
                                 "title": "Leave Feedback"
-                                }]
+                                },
+                                {
+                                "type": "web_url",
+                                "url": "https://user.resi.inloop.com.au/home",
+                                "title": "Latemeal"
+                                }
+                                ]
                         }
                     },
                     "quick_replies":[{
