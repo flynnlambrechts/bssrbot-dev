@@ -77,7 +77,7 @@ def receive_message():
                 #Facebook Messenger ID for user so we know where to send response back to
                 global recipient_id
                 recipient_id = message['sender']['id']
-
+                global buttons
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
@@ -88,7 +88,6 @@ def receive_message():
                 elif message['message'].get('attachments'):
                     #response = "Hello"
                     #send_other(recipient_id, response)
-                    global buttons
                     buttons = []
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
