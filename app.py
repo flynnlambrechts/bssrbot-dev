@@ -142,6 +142,8 @@ def get_bot_response(message_text):
     elif "time" in message:
         global dinotimes
         response = response + dinotimes
+    elif "latemeal" in message or "late" in message:
+        response = "Order a late meal here:"
     elif "my name" in message:
         response = response + getname()
     elif "joke" in message:
@@ -277,7 +279,17 @@ def send_buttons(recipient_id, response): #change to send button message
             "Content-Type": "application/json"
     }
     #message_text = str(response)
-
+    buttons = [{
+                "type": "web_url",
+                "url": "https://bit.ly/3hVT0DX",
+                "title": "Leave Feedback"
+                },
+                {
+                "type": "web_url",
+                "url": "https://user.resi.inloop.com.au/home",
+                "title": "Latemeal"
+                }
+                ]
     data = json.dumps({
                 "recipient": {
                     "id": recipient_id
@@ -288,17 +300,7 @@ def send_buttons(recipient_id, response): #change to send button message
                         "payload":{
                             "template_type":"button",
                             "text":str(response),
-                            "buttons":[{
-                                "type": "web_url",
-                                "url": "https://bit.ly/3hVT0DX",
-                                "title": "Leave Feedback"
-                                },
-                                {
-                                "type": "web_url",
-                                "url": "https://user.resi.inloop.com.au/home",
-                                "title": "Latemeal"
-                                }
-                                ]
+                            "buttons": buttons
                         }
                     },
                     "quick_replies":[{
