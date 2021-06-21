@@ -88,7 +88,8 @@ def receive_message():
                 elif message['message'].get('attachments'):
                     #response = "Hello"
                     #send_other(recipient_id, response)
-
+                    global feedback_button
+                    feedback_button = []
                     response_sent_nontext = "Nice pic!"
                     send_message(recipient_id, response_sent_nontext)
     except TypeError: #if anti-idling add on pings bot we wont get an error
@@ -244,7 +245,8 @@ def checkForCalendar(message):
 #         con.close()
 
 
-#uses PyMessenger to send response to user
+#formerly uses PyMessenger to send response to user
+#now routes to send message with or without buttons
 def send_message(recipient_id, response):
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
