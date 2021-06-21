@@ -320,7 +320,7 @@ def send_buttons(recipient_id, response): #change to send button message
 def send_nonbuttons(recipient_id, response):
     message_text = str(response)
     params = {
-           "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+           "access_token": os.environ["ACCESS_TOKEN"]
     }
 
     headers = {
