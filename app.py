@@ -332,7 +332,7 @@ def send_nonbuttons(recipient_id, response):
                       "id": recipient_id
                },
                "message": {
-                    "text": message_text
+                    "text": message_text,
                     "quick_replies":[{
                             "content_type":"text",
                             "title":"Breakfast",
