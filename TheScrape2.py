@@ -3,7 +3,7 @@ import time
 #import calendar
 #import pytz
 from pytz import timezone
-TIMEZONE = pytz.timezone('Australia/Sydney')
+TIMEZONE = timezone('Australia/Sydney')
 
 # Importing BeautifulSoup class from the bs4 module
 from bs4 import BeautifulSoup
