@@ -12,9 +12,7 @@ import requests                         #for sending get request
 import json
 
 from flask import Flask, request        #flask
-#from pymessenger.bot import Bot         #not sure
-#from pymessenger import Bot
-#from pymessenger import __init__
+#from pymessenger.bot import Bot        #library for sending messages no longer used
 
 from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls

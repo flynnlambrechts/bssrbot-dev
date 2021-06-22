@@ -1,7 +1,8 @@
 from datetime import *
 import time
-import calendar
-import pytz
+#import calendar
+#import pytz
+from pytz import timezone
 TIMEZONE = pytz.timezone('Australia/Sydney')
 
 # Importing BeautifulSoup class from the bs4 module
