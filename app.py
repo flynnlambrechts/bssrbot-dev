@@ -205,7 +205,7 @@ def checkIfGreeting(message): #checks if the user sends a greeting
 
 def checkForShopen(message):
     con = getCon()
-    name = getname()
+    name = getname(recipient_id)
     response = ""
     global shop_catalogue
     if shop_catalogue == None:
