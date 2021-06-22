@@ -74,9 +74,9 @@ def receive_message():
             for message in messaging:
               if message.get('message'):
                 #Facebook Messenger ID for user so we know where to send response back to
-                global recipient_id
+                #global recipient_id
                 recipient_id = message['sender']['id']
-                global buttons
+                #global buttons
                 #if it has text
                 if message['message'].get('text'):
                     message_text = message['message']['text']
@@ -118,9 +118,9 @@ def get_bot_response(message_text):
     message = message_text.lower()
     global response
     response = ""
-    global value, entity
+    #global value, entity
     entity, value = wit_response(message) #prev message_text
-    global buttons
+    #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype': #if user is asking for a meal (uses wit.ai)
@@ -148,7 +148,7 @@ def get_bot_response(message_text):
                 "title": "Latemeal"
                 }]
     elif "my name" in message:
-        response = response + getname()
+        response = response + getname(recipient_id)
     elif "joke" in message:
         response = response + getjoke()
     elif "show me users" in message:
@@ -163,8 +163,7 @@ def get_bot_response(message_text):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
     return response, buttons
 
-def getname(): #gets user full name in format "F_name L_name"
-    global recipient_id
+def getname(recipient_id): #gets user full name in format "F_name L_name"
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     name = ""
@@ -178,8 +177,8 @@ def getname(): #gets user full name in format "F_name L_name"
     #print("NAME: " + "'" + name + "'")
     return name
 
-def getdetails(): #gets user PSID and name details
-    global recipient_id
+def getdetails(recipient_id): #gets user PSID and name details
+    #global recipient_id
     global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     r = requests.get(url = URL)
@@ -190,8 +189,8 @@ def getdetails(): #gets user PSID and name details
     PSID = int(recipient_id)
     return full_name, first_name, last_name, PSID
 
-def adduser(con): #adds user to DB
-    full_name, first_name, last_name, PSID = getdetails()
+def adduser(con, recipient_id): #adds user to DB
+    full_name, first_name, last_name, PSID = getdetails(recipient_id)
     insert_user(full_name, first_name, last_name, PSID, con)
     
 
@@ -208,7 +207,6 @@ def checkForShopen(message):
     con = getCon()
     name = getname()
     response = ""
-
     global shop_catalogue
     if shop_catalogue == None:
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
@@ -268,7 +266,7 @@ def send_message(recipient_id, response, buttons):
         #bot.send_text_message(recipient_id, response)
         send_nonbuttons(recipient_id, response)
     con = getCon()
-    adduser(con)
+    adduser(con, recipient_id)
     con.close()
     return "success"
 
