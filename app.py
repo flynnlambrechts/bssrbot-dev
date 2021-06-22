@@ -12,7 +12,7 @@ import requests                         #for sending get request
 import json
 
 from flask import Flask, request        #flask
-from pymessenger.bot import Bot         #not sure
+#from pymessenger.bot import Bot         #not sure
 #from pymessenger import Bot
 #from pymessenger import __init__
 
@@ -35,7 +35,7 @@ VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
             ] #id of users with powerful permission
-bot = Bot(ACCESS_TOKEN) #not sure
+#bot = Bot(ACCESS_TOKEN) #not sure
 TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
 #Developer: Flynn
