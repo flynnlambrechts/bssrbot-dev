@@ -81,7 +81,7 @@ def receive_message():
             if message['message'].get('text'):
                 message_text = message['message']['text']
                 print(message_text)
-                response_sent_text, buttons = get_bot_response(message_text)
+                response_sent_text, buttons = get_bot_response(message_text, recipient_id)
                 send_message(recipient_id, response_sent_text, buttons)
             #if user sends us a GIF, photo,video, or any other non-text item
             elif message['message'].get('attachments'):
@@ -110,10 +110,10 @@ def verify_fb_token(token_sent):
 
 
 #chooses a message to send to the user
-def get_bot_response(message_text):
+def get_bot_response(message_text, recipient_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     global Admin_ID
-    global recipient_id
+    #global recipient_id
     global message
     message = message_text.lower()
     global response
@@ -131,8 +131,8 @@ def get_bot_response(message_text):
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
-    elif checkForShopen(message):
-        response = response + checkForShopen(message)
+    elif checkForShopen(message, recipient_id):
+        response = response + checkForShopen(message, recipient_id)
     elif checkForCalendar(message):
         response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
@@ -203,7 +203,7 @@ def checkIfGreeting(message): #checks if the user sends a greeting
                 return True      
     return False
 
-def checkForShopen(message):
+def checkForShopen(message, recipient_id):
     con = getCon()
     name = getname(recipient_id)
     response = ""
