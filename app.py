@@ -3,7 +3,7 @@
 
 import os, sys                          #for heroku env
 from datetime import *                  #for time proccessing
-import random                           #for random generation
+#import random                           #for random generation
 import time                             #for time
 #import calendar                        #not neccessary
 import pytz                             #timezone
@@ -114,7 +114,7 @@ def get_bot_response(message_text, recipient_id):
     #global recipient_id
     #global message
     message = message_text.lower()
-    global response
+    #global response
     response = ""
     #global value, entity
     entity, value = wit_response(message) #prev message_text

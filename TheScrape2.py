@@ -67,7 +67,6 @@ def checkForDino(message):
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
             response = response + breakfastmenu(day_value, column, week)
-            
         elif time < 14:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
