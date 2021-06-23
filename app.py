@@ -112,7 +112,7 @@ def get_bot_response(message_text, recipient_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     global Admin_ID
     #global recipient_id
-    global message
+    #global message
     message = message_text.lower()
     global response
     response = ""
@@ -135,6 +135,13 @@ def get_bot_response(message_text, recipient_id):
         response = response + checkForCalendar(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
+    elif checkForDay(message) or "tomorrow" in message or "today" in message:
+        response = response + "blank for now"
+        buttons = [{
+                "type": "web_url",
+                "url": "https://user.resi.inloop.com.au/home",
+                "title": "Latemeal"
+                }]
     elif "time" in message:
         global dinotimes
         response = response + dinotimes

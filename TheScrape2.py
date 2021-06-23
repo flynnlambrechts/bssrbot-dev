@@ -18,13 +18,13 @@ global week
 week = 1 ### work out how to define the week
 '''
 
-global column
+#global column
 column = 6
 
-global page
+#global page
 page = str(7)
 
-global week
+#global week
 week = getmenuweek()
 print(str(week) + " week thescrape2")
 
@@ -38,19 +38,19 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 def checkForDino(message):
-    global current_day #day of week 0-6 inclusive
-    global day_value #day of week 1-7 inclusive
-    global day #name of the day e.g. monday, wedneday, tomorrow, today
-    global week #week of cycle
+    #global current_day #day of week 0-6 inclusive
+    #global day_value #day of week 1-7 inclusive
+    #global day #name of the day e.g. monday, wedneday, tomorrow, today
+    #global week #week of cycle
     week = getmenuweek()
     print(str(week) + " week checkfordino")
     global breakfasttime, lunchtime, dinnertime, dinotimes
-    global entity, value
+    #global entity, value
     entity, value = wit_response(message)
     #global response
     response = ""
     
-    getDay(message) #checks for days and creates current_day
+    day, current_day, column = getDay(message, week) #checks for days and creates current_day
     
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
@@ -62,34 +62,34 @@ def checkForDino(message):
             day_value = current_day + 1
             print(current_day)
             print(day_value)
-            response = response + breakfastmenu()
+            response = response + breakfastmenu(day_value column, week)
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
-            response = response + breakfastmenu()
+            response = response + breakfastmenu(day_value column, week)
             
         elif time < 14:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
-            response = response + lunchmenu()
+            response = response + lunchmenu(day_value column, week)
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 1
             #day_value = current_day + 1 #maybe should be this?????
-            response = response + dinnermenu()
+            response = response + dinnermenu(day_value column, week)
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
             print(current_day)
             print(day_value)
-            response = response + breakfastmenu()
+            response = response + breakfastmenu(day_value column, week)
     elif value == "breakfast":
         if "time" in message:
             response = response + "Breakfast at dino is at " + breakfasttime 
         else:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
-            response = response + breakfastmenu()
+            response = response + breakfastmenu(day_value column, week)
         
     elif value == "lunch":
         if "time" in message:
@@ -97,7 +97,7 @@ def checkForDino(message):
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
-            response = response + lunchmenu()
+            response = response + lunchmenu(day_value column, week)
 
     elif value == "dinner":
         if "time" in message:
@@ -105,7 +105,7 @@ def checkForDino(message):
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
-            response = response + dinnermenu()
+            response = response + dinnermenu(day_value column, week)
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
@@ -128,11 +128,12 @@ def checkForButton(message):
         url_buttons = []
     return url_buttons
 
-def getDay(message): #here is where we get the day and current_day and sometimes week
-    global current_day
-    global day
-    global week
-    global column
+def getDay(message, week): #here is where we get the day and current_day and sometimes week
+    #global current_day
+    #global day
+    #global week
+    #global column
+    column = ""
     print(str(week) + " week a")
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
@@ -169,17 +170,41 @@ def getDay(message): #here is where we get the day and current_day and sometimes
         else:
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])
+    #elif "today" in message:
+        #day = "Today"
+    return day, current_day, column
 
     #otherwise must be today: and day and current_day are not updated from todays value
 
+# def wholedaymenu(message):
+#     global day_value
+#     global column
+#     #global Range
+#     global page
+#     global week
+
+#     day, current_day, week, column = getDay(message, week)
+#     if day == "Today":
+#         response = response + (f"Breakfast {day}: \n")
+#         day_value = current_day + 1
+#         response = response + breakfastmenu() + "\n\n"
+
+#         response = response + (f"Lunch {day}: \n")
+#         response = response + lunchmenu() + "\n\n"
+
+#         response = response + (f"Dinner {day}: \n")
+#         response = response + dinnermenu() + "\n\n"
+
+#     elif day == "Tomorrow":
+#     elif checkForDay(message):
 
 
-def breakfastmenu():
-    global day_value
-    global column
-    global Range
-    global page
-    global week
+def breakfastmenu(day_value, column, week):
+    #global day_value
+    #global column
+    #global Range
+    #global page
+    #global week
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -187,14 +212,14 @@ def breakfastmenu():
         try:
             header = ""
             column = 0
-            header = header + columnlist()[i]
+            header = header + columnlist(page, column, Range)[i]
             header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
             else:
                 column = day_value
-            content = content + columnlist()[i]
+            content = content + columnlist(page, column, Range)[i]
             if content != "":
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
@@ -202,12 +227,12 @@ def breakfastmenu():
             print('NOK')
     return response
 
-def lunchmenu():
-    global day_value
-    global column
-    global Range
-    global page
-    global week
+def lunchmenu(day_value column, week):
+    #global day_value
+    #global column
+    #global Range
+    #global page
+    #global week
     page = str((2*(week-1)+1.5))
     Range = int("3")
     response = ""
@@ -215,14 +240,14 @@ def lunchmenu():
         try:
             header = ""
             column = 0
-            header = header + columnlist()[i]
+            header = header + columnlist(page, column, Range)[i]
             header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
             else:
                 column = day_value
-            content = content + columnlist()[i]
+            content = content + columnlist(page, column, Range)[i]
             if content != "":
                 content = addemojiscontent(content)
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
@@ -230,12 +255,12 @@ def lunchmenu():
             print('NOK')
     return response
 
-def dinnermenu():
-    global day_value
-    global column
-    global Range
-    global page
-    global week
+def dinnermenu(day_value column, week):
+    #global day_value
+    #global column
+    #global Range
+    #global page
+    #global week
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
@@ -243,14 +268,14 @@ def dinnermenu():
         try:
             header = ""
             column = 0 #set to first column to get header
-            header = header + columnlist()[i]
+            header = header + columnlist(page, column, Range)[i]
             header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
             else:
                 column = day_value
-            content = content + columnlist()[i]
+            content = content + columnlist(page, column, Range)[i]
             if header == "vegetables":
                 content = ""
             if content != "":
@@ -286,20 +311,20 @@ def addemojiscontent(content):
     content = content.replace("honey", u"honey \U0001F36F")
     return content
 
-def columnlist(): #gets the info from each column as a list
-    global row
-    global column
+def columnlist(page, column, Range): #gets the info from each column as a list
+    #global row
+    #global column
     rowcontents = []
     for i in range(0,Range):
         row = i
-        content = getinfo(column)
+        content = getinfo(page, row, column)
         rowcontents.append(content)
     return rowcontents
 
 
-def getinfo(column):
-    global page
-    global row
+def getinfo(page, row, column):
+    #global page
+    #global row
     #-----------------------Opening the HTML file--------------------------#
     HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
     #print(str(HTMLFile))
