@@ -45,7 +45,7 @@ def getDay(message):
         #print(column_value)
     elif checkForDay(message):
         print("day found")
-        global week_days
+        #global week_days
         if current_day > int(checkForDay(message)):
             if weekofterm == 10:
                 print("end of term") #FIX this

@@ -110,7 +110,7 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 def get_bot_response(message_text, recipient_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    global Admin_ID
+    #global Admin_ID
     #global recipient_id
     #global message
     message = message_text.lower()
@@ -143,7 +143,7 @@ def get_bot_response(message_text, recipient_id):
                 "title": "Latemeal"
                 }]
     elif "time" in message:
-        global dinotimes
+        #global dinotimes
         response = response + dinotimes
     elif "latemeal" in message or "late" in message:
         response = "Order a late meal here:"
@@ -169,7 +169,7 @@ def get_bot_response(message_text, recipient_id):
     return response, buttons
 
 def getname(recipient_id): #gets user full name in format "F_name L_name"
-    global ACCESS_TOKEN
+    #global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     name = ""
     # sending get request and saving the response as response object
@@ -184,7 +184,7 @@ def getname(recipient_id): #gets user full name in format "F_name L_name"
 
 def getdetails(recipient_id): #gets user PSID and name details
     #global recipient_id
-    global ACCESS_TOKEN
+    #global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     r = requests.get(url = URL)
     data = r.json()
@@ -212,8 +212,9 @@ def checkForShopen(message, recipient_id):
     con = getCon()
     name = getname(recipient_id)
     response = ""
-    global shop_catalogue
+    #global shop_catalogue
     if shop_catalogue == None:
+        global shop_catalogue
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
     
 ##----only use once---------or do in terminal-----
