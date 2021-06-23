@@ -21,12 +21,12 @@ def getmenuweek():
             #print(i)
             if week > i:
                     menuweek = week - i
-                    print(str(menuweek) + "week for i")
+                    #print(str(menuweek) + "week for i")
                     break
             else:
                     #print("Nah")
                     menuweek = week
-    print(str(menuweek) + "week getweekmenu")
+    #print(str(menuweek) + "week getweekmenu")
     return menuweek
 
 #print(getmenuweek())

@@ -3,7 +3,7 @@ from datetime import *
 import time
 
 from pytz import timezone
-TIMEZONE = pytz.timezone('Australia/Sydney')
+TIMEZONE = timezone('Australia/Sydney')
 
 from getmenuweek import checkForDay
 
