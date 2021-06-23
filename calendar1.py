@@ -99,7 +99,7 @@ def get_events(message, con):
     # global weekofterm
     # global column_value
     # global day
-    try:
+    #try:
         current_day, day, weekofterm, column_value = getDay(message)
         if "week" in message:
             cur  = con.cursor()
@@ -130,8 +130,8 @@ def get_events(message, con):
             else:
                 response = response + f"Events on {day}: \n" + str(row[column_value])
              
-    except Exception as error:
-        print("Error: " + str(error) + "\n" + str(type(error)))
-        response = response + "Error in getting events: \n" + str(error)
+    # except Exception as error:
+    #     print("Error: " + str(error) + "\n" + str(type(error)))
+    #     response = response + "Error in getting events: \n" + str(error)
     return response
     
