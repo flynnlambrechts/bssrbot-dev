@@ -62,34 +62,34 @@ def checkForDino(message):
             day_value = current_day + 1
             print(current_day)
             print(day_value)
-            response = response + breakfastmenu(day_value column, week)
+            response = response + breakfastmenu(day_value, column, week)
         elif time < 10:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
-            response = response + breakfastmenu(day_value column, week)
+            response = response + breakfastmenu(day_value, column, week)
             
         elif time < 14:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
-            response = response + lunchmenu(day_value column, week)
+            response = response + lunchmenu(day_value, column, week)
         elif time < 19:
             response = response + (f"Dinner {day}: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 1
             #day_value = current_day + 1 #maybe should be this?????
-            response = response + dinnermenu(day_value column, week)
+            response = response + dinnermenu(day_value, column, week)
         else: 
             response = response + (f"Breakfast Tomorrow: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this might have to be 1 but idk wth is going on
             print(current_day)
             print(day_value)
-            response = response + breakfastmenu(day_value column, week)
+            response = response + breakfastmenu(day_value, column, week)
     elif value == "breakfast":
         if "time" in message:
             response = response + "Breakfast at dino is at " + breakfasttime 
         else:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
-            response = response + breakfastmenu(day_value column, week)
+            response = response + breakfastmenu(day_value, column, week)
         
     elif value == "lunch":
         if "time" in message:
@@ -97,7 +97,7 @@ def checkForDino(message):
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
-            response = response + lunchmenu(day_value column, week)
+            response = response + lunchmenu(day_value, column, week)
 
     elif value == "dinner":
         if "time" in message:
@@ -105,7 +105,7 @@ def checkForDino(message):
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
-            response = response + dinnermenu(day_value column, week)
+            response = response + dinnermenu(day_value, column, week)
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     return response
@@ -227,7 +227,7 @@ def breakfastmenu(day_value, column, week):
             print('NOK')
     return response
 
-def lunchmenu(day_value column, week):
+def lunchmenu(day_value, column, week):
     #global day_value
     #global column
     #global Range
@@ -255,7 +255,7 @@ def lunchmenu(day_value column, week):
             print('NOK')
     return response
 
-def dinnermenu(day_value column, week):
+def dinnermenu(day_value, column, week):
     #global day_value
     #global column
     #global Range
