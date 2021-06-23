@@ -58,7 +58,7 @@ def getDay(message):
             current_day = int(checkForDay(message))
             column_value = current_day + 2
             day = str(week_days[int(checkForDay(message))])
-        return current_day, day, weekofterm, column_value
+    return current_day, day, weekofterm, column_value
 
 def checkfornumber(message):
     weeknumber = ""
