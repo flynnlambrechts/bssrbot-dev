@@ -212,9 +212,9 @@ def checkForShopen(message, recipient_id):
     con = getCon()
     name = getname(recipient_id)
     response = ""
-    #global shop_catalogue
+    global shop_catalogue
     if shop_catalogue == None:
-        global shop_catalogue
+        #global shop_catalogue
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
     
 ##----only use once---------or do in terminal-----
