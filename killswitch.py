@@ -32,7 +32,7 @@ def add_custom_message(message, con):
 	lunch = ""
 	dinner = ""
 	allday = ""
-	
+
 	if "breakfast" in message:
 		breakfast = custom_message
 	elif "lunch" in message:
@@ -45,33 +45,33 @@ def add_custom_message(message, con):
 		print("no meal specified")
 
 	try:
-        date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
-        cur = con.cursor()
+		date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
+		cur = con.cursor()
 
-        cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date))
-       	#check if current day exists
-    	if cur.fetchone() is not None: #if the day exits then update current day
-    		cur.execute('''UPDATE custom_menu SET
-            day= %s, allday = %s, breakfast = %s, lunch = %s,
-            dinner = %s
-            WHERE (%s IS NOT NULL OR 
-            	%s IS NOT NULL OR
-            	%s IS NOT NULL OR
-            	%s IS NOT NULL OR
-            	%s IS NOT NULL)''',
-                (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner))
-        	con.commit()
-        	print("custom_message updated successfully")
-    	else: #otherwise add new row with the current date
-    		cur.execute('''INSERT INTO custom_message (
-	    			day,
-	    			allday,
-	    			breakfast,
-	    			lunch,
-	    			dinner)
+		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date))
+			#check if current day exists
+		if cur.fetchone() is not None: #if the day exits then update current day
+			cur.execute('''UPDATE custom_menu SET
+		    day= %s, allday = %s, breakfast = %s, lunch = %s,
+		    dinner = %s
+		    WHERE (%s IS NOT NULL OR 
+		    	%s IS NOT NULL OR
+		    	%s IS NOT NULL OR
+		    	%s IS NOT NULL OR
+		    	%s IS NOT NULL)''',
+		        (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner))
+			con.commit()
+			print("custom_message updated successfully")
+		else: #otherwise add new row with the current date
+			cur.execute('''INSERT INTO custom_message (
+					day,
+					allday,
+					breakfast,
+					lunch,
+					dinner)
 				VALUES (%s,%s,%s,%s,%s)''',(date,allday,breakfast,lunch,dinner))
-    		con.commit()
-    		print("row added successfully")
+			con.commit()
+			print("row added successfully")
 
 
     except Exception as error:
