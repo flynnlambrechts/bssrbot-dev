@@ -20,6 +20,7 @@ from TheScrape2 import dinotimes        #pulls the dino times from the scrape
 from TheScrape2 import checkForButton   #Checks whether should add feedback button
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
+from killswitch import add_custom_message
 from calendar1 import get_events
 from jokes import getjoke               #for jokes
 from shop_catalogue import shop_catalogue 
@@ -156,6 +157,12 @@ def get_bot_response(message_text, recipient_id):
         response = response + getname(recipient_id)
     elif "joke" in message:
         response = response + getjoke()
+    elif "dookie:" in message:
+        con = getCon()
+        add_custom_message(message, con)
+        con.close()
+        response = response + "adding custom message"
+
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 

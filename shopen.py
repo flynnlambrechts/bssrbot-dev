@@ -3,9 +3,9 @@ import psycopg2
 
 import time
 import datetime
-import pytz
+from pytz import timezone
 
-TIMEZONE = pytz.timezone('Australia/Sydney')
+TIMEZONE = timezone('Australia/Sydney')
 
 global person
 person = str("Mike Hunt")

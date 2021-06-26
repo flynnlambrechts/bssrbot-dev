@@ -99,39 +99,39 @@ def get_events(message, con):
     # global weekofterm
     # global column_value
     # global day
-#try:
-    current_day, day, weekofterm, column_value = getDay(message)
-    if "week" in message:
-        cur  = con.cursor()
-        getDay(message)
-        if checkfornumber(message): # checks if user is asking for a specific week
-            weekofterm = checkfornumber(message)
-        if "next" in message:
-            weekofterm+=1
-        cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
-        row = cur.fetchone()
-        headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
-        response = response + f"Events in Week {weekofterm}:\n"
-        for i in range(1,9):
-            if str(row[i]) == "None": ### THIS WILL ALSO NEED TO BE CHANGED
-                response = response + headers[i-1] + "No Events" + "\n\n"
-            else:
-                response = response + headers[i-1] + row[i] + "\n\n"
-    else:
-        row = []
-        cur  = con.cursor()
-        getDay(message)
-        cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
-        row = cur.fetchone()
-        #print(str(row) + "- ROW THING")
-        #print(str(weekofterm) + " week")
-        if str(row[column_value]) == "None": #this can be changed to "is None" next time
-            response = f"No events on {day}."
+    try:
+        current_day, day, weekofterm, column_value = getDay(message)
+        if "week" in message:
+            cur  = con.cursor()
+            getDay(message)
+            if checkfornumber(message): # checks if user is asking for a specific week
+                weekofterm = checkfornumber(message)
+            if "next" in message:
+                weekofterm+=1
+            cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
+            row = cur.fetchone()
+            headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
+            response = response + f"Events in Week {weekofterm}:\n"
+            for i in range(1,9):
+                if str(row[i]) == "None": ### THIS WILL ALSO NEED TO BE CHANGED
+                    response = response + headers[i-1] + "No Events" + "\n\n"
+                else:
+                    response = response + headers[i-1] + row[i] + "\n\n"
         else:
-            response = response + f"Events on {day}: \n" + str(row[column_value])
-         
-# except Exception as error:
-#     print("Error: " + str(error) + "\n" + str(type(error)))
-#     response = response + "Error in getting events: \n" + str(error)
+            row = []
+            cur  = con.cursor()
+            getDay(message)
+            cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
+            row = cur.fetchone()
+            #print(str(row) + "- ROW THING")
+            #print(str(weekofterm) + " week")
+            if str(row[column_value]) == "None": #this can be changed to "is None" next time
+                response = f"No events on {day}."
+            else:
+                response = response + f"Events on {day}: \n" + str(row[column_value])
+             
+    except Exception as error:
+        print("Error: " + str(error) + "\n" + str(type(error)))
+        response = response + "Error in getting events: \n" + str(error)
     return response
     

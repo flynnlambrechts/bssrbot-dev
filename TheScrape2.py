@@ -340,16 +340,16 @@ def getinfo(page, row, column):
     try:
         menu_table = soup.find("table", attrs={"class": "dataframe"})
         menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
-    except AttributeError:
-        menu_table = soup.find("table", attrs={"class": "t1"})
-        menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+    #except AttributeError:
+        #menu_table = soup.find("table", attrs={"class": "t1"})
+        #menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
     #---------------------------------------------------------------------#
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
             #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
             stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
-            plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
+            #plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
             info.append(plain_text)
         else:
             print("none!")
