@@ -58,7 +58,7 @@ def add_custom_message(message, con):
 			print("updating row")
 			#make so only updates specific row instead of all rows
 			cur.execute('''UPDATE custom_message SET
-			allday = ISNULL(%s,allday), breakfast = %s, lunch = %s,
+			allday = COALESCE(%s,allday), breakfast = %s, lunch = %s,
 			dinner = %s 
 			WHERE (allday IS NOT NULL AND
 				breakfast IS NOT NULL AND
