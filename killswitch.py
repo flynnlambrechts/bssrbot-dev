@@ -12,14 +12,14 @@ index = "1"
 TIMEZONE = timezone('Australia/Sydney')
 
 def get_custom_message(message):
-	try:
+	#try:
 	    custom_message = re.search("'(.+?)'", message).group(1)
-	except AttributeError:
+	#except AttributeError:
 	    custom_message = "no message"
 	    print('no message found')
 	return custom_message
 message = "dookie: dinner 'dino changed it up but heres what it was supposed to be'"
-print(get_custom_message(message))
+#print(get_custom_message(message))
 
 
 
@@ -53,13 +53,7 @@ def add_custom_message(message, con):
 		if cur.fetchone() is not None: #if the day exits then update current day
 			cur.execute('''UPDATE custom_menu SET
 		    day= %s, allday = %s, breakfast = %s, lunch = %s,
-		    dinner = %s
-		    WHERE (%s IS NOT NULL OR 
-		    	%s IS NOT NULL OR
-		    	%s IS NOT NULL OR
-		    	%s IS NOT NULL OR
-		    	%s IS NOT NULL)''',
-		        (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner))
+		    dinner = %s''', (date,allday,breakfast,lunch,dinner))
 			con.commit()
 			print("custom_message updated successfully")
 		else: #otherwise add new row with the current date
