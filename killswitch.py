@@ -59,10 +59,10 @@ def add_custom_message(message, con):
 			cur.execute('''UPDATE custom_message SET
 			allday = %s, breakfast = %s, lunch = %s,
 			dinner = %s 
-			WHERE (%s IS NOT NULL OR
-				%s IS NOT NULL OR
-				%s IS NOT NULL OR
-				%s IS NOT NULL)''', (allday,breakfast,lunch,dinner,allday,breakfast,lunch,dinner,))
+			WHERE (allday IS NOT NULL AND
+				breakfast IS NOT NULL AND
+				lunch IS NOT NULL AND
+				dinner IS NOT NULL)''', (allday,breakfast,lunch,dinner,))
 			con.commit()
 			print("custom_message updated successfully")
 		else: #otherwise add new row with the current date
