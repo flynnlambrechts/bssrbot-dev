@@ -50,8 +50,8 @@ def add_custom_message(message, con):
 
 		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date,))
 			#check if current day exists
-		print(cur.fetchone())
-		dummy = str(cur.fetchone())
+		print(cur.fetchall())
+		dummy = str(cur.fetchall())
 		print(dummy + "dummy")
 		if dummy is not None: #if the day exits then update current day
 			print("updating row")
