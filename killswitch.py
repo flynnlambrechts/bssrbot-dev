@@ -54,7 +54,7 @@ def add_custom_message(message, con):
 		dummy = str(cur.fetchone())
 		print(dummy + " dummy")
 		
-		if dummy is not "": #if the day exits then update current day
+		if dummy != "": #if the day exits then update current day
 			print("updating row")
 			#make so only updates specific row instead of all rows
 			cur.execute('''UPDATE custom_message SET
