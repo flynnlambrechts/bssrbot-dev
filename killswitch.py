@@ -52,17 +52,17 @@ def add_custom_message(message, con):
 			#check if current day exists
 		if cur.fetchone() is not None: #if the day exits then update current day
 			cur.execute('''UPDATE custom_menu SET
-		    day= %s, allday = %s, breakfast = %s, lunch = %s,
-		    dinner = %s''', (date,allday,breakfast,lunch,dinner))
+			day= %s, allday = %s, breakfast = %s, lunch = %s,
+			dinner = %s''', (date,allday,breakfast,lunch,dinner))
 			con.commit()
 			print("custom_message updated successfully")
 		else: #otherwise add new row with the current date
 			cur.execute('''INSERT INTO custom_message (
-					day,
-					allday,
-					breakfast,
-					lunch,
-					dinner)
+				day,
+				allday,
+				breakfast,
+				lunch,
+				dinner)
 				VALUES (%s,%s,%s,%s,%s)''',(date,allday,breakfast,lunch,dinner))
 			con.commit()
 			print("row added successfully")
