@@ -13,7 +13,7 @@ TIMEZONE = timezone('Australia/Sydney')
 
 def get_custom_message(message):
 	try:
-		custom_message = re.search("‘(.+?)‘", message).group(1)
+		custom_message = re.search("<(.+?)>", message).group(1)
 	except AttributeError:
 		custom_message = "no message"
 		print('no message found')
@@ -62,7 +62,12 @@ def add_custom_message(message, con):
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
 				day, allday, breakfast, lunch, dinner)
-				VALUES (%s,%s,%s,%s,%s);''', (date,str(allday),str(breakfast),str(lunch),str(dinner),))
+				VALUES (%s,%s,%s,%s,%s)
+				WHERE (%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL''', (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner,))
 			con.commit()
 			print("row added successfully")
 
