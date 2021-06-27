@@ -59,7 +59,8 @@ def add_custom_message(message, con):
 			#make so only updates specific row instead of all rows
 			cur.execute('''UPDATE custom_message SET
 			allday = COALESCE(%s,allday), breakfast = COALESCE(%s,breakfast), lunch = COALESCE(%s,lunch),
-			dinner = COALESCE(%s,dinner)''', (allday,breakfast,lunch,dinner,))
+			dinner = COALESCE(%s,dinner)
+			WHERE day = %s''', (allday,breakfast,lunch,dinner,date,))
 			con.commit()
 			print("custom_message updated successfully")
 		else: #otherwise add new row with the current date
