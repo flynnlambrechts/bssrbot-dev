@@ -55,19 +55,20 @@ def add_custom_message(message, con):
 			print("updating row")
 			cur.execute('''UPDATE custom_menu SET
 			day= %s, allday = %s, breakfast = %s, lunch = %s,
-			dinner = %s''', (date,allday,breakfast,lunch,dinner))
+			dinner = %s 
+			WHERE (%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL OR
+				%s IS NOT NULL''', (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner,))
 			con.commit()
 			print("custom_message updated successfully")
 		else: #otherwise add new row with the current date
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
 				day, allday, breakfast, lunch, dinner)
-				VALUES (%s,%s,%s,%s,%s)
-				WHERE (%s IS NOT NULL OR
-				%s IS NOT NULL OR
-				%s IS NOT NULL OR
-				%s IS NOT NULL OR
-				%s IS NOT NULL''', (date,allday,breakfast,lunch,dinner,date,allday,breakfast,lunch,dinner,))
+				VALUES (%s,%s,%s,%s,%s)''', 
+				(date,allday,breakfast,lunch,dinner,))
 			con.commit()
 			print("row added successfully")
 
