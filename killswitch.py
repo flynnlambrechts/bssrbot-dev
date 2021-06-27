@@ -31,7 +31,7 @@ def add_custom_message(message, con):
 	breakfast = ""
 	lunch = ""
 	dinner = ""
-	allday = ""
+	allday = None
 
 	if "breakfast" in message:
 		breakfast = custom_message
