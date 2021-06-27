@@ -12,11 +12,11 @@ index = "1"
 TIMEZONE = timezone('Australia/Sydney')
 
 def get_custom_message(message):
-	#try:
-	    custom_message = re.search("'(.+?)'", message).group(1)
-	#except AttributeError:
-	    custom_message = "no message"
-	    print('no message found')
+#try:
+	custom_message = re.search("'(.+?)'", message).group(1)
+#except AttributeError:
+	custom_message = "no message"
+	print('no message found')
 	return custom_message
 message = "dookie: dinner 'dino changed it up but heres what it was supposed to be'"
 #print(get_custom_message(message))
