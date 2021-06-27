@@ -72,6 +72,7 @@ def timeTillClose(end_time):
 def get_shopen(con):
     try:
         cur = con.cursor()
+        #this can be sped up without the for
         cur.execute('''SELECT * FROM shopen1''')
         rows = cur.fetchall()
         response = ""

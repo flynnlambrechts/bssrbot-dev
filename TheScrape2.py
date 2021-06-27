@@ -13,6 +13,7 @@ import requests
 from utils import wit_response
 from getmenuweek import getmenuweek
 from getmenuweek import checkForDay
+from killswitch import read_custom_message
 '''
 global week
 week = 1 ### work out how to define the week
@@ -37,7 +38,7 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 
-def checkForDino(message):
+def checkForDino(message, con):
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
@@ -107,6 +108,8 @@ def checkForDino(message):
             response = response + dinnermenu(day_value, column, week)
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
+    note = addnote(con, value, current_day)
+    response = response + note
     return response
 
 def checkForButton(message):
@@ -282,10 +285,10 @@ def dinnermenu(day_value, column, week):
                 response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
-    if "Oven roast barramundi" in response:
-        response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
-    elif "Roast turkey" in response:
-        response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
+    # if "Oven roast barramundi" in response:
+    #     response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
+    # elif "Roast turkey" in response:
+    #     response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
     return response
 
 def addemojis(header):
@@ -319,6 +322,17 @@ def columnlist(page, column, Range): #gets the info from each column as a list
         content = getinfo(page, row, column)
         rowcontents.append(content)
     return rowcontents
+
+def addnote(con, value, current_day):
+    meal = value
+    if current_day == datetime.now(TIMEZONE).weekday(): #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
+        note = read_custom_message(meal, con)
+    else: #otherwise there is no note
+        note = None 
+
+    if note is not None:
+        note = "\nNote:\n" + note
+    return note
 
 
 def getinfo(page, row, column):

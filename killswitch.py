@@ -49,11 +49,11 @@ def add_custom_message(message, con):
 		cur = con.cursor()
 
 		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date,))
-			#check if current day exists
 		
+		#check if current day exists
 		dummy = str(cur.fetchone())
 		print(dummy + "dummy")
-
+		
 		if dummy is not None: #if the day exits then update current day
 			print("updating row")
 			#make so only updates specific row instead of all rows
@@ -63,6 +63,8 @@ def add_custom_message(message, con):
 			WHERE day = %s''', (allday,breakfast,lunch,dinner,date,))
 			con.commit()
 			print("custom_message updated successfully")
+		#ELIF add clear all command
+
 		else: #otherwise add new row with the current date
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
@@ -78,9 +80,27 @@ def add_custom_message(message, con):
 	return "success"
 
 
+def read_custom_message(meal, con)
+	date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
+	note = None
+	try:
+		#define meal in thescrape and also put if current_day is actual day
+		#make sure to put if note is not none
+		cur = con.cursor()
+		cur.execute('''SELECT * FROM custom_message WHERE day = %s''',(date,))
+		row = cur.fetchone()
+		if meal == 'breakfast':
+			note = row[2]
+		elif meal == 'lunch':
+			note = row[3]
+		elif meal == 'dinner':
+			note = row[4]
+		if row[1] is not None:
+			note = row[1] + "\n\n" + note #maybe use join()
+	except Exception as error:
+		print("Error in read_custom_message: " + str(error) + "\n" + str(type(error)))
 
-
-
+	return note
 
 
 
