@@ -27,7 +27,7 @@ def add_custom_message(message, con):
 	#insert new row if new day
 	#update current day if same day
 	custom_message = get_custom_message(message)
-
+	print(custom_message)
 	breakfast = ""
 	lunch = ""
 	dinner = ""
@@ -51,7 +51,7 @@ def add_custom_message(message, con):
 		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date,))
 			#check if current day exists
 		print(cur.fetchone())
-		if cur.fetchone() is not None: #if the day exits then update current day
+		if cur.fetchone() == date: #if the day exits then update current day
 			print("updating row")
 			cur.execute('''UPDATE custom_menu SET
 			day= %s, allday = %s, breakfast = %s, lunch = %s,
