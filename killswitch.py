@@ -51,13 +51,14 @@ def add_custom_message(message, con):
 		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date,))
 			#check if current day exists
 		
-		dummy = str(cur.fetchall())
+		dummy = str(cur.fetchone())
 		print(dummy + "dummy")
 
 		if dummy is not None: #if the day exits then update current day
 			print("updating row")
+			#make so only updates specific row instead of all rows
 			cur.execute('''UPDATE custom_message SET
-			allday = %s, breakfast = %s, lunch = %s,
+			allday = ISNULL(%s,allday), breakfast = %s, lunch = %s,
 			dinner = %s 
 			WHERE (allday IS NOT NULL AND
 				breakfast IS NOT NULL AND
