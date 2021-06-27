@@ -61,7 +61,7 @@ def add_custom_message(message, con):
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
 				day, allday, breakfast,lunch, dinner)
-				VALUES (%s,%s,%s,%s,%s);''',(date,allday,breakfast,lunch,dinner))
+				VALUES (%s,%s,%s,%s,%s);''',(date,str(allday),str(breakfast),str(lunch),str(dinner)))
 			con.commit()
 			print("row added successfully")
 
