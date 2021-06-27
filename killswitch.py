@@ -56,7 +56,7 @@ def add_custom_message(message, con):
 
 		if dummy is not None: #if the day exits then update current day
 			print("updating row")
-			cur.execute('''UPDATE custom_menu SET
+			cur.execute('''UPDATE custom_message SET
 			day= %s, allday = %s, breakfast = %s, lunch = %s,
 			dinner = %s 
 			WHERE (%s IS NOT NULL OR
