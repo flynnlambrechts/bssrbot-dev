@@ -80,7 +80,7 @@ def add_custom_message(message, con):
 	return "success"
 
 
-def read_custom_message(meal, con)
+def read_custom_message(meal, con):
 	date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 	note = None
 	try:
