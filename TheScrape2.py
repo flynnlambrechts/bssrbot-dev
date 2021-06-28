@@ -109,7 +109,8 @@ def checkForDino(message, con):
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     note = addnote(con, value, current_day)
-    response = response + str(note)
+    if note is not None:
+        response = response + str(note)
     return response
 
 def checkForButton(message):
