@@ -290,7 +290,7 @@ def send_message(recipient_id, response, buttons):
 def send_buttons(recipient_id, response, buttons): #change to send button message
     start = datetime.datetime.now(TIMEZONE).timestamp()
     params = {
-           "access_token": ACCESS_TOKEN
+           "access_token": os.environ["ACCESS_TOKEN"]
     }
 
     headers = {
