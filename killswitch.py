@@ -99,7 +99,7 @@ def read_custom_message(meal, con):
 		row = cur.fetchone()
 		if meal == 'breakfast' and str(row[2]) != "None":
 			note = str(row[2])
-		elif meal == 'lunch' and str(row[3]) != "None":
+		elif meal == 'lunch' and row[3] is not None:
 			note = str(row[3])
 		elif meal == 'dinner' and str(row[4]) != "None":
 			note = str(row[4])
