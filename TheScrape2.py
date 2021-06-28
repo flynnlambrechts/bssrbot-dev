@@ -39,6 +39,7 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 def checkForDino(message, con, value):
+    time = ""
     start = time.time()
     print("checkForDino")
     #global current_day #day of week 0-6 inclusive
