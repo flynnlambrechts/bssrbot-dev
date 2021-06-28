@@ -39,6 +39,7 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 def checkForDino(message, con):
+    print("checkForDino")
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
     #global day #name of the day e.g. monday, wedneday, tomorrow, today
@@ -111,9 +112,11 @@ def checkForDino(message, con):
     note = addnote(con, value, current_day)
     if note is not None:
         response = response + str(note)
+    print("checkForDino DONE")
     return response
 
 def checkForButton(message):
+    print("checkForButton")
     if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
         url_buttons = [{
@@ -129,9 +132,11 @@ def checkForButton(message):
                     ]
     else:
         url_buttons = []
+    print("checkForButton DONE")
     return url_buttons
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
+    print("getDay")
     #global current_day
     #global day
     #global week
@@ -175,6 +180,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
             day = str(week_days[int(checkForDay(message))])
     #elif "today" in message:
         #day = "Today"
+    print("getDat DONE")
     return day, current_day, column
 
     #otherwise must be today: and day and current_day are not updated from todays value
@@ -259,6 +265,7 @@ def lunchmenu(day_value, column, week):
     return response
 
 def dinnermenu(day_value, column, week):
+    print("dinnermenu")
     #global day_value
     #global column
     #global Range
@@ -290,9 +297,11 @@ def dinnermenu(day_value, column, week):
     #     response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
     # elif "Roast turkey" in response:
     #     response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
+    print("dinnermenu DONE")
     return response
 
 def addemojis(header):
+    print("addemojisheader")
     header = header.replace("salad", u"salad \U0001F957")
     if "vegetarian option" in header:
         header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
@@ -303,18 +312,22 @@ def addemojis(header):
     header = header.replace("soup", u"soup \U0001f372")
     header = header.replace("the dessert station", u"the dessert station \U0001f370")
     header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
+    print("addemojisheader DONE")
     return header
 
 def addemojiscontent(content):
+    print("addemojiscontent")
     #content = content.replace("egg", u"egg \U0001F95A")
     content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")
     content = content.replace("honey", u"honey \U0001F36F")
+    print("addemojiscontent DONE")
     return content
 
 def columnlist(page, column, Range): #gets the info from each column as a list
+    print("columlist")
     #global row
     #global column
     rowcontents = []
@@ -322,9 +335,11 @@ def columnlist(page, column, Range): #gets the info from each column as a list
         row = i
         content = getinfo(page, row, column)
         rowcontents.append(content)
+    print("columlist DONE")
     return rowcontents
 
 def addnote(con, value, current_day):
+    print("addnote")
     meal = value
     if current_day == datetime.now(TIMEZONE).weekday(): #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
         note = read_custom_message(meal, con)
@@ -333,10 +348,13 @@ def addnote(con, value, current_day):
 
     if note is not None:
         note = "Note:\n" + note.capitalize()
+
+    print("addnote DONE")
     return note
 
 
 def getinfo(page, row, column):
+    print("getinfo")
     #global page
     #global row
     #-----------------------Opening the HTML file--------------------------#
@@ -370,6 +388,7 @@ def getinfo(page, row, column):
             print("none!")
     #print(str(row) + str(column) + "row column")
     #print(info[column])
+    print("getinfo DONE")
     return info[column]
 
 
