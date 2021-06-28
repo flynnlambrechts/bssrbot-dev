@@ -14,19 +14,29 @@ client = Wit(access_token = wit_access_token)
 # and its value e.g. breakfast, lunch or dinner
 def wit_response(message): #prev message_text
         start = time.time()
-        resp = client.message(message) #prev message_text
-        #global entity
-        #global value
+        # resp = client.message(message) #prev message_text
+        # #global entity
+        # #global value
         entity = None
         value = None
 
-        try:
-                entity = list(resp['entities'])[0]
-                value = resp['entities'][entity][0]['value']
-        except:
-                pass
-        end = time.time()
-        print(end - start)
+        # try:
+        #         entity = list(resp['entities'])[0]
+        #         value = resp['entities'][entity][0]['value']
+        # except:
+        #         pass
+        # end = time.time()
+
+        if "dino" in message:
+                value = "dino"
+        elif "breakfast" in message or "breaky" in message or "brekky" in message:
+                value = "breakfast"
+        elif "lunch" in message:
+                value = "lunch"
+        elif "dinner" in message or "dins" in message or "supper" in message:
+                value = "supper"
+        if value is not None:
+                entity = 'mealtype:mealtype'
         return (entity, value)
 
 #test for random question:
