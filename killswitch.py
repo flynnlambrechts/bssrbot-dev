@@ -96,15 +96,15 @@ def read_custom_message(meal, con):
 		cur.execute('''SELECT * FROM custom_message WHERE day = %s''',(date,))
 		row = cur.fetchone()
 		if meal == 'breakfast':
-			note = row[2]
+			note = str(row[2])
 		elif meal == 'lunch':
-			note = row[3]
+			note = str(row[3])
 		elif meal == 'dinner':
-			note = row[4]
-		print(row[1]+ " all")
-		print(row[2] + " breakfast")
+			note = str(row[4])
+		print(str(row[1])+ " all")
+		print(str(row[2]) + " breakfast")
 		if row[1] is not None:
-			note = row[1] + "\n\n" + note #maybe use join()
+			note = str(row[1]) + "\n\n" + str(note) #maybe use join()
 	except Exception as error:
 		print("Error in read_custom_message: " + str(error) + "\n" + str(type(error)))
 
