@@ -57,7 +57,7 @@ def add_custom_message(message, con):
 			cur.execute('''UPDATE custom_message SET
 			allday = %s, breakfast = %s, lunch = %s,
 			dinner = %s
-			WHERE day = %s''', ("","","","",date,))
+			WHERE day = %s''', (None,None,None,None,date,))
 			con.commit()
 			print("all cleared")
 		
