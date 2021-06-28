@@ -64,7 +64,13 @@ def add_custom_message(message, con):
 			con.commit()
 			print("custom_message updated successfully")
 		#ELIF add clear all command
-
+		elif "clear" in message:
+			cur.execute('''UPDATE custom_message SET
+			allday = %s, breakfast = %s, lunch = %s,
+			dinner = %s
+			WHERE day = %s''', ("","","","",date,))
+			con.commit()
+			print("all cleared")
 		else: #otherwise add new row with the current date
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
@@ -95,6 +101,8 @@ def read_custom_message(meal, con):
 			note = row[3]
 		elif meal == 'dinner':
 			note = row[4]
+		print(row[1]+ " all")
+		print(row[2] + " breakfast")
 		if row[1] is not None:
 			note = row[1] + "\n\n" + note #maybe use join()
 	except Exception as error:
