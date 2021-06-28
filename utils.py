@@ -25,7 +25,7 @@ def wit_response(message): #prev message_text
         #         value = resp['entities'][entity][0]['value']
         # except:
         #         pass
-        # end = time.time()
+        # 
 
         if "dino" in message:
                 value = "dino"
@@ -34,9 +34,11 @@ def wit_response(message): #prev message_text
         elif "lunch" in message:
                 value = "lunch"
         elif "dinner" in message or "dins" in message or "supper" in message:
-                value = "supper"
+                value = "dinner"
         if value is not None:
                 entity = 'mealtype:mealtype'
+        end = time.time()
+        print(end - start)
         return (entity, value)
 
 #test for random question:

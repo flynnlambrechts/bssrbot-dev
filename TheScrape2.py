@@ -38,7 +38,7 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 
-def checkForDino(message, con):
+def checkForDino(message, con, value):
     print("checkForDino")
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
@@ -48,7 +48,7 @@ def checkForDino(message, con):
     #print(str(week) + " week checkfordino")
     #global breakfasttime, lunchtime, dinnertime, dinotimes
     #global entity, value
-    entity, value = wit_response(message)
+    #entity, value = wit_response(message)
     #global response
     response = ""
     

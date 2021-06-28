@@ -122,9 +122,9 @@ def get_bot_response(message_text, recipient_id):
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if entity == 'mealtype:mealtype' and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
+    if wit_response(message) and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
         con = getCon()
-        response = response + checkForDino(message, con)
+        response = response + checkForDino(message, con, value)
         buttons = checkForButton(message)
         con.close()
     elif checkIfGreeting(message):
