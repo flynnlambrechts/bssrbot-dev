@@ -53,7 +53,15 @@ def add_custom_message(message, con):
 		#check if current day exists
 		dummy = str(cur.fetchone())
 		print(dummy + " dummy")
-		if dummy != "(False,)": #if the day exits then update current day
+		if "clear" in message:
+			cur.execute('''UPDATE custom_message SET
+			allday = %s, breakfast = %s, lunch = %s,
+			dinner = %s
+			WHERE day = %s''', ("","","","",date,))
+			con.commit()
+			print("all cleared")
+		
+		elif dummy != "(False,)": #if the day exits then update current day
 			print("!= " + dummy)
 			print("updating row")
 			#make so only updates specific row instead of all rows
@@ -64,13 +72,7 @@ def add_custom_message(message, con):
 			con.commit()
 			print("custom_message updated successfully")
 		#ELIF add clear all command
-		elif "clear" in message:
-			cur.execute('''UPDATE custom_message SET
-			allday = %s, breakfast = %s, lunch = %s,
-			dinner = %s
-			WHERE day = %s''', ("","","","",date,))
-			con.commit()
-			print("all cleared")
+		
 		else: #otherwise add new row with the current date
 			print("adding row")
 			cur.execute('''INSERT INTO custom_message(
@@ -95,11 +97,11 @@ def read_custom_message(meal, con):
 		cur = con.cursor()
 		cur.execute('''SELECT * FROM custom_message WHERE day = %s''',(date,))
 		row = cur.fetchone()
-		if meal == 'breakfast':
+		if meal == 'breakfast' and row[2] is not None:
 			note = str(row[2])
-		elif meal == 'lunch':
+		elif meal == 'lunch' and row[3] is not None:
 			note = str(row[3])
-		elif meal == 'dinner':
+		elif meal == 'dinner' and row[4] is not None:
 			note = str(row[4])
 		print(str(row[1])+ " all")
 		print(str(row[2]) + " breakfast")
