@@ -3,12 +3,12 @@
 #watch https://www.youtube.com/watch?v=e29Aj6tJ_5k&list=PLyb_C2HpOQSC4M3lzzrql7DSppTeAxh-x&index=9
 #and previous video in this playlist to understand
 
-from wit import Wit 
+#from wit import Wit 
 import time
 
-wit_access_token = "LZANSEIRATV3RJ7XZPP3TFIKUND427V6"
+#wit_access_token = "LZANSEIRATV3RJ7XZPP3TFIKUND427V6"
 
-client = Wit(access_token = wit_access_token)
+#client = Wit(access_token = wit_access_token)
 
 #collects what the entity is e.g. mealtype
 # and its value e.g. breakfast, lunch or dinner

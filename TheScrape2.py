@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 import requests
 
 #from utils import value
-from utils import wit_response
+#from utils import wit_response
 from getmenuweek import getmenuweek
 from getmenuweek import checkForDay
 from killswitch import read_custom_message
@@ -39,6 +39,7 @@ dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtim
 
 
 def checkForDino(message, con, value):
+    start = time.time()
     print("checkForDino")
     #global current_day #day of week 0-6 inclusive
     #global day_value #day of week 1-7 inclusive
@@ -113,6 +114,8 @@ def checkForDino(message, con, value):
     if note is not None:
         response = response + str(note)
     print("checkForDino DONE")
+    end = time.time()
+    print(str(end - start) + " checkForDino")
     return response
 
 def checkForButton(message):
@@ -136,13 +139,8 @@ def checkForButton(message):
     return url_buttons
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
-    print("getDay")
-    #global current_day
-    #global day
-    #global week
-    #global column
     column = ""
-    print(str(week) + " week a")
+    #print(str(week) + " week a")
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
     
@@ -180,7 +178,6 @@ def getDay(message, week): #here is where we get the day and current_day and som
             day = str(week_days[int(checkForDay(message))])
     #elif "today" in message:
         #day = "Today"
-    print("getDat DONE")
     return day, current_day, column
 
     #otherwise must be today: and day and current_day are not updated from todays value
@@ -209,11 +206,6 @@ def getDay(message, week): #here is where we get the day and current_day and som
 
 
 def breakfastmenu(day_value, column, week):
-    #global day_value
-    #global column
-    #global Range
-    #global page
-    #global week
     page = str((2*(week-1)+1))
     Range = int("2")
     response = ""
@@ -237,11 +229,6 @@ def breakfastmenu(day_value, column, week):
     return response
 
 def lunchmenu(day_value, column, week):
-    #global day_value
-    #global column
-    #global Range
-    #global page
-    #global week
     page = str((2*(week-1)+1.5))
     Range = int("3")
     response = ""
@@ -266,11 +253,6 @@ def lunchmenu(day_value, column, week):
 
 def dinnermenu(day_value, column, week):
     print("dinnermenu")
-    #global day_value
-    #global column
-    #global Range
-    #global page
-    #global week
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
@@ -301,7 +283,7 @@ def dinnermenu(day_value, column, week):
     return response
 
 def addemojis(header):
-    print("addemojisheader")
+    #print("addemojisheader")
     header = header.replace("salad", u"salad \U0001F957")
     if "vegetarian option" in header:
         header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
@@ -312,22 +294,22 @@ def addemojis(header):
     header = header.replace("soup", u"soup \U0001f372")
     header = header.replace("the dessert station", u"the dessert station \U0001f370")
     header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
-    print("addemojisheader DONE")
+    #print("addemojisheader DONE")
     return header
 
 def addemojiscontent(content):
-    print("addemojiscontent")
+    #print("addemojiscontent")
     #content = content.replace("egg", u"egg \U0001F95A")
     content = content.replace("pancakes", u"pancakes \U0001f95e")
     content = content.replace("pizza", u"pizza \U0001f355")
     content = content.replace("sushi", u"sushi \U0001f363")
     content = content.replace("chicken", u"chicken \U0001F357")
     content = content.replace("honey", u"honey \U0001F36F")
-    print("addemojiscontent DONE")
+    #print("addemojiscontent DONE")
     return content
 
 def columnlist(page, column, Range): #gets the info from each column as a list
-    print("columlist")
+    #print("columlist")
     #global row
     #global column
     rowcontents = []
@@ -335,11 +317,11 @@ def columnlist(page, column, Range): #gets the info from each column as a list
         row = i
         content = getinfo(page, row, column)
         rowcontents.append(content)
-    print("columlist DONE")
+    #print("columlist DONE")
     return rowcontents
 
 def addnote(con, value, current_day):
-    print("addnote")
+    #print("addnote")
     meal = value
     if current_day == datetime.now(TIMEZONE).weekday(): #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
         note = read_custom_message(meal, con)
@@ -349,7 +331,7 @@ def addnote(con, value, current_day):
     if note is not None:
         note = "Note:\n" + note.capitalize()
 
-    print("addnote DONE")
+    #print("addnote DONE")
     return note
 
 
