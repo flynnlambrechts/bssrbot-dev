@@ -261,7 +261,7 @@ def dinnermenu(day_value, column, week):
             header = ""
             column = 0 #set to first column to get header
             header = header + columnlist(page, column, Range)[i]
-            #header = addemojis(header)
+            header = addemojis(header)
             content = ""
             if day_value == 8:
                 column = 1
@@ -271,15 +271,16 @@ def dinnermenu(day_value, column, week):
             if header == "vegetables":
                 content = ""
             if content != "":
-                #content = addemojiscontent(content)
-                response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
+                content = addemojiscontent(content)
+                response = "".join([str(header).title(),": \n",str(content).capitalize(),"\n\n"])
+                #response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
     # if "Oven roast barramundi" in response:
     #     response = response + u"\nHmm... sounds like a roundy run to me... \U0001F914 \n"
     # elif "Roast turkey" in response:
     #     response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
-    response = addemojisresponse(response)
+    # response = addemojisresponse(response)
     print("dinnermenu DONE")
     return response
 
@@ -309,23 +310,23 @@ def addemojiscontent(content):
     #print("addemojiscontent DONE")
     return content
 
-def addemojisresponse(response):
-    if "vegetarian option" in response:
-        response = response.replace("vegetarian option", u"vegetarian option \U0001F331")
-    else:
-        response = response.replace("vegetarian", u"vegetarian \U0001F331")
-    response = response.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
-    response = response.replace("residential breakfast", u"residential breakfast \U0001f95e")
-    response = response.replace("soup", u"soup \U0001f372")
-    response = response.replace("the dessert station", u"the dessert station \U0001f370")
-    response = response.replace("additional vegetables", u"additional vegetables \U0001F966")
+# def addemojisresponse(response):
+#     if "vegetarian option" in response:
+#         response = response.replace("vegetarian option", u"vegetarian option \U0001F331")
+#     else:
+#         response = response.replace("vegetarian", u"vegetarian \U0001F331")
+#     response = response.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
+#     response = response.replace("residential breakfast", u"residential breakfast \U0001f95e")
+#     response = response.replace("soup", u"soup \U0001f372")
+#     response = response.replace("the dessert station", u"the dessert station \U0001f370")
+#     response = response.replace("additional vegetables", u"additional vegetables \U0001F966")
 
-    response = response.replace("pancakes", u"pancakes \U0001f95e")
-    response = response.replace("pizza", u"pizza \U0001f355")
-    response = response.replace("sushi", u"sushi \U0001f363")
-    response = response.replace("chicken", u"chicken \U0001F357")
-    response = response.replace("honey", u"honey \U0001F36F")
-    return response
+#     response = response.replace("pancakes", u"pancakes \U0001f95e")
+#     response = response.replace("pizza", u"pizza \U0001f355")
+#     response = response.replace("sushi", u"sushi \U0001f363")
+#     response = response.replace("chicken", u"chicken \U0001F357")
+#     response = response.replace("honey", u"honey \U0001F36F")
+#     return response
 
 
 def columnlist(page, column, Range): #gets the info from each column as a list
