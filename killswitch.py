@@ -47,13 +47,12 @@ def add_custom_message(message, con):
 	try:
 		date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
 		cur = con.cursor()
-
-		cur.execute('''SELECT day FROM custom_message WHERE day = %s''', (date,))
 		dummy = ""
+		cur.execute('''SELECT EXISTS (SELECT day FROM custom_message WHERE day = %s)''', (date,))
+		
 		#check if current day exists
 		dummy = str(cur.fetchone())
 		print(dummy + " dummy")
-		
 		if dummy != "": #if the day exits then update current day
 			print("updating row")
 			#make so only updates specific row instead of all rows

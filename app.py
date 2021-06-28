@@ -123,8 +123,10 @@ def get_bot_response(message_text, recipient_id):
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if entity == 'mealtype:mealtype' and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
-        response = response + checkForDino(message)
+        con = getCon()
+        response = response + checkForDino(message, con)
         buttons = checkForButton(message)
+        con.close()
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
