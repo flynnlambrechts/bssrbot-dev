@@ -288,7 +288,7 @@ def send_message(recipient_id, response, buttons):
 
 #sends response with quick replies and button
 def send_buttons(recipient_id, response, buttons): #change to send button message
-    start = datetime.now(TIMEZONE).timestamp()
+    start = datetime.datetime.now(TIMEZONE).timestamp()
     params = {
            "access_token": os.environ["ACCESS_TOKEN"]
     }
@@ -346,7 +346,7 @@ def send_buttons(recipient_id, response, buttons): #change to send button messag
     })
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-    end = datetime.now(TIMEZONE).timestamp()
+    end = datetime.datetime.now(TIMEZONE).timestamp()
     print(str(end - start) + " send buttons")
     return "other sent"
 
