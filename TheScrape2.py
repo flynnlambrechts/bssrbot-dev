@@ -310,7 +310,7 @@ def addemojiscontent(content):
     return content
 
 def addemojisresponse(response):
-    if "vegetarian option" in header:
+    if "vegetarian option" in response:
         response = response.replace("vegetarian option", u"vegetarian option \U0001F331")
     else:
         response = response.replace("vegetarian", u"vegetarian \U0001F331")
