@@ -272,7 +272,7 @@ def dinnermenu(day_value, column, week):
                 content = ""
             if content != "":
                 content = addemojiscontent(content)
-                response = "".join([str(header).title(),": \n",str(content).capitalize(),"\n\n"])
+                response = "".join([response,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
                 #response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
         except IndexError:
             print('NOK')
