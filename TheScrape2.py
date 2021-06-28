@@ -332,7 +332,7 @@ def addnote(con, value, current_day):
         note = None 
 
     if note is not None:
-        note = "\nNote:\n" + note
+        note = "Note:\n" + note.capitalize()
     return note
 
 
