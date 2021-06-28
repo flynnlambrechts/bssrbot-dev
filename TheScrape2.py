@@ -260,7 +260,7 @@ def dinnermenu(day_value, column, week):
         try:
             header = ""
             column = 0 #set to first column to get header
-            header = header + columnlist(page, column, Range)[i]
+            header = "".join([header,columnlist(page, column, Range)[i]])
             header = addemojis(header)
             content = ""
             if day_value == 8:
