@@ -223,7 +223,7 @@ def breakfastmenu(day_value, column, week):
             content = content + columnlist(page, column, Range)[i]
             if content != "":
                 content = addemojiscontent(content)
-                response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
+                response = "".join([response,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
         except IndexError:
             print('NOK')
     return response
@@ -246,7 +246,7 @@ def lunchmenu(day_value, column, week):
             content = content + columnlist(page, column, Range)[i]
             if content != "":
                 content = addemojiscontent(content)
-                response = response + str(header).title() + ": \n" + str(content).capitalize() + "\n\n"
+                response = "".join([response,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
         except IndexError:
             print('NOK')
     return response
