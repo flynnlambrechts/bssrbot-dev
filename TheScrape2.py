@@ -354,7 +354,7 @@ def addnote(con, value, current_day):
 
 
 def getinfo(page, row, column):
-    print("getinfo")
+    #print("getinfo")
     #global page
     #global row
     #-----------------------Opening the HTML file--------------------------#
@@ -388,7 +388,7 @@ def getinfo(page, row, column):
             print("none!")
     #print(str(row) + str(column) + "row column")
     #print(info[column])
-    print("getinfo DONE")
+    #print("getinfo DONE")
     return info[column]
 
 

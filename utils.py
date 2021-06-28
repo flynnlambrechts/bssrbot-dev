@@ -4,6 +4,7 @@
 #and previous video in this playlist to understand
 
 from wit import Wit 
+import time
 
 wit_access_token = "LZANSEIRATV3RJ7XZPP3TFIKUND427V6"
 
@@ -12,6 +13,7 @@ client = Wit(access_token = wit_access_token)
 #collects what the entity is e.g. mealtype
 # and its value e.g. breakfast, lunch or dinner
 def wit_response(message): #prev message_text
+        start = time.time()
         resp = client.message(message) #prev message_text
         #global entity
         #global value
@@ -23,7 +25,8 @@ def wit_response(message): #prev message_text
                 value = resp['entities'][entity][0]['value']
         except:
                 pass
-
+        end = time.time()
+        print(end - start)
         return (entity, value)
 
 #test for random question:
