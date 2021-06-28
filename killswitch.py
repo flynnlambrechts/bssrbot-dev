@@ -97,16 +97,19 @@ def read_custom_message(meal, con):
 		cur = con.cursor()
 		cur.execute('''SELECT * FROM custom_message WHERE day = %s''',(date,))
 		row = cur.fetchone()
-		if meal == 'breakfast' and str(row[2]) != "None":
+		if meal == 'breakfast' and str(row[2]) is not None:
 			note = str(row[2])
 		elif meal == 'lunch' and row[3] is not None:
 			note = str(row[3])
-		elif meal == 'dinner' and str(row[4]) != "None":
+		elif meal == 'dinner' and str(row[4]) is not None:
 			note = str(row[4])
 		print(str(row[1])+ " all")
 		print(str(row[2]) + " breakfast")
 		if row[1] is not None:
-			note = str(row[1]) + "\n" + str(note) #maybe use join()
+			if note is not None:
+				note = str(row[1]) + "\n" + str(note) #maybe use join()
+			else:
+				note = str(row[1]) + "\n"
 	except Exception as error:
 		print("Error in read_custom_message: " + str(error) + "\n" + str(type(error)))
 
