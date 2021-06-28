@@ -252,7 +252,7 @@ def lunchmenu(day_value, column, week):
     return response
 
 def dinnermenu(day_value, column, week):
-    print("dinnermenu")
+    #print("dinnermenu")
     page = str((2*(week-1)+2))
     Range = int("8")
     response = ""
@@ -281,7 +281,7 @@ def dinnermenu(day_value, column, week):
     # elif "Roast turkey" in response:
     #     response = "Dino changed dinner but heres what it's supposed to be:\n\n" + response
     # response = addemojisresponse(response)
-    print("dinnermenu DONE")
+    #print("dinnermenu DONE")
     return response
 
 def addemojis(header):
