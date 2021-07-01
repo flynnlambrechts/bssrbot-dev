@@ -55,7 +55,7 @@ def checkForDino(message, con, value):
     day, current_day, column = getDay(message, week) #checks for days and creates current_day
     time = datetime.now(TIMEZONE).time().hour
     #handling if meal is non-specified
-    if value == "dino" or "cooking good looking" in message:
+    if value == "dino": 
         #time = datetime.now(TIMEZONE).time().hour
         if "time" in message:
             response = response + dinotimes
@@ -119,7 +119,7 @@ def checkForDino(message, con, value):
             response = response + dinnermenu(day_value, column, week)
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
-    note = addnote(con, value, current_day)
+    note = addnote(con, value, day)
     if note is not None and "time" not in message:
         response = response + str(note)
     print("checkForDino DONE")
@@ -350,10 +350,10 @@ def columnlist(page, column, Range): #gets the info from each column as a list
     #print("columlist DONE")
     return rowcontents
 
-def addnote(con, value, current_day):
+def addnote(con, value, day):
     #print("addnote")
     meal = value
-    if current_day == datetime.now(TIMEZONE).weekday(): #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
+    if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
         note = read_custom_message(meal, con)
     else: #otherwise there is no note
         note = None 
