@@ -24,6 +24,7 @@ from killswitch import add_custom_message
 from calendar1 import get_events
 from jokes import getjoke               #for jokes
 from shop_catalogue import shop_catalogue 
+from otherdinotimes import notBasser
 
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
@@ -173,6 +174,8 @@ def get_bot_response(message_text, recipient_id):
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
         con.close()
+    elif notBasser(message):
+        response = response + notBasser(message)
     else:
         response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
