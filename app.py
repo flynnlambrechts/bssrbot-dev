@@ -148,7 +148,7 @@ def get_bot_response(message_text, recipient_id):
     elif "time" in message:
         #global dinotimes
         response = response + dinotimes
-    elif "latemeal" in message or "late" in message:
+    elif "latemeal" in message or "late" in message or "inloop" in message:
         response = "Order a late meal here:"
         buttons = [{
                 "type": "web_url",
@@ -157,6 +157,8 @@ def get_bot_response(message_text, recipient_id):
                 }]
     elif "my name" in message:
         response = response + getname(recipient_id)
+    elif "gif pls" in message:
+        response = "gif"
     elif "joke" in message:
         response = response + getjoke()
     elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
@@ -267,7 +269,7 @@ def checkForCalendar(message):
 
 #formerly uses PyMessenger to send response to user
 #now routes to send message with or without buttons
-def send_message(recipient_id, response, buttons):
+def send_message(recipient_id, response, buttons): #decides what type of respones to send
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
@@ -276,6 +278,9 @@ def send_message(recipient_id, response, buttons):
         #text = str(response)
         #bot.send_button_message(recipient_id, text, url_button)
         send_buttons(recipient_id, response, buttons)
+    elif response == "gif":
+        message = "nice"
+        send_gif_message(recipient_id, message)
     else:
         #bot.send_text_message(recipient_id, response)
         send_nonbuttons(recipient_id, response)
@@ -390,13 +395,48 @@ def send_nonbuttons(recipient_id, response):
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
+def send_gif_message(recipient_id, message):
+    gif_url = search_gif(message)
+
+    data = json.dumps({
+        "recipient": {"id": recipient_id},
+        "message": {
+            "attachment": {
+                "type": "image",
+                "payload": {
+                    "url": gif_url
+                }
+            }}
+    })
+
+    params = {
+        "access_token": os.environ["ACCESS_TOKEN"]
+    }
+
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
+                      params=params, headers=headers, data=data)
+
+
 if __name__ == "__main__":
     app.run()
 
 
+def search_gif(text):
+    #get a GIF that is similar to text sent
+    payload = {'s': text, 'api_key': 'ey1oVnN1NGrtEDHFGBJjRj5AgegLFVeT', 'weirdness': 1}
+    r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
+    r = r.json()
+    # sprint(r)
+    try:
+        url = r['data']['images']['original']['url']
+    except:
+        print('failed to get gif')
 
-
-
+    return url
 
 
 
