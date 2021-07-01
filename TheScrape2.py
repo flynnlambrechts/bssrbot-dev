@@ -120,7 +120,7 @@ def checkForDino(message, con, value):
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     note = addnote(con, value, current_day)
-    if note is not None and "time" not in messsage:
+    if note is not None and "time" not in message:
         response = response + str(note)
     print("checkForDino DONE")
     end = datetime.now(TIMEZONE).timestamp()
