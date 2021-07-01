@@ -154,7 +154,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
     day = "Today"
     
     #See if user is asking about tomorrow
-    if "tomorrow" in message or "tmrw" in message or "tomoz" in message:
+    if "tomorrow" in message or "tmrw" in message or "tomoz" in message or "tmoz" in message:
         day = "Tomorrow"
         current_day+=1
         time = 0
@@ -392,10 +392,10 @@ def getinfo(page, row, column):
     info = []
     for td in menu_table_data[row].find_all("td"):
         if td is not None:
-            plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+            #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
             stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
-            plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
-            info.append(plain_text)
+            #plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
+            info.append(stuff)
         else:
             print("none!")
     #print(str(row) + str(column) + "row column")

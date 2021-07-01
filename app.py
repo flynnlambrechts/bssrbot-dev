@@ -131,6 +131,11 @@ def get_bot_response(message_text, recipient_id):
     elif checkIfGreeting(message):
         response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
         response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
+        buttons = [{
+                "type": "web_url",
+                "url": "https://www.facebook.com/BssrBot-107323461505853/",
+                "title": "BssrBot Page"
+                }]
     elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
         response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
     elif checkForShopen(message, recipient_id):
