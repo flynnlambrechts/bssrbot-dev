@@ -258,7 +258,7 @@ def lunchmenu(day_value, column, week):
                 response = "".join([response,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
         except IndexError:
             print('NOK')
-    response = response + week
+    response = response + str(week)
     return response
 
 def dinnermenu(day_value, column, week):
