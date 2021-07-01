@@ -1,4 +1,6 @@
 
+#### THIS NEEDS TO BE CLEANED THE HELL UP #####
+
 #wit.ai
 #watch https://www.youtube.com/watch?v=e29Aj6tJ_5k&list=PLyb_C2HpOQSC4M3lzzrql7DSppTeAxh-x&index=9
 #and previous video in this playlist to understand
@@ -13,7 +15,7 @@ import time
 #collects what the entity is e.g. mealtype
 # and its value e.g. breakfast, lunch or dinner
 def wit_response(message): #prev message_text
-        start = time.time()
+        #start = time.time()
         # resp = client.message(message) #prev message_text
         # #global entity
         # #global value
@@ -37,8 +39,8 @@ def wit_response(message): #prev message_text
                 value = "dinner"
         if value is not None:
                 entity = 'mealtype:mealtype'
-        end = time.time()
-        print(end - start)
+        #end = time.time()
+        #print(end - start)
         return (entity, value)
 
 #test for random question:

@@ -12,7 +12,7 @@ import datetime
 def getmenuweek():
     TIMEZONE = timezone('Australia/Sydney')
     x = datetime.datetime.now(TIMEZONE)
-    week = (int(x.strftime("%W"))-15) #21 to 22
+    week = (int(x.strftime("%W"))-22) #21 to 22
     menuweek = 0
     #global numbers
     #multiples of 4 to account for the four week cycle (must be less than 40)

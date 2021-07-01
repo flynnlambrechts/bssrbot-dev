@@ -31,10 +31,10 @@ print(str(week) + " week thescrape2")
 
 
 #define the dino times here used throughout
-breakfasttime = "7:00-10:00am"
-lunchtime = "12:15-2:15pm"
-dinnertime = "5:00-7:15pm"
-dinotimes = "Dino Times: \nBreakfast: " + breakfasttime + "\nLunch: " + lunchtime + "\nDinner: " + dinnertime
+breakfasttime = "7:00-7:45am" #"7:00-10:00am"
+lunchtime = "11:45-12:30pm" #"12:15-2:15pm"
+dinnertime = "4:30-5:15pm"  #"5:00-7:15pm"
+dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch: ", lunchtime, "\nDinner: ", dinnertime])
 
 
 
@@ -50,7 +50,6 @@ def checkForDino(message, con, value):
     #global breakfasttime, lunchtime, dinnertime, dinotimes
     #global entity, value
     #entity, value = wit_response(message)
-    #global response
     response = ""
     
     day, current_day, column = getDay(message, week) #checks for days and creates current_day
@@ -87,7 +86,12 @@ def checkForDino(message, con, value):
             response = response + breakfastmenu(day_value, column, week)
     elif value == "breakfast":
         if "time" in message:
-            response = response + "Breakfast at dino is at " + breakfasttime 
+            response = response + "Basser breakfast is at " + breakfasttime
+        elif time > 14: #after 2pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Breakfast {day}: \n")
+            day_value = current_day + 2
+            response = response + breakfastmenu(day_value, column, week)
         else:
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 1
@@ -95,7 +99,12 @@ def checkForDino(message, con, value):
         
     elif value == "lunch":
         if "time" in message:
-            response = response + "Lunch at dino is at " + lunchtime
+            response = response + "Basser lunch is at " + lunchtime
+        elif time > 17: #after 2pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Lunch {day}: \n")
+            day_value = current_day + 2
+            response = response + lunchmenu(day_value, column, week)
         else:
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 1
@@ -103,7 +112,7 @@ def checkForDino(message, con, value):
 
     elif value == "dinner":
         if "time" in message:
-            response = response + "Dinner at dino is at " + dinnertime
+            response = response + "Basser dinner is at " + dinnertime
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
@@ -111,7 +120,7 @@ def checkForDino(message, con, value):
     #if "time" not in message: #adds feedback link to end of response unless user is asking for time
         #response = response + " \nPlease leave feedback here: https://bit.ly/3hVT0DX"
     note = addnote(con, value, current_day)
-    if note is not None:
+    if note is not None and "time" not in messsage:
         response = response + str(note)
     print("checkForDino DONE")
     end = datetime.now(TIMEZONE).timestamp()
@@ -249,6 +258,7 @@ def lunchmenu(day_value, column, week):
                 response = "".join([response,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
         except IndexError:
             print('NOK')
+    response = response + week
     return response
 
 def dinnermenu(day_value, column, week):

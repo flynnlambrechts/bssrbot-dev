@@ -159,12 +159,11 @@ def get_bot_response(message_text, recipient_id):
         response = response + getname(recipient_id)
     elif "joke" in message:
         response = response + getjoke()
-    elif "dookie:" in message:
+    elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
         con = getCon()
         add_custom_message(message, con)
+        response = response + "Adding custom message..."
         con.close()
-        response = response + "adding custom message"
-
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
