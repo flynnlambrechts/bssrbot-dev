@@ -53,10 +53,10 @@ def checkForDino(message, con, value):
     response = ""
     
     day, current_day, column = getDay(message, week) #checks for days and creates current_day
-    
+    time = datetime.now(TIMEZONE).time().hour
     #handling if meal is non-specified
     if value == "dino" or "cooking good looking" in message:
-        time = datetime.now(TIMEZONE).time().hour
+        #time = datetime.now(TIMEZONE).time().hour
         if "time" in message:
             response = response + dinotimes
         elif day == "Tomorrow":
