@@ -123,7 +123,9 @@ def get_bot_response(message_text, recipient_id):
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if entity and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
+    if notBasser(message):
+        response = notBasser(message)
+    elif entity and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
         con = getCon()
         response = response + checkForDino(message, con, value)
         buttons = checkForButton(message)
@@ -142,8 +144,6 @@ def get_bot_response(message_text, recipient_id):
         response = response + checkForShopen(message, recipient_id)
     elif checkForCalendar(message):
         response = response + checkForCalendar(message)
-    if notBasser(message):
-        response = notBasser(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif checkForDay(message) or "tomorrow" in message or "today" in message:
