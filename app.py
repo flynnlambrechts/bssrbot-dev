@@ -142,6 +142,8 @@ def get_bot_response(message_text, recipient_id):
         response = response + checkForShopen(message, recipient_id)
     elif checkForCalendar(message):
         response = response + checkForCalendar(message)
+    if notBasser(message):
+        response = notBasser(message)
     elif checkForEasterEggs(message):
         response = response + checkForEasterEggs(message)
     elif checkForDay(message) or "tomorrow" in message or "today" in message:
@@ -179,8 +181,6 @@ def get_bot_response(message_text, recipient_id):
         else:
             response = response + "You shall not, PASS: \n" + str(recipient_id)
         con.close()
-    elif notBasser(message):
-        response = response + notBasser(message)
     else:
         response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
