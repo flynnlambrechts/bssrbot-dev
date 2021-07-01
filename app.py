@@ -157,7 +157,7 @@ def get_bot_response(message_text, recipient_id):
                 }]
     elif "my name" in message:
         response = response + getname(recipient_id)
-    elif "gif pls" in message:
+    elif "gif" in message:
         response = "gif"
     elif "joke" in message:
         response = response + getjoke()
