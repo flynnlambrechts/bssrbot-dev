@@ -1,13 +1,11 @@
-import re
+from pytz import timezone
+import datetime
 
-def get_custom_message(message):
-	try:
-		custom_message = re.search("'(.+?)'", message).group(1)
-	except AttributeError:
-		custom_message = "no message"
-		print('no message found')
-	return custom_message
+def getmenuweek():
+    TIMEZONE = timezone('Australia/Sydney')
+    x = datetime.datetime.now(TIMEZONE)
+    week = (int(x.strftime("%W"))+1) 
+    print((week)%4+1) #cheeky factor of 1 changes range from (0-3 to 1-4)
+    return week
 
-
-message = "dookie: dinner 'hello'"
-print(get_custom_message(message))
+getmenuweek()

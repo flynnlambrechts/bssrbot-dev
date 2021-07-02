@@ -1,36 +1,13 @@
 from pytz import timezone
 import datetime
 
-#global numbers
-
-
-
-#15 is value from the current week of the year to the start of the current menu
-
-
-#print(print(str(week) + " week"))
 def getmenuweek():
     TIMEZONE = timezone('Australia/Sydney')
     x = datetime.datetime.now(TIMEZONE)
-    week = (int(x.strftime("%W"))-22) #21 to 22
-    menuweek = 0
-    #global numbers
-    #multiples of 4 to account for the four week cycle (must be less than 40)
-    numbers = [40,36,32,28,24,20,16,12,8,4]
-    for i in numbers:
-            #print(i)
-            if week > i:
-                    menuweek = week - i
-                    #print(str(menuweek) + "week for i")
-                    break
-            else:
-                    #print("Nah")
-                    menuweek = week
-    #print(str(menuweek) + "week getweekmenu")
+    week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
+    menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
+    print(menuweek)
     return menuweek
-
-#print(getmenuweek())
-
 
 def checkForDay(message): #check of day of week specified
     day = "" 

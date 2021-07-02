@@ -67,33 +67,33 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-#try:
-    #log(output) #entire output good for finding sender ids what message contains etc
-    for event in output['entry']:
-        messaging = event['messaging']
-        for message in messaging:
-          if message.get('message'):
-            #Facebook Messenger ID for user so we know where to send response back to
-            #global recipient_id
-            recipient_id = message['sender']['id']
-            #global buttons
-            #if it has text
-            if message['message'].get('text'):
-                message_text = message['message']['text']
-                print(message_text)
-                response_sent_text, buttons = get_bot_response(message_text, recipient_id)
-                send_message(recipient_id, response_sent_text, buttons)
-            #if user sends us a GIF, photo,video, or any other non-text item
-            elif message['message'].get('attachments'):
-                #response = "Hello"
-                #send_other(recipient_id, response)
-                buttons = []
-                response_sent_nontext = "Nice pic!"
-                send_message(recipient_id, response_sent_nontext, buttons)
-#except TypeError: #if anti-idling add on pings bot we wont get an error
-        #print('PING!')
-#except:
-        #print("an error occured...") 
+    try:
+        #log(output) #entire output good for finding sender ids what message contains etc
+        for event in output['entry']:
+            messaging = event['messaging']
+            for message in messaging:
+              if message.get('message'):
+                #Facebook Messenger ID for user so we know where to send response back to
+                #global recipient_id
+                recipient_id = message['sender']['id']
+                #global buttons
+                #if it has text
+                if message['message'].get('text'):
+                    message_text = message['message']['text']
+                    print(message_text)
+                    response_sent_text, buttons = get_bot_response(message_text, recipient_id)
+                    send_message(recipient_id, response_sent_text, buttons)
+                #if user sends us a GIF, photo,video, or any other non-text item
+                elif message['message'].get('attachments'):
+                    #response = "Hello"
+                    #send_other(recipient_id, response)
+                    buttons = []
+                    response_sent_nontext = "Nice pic!"
+                    send_message(recipient_id, response_sent_nontext, buttons)
+    except TypeError: #if anti-idling add on pings bot we wont get an error
+            print('PING!')
+    except:
+            print("an error occured...") 
     return "Message Processed"
 
 
@@ -123,9 +123,14 @@ def get_bot_response(message_text, recipient_id):
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if notBasser(message):
+    if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
+        con = getCon()
+        add_custom_message(message, con)
+        response = response + "Adding custom message..."
+        con.close()
+    elif notBasser(message):
         response = notBasser(message)
-    elif entity and "dookie:" not in message: #if user is asking for a meal (uses wit.ai)
+    elif entity: #if user is asking for a meal (uses wit.ai)
         con = getCon()
         response = response + checkForDino(message, con, value)
         buttons = checkForButton(message)
@@ -169,11 +174,6 @@ def get_bot_response(message_text, recipient_id):
         response = "gif"
     elif "joke" in message:
         response = response + getjoke()
-    elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
-        con = getCon()
-        add_custom_message(message, con)
-        response = response + "Adding custom message..."
-        con.close()
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
@@ -187,7 +187,6 @@ def get_bot_response(message_text, recipient_id):
     return response, buttons
 
 def getname(recipient_id): #gets user full name in format "F_name L_name"
-    #global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     name = ""
     # sending get request and saving the response as response object
@@ -201,8 +200,6 @@ def getname(recipient_id): #gets user full name in format "F_name L_name"
     return name
 
 def getdetails(recipient_id): #gets user PSID and name details
-    #global recipient_id
-    #global ACCESS_TOKEN
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
     r = requests.get(url = URL)
     data = r.json()
@@ -234,13 +231,6 @@ def checkForShopen(message, recipient_id):
     if shop_catalogue == None:
         #global shop_catalogue
         shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
-    
-##----only use once---------or do in terminal-----
-#    if "dookie:create table" in message:#        |
-#        response = response  + create_shopen()#  |
-#    elif "dookie:insert row" in message:#        |
-#        response = response + insert_shopen()#   |
-##------------------------------------------------
     if "i would like to open the shop" in message:
         response = response + open_shopen(name, con)
     elif "i would like to close the shop" in message:
@@ -268,12 +258,6 @@ def checkForCalendar(message):
     return response
 
 
-# def checkForKill(message):
-#     if "dino wrong" in message and str(recipient_id) in Admin_ID:
-#         con = getCon()
-#         killswitch(message, con)
-#         con.close()
-
 
 #formerly uses PyMessenger to send response to user
 #now routes to send message with or without buttons
@@ -281,7 +265,6 @@ def send_message(recipient_id, response, buttons): #decides what type of respone
     if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
         response = response + "\n\nSHUTUP HUGO"
     #sends user the text message provided via input response parameter
-    #print("test")
     if buttons != []:
         #text = str(response)
         #bot.send_button_message(recipient_id, text, url_button)
@@ -300,7 +283,6 @@ def send_message(recipient_id, response, buttons): #decides what type of respone
 
 #sends response with quick replies and button
 def send_buttons(recipient_id, response, buttons): #change to send button message
-    start = datetime.datetime.now(TIMEZONE).timestamp()
     params = {
            "access_token": os.environ["ACCESS_TOKEN"]
     }
@@ -358,8 +340,6 @@ def send_buttons(recipient_id, response, buttons): #change to send button messag
     })
 
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-    end = datetime.datetime.now(TIMEZONE).timestamp()
-    print(str(end - start) + " send buttons")
     return "other sent"
 
 def send_nonbuttons(recipient_id, response):
