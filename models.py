@@ -1,4 +1,6 @@
 #first attempts using classes
+import os
+
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
