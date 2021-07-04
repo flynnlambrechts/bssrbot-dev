@@ -29,7 +29,7 @@ from otherdinotimes import notBasser
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
 
-from models import *
+from models import Sender
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
@@ -174,7 +174,7 @@ def get_bot_response(message_text, recipient_id):
     elif "joke" in message:
         response = response + getjoke()
     elif "test" == message:
-        user = models.Sender(recipient_id)
+        user = Sender(recipient_id)
         response = response + user.get_fullname()
     elif "show me users" in message:
         con = getCon()
