@@ -1,6 +1,3 @@
-
-#### THIS NEEDS TO BE CLEANED THE HELL UP #####
-
 #import time
 
 #collects what the entity is e.g. mealtype

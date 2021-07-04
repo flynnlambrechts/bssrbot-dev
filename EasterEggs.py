@@ -10,7 +10,7 @@ def checkForEasterEggs(message):
     elif "molly" in message or "molly rolfe" in message or "rolfey" in message:
         response = response + "Molly is a butt nug. " + u"\U0001F61D"
     elif "benny g" in message or "ben grant" in message:
-        response = response + "Time for the bad man to settle down..."
+        response = response + "Time for the family man to return to his old ways..."
     elif "crispy" in message or "brendan crisp" in message:
         response = response + "That man is bricked up in a brick house."
     elif "feature" in message:
@@ -22,7 +22,7 @@ def checkForEasterEggs(message):
     elif "booty mitch" in message:
         response = response + "DUMPTRUCK"
     elif "flynn" in message or "flynn lambrechts" in message:
-        response = response + "Sick Lad"
+        response = response + "A bot"
     elif "jasmine" in message or "jas" in message:
         response = response + "A valuable contributor"
     elif "ethan" in message:

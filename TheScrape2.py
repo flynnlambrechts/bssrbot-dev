@@ -58,6 +58,17 @@ def checkForDino(message, con, value):
             day = "Tomorrow"
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 2
+            current_day += 1
+            time = 0
+            if current_day==7:
+                if week==4:
+                    week = 1
+                    print(str(week) + " week")
+                    column = 1
+                else:
+                    week = week + 1
+                    print(str(week) + "week")
+                    column = 1
             response = response + breakfastmenu(day_value, column, week)
         else:
             response = response + (f"Breakfast {day}: \n")
@@ -71,6 +82,17 @@ def checkForDino(message, con, value):
             day = "Tomorrow"
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 2
+            current_day += 1
+            time = 0
+            if current_day==7:
+                if week==4:
+                    week = 1
+                    print(str(week) + " week")
+                    column = 1
+                else:
+                    week = week + 1
+                    print(str(week) + "week")
+                    column = 1
             response = response + lunchmenu(day_value, column, week)
         else:
             response = response + (f"Lunch {day}: \n")

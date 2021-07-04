@@ -29,13 +29,15 @@ from otherdinotimes import notBasser
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
 
+from models import *
+
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
             ] #id of users with powerful permission
-#bot = Bot(ACCESS_TOKEN) #not sure
+
 TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
 #Developer: Flynn
@@ -112,15 +114,12 @@ def verify_fb_token(token_sent):
 #chooses a message to send to the user
 def get_bot_response(message_text, recipient_id):
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    #global Admin_ID
-    #global recipient_id
-    #global message
     message = message_text.lower()
-    #global response
+
     response = ""
-    #global value, entity
+
     entity, value = whatmeal(message) #prev message_text
-    #global buttons
+
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
     if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
@@ -174,6 +173,9 @@ def get_bot_response(message_text, recipient_id):
         response = "gif"
     elif "joke" in message:
         response = response + getjoke()
+    elif "test" == message:
+        user = models.Sender(recipient_id)
+        response = response + user.get_fullname()
     elif "show me users" in message:
         con = getCon()
         if str(recipient_id) in Admin_ID: 
@@ -187,7 +189,6 @@ def get_bot_response(message_text, recipient_id):
     return response, buttons
 
 def whatmeal(message): #prev message_text
-        #start = time.time()
         entity = None
         value = None
 
@@ -201,8 +202,6 @@ def whatmeal(message): #prev message_text
                 value = "dinner"
         if value is not None:
                 entity = 'mealtype:mealtype'
-        #end = time.time()
-        #print(end - start)
         return (entity, value)
 
 def getname(recipient_id): #gets user full name in format "F_name L_name"
