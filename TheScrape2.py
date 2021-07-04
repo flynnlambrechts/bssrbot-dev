@@ -20,10 +20,10 @@ def checkForDino(message, con, value):
 
     response = ""
     
-    day, current_day, column = getDay(message, week) #checks for days and creates current_day
+    day, current_day, column, week = getDay(message, week) #checks for days and creates current_day
     #current_day: day of week 0-6 inclusive
     #day_value: day of week 1-7 inclusive
-    #day: name of the day e.g. monday, wedneday, tomorrow, today
+    #day: name of the day e.g. monday, wednesday, tomorrow, today
     #week: week of cycle (1-4)
 
     time = datetime.now(TIMEZONE).time().hour
@@ -51,7 +51,7 @@ def checkForDino(message, con, value):
             response = response + (f"Breakfast Tomorrow: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this is 2 since early +1 was done cause "tomorrow" was in message
             response = response + breakfastmenu(day_value, column, week)
-    elif value == "breakfast":
+    elif value == "breakfast" and day == "Today":
         if "time" in message:
             response = response + "Basser breakfast is at " + breakfasttime
         elif time > 14: #after 2pm will give the breakfast for the next day
@@ -67,7 +67,7 @@ def checkForDino(message, con, value):
     elif value == "lunch":
         if "time" in message:
             response = response + "Basser lunch is at " + lunchtime
-        elif time > 17: #after 5pm will give the lunch for the next day
+        elif time > 17 and day == "Today": #after 5pm will give the lunch for the next day
             day = "Tomorrow"
             response = response + (f"Lunch {day}: \n")
             day_value = current_day + 2
@@ -80,6 +80,22 @@ def checkForDino(message, con, value):
     elif value == "dinner":
         if "time" in message:
             response = response + "Basser dinner is at " + dinnertime
+        elif time > 20 and day == "Today": #after 8pm will give the value for the next day
+            day = "Tomorrow"
+            response = response + (f"Dinner {day}: \n")
+            day_value = current_day + 2
+            current_day += 1
+            time = 0
+            if current_day==7:
+                if week==4:
+                    week = 1
+                    print(str(week) + " week")
+                    column = 1
+                else:
+                    week = week + 1
+                    print(str(week) + "week")
+                    column = 1
+            response = response + dinnermenu(day_value, column, week)
         else:
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
@@ -148,7 +164,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
             current_day = int(checkForDay(message))
             day = str(week_days[int(checkForDay(message))])
     #otherwise must be today: and day and current_day are not updated from todays value
-    return day, current_day, column
+    return day, current_day, column, week
 
     
 

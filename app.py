@@ -14,7 +14,7 @@ import json
 from flask import Flask, request        #flask
 #from pymessenger.bot import Bot        #library for sending messages no longer used
 
-from utils import wit_response          #for nlp
+#from utils import wit_response          #for nlp
 from TheScrape2 import checkForDino     #for scraping htmls
 from TheScrape2 import dinotimes        #pulls the dino times from the scrape
 from TheScrape2 import checkForButton   #Checks whether should add feedback button
@@ -92,8 +92,8 @@ def receive_message():
                     send_message(recipient_id, response_sent_nontext, buttons)
     except TypeError: #if anti-idling add on pings bot we wont get an error
             print('PING!')
-    except:
-            print("an error occured...") 
+    # except:
+    #         print("an error occured...") 
     return "Message Processed"
 
 
@@ -119,7 +119,7 @@ def get_bot_response(message_text, recipient_id):
     #global response
     response = ""
     #global value, entity
-    entity, value = wit_response(message) #prev message_text
+    entity, value = whatmeal(message) #prev message_text
     #global buttons
     buttons = []
 #--------------------------------------------------------------------------------------------------------------------------------------------------------   
@@ -185,6 +185,25 @@ def get_bot_response(message_text, recipient_id):
         response = response + "Sorry, I don't understand: \n" + message
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
     return response, buttons
+
+def whatmeal(message): #prev message_text
+        #start = time.time()
+        entity = None
+        value = None
+
+        if "dino" in message:
+                value = "dino"
+        elif "breakfast" in message or "breaky" in message or "brekky" in message:
+                value = "breakfast"
+        elif "lunch" in message:
+                value = "lunch"
+        elif "dinner" in message or "dins" in message or "supper" in message:
+                value = "dinner"
+        if value is not None:
+                entity = 'mealtype:mealtype'
+        #end = time.time()
+        #print(end - start)
+        return (entity, value)
 
 def getname(recipient_id): #gets user full name in format "F_name L_name"
     URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
