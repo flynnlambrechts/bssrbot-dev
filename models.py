@@ -12,7 +12,7 @@ class Sender:
 		self.first_name = data['first_name']
 		self.last_name = data['last_name']
 		self.psid = recipient_id
-		self.full_name  = " ".join(data['first_name'],data['last_name'])
+		self.full_name  = " ".join([data['first_name'],data['last_name']])
 
 	def get_firstname():
 		return self.first_name
