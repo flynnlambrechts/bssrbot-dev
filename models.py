@@ -1,5 +1,6 @@
 #first attempts using classes
 import os
+import requests
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
