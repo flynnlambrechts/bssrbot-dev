@@ -14,13 +14,13 @@ class Sender:
 		self.psid = recipient_id
 		self.full_name  = " ".join([data['first_name'],data['last_name']])
 
-	def get_firstname():
+	def get_firstname(self):
 		return self.first_name
 
-	def get_lastname():
+	def get_lastname(self):
 		return self.lastname
 
-	def get_fullname():
+	def get_fullname(self):
 		return self.full_name
 
 # user = Sender(recipient_id)
