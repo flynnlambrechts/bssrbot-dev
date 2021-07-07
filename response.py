@@ -71,7 +71,7 @@ class Button:
 
 class UrlButton(Button):
 	def __init__(self,title,url):
-		super.__init__(title)
+		super().__init__(title)
 		self.url = url
 		self.button = {
 			"type": "web_url",
