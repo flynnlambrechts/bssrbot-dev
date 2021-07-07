@@ -111,10 +111,10 @@ def get_bot_response(message_text, recipient_id):
 		if str(recipient_id) in Admin_ID: 
 			con = getCon()
 			response.text = "Check the logs."
-		    print("Users: \n" + view_users(con))
-		    con.close()
+			print("Users: \n" + view_users(con))
+			con.close()
 		else:
-		    response.text = "You shall not, PASS: \n" + str(recipient_id)
+			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
 		response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
 		response.send(recipient_id)
