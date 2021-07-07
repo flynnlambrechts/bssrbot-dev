@@ -338,7 +338,10 @@ def columnlist(page, column, Range): #gets the info from each column as a list
 def addnote(con, value, day):
     meal = value
     if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
-        note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])
+        try: 
+            note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])
+        except AttributeError:
+            note = None
     else: #otherwise there is no note
         note = None 
 
