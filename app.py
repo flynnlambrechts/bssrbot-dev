@@ -72,17 +72,22 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
 #try:
-    #log(output) #entire output good for finding sender ids what message contains etc
+    log(output) #entire output good for finding sender ids what message contains etc
     for event in output['entry']:
         messaging = event['messaging']
         for message in messaging:
-            recipient_id = message['sender']['id']
             if message.get('message'):
-                message_text = message['message']['text']
-                print(message_text)
-                get_bot_response(message_text, recipient_id)
-            # else:
-            #     print("no message")
+                recipient_id = message['sender']['id']
+                if message['message'].get('text'):
+                    message_text = message['message']['text']
+                    print(message_text)
+                    get_bot_response(message_text, recipient_id)
+                elif message['message'].get('attachments'):
+                    print("Picture")
+                else:
+                    print("No message?")
+                    log(output)
+
 
 # except TypeError: #if anti-idling add on pings bot we wont get an error
 #         print('PING!')
