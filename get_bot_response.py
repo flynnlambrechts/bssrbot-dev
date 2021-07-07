@@ -70,7 +70,7 @@ def get_bot_response(message_text, recipient_id):
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		print(str(button) + " Button")
 		Response.text = greeting_message
-		Response.addbutton(button)
+		#Response.addbutton(button)
 
 	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
