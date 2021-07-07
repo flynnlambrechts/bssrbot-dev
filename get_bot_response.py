@@ -134,40 +134,40 @@ def checkForDino(message):
         return value
 
 def checkForShopen(message, recipient_id):
-    user = Sender(recipient_id)
-    name =  user.get_fullname()
-    response = ""
-    global shop_catalogue
-    if shop_catalogue == None:
-        #global shop_catalogue
-        shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
-    if "i would like to open the shop" in message:
-    	con = getCon()
-        response = response + open_shopen(name, con)
-        con.close()
-    elif "i would like to close the shop" in message:
-    	con = getCon()
-        ##add feature where only person who opened can close
-        response = response + close_shopen(name, con)
+	user = Sender(recipient_id)
+	name =  user.get_fullname()
+	response = ""
+	global shop_catalogue
+	if shop_catalogue == None:
+		#global shop_catalogue
+		shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
+	if "i would like to open the shop" in message:
+		con = getCon()
+		response = response + open_shopen(name, con)
 		con.close()
-    elif "shopen" in message or ("shop" in message and ("catalogue" not in message and "sell" not in message)):
-        con = getCon()
-        response = response + get_shopen(con)
-        response = response + "\n" + "\n" + shop_catalogue
-        con.close()
-    elif "catalogue" in message or ("shop" in message and "sell" in message):
-        response = response + str(shop_catalogue)
-    return response
+	elif "i would like to close the shop" in message:
+		con = getCon()
+		##add feature where only person who opened can close
+		response = response + close_shopen(name, con)
+		con.close()
+	elif "shopen" in message or ("shop" in message and ("catalogue" not in message and "sell" not in message)):
+		con = getCon()
+		response = response + get_shopen(con)
+		response = response + "\n" + "\n" + shop_catalogue
+		con.close()
+	elif "catalogue" in message or ("shop" in message and "sell" in message):
+		response = response + str(shop_catalogue)
+	return response
 
 def checkForCalendar(message):
-    response = ""
-    if "events" in message \
-    or "event" in message \
-    or "whats on" in message \
-    or "what’s on" in message \
-    or "what's on" in message \
-    or "what is on" in message:
-        con = getCon()
-        response = response + get_events(message, con)
-        con.close()
-    return response
+	response = ""
+	if "events" in message \
+	or "event" in message \
+	or "whats on" in message \
+	or "what’s on" in message \
+	or "what's on" in message \
+	or "what is on" in message:
+		con = getCon()
+		response = response + get_events(message, con)
+		con.close()
+	return response
