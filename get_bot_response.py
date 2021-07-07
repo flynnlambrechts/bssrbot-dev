@@ -36,91 +36,90 @@ def getCon(): #gets the connection  to the database when required
 
 
 def get_bot_response(message_text, recipient_id):
-   
-    message = message_text.lower()
+	message = message_text.lower()
 
-    if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
-        con = getCon()
-        add_custom_message(message, con)
-        response.text = "Adding custom message..."
-        con.close()
+	if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
+		con = getCon()
+		add_custom_message(message, con)
+		response.text = "Adding custom message..."
+		con.close()
 
-    elif notBasser(message):
-        response.text = notBasser(message)
+	elif notBasser(message):
+		response.text = notBasser(message)
 
-    elif checkForDino(message): #rename to checkfordino later
-        meal = checkForDino(message)
-        con = getCon()
-        response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
-        con.close()
-        button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
-        response.add_button(button)
-        button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX")
-        response.add_button(button)
-        
+	elif checkForDino(message): #rename to checkfordino later
+		meal = checkForDino(message)
+		con = getCon()
+		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
+		con.close()
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		response.add_button(button)
+		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX")
+		response.add_button(button)
+	    
 
-    elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
-    	greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
-    			Here are some example questions:\
-    			\n1. What's for dino? \
-    			\n2. What's for lunch today? \
-    			\n3. Is shopen? \
-    			\n4. What's the shop catalogue? \
-    			\n5. What's on tonight? \
-    			\n6. Events on this week?"
-    	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/")
-        response.text = greeting_message
-        response.add_button(button)
+	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
+		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
+				Here are some example questions:\
+				\n1. What's for dino? \
+				\n2. What's for lunch today? \
+				\n3. Is shopen? \
+				\n4. What's the shop catalogue? \
+				\n5. What's on tonight? \
+				\n6. Events on this week?"
+		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/")
+		response.text = greeting_message
+		response.add_button(button)
 
-    elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-        response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
+	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
+		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
-    elif checkForShopen(message, recipient_id):
-        response.text = checkForShopen(message, recipient_id)
+	elif checkForShopen(message, recipient_id):
+		response.text = checkForShopen(message, recipient_id)
 
-    elif checkForCalendar(message):
-        response.text = checkForCalendar(message)
+	elif checkForCalendar(message):
+		response.text = checkForCalendar(message)
 
-    elif checkForEasterEggs(message):
-        response.text = checkForEasterEggs(message)
+	elif checkForEasterEggs(message):
+		response.text = checkForEasterEggs(message)
 
-    elif checkForDay(message) or "tomorrow" in message or "today" in message:
-        response.text = "Blank for now..."
-        button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
-        response.add_button(button)
+	elif checkForDay(message) or "tomorrow" in message or "today" in message:
+		response.text = "Blank for now..."
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		response.add_button(button)
 
-    elif "time" in message:
-        response.text = dinotimes
+	elif "time" in message:
+		response.text = dinotimes
 
-    elif "latemeal" in message or "late" in message or "inloop" in message:
-        response = "Order a late meal here:"
-        button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
-        response.add_button(button)
+	elif "latemeal" in message or "late" in message or "inloop" in message:
+		response = "Order a late meal here:"
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		response.add_button(button)
 
-    elif "my name" in message:
-        user = Sender(recipient_id)
-        response.text = user.get_fullname()
+	elif "my name" in message:
+		user = Sender(recipient_id)
+		response.text = user.get_fullname()
 
-    elif "gif" in message:
-        response.attachment = Gif("nice").get_gif()
+	elif "gif" in message:
+		response.attachment = Gif("nice").get_gif()
 
-    elif "joke" in message:
-        response.text = getjoke()
+	elif "joke" in message:
+		response.text = getjoke()
 
-    elif "show me users" in message:
-        
-        if str(recipient_id) in Admin_ID: 
-        	con = getCon()
-        	response.text = "Check the logs."
-            print("Users: \n" + view_users(con))
-            con.close()
-        else:
-            response.text = "You shall not, PASS: \n" + str(recipient_id)
-    else:
-        response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
-    response.send(recipient_id)
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
-    return "Response formulated"
+	elif "show me users" in message:
+
+		if str(recipient_id) in Admin_ID: 
+			con = getCon()
+			response.text = "Check the logs."
+		    print("Users: \n" + view_users(con))
+		    con.close()
+		else:
+		    response.text = "You shall not, PASS: \n" + str(recipient_id)
+	else:
+		response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
+		response.send(recipient_id)
+	#--------------------------------------------------------------------------------------------------------------------------------------------------------
+	return "Response formulated"
 
 def checkForDino(message):
         value = None
