@@ -76,12 +76,13 @@ def receive_message():
     for event in output['entry']:
         messaging = event['messaging']
         for message in messaging:
+            recipient_id = message['sender']['id']
             if message.get('message'):
                 message_text = message['message']['text']
-                recipient_id = message['sender']['id']
+                print(message_text)
                 get_bot_response(message_text, recipient_id)
-            else:
-                print("no message")
+            # else:
+            #     print("no message")
 
 # except TypeError: #if anti-idling add on pings bot we wont get an error
 #         print('PING!')
