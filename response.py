@@ -50,11 +50,11 @@ class Response:
 					}
 				}
 			else: #No buttons
-		    	data = {
-		    		"recipient": {"id": recipient_id},
-		    		"message": {
-		            	"text": self.text}
-		    	}
+				data = {
+					"recipient": {"id": recipient_id},
+					"message": {
+						"text": self.text}
+				}
 
 		if self.quickreplies:
 			data["message"]["quick_replies"] = self.quickreplys #a list
