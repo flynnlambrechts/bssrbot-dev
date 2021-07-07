@@ -52,9 +52,9 @@ def get_bot_response(message_text, recipient_id):
 		con = getCon()
 		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
 		con.close()
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.add_button(button)
-		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX")
+		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.add_button(button)
 	    
 
@@ -67,7 +67,7 @@ def get_bot_response(message_text, recipient_id):
 				\n4. What's the shop catalogue? \
 				\n5. What's on tonight? \
 				\n6. Events on this week?"
-		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/")
+		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		response.text = greeting_message
 		response.add_button(button)
 
@@ -85,7 +85,7 @@ def get_bot_response(message_text, recipient_id):
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message:
 		response.text = "Blank for now..."
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.add_button(button)
 
 	elif "time" in message:
@@ -93,7 +93,7 @@ def get_bot_response(message_text, recipient_id):
 
 	elif "latemeal" in message or "late" in message or "inloop" in message:
 		response = "Order a late meal here:"
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home")
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.add_button(button)
 
 	elif "my name" in message:

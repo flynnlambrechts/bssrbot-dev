@@ -78,6 +78,8 @@ class UrlButton(Button):
 			"url": self.url,
 			"title": self.title
 			}
+			
+	def get_button(self)
 		return self.button
 
 
