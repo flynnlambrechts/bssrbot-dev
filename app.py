@@ -30,6 +30,8 @@ from users import *                     #for viewing users
 from getmenuweek import checkForDay
 
 from models import Sender
+import response
+from get_bot_reponse import get_bot_response
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
@@ -74,24 +76,12 @@ def receive_message():
     for event in output['entry']:
         messaging = event['messaging']
         for message in messaging:
-          if message.get('message'):
-            #Facebook Messenger ID for user so we know where to send response back to
-            #global recipient_id
-            recipient_id = message['sender']['id']
-            #global buttons
-            #if it has text
-            if message['message'].get('text'):
-                message_text = message['message']['text']
-                print(message_text)
-                response_sent_text, buttons = get_bot_response(message_text, recipient_id)
-                send_message(recipient_id, response_sent_text, buttons)
-            #if user sends us a GIF, photo,video, or any other non-text item
-            elif message['message'].get('attachments'):
-                #response = "Hello"
-                #send_other(recipient_id, response)
-                buttons = []
-                response_sent_nontext = "Nice pic!"
-                send_message(recipient_id, response_sent_nontext, buttons)
+            if message.get('message'):
+                recipient_id = message['sender']['id']
+                get_bot_response(message_text, recipient_id)
+            else:
+                print("no message")
+
 # except TypeError: #if anti-idling add on pings bot we wont get an error
 #         print('PING!')
 # except:
@@ -111,169 +101,10 @@ def verify_fb_token(token_sent):
     return 'Invalid verification token'
 
 
-#chooses a message to send to the user
-def get_bot_response(message_text, recipient_id):
-#--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    message = message_text.lower()
-
-    response = ""
-
-    entity, value = whatmeal(message) #prev message_text
-
-    buttons = []
-#--------------------------------------------------------------------------------------------------------------------------------------------------------   
-    if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
-        con = getCon()
-        add_custom_message(message, con)
-        response = response + "Adding custom message..."
-        con.close()
-    elif notBasser(message):
-        response = notBasser(message)
-    elif entity: #if user is asking for a meal (uses wit.ai)
-        con = getCon()
-        response = response + checkForDino(message, con, value)
-        buttons = checkForButton(message)
-        con.close()
-    elif checkIfGreeting(message):
-        response = response + "Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs."
-        response = response + (f" Here are some example questions:\n1. What's for dino? \n2. What's for lunch today? \n3. Is shopen? \n4. What's the shop catalogue? \n5. What's on tonight? \n6. Events on this week?")
-        buttons = [{
-                "type": "web_url",
-                "url": "https://www.facebook.com/BssrBot-107323461505853/",
-                "title": "BssrBot Page"
-                }]
-    elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-        response = response + "You're welcome!" + u"\U0001F60B" #tongue out emoji
-    elif checkForShopen(message, recipient_id):
-        response = response + checkForShopen(message, recipient_id)
-    elif checkForCalendar(message):
-        response = response + checkForCalendar(message)
-    elif checkForEasterEggs(message):
-        response = response + checkForEasterEggs(message)
-    elif checkForDay(message) or "tomorrow" in message or "today" in message:
-        response = response + "blank for now"
-        buttons = [{
-                "type": "web_url",
-                "url": "https://user.resi.inloop.com.au/home",
-                "title": "Latemeal"
-                }]
-    elif "time" in message:
-        #global dinotimes
-        response = response + dinotimes
-    elif "latemeal" in message or "late" in message or "inloop" in message:
-        response = "Order a late meal here:"
-        buttons = [{
-                "type": "web_url",
-                "url": "https://user.resi.inloop.com.au/home",
-                "title": "Latemeal"
-                }]
-    elif "my name" in message:
-        response = response + getname(recipient_id)
-    elif "gif" in message:
-        response = "gif"
-    elif "joke" in message:
-        response = response + getjoke()
-    elif "test" == message:
-        user = Sender(recipient_id)
-        response = response + user.get_fullname()
-    elif "show me users" in message:
-        con = getCon()
-        if str(recipient_id) in Admin_ID: 
-            response = response + "Users: \n" + view_users(con)
-        else:
-            response = response + "You shall not, PASS: \n" + str(recipient_id)
-        con.close()
-    else:
-        response = response + "Sorry, I don't understand: \n" + message
-#--------------------------------------------------------------------------------------------------------------------------------------------------------
-    return response, buttons
-
-def whatmeal(message): #prev message_text
-        entity = None
-        value = None
-
-        if "dino" in message:
-                value = "dino"
-        elif "breakfast" in message or "breaky" in message or "brekky" in message:
-                value = "breakfast"
-        elif "lunch" in message:
-                value = "lunch"
-        elif "dinner" in message or "dins" in message or "supper" in message:
-                value = "dinner"
-        if value is not None:
-                entity = 'mealtype:mealtype'
-        return (entity, value)
-
-def getname(recipient_id): #gets user full name in format "F_name L_name"
-    URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
-    name = ""
-    # sending get request and saving the response as response object
-    r = requests.get(url = URL)
-    # extracting data in json format
-    data = r.json()
-    first_name = data['first_name']
-    last_name = data['last_name']
-    name = str(first_name) + " " + str(last_name)
-    #print("NAME: " + "'" + name + "'")
-    return name
-
-def getdetails(recipient_id): #gets user PSID and name details
-    URL = "https://graph.facebook.com/v2.6/"+ recipient_id + "?fields=first_name,last_name&access_token=" + ACCESS_TOKEN
-    r = requests.get(url = URL)
-    data = r.json()
-    first_name = data['first_name']
-    last_name = data['last_name']
-    full_name = str(first_name) + " " + str(last_name)
-    PSID = int(recipient_id)
-    return full_name, first_name, last_name, PSID
-
 def adduser(con, recipient_id): #adds user to DB
     full_name, first_name, last_name, PSID = getdetails(recipient_id)
     insert_user(full_name, first_name, last_name, PSID, con)
     
-
-def checkIfGreeting(message): #checks if the user sends a greeting
-    possibleGreetings = ["hello", "hi", "help", "hey"]
-    message_elements = message.split()
-    for word in message_elements:
-        for el in possibleGreetings:
-            if el == word:
-                return True      
-    return False
-
-def checkForShopen(message, recipient_id):
-    con = getCon()
-    name = getname(recipient_id)
-    response = ""
-    global shop_catalogue
-    if shop_catalogue == None:
-        #global shop_catalogue
-        shop_catalogue = "No catalogue." + u"\U0001F4A9" #poop emoji
-    if "i would like to open the shop" in message:
-        response = response + open_shopen(name, con)
-    elif "i would like to close the shop" in message:
-        ##add feature where only person who opened can close
-        response = response + close_shopen(name, con)
-    elif "shopen" in message or ("shop" in message and ("catalogue" not in message and "sell" not in message)):
-        response = response + get_shopen(con)
-        response = response + "\n" + "\n" + shop_catalogue
-    elif "catalogue" in message or ("shop" in message and "sell" in message):
-            response = response + str(shop_catalogue)
-    con.close()
-    return response
-
-def checkForCalendar(message):
-    response = ""
-    if "events" in message \
-    or "event" in message \
-    or "whats on" in message \
-    or "what’s on" in message \
-    or "what's on" in message \
-    or "what is on" in message:
-        con = getCon()
-        response = response + get_events(message, con)
-        con.close()
-    return response
 
 
 

@@ -1,10 +1,38 @@
 #get_bot_response
+import os
+import psycopg2 
+
 from response import (Response, UrlButton, QuickReply, Gif)
 from shop_catalogue import shop_catalogue
 from TheScrape2 import dinotimes
 
+from TheScrape2 import checkForDino as getDino   #for scraping htmls
+from TheScrape2 import dinotimes        #pulls the dino times from the scrape
+from TheScrape2 import checkForButton   #Checks whether should add feedback button
+from EasterEggs import checkForEasterEggs #self explanatory
+from shopen import *                    #for all shopen related
+from killswitch import add_custom_message
+from calendar1 import get_events
+from jokes import getjoke               #for jokes
+from shop_catalogue import shop_catalogue 
+from otherdinotimes import notBasser
+
+from users import *                     #for viewing users
+from getmenuweek import checkForDay
+
+from models import Sender
+
 ###MAKE ALL INTO INDIVDUAL FUNCTIONS THAT HANDLE TO OCCURANCES
 ###Add buttons and send using response.py
+
+def getCon(): #gets the connection  to the database when required
+    if "HEROKU" in os.environ:
+        DATABASE_URL =  os.environ['DATABASE_URL']
+        con = psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
+        print("Local Database opened successfully")
+    return con
 
 
 def get_bot_response(message_text, recipient_id):
@@ -89,7 +117,7 @@ def get_bot_response(message_text, recipient_id):
         else:
             response.text = "You shall not, PASS: \n" + str(recipient_id)
     else:
-        response.text = "Sorry, I don't understand: \n" + message_text
+        response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
     response.send(recipient_id)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------
     return "Response formulated"
