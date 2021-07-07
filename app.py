@@ -31,7 +31,7 @@ from getmenuweek import checkForDay
 
 from models import Sender
 import response
-from get_bot_reponse import get_bot_response
+from get_bot_response import get_bot_response
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
