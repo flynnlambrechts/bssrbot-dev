@@ -20,47 +20,47 @@ class Response:
 
 	def send(self, recipient_id):
 		params = {
-           "access_token": os.environ["ACCESS_TOKEN"]
-	    }
+		   "access_token": os.environ["ACCESS_TOKEN"]
+		}
 
-	    headers = {
+		headers = {
 			"Content-Type": "application/json"
-        }
+		}
 
-        if self.attachment:
-        	data = {
-	        	"recipient": {"id": recipient_id},
-	        	"message": {
+		if self.attachment:
+			data = {
+		    	"recipient": {"id": recipient_id},
+		    	"message": {
 		            "attachment": self.attachment
 		            	}
-        	}
-    	else: #must be text
-	        if self.buttons:
-	        	data = {
-	        		"recipient": {"id": recipient_id},
-	        		"message": {
-	                    "attachment":{
-	                        "type":"template",
-	                        "payload":{
-	                            "template_type":"button",
-	                            "text": self.text,
-	                            "buttons": self.buttons
-                        	}
-                    	}
-                	}
-                }
-        	else: #No buttons
-	        	data = {
-	        		"recipient": {"id": recipient_id},
-	        		"message": {
-                    	"text": self.text}
-            	}
+			}
+		else: #must be text
+		    if self.buttons:
+		    	data = {
+		    		"recipient": {"id": recipient_id},
+		    		"message": {
+		                "attachment":{
+		                    "type":"template",
+		                    "payload":{
+		                        "template_type":"button",
+		                        "text": self.text,
+		                        "buttons": self.buttons
+		                	}
+		            	}
+		        	}
+		        }
+			else: #No buttons
+		    	data = {
+		    		"recipient": {"id": recipient_id},
+		    		"message": {
+		            	"text": self.text}
+		    	}
 
-        if self.quickreplies:
-        	data["message"]["quick_replies"] = self.quickreplys #a list
+		if self.quickreplies:
+			data["message"]["quick_replies"] = self.quickreplys #a list
 
 		data = json.dumps(data)
-    	r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
 
