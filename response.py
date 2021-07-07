@@ -24,7 +24,7 @@ class Response:
 	    }
 
 	    headers = {
-	            "Content-Type": "application/json"
+			"Content-Type": "application/json"
         }
 
         if self.attachment:
