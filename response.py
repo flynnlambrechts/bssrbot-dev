@@ -99,11 +99,11 @@ class QuickReply:
 
 	def get_quickreply(self):
 		quickreply = {
-					"content_type":"text",
-                    "title":self.title,
-                    "payload":self.payload
-                    }
-        return quickreply
+				"content_type":"text",
+				"title":self.title,
+				"payload":self.payload
+				}
+		return quickreply
 
 
 class Gif:
@@ -112,23 +112,23 @@ class Gif:
 
 	def searh_gif(self,text):
 		payload = {'s': text, 'api_key': 'ey1oVnN1NGrtEDHFGBJjRj5AgegLFVeT', 'weirdness': 1}
-	    r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
-	    r = r.json()
-	    # sprint(r)
-	    try:
-	        url = r['data']['images']['original']['url']
-	    except:
-	        print('failed to get gif')
+		r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
+		r = r.json()
+		# sprint(r)
+		try:
+			url = r['data']['images']['original']['url']
+		except:
+			print('failed to get gif')
 
-	    return url
+		return url
 
 	def get_gif(self):
 		self.attachment = {
-        "type": "image",
-        "payload": {
-            "url": self.gifurl}
-        }
-        return self.attachment
+		"type": "image",
+		"payload": {
+			"url": self.gifurl}
+		}
+		return self.attachment
 
 
 
