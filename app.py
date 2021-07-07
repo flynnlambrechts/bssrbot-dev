@@ -77,6 +77,7 @@ def receive_message():
         messaging = event['messaging']
         for message in messaging:
             if message.get('message'):
+                message_text = message['message']['text']
                 recipient_id = message['sender']['id']
                 get_bot_response(message_text, recipient_id)
             else:
