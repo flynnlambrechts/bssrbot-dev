@@ -35,20 +35,20 @@ class Response:
 		            	}
 			}
 		else: #must be text
-		    if self.buttons:
-		    	data = {
-		    		"recipient": {"id": recipient_id},
-		    		"message": {
-		                "attachment":{
-		                    "type":"template",
-		                    "payload":{
-		                        "template_type":"button",
-		                        "text": self.text,
-		                        "buttons": self.buttons
-		                	}
-		            	}
-		        	}
-		        }
+			if self.buttons:
+				data = {
+					"recipient": {"id": recipient_id},
+					"message": {
+						"attachment":{
+							"type":"template",
+							"payload":{
+								"template_type":"button",
+								"text": self.text,
+								"buttons": self.buttons
+							}
+						}
+					}
+				}
 			else: #No buttons
 		    	data = {
 		    		"recipient": {"id": recipient_id},
