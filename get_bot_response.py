@@ -68,6 +68,7 @@ def get_bot_response(message_text, recipient_id):
 				\n5. What's on tonight? \
 				\n6. Events on this week?"
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+		print(str(button) + " Button")
 		Response.text = greeting_message
 		Response.addbutton(button)
 
