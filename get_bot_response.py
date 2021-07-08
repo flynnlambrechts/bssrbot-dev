@@ -35,7 +35,7 @@ def getCon(): #gets the connection  to the database when required
     return con
 
 
-def get_bot_response(message_text="",attachment = "", recipient_id):
+def get_bot_response(recipient_id, message_text="",attachment = ""):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	if attachment != "":

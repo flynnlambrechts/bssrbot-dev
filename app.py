@@ -81,9 +81,11 @@ def receive_message():
                 if message['message'].get('text'):
                     message_text = message['message']['text']
                     print(message_text)
-                    get_bot_response(message_text, recipient_id)
+                    get_bot_response(recipient_id,message_text)
                 elif message['message'].get('attachments'):
                     print("Picture")
+                    attachment = "blank for now"
+                    get_bot_response(recipient_id, attachment)
                 else:
                     print("No message?")
                     log(output)
@@ -114,173 +116,9 @@ def adduser(con, recipient_id): #adds user to DB
     
 
 
-
-#formerly uses PyMessenger to send response to user
-#now routes to send message with or without buttons
-def send_message(recipient_id, response, buttons): #decides what type of respones to send
-    if recipient_id == "5443690809005509": #CHECKS IF HUGO IS MESSAGING
-        response = response + "\n\nSHUTUP HUGO"
-    #sends user the text message provided via input response parameter
-    if buttons != []:
-        #text = str(response)
-        #bot.send_button_message(recipient_id, text, url_button)
-        send_buttons(recipient_id, response, buttons)
-    elif response == "gif":
-        message = "nice"
-        send_gif_message(recipient_id, message)
-    else:
-        #bot.send_text_message(recipient_id, response)
-        send_nonbuttons(recipient_id, response)
-    con = getCon()
-    adduser(con, recipient_id)
-    con.close()
-    return "success"
-
-
-#sends response with quick replies and button
-def send_buttons(recipient_id, response, buttons): #change to send button message
-    params = {
-           "access_token": os.environ["ACCESS_TOKEN"]
-    }
-
-    headers = {
-            "Content-Type": "application/json"
-    }
-    #message_text = str(response)
-    # buttons = [{
-    #             "type": "web_url",
-    #             "url": "https://bit.ly/3hVT0DX",
-    #             "title": "Leave Feedback"
-    #             },
-    #             {
-    #             "type": "web_url",
-    #             "url": "https://user.resi.inloop.com.au/home",
-    #             "title": "Latemeal"
-    #             }
-    #             ]
-    #print(type(buttons))
-    data = json.dumps({
-                "recipient": {
-                    "id": recipient_id
-                },
-                "message": {
-                    "attachment":{
-                        "type":"template",
-                        "payload":{
-                            "template_type":"button",
-                            "text":str(response),
-                            "buttons": buttons
-                        }
-                    },
-                    "quick_replies":[{
-                            "content_type":"text",
-                            "title":"Breakfast",
-                            "payload":"Breakfast"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Lunch",
-                            "payload":"Lunch"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Dinner",
-                            "payload":"Dinner"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Dino",
-                            "payload":"Dino"
-                            }]
-                }
-    })
-
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-    return "other sent"
-
-def send_nonbuttons(recipient_id, response):
-    message_text = str(response)
-    params = {
-           "access_token": os.environ["ACCESS_TOKEN"]
-    }
-
-    headers = {
-            "Content-Type": "application/json"
-    }
-
-    data = json.dumps({
-               "recipient": {
-                      "id": recipient_id
-               },
-               "message": {
-                    "text": message_text,
-                    "quick_replies":[{
-                            "content_type":"text",
-                            "title":"Breakfast",
-                            "payload":"Breakfast"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Lunch",
-                            "payload":"Lunch"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Dinner",
-                            "payload":"Dinner"
-                            },
-                            {
-                            "content_type":"text",
-                            "title":"Dino",
-                            "payload":"Dino"
-                            }]
-               }
-    })
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-
-
-def send_gif_message(recipient_id, message):
-    gif_url = search_gif(message)
-
-    data = json.dumps({
-        "recipient": {"id": recipient_id},
-        "message": {
-            "attachment": {
-                "type": "image",
-                "payload": {
-                    "url": gif_url
-                }
-            }}
-    })
-
-    params = {
-        "access_token": os.environ["ACCESS_TOKEN"]
-    }
-
-    headers = {
-        "Content-Type": "application/json"
-    }
-
-    r = requests.post("https://graph.facebook.com/v2.6/me/messages",
-                      params=params, headers=headers, data=data)
-
-
 if __name__ == "__main__":
     app.run()
 
-
-def search_gif(text):
-    #get a GIF that is similar to text sent
-    payload = {'s': text, 'api_key': 'ey1oVnN1NGrtEDHFGBJjRj5AgegLFVeT', 'weirdness': 1}
-    r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
-    r = r.json()
-    # sprint(r)
-    try:
-        url = r['data']['images']['original']['url']
-    except:
-        print('failed to get gif')
-
-    return url
 
 
 
