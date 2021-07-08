@@ -86,16 +86,6 @@ class UrlButton(Button):
 		return self.button
 
 
-	# def get_button(self):
-	# 	button = {
- #                    "type": "web_url",
- #                    "url": self.url,
- #                    "title": self.title
- #                    }
-
-	# 	return button
-
-
 class QuickReply:
 	def __init__(self,title,payload):
 		self.title = title

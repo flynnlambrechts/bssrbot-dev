@@ -119,9 +119,12 @@ def checkForDino(message, con, value):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu(day_value, column, week)
-
-    note = addnote(con, value, day)
-    if note is not None and "time" not in message:
+            
+    if "time" not in message:
+        note = addnote(con, value, day)
+    else:
+        note = None
+    if note is not None:
         response = response + str(note)
 
     return response

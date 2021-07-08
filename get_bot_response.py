@@ -12,7 +12,6 @@ from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
 from jokes import getjoke               #for jokes
-from otherdinotimes import notBasser
 
 
 from users import *                     #for viewing users
@@ -44,19 +43,19 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 		response.text = "Adding custom message..."
 		con.close()
 
-	elif notBasser(message):
-		response.text = notBasser(message)
+	elif "time" in message:
+		response.text = getTime(message)
 
 	elif checkForDino(message): #rename to checkfordino later
 		value = checkForDino(message)
 		con = getCon()
 		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
 		con.close()
-		if "time" not in message:
-			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-			response.addbutton(button)
-			button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
-			response.addbutton(button)
+
+		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+		response.addbutton(button)
+		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
+		response.addbutton(button)
 	    
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
 		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
@@ -90,9 +89,6 @@ Here are some example questions:\
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 
-	elif "time" in message:
-		response.text = dinotimes
-
 	elif "latemeal" in message or "late" in message or "inloop" in message:
 		response = "Order a late meal here:"
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
@@ -124,6 +120,27 @@ Here are some example questions:\
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"
+
+def getTime(message):
+	if "baxter" in message:
+		response = response + notbassertimes["Baxter"]
+	elif "goldstein" in message or "goldie" in message or "goldy" in message
+		response = response + notbassertimes["Goldstein"]
+	elif "fig" in message:
+		response = response + notbassertimes["Fig"]
+	elif "hall" in message:
+		response = response + notbassertimes["Hall"]
+	else:
+		meal = checkForDino(message)
+		if meal:
+			if meal == "dino":
+				response = response + dinotimes
+			else:
+				response = response + bassertimes[meal]
+		else :
+			response = response + dinotimes
+	return response
+
 
 def checkForDino(message):
         value = None
