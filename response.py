@@ -4,7 +4,9 @@ import requests
 import json
 
 class Response:
-	def __init__(self,text=None,button=None,attachment=None):
+	def __init__(self,recipient_id,text=None,button=None,attachment=None):
+		self.recipient_id = recipient_id
+
 		self.text = text
 		self.attachment = attachment
 
@@ -18,7 +20,8 @@ class Response:
 		self.quick_replies.append(quick_reply)
 
 
-	def send(self, recipient_id):
+	def send(self):
+		recipient_id = self.recipient_id
 		params = {
 		   "access_token": os.environ["ACCESS_TOKEN"]
 		}

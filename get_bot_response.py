@@ -37,7 +37,7 @@ def getCon(): #gets the connection  to the database when required
 
 def get_bot_response(message_text, recipient_id):
 	message = message_text.lower()
-
+	response  = Response(recipient_id)
 	if "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 		con = getCon()
 		add_custom_message(message, con)
@@ -69,7 +69,8 @@ def get_bot_response(message_text, recipient_id):
 				\n6. Events on this week?"
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		print(str(button) + " Button")
-		Response.text = greeting_message
+		response.addbutton(button)
+		response.text = greeting_message
 		#Response.addbutton(button)
 
 	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
@@ -118,7 +119,7 @@ def get_bot_response(message_text, recipient_id):
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
 		response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
-	Response().send(recipient_id)
+	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"
 
