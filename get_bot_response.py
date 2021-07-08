@@ -124,7 +124,7 @@ Here are some example questions:\
 def getTime(message):
 	if "baxter" in message:
 		response = response + notbassertimes["Baxter"]
-	elif "goldstein" in message or "goldie" in message or "goldy" in message
+	elif "goldstein" in message or "goldie" in message or "goldy" in message:
 		response = response + notbassertimes["Goldstein"]
 	elif "fig" in message:
 		response = response + notbassertimes["Fig"]
