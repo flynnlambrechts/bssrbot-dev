@@ -6,9 +6,6 @@ from response import (Response, UrlButton, QuickReply, Gif)
 
 from bot_constants import *
 
-from shop_catalogue import shop_catalogue
-from TheScrape2 import dinotimes
-
 from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
