@@ -122,6 +122,7 @@ Here are some example questions:\
 	return "Response formulated"
 
 def getTime(message):
+	response = ""
 	if "baxter" in message:
 		response = response + notbassertimes["Baxter"]
 	elif "goldstein" in message or "goldie" in message or "goldy" in message:
