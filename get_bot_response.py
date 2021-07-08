@@ -48,7 +48,7 @@ def get_bot_response(message_text, recipient_id):
 		response.text = notBasser(message)
 
 	elif checkForDino(message): #rename to checkfordino later
-		meal = checkForDino(message)
+		value = checkForDino(message)
 		con = getCon()
 		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
 		con.close()
@@ -60,13 +60,13 @@ def get_bot_response(message_text, recipient_id):
 
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
 		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
-				Here are some example questions:\
-				\n1. What's for dino? \
-				\n2. What's for lunch today? \
-				\n3. Is shopen? \
-				\n4. What's the shop catalogue? \
-				\n5. What's on tonight? \
-				\n6. Events on this week?"
+			Here are some example questions:\
+				1. What's for dino? \
+				2. What's for lunch today? \
+				3. Is shopen? \
+				4. What's the shop catalogue? \
+				5. What's on tonight? \
+				6. Events on this week?"
 		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		print(str(button) + " Button")
 		response.addbutton(button)
