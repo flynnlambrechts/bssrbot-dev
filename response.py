@@ -59,7 +59,7 @@ class Response:
 						"text": self.text}
 				}
 
-		if self.quickreplies != []:
+		if self.quick_replies != []:
 			data["message"]["quick_replies"] = self.quickreplys #a list
 
 		data = json.dumps(data)
