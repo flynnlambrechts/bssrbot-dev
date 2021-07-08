@@ -9,7 +9,7 @@ class Response:
 
 		self.text = text
 		self.attachment = attachment
-		self.quick_replies = []]
+		self.quick_replies = []
 
 		self.buttons = []
 		
