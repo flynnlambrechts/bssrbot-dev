@@ -137,7 +137,7 @@ def getTime(message):
 			if meal == "dino":
 				response = response + dinotimes
 			else:
-				response = "".join([response, f"Basser {meal} is at ",bassertimes[meal]],".")
+				response = "".join([response, f"Basser {meal} is at ",bassertimes[meal],"."])
 		else :
 			response = response + dinotimes
 	return response
