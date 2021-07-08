@@ -63,6 +63,7 @@ class Response:
 			data["message"]["quick_replies"] = self.quickreplys #a list
 
 		data = json.dumps(data)
+		print(data)
 		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
