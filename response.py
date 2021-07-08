@@ -4,7 +4,7 @@ import requests
 import json
 
 class Response:
-	def __init__(self,recipient_id,text=None,button=None,attachment=None):
+	def __init__(self,recipient_id,text=None,attachment=None):
 		self.recipient_id = recipient_id
 
 		self.text = text
@@ -30,7 +30,7 @@ class Response:
 			"Content-Type": "application/json"
 		}
 
-		if self.attachment:
+		if self.attachment != None:
 			data = {
 		    	"recipient": {"id": recipient_id},
 		    	"message": {
@@ -38,7 +38,7 @@ class Response:
 		            	}
 			}
 		else: #must be text
-			if self.buttons:
+			if self.buttons != []:
 				data = {
 					"recipient": {"id": recipient_id},
 					"message": {
@@ -59,7 +59,7 @@ class Response:
 						"text": self.text}
 				}
 
-		if self.quickreplies:
+		if self.quickreplies != []:
 			data["message"]["quick_replies"] = self.quickreplys #a list
 
 		data = json.dumps(data)
