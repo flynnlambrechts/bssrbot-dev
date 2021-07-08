@@ -10,7 +10,7 @@ from getmenuweek import checkForDay
 from killswitch import read_custom_message
 
 #define the dino times here used throughout
-from bot_constants import (breakfasttime, lunchtime, dinnertime, dinotimes)
+from bot_constants import (bassertimes, dinotimes)
 
 def checkForDino(message, con, value):
     week = getmenuweek()
@@ -50,7 +50,7 @@ def checkForDino(message, con, value):
             response = response + breakfastmenu(day_value, column, week)
     elif value == "breakfast" and day == "Today":
         if "time" in message:
-            response = response + "Basser breakfast is at " + breakfasttime
+            response = response + "Basser breakfast is at " +  bassertimes["breakfast"]
         elif time > 14: #after 2pm will give the breakfast for the next day
             day = "Tomorrow"
             response = response + (f"Breakfast {day}: \n")
@@ -74,7 +74,7 @@ def checkForDino(message, con, value):
         
     elif value == "lunch":
         if "time" in message:
-            response = response + "Basser lunch is at " + lunchtime
+            response = response + "Basser lunch is at " + bassertimes["lunch"]
         elif time > 17 and day == "Today": #after 5pm will give the lunch for the next day
             day = "Tomorrow"
             response = response + (f"Lunch {day}: \n")
@@ -98,7 +98,7 @@ def checkForDino(message, con, value):
 
     elif value == "dinner":
         if "time" in message:
-            response = response + "Basser dinner is at " + dinnertime
+            response = response + "Basser dinner is at " + bassertimes["dinner"]
         elif time > 20 and day == "Today": #after 8pm will give the value for the next day
             day = "Tomorrow"
             response = response + (f"Dinner {day}: \n")

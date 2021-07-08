@@ -1,5 +1,5 @@
 #response
-import os #make to import from a settings file
+from bot_constants import ACCESS_TOKEN
 import requests
 import json
 
@@ -22,7 +22,7 @@ class Response:
 	def send(self):
 		recipient_id = self.recipient_id
 		params = {
-		   "access_token": os.environ["ACCESS_TOKEN"]
+		   "access_token": ACCESS_TOKEN
 		}
 
 		headers = {
@@ -34,7 +34,7 @@ class Response:
 		    	"recipient": {"id": recipient_id},
 		    	"message": {
 		            "attachment": self.attachment
-		            	}
+            	}
 			}
 		else: #must be text
 			if self.buttons != []:

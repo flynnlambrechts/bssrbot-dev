@@ -1,4 +1,11 @@
 #Constants
+import os
+
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
+Admin_ID = ["4409117335852974", #Flynn-DEV
+            "3760608700732342" #Flynn-REAL
+            ] #id of users with powerful permission
 
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
  {'content_type': 'text', 'title': 'Lunch', 'payload': 'Lunch'},\
@@ -27,11 +34,17 @@ Cadbury Blocks $2.5\n\
 Red Rock Deli Chips $3"
 
 #Basser
-breakfasttime = "7:00-7:45am" #"7:00-10:00am"
-lunchtime = "11:45-12:30pm" #"12:15-2:15pm"
-dinnertime = "4:30-5:15pm"  #"5:00-7:15pm"
-dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch: ", lunchtime, "\nDinner: ", dinnertime])
+bassertimes = {"breakfast": "7:00-7:45am",\
+"lunch" : "11:45-12:30pm",\
+"dinner" : "4:30-5:15pm"}
+dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
 
+notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch: 12:45-1:30pm\nDinner: 5:45-6:30pm",\
+"Goldstein" : "Goldstein Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
+"Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
+"Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
+
+	
 
 
 

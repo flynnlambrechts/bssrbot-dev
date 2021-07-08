@@ -1,14 +1,7 @@
   
 #Python libraries that we need to import for our bot
-
 import os, sys                          #for heroku env
-from datetime import *                  #for time proccessing
-#import random                           #for random generation
-import time                             #for time
-#import calendar                        #not neccessary
-import pytz                             #timezone
 import psycopg2                         #database stuff
-import requests                         #for sending get request
 import json
 
 from flask import Flask, request        #flask
@@ -17,13 +10,6 @@ import response
 from get_bot_response import get_bot_response
 
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
-VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
-Admin_ID = ["4409117335852974", #Flynn-DEV
-            "3760608700732342" #Flynn-REAL
-            ] #id of users with powerful permission
-
-TIMEZONE = pytz.timezone('Australia/Sydney') #sets timezone
 
 #Developer: Flynn
 #Contributors: Ethan, Jas, Zoe
