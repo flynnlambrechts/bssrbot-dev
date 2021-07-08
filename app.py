@@ -12,24 +12,7 @@ import requests                         #for sending get request
 import json
 
 from flask import Flask, request        #flask
-#from pymessenger.bot import Bot        #library for sending messages no longer used
 
-#from utils import wit_response          #for nlp
-from TheScrape2 import checkForDino     #for scraping htmls
-from TheScrape2 import dinotimes        #pulls the dino times from the scrape
-from TheScrape2 import checkForButton   #Checks whether should add feedback button
-from EasterEggs import checkForEasterEggs #self explanatory
-from shopen import *                    #for all shopen related
-from killswitch import add_custom_message
-from calendar1 import get_events
-from jokes import getjoke               #for jokes
-from shop_catalogue import shop_catalogue 
-from otherdinotimes import notBasser
-
-from users import *                     #for viewing users
-from getmenuweek import checkForDay
-
-from models import Sender
 import response
 from get_bot_response import get_bot_response
 
@@ -72,7 +55,7 @@ def receive_message():
         # get whatever message a user sent the bot
         output = request.get_json()
 #try:
-    log(output) #entire output good for finding sender ids what message contains etc
+    #log(output) #entire output good for finding sender ids what message contains etc
     for event in output['entry']:
         messaging = event['messaging']
         for message in messaging:

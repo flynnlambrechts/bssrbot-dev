@@ -1,22 +1,13 @@
 import json
+from response import QuickReply
 
-data = {
-	        		"recipient": {"id": "here recipient_id"},
-	        		"message": {
-	                    "attachment":{
-	                        "type":"template",
-	                        "payload":{
-	                            "template_type":"button",
-	                            "text": "text here",
-	                            "buttons": "button here"
-                        	}
-                    	}
-                	}
-                }
+quick_replies = []
+quickreply1 = QuickReply("Breakfast", "Breakfast").get_quickreply()
+quickreply2 = QuickReply("Lunch", "Lunch").get_quickreply()
+quickreply3 = QuickReply("Dinner", "Dinner").get_quickreply()
 
-#print(data)
+quick_replies.append(quickreply1)
+quick_replies.append(quickreply2)
+quick_replies.append(quickreply3)
 
-data["message"]["quick_replies"] = "quick reply here"
-
-data = json.dumps(data)
-print(data)
+print(quick_replies)

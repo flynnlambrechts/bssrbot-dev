@@ -3,6 +3,9 @@ import os
 import psycopg2 
 
 from response import (Response, UrlButton, QuickReply, Gif)
+
+from bot_constants import *
+
 from shop_catalogue import shop_catalogue
 from TheScrape2 import dinotimes
 
@@ -16,6 +19,7 @@ from calendar1 import get_events
 from jokes import getjoke               #for jokes
 from shop_catalogue import shop_catalogue 
 from otherdinotimes import notBasser
+
 
 from users import *                     #for viewing users
 from getmenuweek import checkForDay
@@ -54,12 +58,12 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 		con = getCon()
 		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
 		con.close()
+
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
 	    
-
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
 		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
 Here are some example questions:\
@@ -120,7 +124,9 @@ Here are some example questions:\
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
-		response.text = "'".join(["Sorry, I don't understand: \n","",message_text,""])
+		response.text = "'".join(["Sorry, I don't understand: \n",message_text,""])
+
+	response.addquick_replies(dino_quickreplies)
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	return "Response formulated"

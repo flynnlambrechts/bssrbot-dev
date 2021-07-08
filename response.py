@@ -9,16 +9,15 @@ class Response:
 
 		self.text = text
 		self.attachment = attachment
+		self.quick_replies = []]
 
 		self.buttons = []
-		self.quick_replies = []
-
+		
 	def addbutton(self,button):
 		self.buttons.append(button)
 
-	def addquickreply(self, quick_reply):
-		self.quick_replies.append(quick_reply)
-
+	def addquick_replies(self,quick_replies):
+		self.quick_replies.append(quick_replies)
 
 	def send(self):
 		recipient_id = self.recipient_id
@@ -63,7 +62,7 @@ class Response:
 			data["message"]["quick_replies"] = self.quickreplys #a list
 
 		data = json.dumps(data)
-		print(data)
+		#print(data)
 		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 
