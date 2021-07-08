@@ -116,7 +116,7 @@ class Gif:
 	def __init__(self,text):
 		self.gifurl = self.search_gif(text)
 
-	def searh_gif(self,text):
+	def search_gif(self,text):
 		payload = {'s': text, 'api_key': 'ey1oVnN1NGrtEDHFGBJjRj5AgegLFVeT', 'weirdness': 1}
 		r = requests.get('http://api.giphy.com/v1/gifs/translate', params=payload)
 		r = r.json()
