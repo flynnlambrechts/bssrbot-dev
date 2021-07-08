@@ -10,10 +10,7 @@ from getmenuweek import checkForDay
 from killswitch import read_custom_message
 
 #define the dino times here used throughout
-breakfasttime = "7:00-7:45am" #"7:00-10:00am"
-lunchtime = "11:45-12:30pm" #"12:15-2:15pm"
-dinnertime = "4:30-5:15pm"  #"5:00-7:15pm"
-dinotimes = "".join(["Basser Dino Times: \nBreakfast: ", breakfasttime, "\nLunch: ", lunchtime, "\nDinner: ", dinnertime])
+from bot_constants import (breakfasttime, lunchtime, dinnertime, dinotimes)
 
 def checkForDino(message, con, value):
     week = getmenuweek()
@@ -128,24 +125,6 @@ def checkForDino(message, con, value):
         response = response + str(note)
 
     return response
-
-def checkForButton(message):
-
-    if "time" not in message: 
-        url_buttons = [{
-                    "type": "web_url",
-                    "url": "https://bit.ly/3hVT0DX",
-                    "title": "Leave Feedback"
-                    },
-                    {
-                    "type": "web_url",
-                    "url": "https://user.resi.inloop.com.au/home",
-                    "title": "Latemeal"
-                    }
-                    ]
-    else:
-        url_buttons = []
-    return url_buttons
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
     column = ""

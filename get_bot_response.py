@@ -10,14 +10,11 @@ from shop_catalogue import shop_catalogue
 from TheScrape2 import dinotimes
 
 from TheScrape2 import checkForDino as getDino   #for scraping htmls
-from TheScrape2 import dinotimes        #pulls the dino times from the scrape
-from TheScrape2 import checkForButton   #Checks whether should add feedback button
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
 from jokes import getjoke               #for jokes
-from shop_catalogue import shop_catalogue 
 from otherdinotimes import notBasser
 
 
@@ -58,11 +55,11 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 		con = getCon()
 		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
 		con.close()
-
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-		response.addbutton(button)
-		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
-		response.addbutton(button)
+		if "time" not in message:
+			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+			response.addbutton(button)
+			button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
+			response.addbutton(button)
 	    
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
 		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
