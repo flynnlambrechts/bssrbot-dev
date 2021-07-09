@@ -4,8 +4,6 @@ import time
 
 from pytz import timezone
 
-from getmenuweek import getmenuweek
-from getmenuweek import checkForDay
 from killswitch import read_custom_message
 from bot_constants import week_days
 
@@ -19,58 +17,53 @@ class Meal:
 		self.menu = ""
 		self.Range = 0
 		self.page = 0
+		self.headers = ["Header1","Header2","Header3"]
 
-	def setday(self):
-
-	def setweek(self):
-
-	def getmenu(self ,current_day, column, week):
+	def getmenu(self ,current_day, week):
 	    for i in range(0,self.Range):
 	        try:
-	            header = ""
-	            column = 0
-	            header = header + columnlist(page, column, Range)[i]
-	            header = addemojis(header)
 	            content = ""
-	            if current_day == 7: #if its after sunday
-	                column = 1 #it must be monday
-	            else:
-	                column = current_day + 1
+                column = current_day + 1
 	            content = content + columnlist(self.page, column, self.Range)[i]
 	            if content != "":
 	                content = addemojiscontent(content)
-	                self.menu = "".join([self.menu,str(header).title(),": \n",str(content).capitalize(),"\n\n"])
+	                self.menu = "".join([self.headers[i],": \n",str(content).capitalize(),"\n\n"])
 	        except IndexError:
 	            print('NOK')
 	    return self.menu
 
-	def getresponse(self):
-		response = f"{meal} {day}: \n"
+	def getresponse(self, value, day, current_day, week):
+		self.response = f"{value} {day}: \n".title() + getmenu(current_day, week)
+
+		return self.response
 
 class Breakfast(Meal):
 	def __init__(self, meal=None, day=None, week=None):
 		self.Range = 3
 		self.page = str((2*(week-1)+1))
 		self.menu = ""
+		self.headers = [u"Residential Breakfast \U0001f95e", "Special"]
 
 class Lunch(Meal):
 	def __init__(self, meal=None, day=None, week=None):
 		self.Range = 2
 		self.page = str((2*(week-1)+1.5))
 		self.menu = ""
+		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
 class Dinner(Meal):
 	def __init__(self, meal=None, day=None, week=None):
 		self.Range = 8
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
+		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
 def getDino(message, con, value):
-
 	time = datetime.now(TIMEZONE).time().hour
+	week = getmenuweek
 
-	day, current_day, column, week = getDay(message, week)
+	day, current_day, week = getDay(message, week)
 
 	if value == "dino":
 		if day == "Tomorrow":
@@ -81,17 +74,35 @@ def getDino(message, con, value):
             meal = Lunch()
         elif time < 19:
             meal = Dinner()
-        else: 
-            day = "Tomorrow"
-            current_day += 1
+        else: #after 7pm
+            day, current_day, week = isTomorrow(day, current_day, week)
             meal = Breakfast()
 
     elif value == "breakfast":
     	if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
-    		day = "Tomorrow"
-    		#UP TO HERE
+    		day, current_day, week = isTomorrow(day, current_day, week)
+		meal = Breakfast()
 
-def getmenuweek():
+	elif value == "lunch":
+		if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
+			day, current_day, week = isTomorrow(day, current_day, week)
+		meal = Lunch()
+
+	elif value == "dinner":
+		if time > 20 and day == "Today":
+			day, current_day, week = isTomorrow(day, current_day, week)
+		meal = Dinner()
+
+	response = meal.getresponse(value, day, current_day, week)
+
+	note = addnote(con, value, day)
+
+	if note is not None:
+		response = response + str(note)
+
+	return response
+
+def getmenuweek(): #1-4 inclusive cycle
     x = datetime.datetime.now(TIMEZONE)
     week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
     menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
@@ -99,25 +110,14 @@ def getmenuweek():
     return menuweek
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
-    column = ""
+    #column = ""
 
     current_day = datetime.now(TIMEZONE).weekday()
     day = "Today"
     
     #See if user is asking about tomorrow
     if "tomorrow" in message or "tmrw" in message or "tomoz" in message or "tmoz" in message:
-        day = "Tomorrow"
-        current_day+=1
-        time = 0
-        if current_day==7:
-            if week==4:
-                week = 1
-                print(str(week) + " week")
-                column = 1
-            else:
-                week = week + 1
-                print(str(week) + "week")
-                column = 1
+        day, current_day, week = isTomorrow(day, current_day, week)
 
     #check if user has asked about a day of the week
     elif checkForDay(message):
@@ -137,7 +137,7 @@ def getDay(message, week): #here is where we get the day and current_day and som
             current_day = daynumber
             day = str(week_days[current_day])
     #otherwise must be today: and day and current_day are not updated from todays value
-    return day, current_day, column, week
+    return day, current_day, week
 
 def checkForDay(message): #check of day of week specified
     day = ""
@@ -157,25 +157,27 @@ def checkForDay(message): #check of day of week specified
         day = 6
     return day
 
+def isTomorrow(day, current_day, week):
+	day = "Tomorrow"
+    current_day+=1
+    time = 0
+    if current_day==7: #if after sunday
+        if week==4:
+            week = 1
+            print(str(week) + " week")
+        else:
+            week = week + 1
+            print(str(week) + "week")
+        current_day = 0 #sets it back to monday
+    return day, current_day, week
+	
+
 #GLOSSARY:
 #current_day: day of week 0-6 inclusive
 #daynumber:  day of week 0-6 inclusive represents day user asked for
 #day_value: day of week 1-7 inclusive
 #day: name of the day e.g. monday, wednesday, tomorrow, today
 #week: week of cycle (1-4)
-	
-def addemojis(header):
-    header = header.replace("salad", u"salad \U0001F957")
-    if "vegetarian option" in header:
-        header = header.replace("vegetarian option", u"vegetarian option \U0001F331")
-    else:
-        header = header.replace("vegetarian", u"vegetarian \U0001F331")
-    header = header.replace("main course", u"main course \U0001F37D").replace("hot option", u"hot option \U0001F37D")
-    header = header.replace("residential breakfast", u"residential breakfast \U0001f95e")
-    header = header.replace("soup", u"soup \U0001f372")
-    header = header.replace("the dessert station", u"the dessert station \U0001f370")
-    header = header.replace("additional vegetables", u"additional vegetables \U0001F966")
-    return header
 
 def addemojiscontent(content):
     #content = content.replace("egg", u"egg \U0001F95A")

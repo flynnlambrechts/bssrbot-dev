@@ -6,7 +6,8 @@ from response import (Response, UrlButton, QuickReply, Gif)
 
 from bot_constants import *
 
-from TheScrape2 import checkForDino as getDino   #for scraping htmls
+#from TheScrape2 import checkForDino as getDino   #for scraping htmls
+from TheScrape3 import getDino
 from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
@@ -152,7 +153,7 @@ def checkForDino(message):
                 value = "dinner"
         return value
 
-def checkForShopen(message, recipient_id):
+def checkForShopen(message, recipient_id): #this can be mademore efficient
 	user = Sender(recipient_id)
 	name =  user.get_fullname()
 	response = ""

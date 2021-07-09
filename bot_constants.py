@@ -12,6 +12,7 @@ dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': '
  {'content_type': 'text', 'title': 'Dinner', 'payload': 'Dinner'},\
  {'content_type': 'text', 'title': 'Dino', 'payload': 'Dino'}]
 
+
 shop_catalogue = u"Shop Currently Sells: \n\
 Pods $3\n\
 Pringles $4\n\
@@ -33,7 +34,7 @@ Shapes $2.5\n\
 Cadbury Blocks $2.5\n\
 Red Rock Deli Chips $3"
 
-#Basser
+#Basser used in get_bot_response
 bassertimes = {"breakfast": "7:00-7:45am",\
 "lunch" : "11:45-12:30pm",\
 "dinner" : "4:30-5:15pm"}
@@ -44,7 +45,13 @@ notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch:
 "Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
 "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
 
+#used in TheScrape3
 week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+
+#DEFINED IN THESCRAPE3 IN CLASS UPDATE THERE
+# breakfastheaders = [u"Residential Breakfast \U0001f95e", "Special"]
+# lunchheaders = [ u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
+# dinnerheaders = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
 
