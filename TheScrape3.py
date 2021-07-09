@@ -20,17 +20,17 @@ class Meal:
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getmenu(self ,current_day, week):
-	    for i in range(0,self.Range):
-	        try:
-	            content = ""
-                column = current_day + 1
-	            content = content + columnlist(self.page, column, self.Range)[i]
-	            if content != "":
-	                content = addemojiscontent(content)
-	                self.menu = "".join([self.headers[i],": \n",str(content).capitalize(),"\n\n"])
-	        except IndexError:
-	            print('NOK')
-	    return self.menu
+		for i in range(0,self.Range):
+			try:
+				content = ""
+				column = current_day + 1
+				content = content + columnlist(self.page, column, self.Range)[i]
+				if content != "":
+					content = addemojiscontent(content)
+					self.menu = "".join([self.headers[i],": \n",str(content).capitalize(),"\n\n"])
+			except IndexError:
+				print('NOK')
+		return self.menu
 
 	def getresponse(self, value, day, current_day, week):
 		self.response = f"{value} {day}: \n".title() + getmenu(current_day, week)
@@ -70,17 +70,17 @@ def getDino(message, con, value):
 			meal = Breakfast()
 		elif time < 10:
 			meal  = Breakfast()
-        elif time < 14:
-            meal = Lunch()
-        elif time < 19:
-            meal = Dinner()
-        else: #after 7pm
-            day, current_day, week = isTomorrow(day, current_day, week)
-            meal = Breakfast()
+		elif time < 14:
+			meal = Lunch()
+		elif time < 19:
+			meal = Dinner()
+		else: #after 7pm
+			day, current_day, week = isTomorrow(day, current_day, week)
+			meal = Breakfast()
 
-    elif value == "breakfast":
-    	if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
-    		day, current_day, week = isTomorrow(day, current_day, week)
+	elif value == "breakfast":
+		if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
+			day, current_day, week = isTomorrow(day, current_day, week)
 		meal = Breakfast()
 
 	elif value == "lunch":
@@ -103,73 +103,73 @@ def getDino(message, con, value):
 	return response
 
 def getmenuweek(): #1-4 inclusive cycle
-    x = datetime.datetime.now(TIMEZONE)
-    week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
-    menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
-    print(menuweek)
-    return menuweek
+	x = datetime.datetime.now(TIMEZONE)
+	week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
+	menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
+	print(menuweek)
+	return menuweek
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
-    #column = ""
+	#column = ""
 
-    current_day = datetime.now(TIMEZONE).weekday()
-    day = "Today"
-    
-    #See if user is asking about tomorrow
-    if "tomorrow" in message or "tmrw" in message or "tomoz" in message or "tmoz" in message:
-        day, current_day, week = isTomorrow(day, current_day, week)
+	current_day = datetime.now(TIMEZONE).weekday()
+	day = "Today"
+	
+	#See if user is asking about tomorrow
+	if "tomorrow" in message or "tmrw" in message or "tomoz" in message or "tmoz" in message:
+		day, current_day, week = isTomorrow(day, current_day, week)
 
-    #check if user has asked about a day of the week
-    elif checkForDay(message):
-        print("Day Found!")
-        daynumber = int(checkForDay(message))
-        if current_day > daynumber:
-            print(str(week) + " week, checkForDay")
-            if str(week)==str("4"):
-                week = 1
-                print(str(week) + " week, checkForDay if 4")
-            else:
-                week = week + 1
-                print(str(week) + " week, checkForDay else")
-            current_day = daynumber
-            day = str(week_days[current_day])
-        else:
-            current_day = daynumber
-            day = str(week_days[current_day])
-    #otherwise must be today: and day and current_day are not updated from todays value
-    return day, current_day, week
+	#check if user has asked about a day of the week
+	elif checkForDay(message):
+		print("Day Found!")
+		daynumber = int(checkForDay(message))
+		if current_day > daynumber:
+			print(str(week) + " week, checkForDay")
+			if str(week)==str("4"):
+				week = 1
+				print(str(week) + " week, checkForDay if 4")
+			else:
+				week = week + 1
+				print(str(week) + " week, checkForDay else")
+			current_day = daynumber
+			day = str(week_days[current_day])
+		else:
+			current_day = daynumber
+			day = str(week_days[current_day])
+	#otherwise must be today: and day and current_day are not updated from todays value
+	return day, current_day, week
 
 def checkForDay(message): #check of day of week specified
-    day = ""
-    if "monday" in message or " mon" in message or "mon " in message:
-        day = str('0')
-    elif "tuesday" in message or " tues" in message or "tues " in message:
-        day = 1
-    elif "wednesday" in message or " wed" in message or "wed " in message:
-        day = 2 
-    elif "thursday" in message or " thur" in message or "thur " in message or " thurs" in message or "thurs " in message:
-        day = 3
-    elif "friday" in message or " fri" in message or "fri " in message:
-        day = 4
-    elif "saturday" in message or " sat" in message or "sat " in message:
-        day = 5
-    elif "sunday" in message or " sun" in message or "sun " in message:
-        day = 6
-    return day
+	day = ""
+	if "monday" in message or " mon" in message or "mon " in message:
+		day = str('0')
+	elif "tuesday" in message or " tues" in message or "tues " in message:
+		day = 1
+	elif "wednesday" in message or " wed" in message or "wed " in message:
+		day = 2 
+	elif "thursday" in message or " thur" in message or "thur " in message or " thurs" in message or "thurs " in message:
+		day = 3
+	elif "friday" in message or " fri" in message or "fri " in message:
+		day = 4
+	elif "saturday" in message or " sat" in message or "sat " in message:
+		day = 5
+	elif "sunday" in message or " sun" in message or "sun " in message:
+		day = 6
+	return day
 
 def isTomorrow(day, current_day, week):
 	day = "Tomorrow"
-    current_day+=1
-    time = 0
-    if current_day==7: #if after sunday
-        if week==4:
-            week = 1
-            print(str(week) + " week")
-        else:
-            week = week + 1
-            print(str(week) + "week")
-        current_day = 0 #sets it back to monday
-    return day, current_day, week
+	current_day+=1
+	time = 0
+	if current_day==7: #if after sunday
+		if week==4:
+			week = 1
+			print(str(week) + " week")
+		else:
+			week = week + 1
+			print(str(week) + "week")
+		current_day = 0 #sets it back to monday
+	return day, current_day, week
 	
 
 #GLOSSARY:
@@ -180,65 +180,65 @@ def isTomorrow(day, current_day, week):
 #week: week of cycle (1-4)
 
 def addemojiscontent(content):
-    #content = content.replace("egg", u"egg \U0001F95A")
-    content = content.replace("pancakes", u"pancakes \U0001f95e")
-    content = content.replace("pizza", u"pizza \U0001f355")
-    content = content.replace("sushi", u"sushi \U0001f363")
-    content = content.replace("chicken", u"chicken \U0001F357")
-    content = content.replace("honey", u"honey \U0001F36F")
-    return content
+	#content = content.replace("egg", u"egg \U0001F95A")
+	content = content.replace("pancakes", u"pancakes \U0001f95e")
+	content = content.replace("pizza", u"pizza \U0001f355")
+	content = content.replace("sushi", u"sushi \U0001f363")
+	content = content.replace("chicken", u"chicken \U0001F357")
+	content = content.replace("honey", u"honey \U0001F36F")
+	return content
 
 
 def columnlist(page, column, Range): #gets the info from each column as a list
-    rowcontents = []
-    for i in range(0,Range):
-        row = i
-        content = getinfo(page, row, column)
-        rowcontents.append(content)
-    return rowcontents
+	rowcontents = []
+	for i in range(0,Range):
+		row = i
+		content = getinfo(page, row, column)
+		rowcontents.append(content)
+	return rowcontents
 
 def addnote(con, value, day):
-    meal = value
-    if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
-        try: 
-            note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])
-        except AttributeError:
-            note = None
-    else: #otherwise there is no note
-        note = None 
+	meal = value
+	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
+		try: 
+			note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])
+		except AttributeError:
+			note = None
+	else: #otherwise there is no note
+		note = None 
 
-    return note
+	return note
 
 
 def getinfo(page, row, column): #this is where the scraping happens
-    #-----------------------Opening the HTML file--------------------------#
-    HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
-    #print(str(HTMLFile))
-    # Reading the file
-    index = HTMLFile.read()
-      
-    # Creating a BeautifulSoup object and specifying the parser
-    soup = BeautifulSoup(index, 'lxml')
+	#-----------------------Opening the HTML file--------------------------#
+	HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
+	#print(str(HTMLFile))
+	# Reading the file
+	index = HTMLFile.read()
+	  
+	# Creating a BeautifulSoup object and specifying the parser
+	soup = BeautifulSoup(index, 'lxml')
 
-    # Using the prettify method to modify the code
-    #print(soup.body.prettify())
+	# Using the prettify method to modify the code
+	#print(soup.body.prettify())
 
-    #print(soup.title) #prints the table title if it has one
+	#print(soup.title) #prints the table title if it has one
 
-    menu_table = soup.find("table", attrs={"class": "dataframe"})
-    menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+	menu_table = soup.find("table", attrs={"class": "dataframe"})
+	menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
 
-    #---------------------------------------------------------------------#
-    info = []
-    for td in menu_table_data[row].find_all("td"):
-        if td is not None:
-            #plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
-            stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
-            #plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
-            info.append(stuff)
-        else:
-            print("none!")
-    return info[column]
+	#---------------------------------------------------------------------#
+	info = []
+	for td in menu_table_data[row].find_all("td"):
+		if td is not None:
+			#plain_text = str(td).replace(r"– \n \n","- ").replace(r" \n \n", ", ").replace(r"– \n", "- ").replace(r"\n–","-").replace(", \n",", ").replace(r" \n ","").replace(r" \n",", ").replace(r"\n",", ")
+			stuff = str(td).replace("<td>","").replace("</td>","").replace("amp;","").replace(r"\n","")
+			#plain_text  =  stuff.strip(""",.;:-¢"'�_!?I•,L4J£<~""") #removes all weird artifacts
+			info.append(stuff)
+		else:
+			print("none!")
+	return info[column]
 
 
 
