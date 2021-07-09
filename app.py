@@ -8,6 +8,7 @@ from flask import Flask, request        #flask
 
 import response
 from get_bot_response import get_bot_response
+from models import Sender
 
 app = Flask(__name__)
 
@@ -51,10 +52,16 @@ def receive_message():
                     message_text = message['message']['text']
                     print(message_text)
                     get_bot_response(recipient_id,message_text)
+
+                    con = getCon()
+                    Sender(recipient_id).adduser(con)
+                    con.close()
+
                 elif message['message'].get('attachments'):
                     print("Picture")
                     attachment = "blank for now"
                     get_bot_response(recipient_id, attachment)
+
                 else:
                     print("No message?")
                     log(output)
@@ -79,11 +86,10 @@ def verify_fb_token(token_sent):
     return 'Invalid verification token'
 
 
-def adduser(con, recipient_id): #adds user to DB
-    full_name, first_name, last_name, PSID = getdetails(recipient_id)
-    insert_user(full_name, first_name, last_name, PSID, con)
+# def adduser(con, recipient_id): #adds user to DB
+#     full_name, first_name, last_name, PSID = getdetails(recipient_id)
+#     insert_user(full_name, first_name, last_name, PSID, con)
     
-
 
 if __name__ == "__main__":
     app.run()

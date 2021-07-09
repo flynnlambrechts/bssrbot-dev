@@ -2,6 +2,8 @@
 import os
 import requests
 
+from users import insert_user
+
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
@@ -18,10 +20,14 @@ class Sender:
 		return self.first_name
 
 	def get_lastname(self):
-		return self.lastname
+		return self.last_name
 
 	def get_fullname(self):
 		return self.full_name
+
+	def adduser(self, con):
+		insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
+
 
 # user = Sender(recipient_id)
 # print(user.get_fullname())

@@ -44,7 +44,7 @@ notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch:
 "Fig" : "Fig Tree Dino Times:\nBreakfast: 9:00-9:45am\nLunch: 1:45-2:30pm\nDinner: 6:45-7:30pm",\
 "Hall" : "Hall Dino Times:\nBreakfast: As Normal \nDinner: 7:45-8:30pm"}
 
-	
+week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
 
 

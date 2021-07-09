@@ -19,9 +19,6 @@ from getmenuweek import checkForDay
 
 from models import Sender
 
-###MAKE ALL INTO INDIVDUAL FUNCTIONS THAT HANDLE TO OCCURANCES
-###Add buttons and send using response.py
-
 def getCon(): #gets the connection  to the database when required
     if "HEROKU" in os.environ:
         DATABASE_URL =  os.environ['DATABASE_URL']

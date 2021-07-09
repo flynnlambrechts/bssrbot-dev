@@ -48,10 +48,10 @@ def checkForDino(message, con, value):
             response = response + (f"Breakfast Tomorrow: \n")
             day_value = int(datetime.now(TIMEZONE).weekday()) + 2 #this is 2 since early +1 was done cause "tomorrow" was in message
             response = response + breakfastmenu(day_value, column, week)
-    elif value == "breakfast" and day == "Today":
+    elif value == "breakfast":
         if "time" in message:
             response = response + "Basser breakfast is at " +  bassertimes["breakfast"]
-        elif time > 14: #after 2pm will give the breakfast for the next day
+        elif time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
             day = "Tomorrow"
             response = response + (f"Breakfast {day}: \n")
             day_value = current_day + 2
@@ -119,7 +119,7 @@ def checkForDino(message, con, value):
             response = response + (f"Dinner {day}: \n")
             day_value = current_day + 1
             response = response + dinnermenu(day_value, column, week)
-            
+
     if "time" not in message:
         note = addnote(con, value, day)
     else:
