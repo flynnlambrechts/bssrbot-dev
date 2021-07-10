@@ -33,6 +33,7 @@ def getCon(): #gets the connection  to the database when required
 def get_bot_response(recipient_id, message_text="",attachment = ""):
 	message = message_text.lower()
 	response  = Response(recipient_id)
+	picture = Response(recipient_id)
 	if attachment != "":
 		response.text = "Nice pic!"
 	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
