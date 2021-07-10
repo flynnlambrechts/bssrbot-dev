@@ -28,7 +28,6 @@ class Meal:
 		column_list = columnlist(self.page, column, self.Range)
 
 		for i in self.Range: #this loop can be made more efficient
-			print(i)
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
@@ -37,6 +36,7 @@ class Meal:
 				content = content + column_list[i]
 				
 				if content != "":
+					print(content)
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
 				x += 1
