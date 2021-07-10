@@ -34,7 +34,7 @@ class Meal:
 			try:
 				content = ""
 				content = content + column_list[i]
-				print(str(i) + " " + content)
+				#print(str(i) + " " + content)
 				if content != "":
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
@@ -206,7 +206,7 @@ def addemojiscontent(content):
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []
 	menu_table_data = openhtml(page)
-	for i in range(0,Range[-1]+1):
+	for i in range(0,Range[-1]+1): #still includes the first two rows for dinner
 		row = i
 		content = getinfo(menu_table_data, row, column)
 		rowcontents.append(content)
