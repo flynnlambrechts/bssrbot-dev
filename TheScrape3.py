@@ -203,7 +203,7 @@ def addemojiscontent(content):
 
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []
-	for i in range(0,Range):
+	for i in Range:
 		row = i
 		content = getinfo(page, row, column)
 		rowcontents.append(content)
