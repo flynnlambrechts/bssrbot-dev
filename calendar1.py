@@ -20,12 +20,6 @@ def getevent(day, message):
 
 
 def getDay(message):
-    # global current_day
-    
-    # global weekofterm
-    # global column_value
-    # global day
-
     current_day = datetime.now(TIMEZONE).weekday()
     x = datetime.now(TIMEZONE)
     weekofterm = (int(x.strftime("%W"))-21) #ZERO WEEK HERE

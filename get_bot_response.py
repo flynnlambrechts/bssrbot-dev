@@ -37,7 +37,7 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 		response.text = "Nice pic!"
 	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 		con = getCon()
-		add_custom_message(message, con)
+		add_custom_message(message_text, con)
 		response.text = "Adding custom message..."
 		con.close()
 
