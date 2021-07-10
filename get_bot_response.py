@@ -102,7 +102,7 @@ Here are some example questions:\
 		response.text = user.get_fullname()
 
 	elif "picture" in message:
-		response.text = user.get_profile_pic()
+		response.text = Sender(recipient_id).get_profile_pic()
 
 	elif "gif" in message:
 		response.attachment = Gif("nice").get_gif()
