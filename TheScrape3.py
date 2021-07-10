@@ -206,7 +206,7 @@ def addemojiscontent(content):
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []
 	menu_table_data = openhtml(page)
-	for i in (0,Range[-1]+1):
+	for i in range(0,Range[-1]+1):
 		row = i
 		content = getinfo(menu_table_data, row, column)
 		rowcontents.append(content)
