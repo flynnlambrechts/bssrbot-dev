@@ -1,6 +1,6 @@
 #get_bot_response
 import os
-import psycopg2 
+import psycopg2
 
 from response import (Response, UrlButton, QuickReply, Gif)
 

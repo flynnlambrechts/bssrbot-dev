@@ -4,6 +4,8 @@ import os, sys                          #for heroku env
 import psycopg2                         #database stuff
 import json
 
+from linecache import (checkcache, getline) # for error handling
+
 from flask import Flask, request        #flask
 
 import response
