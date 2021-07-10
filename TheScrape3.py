@@ -12,7 +12,7 @@ TIMEZONE = timezone('Australia/Sydney')
 
 
 class Meal:
-	def __init__(self week, meal=None, day=None):
+	def __init__(self, week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
 		self.menu = ""
 		self.Range = 0
