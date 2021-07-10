@@ -23,6 +23,7 @@ class Meal:
 
 	def getresponse(self ,value, day, current_day, week):
 		self.response = f"{value} {day}: \n".title()
+		x = 0
 		for i in range(self.start,self.Range): #this loop can be made more efficient
 			try:
 				content = ""
@@ -32,7 +33,8 @@ class Meal:
 				if content != "":
 					#add new integer to dicate the titles
 					content = addemojiscontent(content)
-					self.response = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
+					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
+					x += 1
 			except IndexError:
 				print('NOK ' + str(i))
 		return self.response
@@ -62,7 +64,7 @@ class Dinner(Meal):
 		self.Range = 8
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
-		self.headers = ["Blank", u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
+		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
 def getDino(message, con, value):
@@ -112,7 +114,7 @@ def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
 	week = (int(x.strftime("%W"))+1) #plus one changes the cycle to match the dino cycle
 	menuweek = (week)%4+1 #this cheeky +1 changes range from (0-3 to 1-4)
-	print(menuweek)
+	print(str(menuweek) + " Menu Week")
 	return menuweek
 
 def getDay(message, week): #here is where we get the day and current_day and sometimes week
