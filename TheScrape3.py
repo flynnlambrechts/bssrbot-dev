@@ -17,7 +17,7 @@ class Meal:
 	def __init__(self, week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
 		self.menu = ""
-		self.Range = [0.1]
+		self.Range = range(0,1)
 		self.page = 0
 		self.headers = ["Header1","Header2","Header3"]
 
@@ -28,6 +28,7 @@ class Meal:
 		column_list = columnlist(self.page, column, self.Range)
 
 		for i in self.Range: #this loop can be made more efficient
+			print(i)
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
@@ -203,9 +204,10 @@ def addemojiscontent(content):
 
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []
+	menu_table_data = openhtml(page)
 	for i in Range:
 		row = i
-		content = getinfo(page, row, column)
+		content = getinfo(menu_table_data, row, column)
 		rowcontents.append(content)
 	return rowcontents
 
@@ -221,9 +223,8 @@ def addnote(con, value, day):
 
 	return note
 
-
-def getinfo(page, row, column): #this is where the scraping happens
-	#-----------------------Opening the HTML file--------------------------#
+def openhtml(page):
+#-----------------------Opening the HTML file--------------------------#
 	HTMLFile = open(str("menu/" + page + ".html"), "r") #try putting in func.
 	#print(str(HTMLFile))
 	# Reading the file
@@ -239,8 +240,10 @@ def getinfo(page, row, column): #this is where the scraping happens
 
 	menu_table = soup.find("table", attrs={"class": "dataframe"})
 	menu_table_data = menu_table.tbody.find_all("tr")  # contains 2 rows
+#---------------------------------------------------------------------#
+	return menu_table_data
 
-	#---------------------------------------------------------------------#
+def getinfo(menu_table_data, row, column): #this is where the scraping happens
 	info = []
 	for td in menu_table_data[row].find_all("td"):
 		if td is not None:

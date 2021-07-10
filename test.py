@@ -1,4 +1,4 @@
 
-Range = range(1,5)
+Range = range(2,8)
 
-print(list(Range))
+print(Range)
