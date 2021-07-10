@@ -5,7 +5,7 @@ import time
 from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
-from getmenuweek import checkForDay
+from TheScrape3 import checkForDay
 
 week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
