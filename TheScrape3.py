@@ -68,7 +68,7 @@ class Dinner(Meal):
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
-def getDino(message, con, value):
+def getDino(message, value, con=None):
 	time = datetime.now(TIMEZONE).time().hour
 	week = getmenuweek()
 
@@ -104,10 +104,10 @@ def getDino(message, con, value):
 
 	response = meal.getresponse(value, day, current_day, week)
 
-	note = addnote(con, meal, day)
-
-	if note is not None:
-		response = response + str(note)
+	if con:
+		note = addnote(con, meal, day)
+		if note is not None:
+			response = response + str(note)
 
 	return response
 

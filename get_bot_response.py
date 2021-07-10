@@ -47,7 +47,7 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 	elif checkForDino(message): #rename to checkfordino later
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, con, value) #CURRENTLY CALLED checkForDino
+		response.text = getDino(message, value, con) #CURRENTLY CALLED checkForDino
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
@@ -56,7 +56,7 @@ def get_bot_response(recipient_id, message_text="",attachment = ""):
 		response.addbutton(button)
 	    
 	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
-		greeting_message = f"Hello! Welcome to the BssrBot! I'm here to help you with all your dino and calendar needs.\
+		greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
 Here are some example questions:\
 \n1. What's for dino? \
 \n2. What's for lunch today? \
@@ -83,7 +83,12 @@ Here are some example questions:\
 		response.text = checkForEasterEggs(message)
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message:
-		response.text = "Blank for now..."
+		response.text = getDino(message, "breakfast")
+		response.send()
+		response.text = getDino(message, "lunch")
+		response.send()
+		response.text = getDino(message, "dinner")
+		
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 

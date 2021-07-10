@@ -57,6 +57,8 @@ def checkForEasterEggs(message):
         response  = response  + "Hold my bball?"
     elif "floor 4" in message or "floor four" in message:
         response  = response  + "the second best floor"
-    if "fuck" in message or "shit" in message:
+    elif "fuck" in message or "shit" in message:
         response = response + "Fuck you."
+    elif "aiden" in message:
+        response = response + "That's my Senior Shots Officer."
     return response
