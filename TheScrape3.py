@@ -26,7 +26,6 @@ class Meal:
 		self.response = f"{value} {day}: \n".title()
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
-		print(column_list)
 
 		for i in self.Range: #this loop can be made more efficient
 			if i == 5: #skips if it's the vegetables row
@@ -35,10 +34,12 @@ class Meal:
 			try:
 				content = ""
 				content = content + column_list[i]
-				
+				print(str(i) + " " + content)
 				if content != "":
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
+				else:
+					print("Blank content")
 				x += 1
 
 			except IndexError:
