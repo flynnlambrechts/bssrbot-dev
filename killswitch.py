@@ -112,8 +112,7 @@ def read_custom_message(meal, con):
 				note = str(row[1]) + "\n"
 	except Exception as error:
 		print("Error in read_custom_message: " + str(error) + "\n" + str(type(error)))
-		if type(error) == "<class 'TypeError'>":
-			print("No custom message.")
+		print("Likely no custom message.")
 
 	return note
 

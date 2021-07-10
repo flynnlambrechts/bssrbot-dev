@@ -1,3 +1,6 @@
+#TheScrape2 IS NOW A RELIC OF THE PAST (NO LONGER IN USE)
+#She is very slow but is accurate i think
+#Kept around as a last resort if TheScrape3 has mistakes
 from datetime import *
 import time
 from pytz import timezone

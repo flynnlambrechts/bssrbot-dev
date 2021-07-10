@@ -27,7 +27,7 @@ class Meal:
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
 
-		for i in self.Range: #this loop can be made more efficient
+		for i in self.Range:
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
@@ -109,7 +109,7 @@ def getDino(message, con, value):
 
 	response = meal.getresponse(value, day, current_day, week)
 
-	note = addnote(con, value, day)
+	note = addnote(con, meal, day)
 
 	if note is not None:
 		response = response + str(note)
@@ -145,11 +145,8 @@ def getDay(message, week): #here is where we get the day and current_day and som
 			else:
 				week = week + 1
 				print(str(week) + " week, checkForDay else")
-			current_day = daynumber
-			day = str(week_days[current_day])
-		else:
-			current_day = daynumber
-			day = str(week_days[current_day])
+		current_day = daynumber
+		day = str(week_days[current_day])
 	#otherwise must be today: and day and current_day are not updated from todays value
 	return day, current_day, week
 
@@ -212,8 +209,8 @@ def columnlist(page, column, Range): #gets the info from each column as a list
 		rowcontents.append(content)
 	return rowcontents
 
-def addnote(con, value, day):
-	meal = value
+def addnote(con, meal, day):
+	meal = type(meal).__name__.lower()
 	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
 			note = "".join(["Note:\n",read_custom_message(meal, con).capitalize()])

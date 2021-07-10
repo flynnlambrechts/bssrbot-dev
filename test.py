@@ -1,6 +1,14 @@
 
-Range = range(0,2)
+class Meal:
+	def __init__(self):
+		print("meal")
 
-print(Range)
-print(len(Range))
-print(Range[-1]+1)
+class Dinner:
+	def __init__(self):
+		print("dinner")
+
+meal = Meal()
+dinner = Dinner()
+
+print(type(meal))
+print(type(dinner).__name__)
