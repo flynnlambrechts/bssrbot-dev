@@ -67,7 +67,7 @@ class Lunch(Meal):
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.Range = range(0,8)
+		self.Range = range(2,8)
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
@@ -206,7 +206,7 @@ def addemojiscontent(content):
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []
 	menu_table_data = openhtml(page)
-	for i in Range:
+	for i in (Range[-1]+1):
 		row = i
 		content = getinfo(menu_table_data, row, column)
 		rowcontents.append(content)
