@@ -22,7 +22,7 @@ class Meal:
 
 	def getresponse(self ,value, day, current_day, week):
 		self.response = f"{value} {day}: \n".title()
-		for i in range(0,self.Range):
+		for i in range(0,self.Range): #this loop can be made more efficient
 			try:
 				content = ""
 				column = current_day + 1
@@ -31,7 +31,7 @@ class Meal:
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
 			except IndexError:
-				print('NOK')
+				print('NOK ' + str(i))
 		return self.response
 
 	# def getresponse(self, value, day, current_day, week):
