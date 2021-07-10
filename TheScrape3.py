@@ -25,6 +25,7 @@ class Meal:
 		self.response = f"{value} {day}: \n".title()
 		x = 0
 		column = current_day + 1
+		
 		columnlist = columnlist(self.page, column, self.Range)
 
 		for i in range(self.start,self.Range): #this loop can be made more efficient
@@ -34,7 +35,6 @@ class Meal:
 			try:
 				content = ""
 				content = content + columnlist[i]
-				#print(str(i) + " " + content)
 				
 				if content != "":
 					content = addemojiscontent(content)
