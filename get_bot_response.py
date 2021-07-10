@@ -112,7 +112,7 @@ Here are some example questions:\
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
-		response.text = "'".join(["Sorry, I don't understand: \n",message_text,""])
+		response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 
 	response.addquick_replies(dino_quickreplies)
 	response.send()

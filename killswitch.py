@@ -11,9 +11,9 @@ import re
 index = "1"
 TIMEZONE = timezone('Australia/Sydney')
 
-def get_custom_message(message):
+def get_custom_message(message_text):
 	try:
-		custom_message = re.search("<(.+?)>", message).group(1)
+		custom_message = re.search("<(.+?)>", message_text).group(1)
 	except AttributeError:
 		custom_message = "no message"
 		print('no message found')
@@ -23,10 +23,11 @@ message = "dookie: dinner ‘dino changed it up but heres what it was supposed t
 
 
 
-def add_custom_message(message, con):
+def add_custom_message(message_text, con):
+	message = message_text.lower()
 	#insert new row if new day
 	#update current day if same day
-	custom_message = get_custom_message(message)
+	custom_message = get_custom_message(message_text)
 	print(custom_message)
 	breakfast = None
 	lunch = None
@@ -107,7 +108,7 @@ def read_custom_message(meal, con):
 		# print(str(row[2]) + " breakfast")
 		if row[1] is not None:
 			if note is not None:
-				note = "".join(str(row[1]) , "\n", str(note).capitalize()) #maybe use join()
+				note = "".join(str(row[1]) , "\n", str(note)) #maybe use join()
 			else:
 				note = str(row[1]) + "\n"
 	except Exception as error:
