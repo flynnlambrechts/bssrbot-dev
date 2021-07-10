@@ -11,12 +11,15 @@ from bot_constants import week_days
 
 TIMEZONE = timezone('Australia/Sydney')
 
-#maybe combine start and range into one
+#GLOSSARY:
+#current_day: day of week 0-6 inclusive
+#daynumber:  day of week 0-6 inclusive represents day user asked for
+#day: name of the day e.g. monday, wednesday, tomorrow, today
+#week: week of cycle (1-4)
 
 class Meal:
 	def __init__(self, week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
-		self.menu = ""
 		self.Range = range(0,1)
 		self.page = 0
 		self.headers = ["Header1","Header2","Header3"]
@@ -39,37 +42,29 @@ class Meal:
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
 				else:
-					print("Blank content")
+					print("Blank content:" + self.headers[x])
 				x += 1
 
 			except IndexError:
 				print('NOK ' + str(i))
 		return self.response
 
-	# def getresponse(self, value, day, current_day, week):
-	# 	self.response = f"{value} {day}: \n".title() #+ getmenu(current_day, week)
-
-	# 	return self.response
-
 class Breakfast(Meal):
 	def __init__(self, week, meal=None, day=None):
 		self.Range = range(0,2)
 		self.page = str((2*(week-1)+1))
-		self.menu = ""
 		self.headers = [u"Residential Breakfast \U0001f95e", "Special"]
 
 class Lunch(Meal):
 	def __init__(self, week, meal=None, day=None):
 		self.Range = range(0,2)
 		self.page = str((2*(week-1)+1.5))
-		self.menu = ""
 		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
 		self.Range = range(2,8)
 		self.page = str((2*(week-1)+2))
-		self.menu = ""
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
@@ -182,13 +177,6 @@ def isTomorrow(day, current_day, week):
 		current_day = 0 #sets it back to monday
 	return day, current_day, week
 	
-
-#GLOSSARY:
-#current_day: day of week 0-6 inclusive
-#daynumber:  day of week 0-6 inclusive represents day user asked for
-#day_value: day of week 1-7 inclusive
-#day: name of the day e.g. monday, wednesday, tomorrow, today
-#week: week of cycle (1-4)
 
 def addemojiscontent(content):
 	#content = content.replace("egg", u"egg \U0001F95A")
