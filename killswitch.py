@@ -103,8 +103,8 @@ def read_custom_message(meal, con):
 			note = str(row[3])
 		elif meal == 'dinner' and row[4] is not None:
 			note = str(row[4])
-		print(str(row[1])+ " all")
-		print(str(row[2]) + " breakfast")
+		# print(str(row[1])+ " all")
+		# print(str(row[2]) + " breakfast")
 		if row[1] is not None:
 			if note is not None:
 				note = "".join(str(row[1]) , "\n", str(note).capitalize()) #maybe use join()

@@ -41,36 +41,36 @@ def receive_message():
     else:
         # get whatever message a user sent the bot
         output = request.get_json()
-#try:
-    #log(output) #entire output good for finding sender ids what message contains etc
-    for event in output['entry']:
-        messaging = event['messaging']
-        for message in messaging:
-            if message.get('message'):
-                recipient_id = message['sender']['id']
-                if message['message'].get('text'):
-                    message_text = message['message']['text']
-                    print(message_text)
-                    get_bot_response(recipient_id,message_text)
+    try:
+        #log(output) #entire output good for finding sender ids what message contains etc
+        for event in output['entry']:
+            messaging = event['messaging']
+            for message in messaging:
+                if message.get('message'):
+                    recipient_id = message['sender']['id']
+                    if message['message'].get('text'):
+                        message_text = message['message']['text']
+                        print(message_text)
+                        get_bot_response(recipient_id,message_text)
 
-                    con = getCon()
-                    Sender(recipient_id).adduser(con)
-                    con.close()
+                        con = getCon()
+                        Sender(recipient_id).adduser(con)
+                        con.close()
 
-                elif message['message'].get('attachments'):
-                    print("Picture")
-                    attachment = "blank for now"
-                    get_bot_response(recipient_id, attachment)
+                    elif message['message'].get('attachments'):
+                        print("Picture")
+                        attachment = "blank for now"
+                        get_bot_response(recipient_id, attachment)
 
-                else:
-                    print("No message?")
-                    log(output)
+                    else:
+                        print("No message?")
+                        log(output)
 
 
-# except TypeError: #if anti-idling add on pings bot we wont get an error
-#         print('PING!')
-# except:
-#         print("an error occured...") 
+    except TypeError: #if anti-idling add on pings bot we wont get an error
+        print('PING!')
+    except:
+        PrintException()
     return "Message Processed"
 
 
@@ -85,15 +85,15 @@ def verify_fb_token(token_sent):
         return request.args.get("hub.challenge")
     return 'Invalid verification token'
 
-
-# def adduser(con, recipient_id): #adds user to DB
-#     full_name, first_name, last_name, PSID = getdetails(recipient_id)
-#     insert_user(full_name, first_name, last_name, PSID, con)
+def PrintException():
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    checkcache(filename)
+    line = getline(filename, lineno, f.f_globals)
+    print(f'EXCEPTION IN ({filename}, LINE {lineno} "{line.strip()}"): {exc_obj}')
     
 
 if __name__ == "__main__":
     app.run()
-
-
-
-

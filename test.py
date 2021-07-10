@@ -1,14 +1,20 @@
+import sys
+from linecache import (checkcache, getline)
 
-class Meal:
-	def __init__(self):
-		print("meal")
+def PrintException():
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    checkcache(filename)
+    line = getline(filename, lineno, f.f_globals)
+    print(f'EXCEPTION IN ({filename}, LINE {lineno} "{line.strip()}"): {exc_obj}')
 
-class Dinner:
-	def __init__(self):
-		print("dinner")
+Range = list(range(1,10))
 
-meal = Meal()
-dinner = Dinner()
+try:
+	for i in range(0,11):
+		print(Range[i])
+except:
+	PrintException()
 
-print(type(meal))
-print(type(dinner).__name__)
