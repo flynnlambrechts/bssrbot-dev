@@ -61,7 +61,7 @@ class Dinner(Meal):
 
 def getDino(message, con, value):
 	time = datetime.now(TIMEZONE).time().hour
-	week = getmenuweek
+	week = getmenuweek()
 
 	day, current_day, week = getDay(message, week)
 
