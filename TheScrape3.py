@@ -24,21 +24,23 @@ class Meal:
 	def getresponse(self ,value, day, current_day, week):
 		self.response = f"{value} {day}: \n".title()
 		x = 0
+		column = current_day + 1
+		columnlist = columnlist(self.page, column, self.Range)
+
 		for i in range(self.start,self.Range): #this loop can be made more efficient
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
 			try:
 				content = ""
-				column = current_day + 1 ##
-				content = content + columnlist(self.page, column, self.Range)[i]
-				print(str(i) + " " + content)
+				content = content + columnlist[i]
+				#print(str(i) + " " + content)
 				
 				if content != "":
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
 				x += 1
-				
+
 			except IndexError:
 				print('NOK ' + str(i))
 		return self.response
