@@ -125,6 +125,18 @@ class Gif:
 		}
 		return self.attachment
 
+class Image:
+	def __init__(self,url):
+		self.imageurl = url
+
+	def get_image(self):
+		self.attachment = {
+		"type": "image",
+		"payload": {
+			"url": self.imageurl}
+		}
+		return self.attachment
+
 
 
 
