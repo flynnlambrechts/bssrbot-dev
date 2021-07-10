@@ -6,8 +6,7 @@ from pytz import timezone
 TIMEZONE = timezone('Australia/Sydney')
 
 from TheScrape3 import checkForDay
-
-week_days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+from bot_constants import week_days
 
 #column_value = 0
 '''

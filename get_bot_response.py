@@ -16,7 +16,7 @@ from jokes import getjoke               #for jokes
 
 
 from users import *                     #for viewing users
-from getmenuweek import checkForDay
+from TheScrape3 import checkForDay
 
 from models import Sender
 
