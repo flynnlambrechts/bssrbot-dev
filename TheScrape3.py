@@ -11,6 +11,7 @@ from bot_constants import week_days
 
 TIMEZONE = timezone('Australia/Sydney')
 
+#maybe combine start and range into one
 
 class Meal:
 	def __init__(self, week, meal=None, day=None):
@@ -22,8 +23,8 @@ class Meal:
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getresponse(self ,value, day, current_day, week):
-		self.response = f"{value} {day}: \n".title()
 		x = 0
+		self.response = f"{value} {day}: \n".title()
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
 
@@ -51,6 +52,7 @@ class Meal:
 
 class Breakfast(Meal):
 	def __init__(self, week, meal=None, day=None):
+		self.start = 0
 		self.Range = 3
 		self.page = str((2*(week-1)+1))
 		self.menu = ""
@@ -58,6 +60,7 @@ class Breakfast(Meal):
 
 class Lunch(Meal):
 	def __init__(self, week, meal=None, day=None):
+		self.start = 0
 		self.Range = 2
 		self.page = str((2*(week-1)+1.5))
 		self.menu = ""
