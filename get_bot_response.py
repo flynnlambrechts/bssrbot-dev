@@ -2,7 +2,7 @@
 import os
 import psycopg2
 
-from response import (Response, UrlButton, QuickReply, Gif)
+from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
 
