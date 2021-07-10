@@ -16,17 +16,19 @@ class Meal:
 	def __init__(self, week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
 		self.menu = ""
+		self.start = 0
 		self.Range = 0
 		self.page = 0
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getresponse(self ,value, day, current_day, week):
 		self.response = f"{value} {day}: \n".title()
-		for i in range(0,self.Range): #this loop can be made more efficient
+		for i in range(self.start,self.Range): #this loop can be made more efficient
 			try:
 				content = ""
 				column = current_day + 1 ##
 				content = content + columnlist(self.page, column, self.Range)[i]
+				print(content)
 				if content != "":
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
@@ -55,6 +57,7 @@ class Lunch(Meal):
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
+		self.start = 1
 		self.Range = 8
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
