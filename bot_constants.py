@@ -10,7 +10,8 @@ Admin_ID = ["4409117335852974", #Flynn-DEV
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
  {'content_type': 'text', 'title': 'Lunch', 'payload': 'Lunch'},\
  {'content_type': 'text', 'title': 'Dinner', 'payload': 'Dinner'},\
- {'content_type': 'text', 'title': 'Dino', 'payload': 'Dino'}]
+ {'content_type': 'text', 'title': 'Dino', 'payload': 'Dino'},\
+ {'content_type': 'text', 'title': 'All', 'payload': 'All'}]
 
 
 shop_catalogue = u"Shop Currently Sells: \n\

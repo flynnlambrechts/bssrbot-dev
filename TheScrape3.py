@@ -57,7 +57,7 @@ class Breakfast(Meal):
 
 class Lunch(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.Range = range(0,2)
+		self.Range = range(0,3)
 		self.page = str((2*(week-1)+1.5))
 		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
