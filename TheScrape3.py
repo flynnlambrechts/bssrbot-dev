@@ -3,6 +3,7 @@ from datetime import *
 import time
 
 from pytz import timezone
+from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 module
 
 from killswitch import read_custom_message
 from bot_constants import week_days
