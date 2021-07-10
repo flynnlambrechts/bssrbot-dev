@@ -82,13 +82,13 @@ Here are some example questions:\
 	elif checkForEasterEggs(message):
 		response.text = checkForEasterEggs(message)
 
-	elif checkForDay(message) or "tomorrow" in message or "today" in message:
+	elif checkForDay(message) or "tomorrow" in message or "today" in message or "all" in message:
 		response.text = getDino(message, "breakfast")
 		response.send()
 		response.text = getDino(message, "lunch")
 		response.send()
 		response.text = getDino(message, "dinner")
-		
+
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 
@@ -100,6 +100,9 @@ Here are some example questions:\
 	elif "my name" in message:
 		user = Sender(recipient_id)
 		response.text = user.get_fullname()
+
+	elif "picture" in message:
+		response.text = user.get_profile_pic()
 
 	elif "gif" in message:
 		response.attachment = Gif("nice").get_gif()
