@@ -31,20 +31,19 @@ class Meal:
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
-			try:
-				content = ""
-				content = content + column_list[i]
-				print(str(i) + " " + content)
-				if content != "":
-					content = addemojiscontent(content)
-					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
-					x += 1
-				else:
-					print("Blank content")
-				
+#		try:
+			content = ""
+			content = content + column_list[i]
+			print(str(i) + " " + content)
+			if content != "":
+				content = addemojiscontent(content)
+				self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
+			else:
+				print("Blank content")
+			x += 1
 
-			except IndexError:
-				print('NOK ' + str(i))
+#		except IndexError:
+			#print('NOK ' + str(i))
 		return self.response
 
 	# def getresponse(self, value, day, current_day, week):
