@@ -25,7 +25,7 @@ class Meal:
 		for i in range(0,self.Range): #this loop can be made more efficient
 			try:
 				content = ""
-				column = current_day + 1
+				column = current_day + 1 ##
 				content = content + columnlist(self.page, column, self.Range)[i]
 				if content != "":
 					content = addemojiscontent(content)
@@ -40,7 +40,7 @@ class Meal:
 	# 	return self.response
 
 class Breakfast(Meal):
-	def __init__(sel, week, meal=None, day=None):
+	def __init__(self, week, meal=None, day=None):
 		self.Range = 3
 		self.page = str((2*(week-1)+1))
 		self.menu = ""
