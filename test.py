@@ -1,6 +1,7 @@
-import mammoth
-#installed cobble-0.1.3 mammoth-1.4.16 
 
-file = "test.pdf"
+class Tunk:
+    def __init__(self):
+        print(type(self).__name__.lower())
 
-file2 = mammoth.convert_to_html(file)
+Tunk()
+#meal = type(meal).__name__.lower()
