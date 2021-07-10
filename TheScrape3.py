@@ -28,8 +28,9 @@ class Meal:
 				content = ""
 				column = current_day + 1 ##
 				content = content + columnlist(self.page, column, self.Range)[i]
-				print(content)
+				print(str(i) + " " + content)
 				if content != "":
+					#add new integer to dicate the titles
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
 			except IndexError:
@@ -61,7 +62,7 @@ class Dinner(Meal):
 		self.Range = 8
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
-		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
+		self.headers = ["Blank", u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
 
 
 def getDino(message, con, value):
