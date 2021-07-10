@@ -17,8 +17,7 @@ class Meal:
 	def __init__(self, week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
 		self.menu = ""
-		self.start = 0
-		self.Range = 0
+		self.Range = [0.1]
 		self.page = 0
 		self.headers = ["Header1","Header2","Header3"]
 
@@ -28,7 +27,7 @@ class Meal:
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
 
-		for i in range(self.start,self.Range): #this loop can be made more efficient
+		for i in self.Range: #this loop can be made more efficient
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
@@ -52,24 +51,21 @@ class Meal:
 
 class Breakfast(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.start = 0
-		self.Range = 3
+		self.Range = range(0,2)
 		self.page = str((2*(week-1)+1))
 		self.menu = ""
 		self.headers = [u"Residential Breakfast \U0001f95e", "Special"]
 
 class Lunch(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.start = 0
-		self.Range = 2
+		self.Range = range(0,2)
 		self.page = str((2*(week-1)+1.5))
 		self.menu = ""
 		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.start = 2
-		self.Range = 8
+		self.Range = range(2,8)
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
