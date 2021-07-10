@@ -12,7 +12,7 @@ TIMEZONE = timezone('Australia/Sydney')
 
 
 class Meal:
-	def __init__(self, meal=None, day=None, week=None):
+	def __init__(self week, meal=None, day=None):
 		self.week = getmenuweek() #week defaults to current week of cycle
 		self.menu = ""
 		self.Range = 0
@@ -38,21 +38,21 @@ class Meal:
 		return self.response
 
 class Breakfast(Meal):
-	def __init__(self, meal=None, day=None, week=None):
+	def __init__(self week, meal=None, day=None):
 		self.Range = 3
 		self.page = str((2*(week-1)+1))
 		self.menu = ""
 		self.headers = [u"Residential Breakfast \U0001f95e", "Special"]
 
 class Lunch(Meal):
-	def __init__(self, meal=None, day=None, week=None):
+	def __init__(self week, meal=None, day=None):
 		self.Range = 2
 		self.page = str((2*(week-1)+1.5))
 		self.menu = ""
 		self.headers = [u"Hot Option \U0001F37D", u"Vegetarian Option \U0001F331", u"Soup \U0001f372"]
 
 class Dinner(Meal):
-	def __init__(self, meal=None, day=None, week=None):
+	def __init__(self week, meal=None, day=None):
 		self.Range = 8
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
