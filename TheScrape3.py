@@ -20,7 +20,7 @@ class Meal:
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getresponse(self ,value, day, current_day, week):
-		self.response = f"{value} {day}: \n".title() + getmenu(current_day, week)
+		self.response = f"{value} {day}: \n".title()
 		for i in range(0,self.Range):
 			try:
 				content = ""
@@ -28,7 +28,7 @@ class Meal:
 				content = content + columnlist(self.page, column, self.Range)[i]
 				if content != "":
 					content = addemojiscontent(content)
-					self.ressponse = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
+					self.response = "".join([self.response, self.headers[i],": \n",str(content).capitalize(),"\n\n"])
 			except IndexError:
 				print('NOK')
 		return self.response
