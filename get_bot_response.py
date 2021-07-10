@@ -103,8 +103,8 @@ Here are some example questions:\
 
 	elif "idiot" in message:
 		link = Sender(recipient_id).get_profile_pic()
-		response.attachment = Image(link).get_image()
-		response.send()
+		picture.attachment = Image(link).get_image()
+		picture.send()
 		response.text = "This you?"
 
 	elif "gif" in message:
