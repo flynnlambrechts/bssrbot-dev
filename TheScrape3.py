@@ -38,9 +38,10 @@ class Meal:
 				if content != "":
 					content = addemojiscontent(content)
 					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
+					x += 1
 				else:
 					print("Blank content")
-				x += 1
+				
 
 			except IndexError:
 				print('NOK ' + str(i))
