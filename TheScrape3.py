@@ -25,9 +25,9 @@ class Meal:
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getresponse(self ,value, day, current_day, week):
-		print(type(self).__name__.lower())
+		meal = type(self).__name__
 		x = 0
-		self.response = f"{value} {day}: \n".title()
+		self.response = f"{meal} {day}: \n".title()
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
 
