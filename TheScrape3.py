@@ -67,31 +67,31 @@ def getDino(message, con, value):
 
 	if value == "dino":
 		if day == "Tomorrow":
-			meal = Breakfast()
+			meal = Breakfast(week)
 		elif time < 10:
-			meal  = Breakfast()
+			meal  = Breakfast(week)
 		elif time < 14:
-			meal = Lunch()
+			meal = Lunch(week)
 		elif time < 19:
-			meal = Dinner()
+			meal = Dinner(week)
 		else: #after 7pm
 			day, current_day, week = isTomorrow(day, current_day, week)
-			meal = Breakfast()
+			meal = Breakfast(week)
 
 	elif value == "breakfast":
 		if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
 			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Breakfast()
+		meal = Breakfast(week)
 
 	elif value == "lunch":
 		if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
 			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Lunch()
+		meal = Lunch(week)
 
 	elif value == "dinner":
 		if time > 20 and day == "Today":
 			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Dinner()
+		meal = Dinner(week)
 
 	response = meal.getresponse(value, day, current_day, week)
 
@@ -185,7 +185,7 @@ def addemojiscontent(content):
 	content = content.replace("pizza", u"pizza \U0001f355")
 	content = content.replace("sushi", u"sushi \U0001f363")
 	content = content.replace("chicken", u"chicken \U0001F357")
-	content = content.replace("honey", u"honey \U0001F36F")
+	#content = content.replace("honey", u"honey \U0001F36F")
 	return content
 
 
