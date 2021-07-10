@@ -31,19 +31,19 @@ class Meal:
 			if i == 5: #skips if it's the vegetables row
 				x += 1
 				continue
-#		try:
-			content = ""
-			content = content + column_list[i]
-			print(str(i) + " " + content)
-			if content != "":
-				content = addemojiscontent(content)
-				self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
-			else:
-				print("Blank content")
-			x += 1
+			try:
+				content = ""
+				content = content + column_list[i]
+				print(str(i) + " " + content)
+				if content != "":
+					content = addemojiscontent(content)
+					self.response = "".join([self.response, self.headers[x],": \n",str(content).capitalize(),"\n\n"])
+				else:
+					print("Blank content")
+				x += 1
 
-#		except IndexError:
-			#print('NOK ' + str(i))
+			except IndexError:
+				print('NOK ' + str(i))
 		return self.response
 
 	# def getresponse(self, value, day, current_day, week):
@@ -67,7 +67,7 @@ class Lunch(Meal):
 
 class Dinner(Meal):
 	def __init__(self, week, meal=None, day=None):
-		self.Range = range(2,8)
+		self.Range = range(0,8)
 		self.page = str((2*(week-1)+2))
 		self.menu = ""
 		self.headers = [u"Main Course \U0001F37D", u"Vegetarian \U0001F331", u"Salad \U0001F957", "Vegetables", u"Additional Vegetables \U0001F966", u"The Dessert Station \U0001f370"]
