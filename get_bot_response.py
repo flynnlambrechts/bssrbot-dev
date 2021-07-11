@@ -41,7 +41,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif checkForDino(message): #rename to checkfordino later
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, value, con, recipient_id) #CURRENTLY CALLED checkForDino
+		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
