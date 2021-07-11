@@ -109,9 +109,6 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = greeting_message
 		#Response.addbutton(button)
 
-	elif "who made" in message:
-		response.text = "I was made by Flynn with help from Ethan and Yas."
-
 	else:
 		entity, value, confidence = wit_response(message)
 		print(float(confidence))
@@ -206,5 +203,5 @@ def checkForCalendar(message):
 def getResponse(entity, value, confidence):
 	response = "blank"
 	if entity == "Praise:Praise":
-		response = f"No you're {value}."
+		response = f"No, you're {value}."
 	return response
