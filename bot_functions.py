@@ -2,6 +2,7 @@
 import os, sys
 import psycopg2
 from linecache import (checkcache, getline) # for error handling
+from bot_constants import DATABASE_URL
 
 def PrintException():
     exc_type, exc_obj, tb = sys.exc_info()
