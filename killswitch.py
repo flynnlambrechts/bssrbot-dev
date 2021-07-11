@@ -8,6 +8,9 @@ from pytz import timezone
 #command example dookie: meal "message"
 import re
 
+from bot_functions import PrintException
+
+
 index = "1"
 TIMEZONE = timezone('Australia/Sydney')
 
@@ -111,9 +114,10 @@ def read_custom_message(meal, con):
 				note = "".join(str(row[1]) , "\n", str(note)) #maybe use join()
 			else:
 				note = str(row[1]) + "\n"
-	except Exception as error:
-		print("Error in read_custom_message: " + str(error) + "\n" + str(type(error)))
+	except:
+		PrintException()
 		print("Likely no custom message.")
+
 
 	return note
 
