@@ -28,7 +28,6 @@ bot.sort_replies()
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
-	a = 4/0
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
