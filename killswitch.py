@@ -111,7 +111,7 @@ def read_custom_message(meal, con):
 		# print(str(row[2]) + " breakfast")
 		if row[1] is not None:
 			if note is not None:
-				note = "".join(str(row[1]) , "\n", str(note)) #maybe use join()
+				note = "".join([str(row[1]) , "\n", str(note)]) #maybe use join()
 			else:
 				note = str(row[1]) + "\n"
 	except:
