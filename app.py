@@ -8,7 +8,7 @@ import json
 
 from flask import Flask, request        #flask
 
-import response
+from response import Response
 from get_bot_response import get_bot_response
 from models import Sender
 from bot_constants import VERIFY_TOKEN
