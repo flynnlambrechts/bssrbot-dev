@@ -59,11 +59,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = checkForEasterEggs(message)
 
 	elif checkForDay(message) or "tomorrow" in message or "today" in message or "all" in message:
-		response.text = getDino(message, "breakfast")
+		response.text = getDino(message, "breakfast", recipient_id)
 		response.send()
-		response.text = getDino(message, "lunch")
+		response.text = getDino(message, "lunch", recipient_id)
 		response.send()
-		response.text = getDino(message, "dinner")
+		response.text = getDino(message, "dinner", recipient_id)
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
@@ -109,16 +109,22 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.text = greeting_message
 		#Response.addbutton(button)
 
-	else:
-		entity, value, confidence = wit_response(message)
-		print(float(confidence))
-		if float(confidence) > 0.8:
-			print("confident")
-			#response.text  = " : ".join([str(entity), str(value), str(confidence)])
-			response.text = getResponse(entity, value, confidence)
-		else:
-			print("not confident")
-			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+	else:	
+		try:
+			entity, value, confidence = wit_response(message)
+			print(float(confidence))
+			if float(confidence) > 0.8:
+				print("confident")
+				#response.text  = " : ".join([str(entity), str(value), str(confidence)])
+				response.text = getResponse(entity, value, confidence)
+
+			else:
+				print("not confident")
+				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+		except:
+			print("Wit error")
+			response.text = response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+			pass
 
 	response.addquick_replies(dino_quickreplies)
 	response.send()
