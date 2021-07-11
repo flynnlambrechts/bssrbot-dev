@@ -125,9 +125,9 @@ Here are some example questions:\
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
-		entity, value = wit_response(message)
+		entity, value, confidence = wit_response(message)
 		if entity:
-			response.text  = str(entity) + " : " + str(value)
+			response.text  = " : ".join([str(entity), str(value), str(confidence)])
 		else:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 

@@ -16,14 +16,16 @@ def wit_response(message): #prev message_text
         print(resp)
         entity = None
         value = None
+        confidence = None
 
         try:
                 entity = list(resp['entities'])[0]
                 value = resp['entities'][entity][0]['value']
+                confidence = resp['entities'][entity][0]['confidence']
         except:
                 pass
 
-        return (entity, value)
+        return (entity, value, confidence)
 
 #test for random question:
 
