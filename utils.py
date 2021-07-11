@@ -17,11 +17,11 @@ def wit_response(message): #prev message_text
         entity = None
         value = None
         confidence = None
-        print(str(confidence) + " Confidence")
         try:
                 entity = list(resp['entities'])[0]
                 value = resp['entities'][entity][0]['value']
                 confidence = resp['entities'][entity][0]['confidence']
+                print(str(confidence) + " Confidence")
         except:
                 pass
 

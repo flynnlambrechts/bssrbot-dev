@@ -12,10 +12,10 @@ Admin_ID = ["4409117335852974", #Flynn-DEV
 Staff_ID = ["3963292617085764", #Kendy
 "4294576107270093", #Sam
 "4610989705596963", #Kyra
-"3890926854296476"] #James
-# "4409117335852974", #Flynn-DEV
-# "3760608700732342" #Flynn-REAL
-# ]
+"3890926854296476", #James
+"4409117335852974", #Flynn-DEV
+"3760608700732342" #Flynn-REAL
+]
 
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
  {'content_type': 'text', 'title': 'Lunch', 'payload': 'Lunch'},\
