@@ -17,6 +17,7 @@ from jokes import getjoke               #for jokes
 
 from users import *                     #for viewing users
 from TheScrape3 import checkForDay
+from utils import wit_response
 
 from models import Sender
 
