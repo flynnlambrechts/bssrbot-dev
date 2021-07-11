@@ -9,7 +9,6 @@ from bot_functions import (PrintException, getCon)
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
-from EasterEggs import checkForEasterEggs #self explanatory
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
