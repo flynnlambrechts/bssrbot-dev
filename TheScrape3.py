@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 modul
 
 from killswitch import read_custom_message
 from bot_constants import (week_days, Staff_ID)
+from bot_functions import PrintException
 
 
 TIMEZONE = timezone('Australia/Sydney')
@@ -205,6 +206,7 @@ def addnote(con, meal, day, recipient_id):
 		try: 
 			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
 		except:
+			PrintException()
 			print("Probably no message.")
 	return note
 
