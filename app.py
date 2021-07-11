@@ -61,9 +61,10 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
-        response = Response(3760608700732342)
-        response.text = "Oh no something went wrong :( \nI'm sure someone is working on a solution..."
-        response.send()
+        for ID in Admin_ID:
+            response = Response(ID)
+            response.text = "Oh no something went wrong :("
+            response.send()
         #maybe add func to text admin when error occurs
     return "Message Processed"
 
