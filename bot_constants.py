@@ -3,6 +3,8 @@ import os
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
+DATABASE_URL = os.environ['DATABASE_URL']
+
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
 ] #id of users with powerful permission
@@ -10,10 +12,10 @@ Admin_ID = ["4409117335852974", #Flynn-DEV
 Staff_ID = ["3963292617085764", #Kendy
 "4294576107270093", #Sam
 "4610989705596963", #Kyra
-"3890926854296476" #James
-"4409117335852974", #Flynn-DEV
-"3760608700732342" #Flynn-REAL
-]
+"3890926854296476"] #James
+# "4409117335852974", #Flynn-DEV
+# "3760608700732342" #Flynn-REAL
+# ]
 
 dino_quickreplies = [{'content_type': 'text', 'title': 'Breakfast', 'payload': 'Breakfast'},\
  {'content_type': 'text', 'title': 'Lunch', 'payload': 'Lunch'},\
