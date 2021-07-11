@@ -30,7 +30,7 @@ def getCon(): #gets the connection  to the database when required
     return con
 
 
-def get_bot_response(recipient_id, message_text="",attachment = ""):
+def get_bot_response(recipient_id, message_text="", attachment = ""):
 	message = message_text.lower()
 	response  = Response(recipient_id)
 	picture = Response(recipient_id)
@@ -124,7 +124,11 @@ Here are some example questions:\
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
 	else:
-		response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+		entity, value = wit_response(message)
+		if entity:
+			response.text  = str(entity) + " : " + str(value)
+		else:
+			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 
 	response.addquick_replies(dino_quickreplies)
 	response.send()
@@ -151,6 +155,7 @@ def getTime(message):
 		else :
 			response = response + dinotimes
 	return response
+
 
 
 def checkForDino(message):

@@ -25,9 +25,9 @@ class Meal:
 		self.headers = ["Header1","Header2","Header3"]
 
 	def getresponse(self ,value, day, current_day, week):
-		meal = type(self).__name__
+		mealname = type(self).__name__
 		x = 0
-		self.response = f"{meal} {day}: \n".title()
+		self.response = f"{mealname} {day}: \n".title()
 		column = current_day + 1
 		column_list = columnlist(self.page, column, self.Range)
 
@@ -99,13 +99,13 @@ def getDino(message, value, con=None):
 		meal = Lunch(week)
 
 	elif value == "dinner":
-		if time > 20 and day == "Today":
+		if time > 21 and day == "Today":
 			day, current_day, week = isTomorrow(day, current_day, week)
 		meal = Dinner(week)
 
 	response = meal.getresponse(value, day, current_day, week)
 
-	if con:
+	if con is not None:
 		note = addnote(con, meal, day)
 		if note is not None:
 			response = response + str(note)
@@ -200,14 +200,12 @@ def columnlist(page, column, Range): #gets the info from each column as a list
 
 def addnote(con, meal, day):
 	meal = type(meal).__name__.lower()
+	note = None
 	if day == "Today": #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
-			note = "".join(["Note:\n",read_custom_message(meal, con)])
-		except AttributeError:
-			note = None
-	else: #otherwise there is no note
-		note = None 
-
+			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
+		except:
+			print("Probably no message.")
 	return note
 
 def openhtml(page):
