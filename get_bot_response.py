@@ -17,7 +17,7 @@ from jokes import getjoke               #for jokes
 
 from users import *                     #for viewing users
 from TheScrape3 import checkForDay
-from utils import wit_response
+#from utils import wit_response
 
 from models import Sender
 
@@ -193,8 +193,8 @@ def checkForCalendar(message):
 	return response
 
 
-def getResponse(entity, value, confidence):
-	response = "blank"
-	if entity == "Praise:Praise":
-		response = f"No, you're {value}."
-	return response
+# def getResponse(entity, value, confidence):
+# 	response = "blank"
+# 	if entity == "Praise:Praise":
+# 		response = f"No, you're {value}."
+# 	return response
