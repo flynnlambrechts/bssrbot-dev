@@ -6,7 +6,7 @@
 < begin
 
 // The Botmaster's Name
-! var master = 3760608700732342
+! var master = Flynn
 
 // Bot Variables
 ! var name     = Bssrbot

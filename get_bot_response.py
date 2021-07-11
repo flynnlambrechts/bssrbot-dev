@@ -81,9 +81,9 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
-	elif "my name" in message:
-		user = Sender(recipient_id)
-		response.text = user.get_fullname()
+	# elif "my name" in message:
+	# 	user = Sender(recipient_id)
+	# 	response.text = user.get_fullname()
 
 	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()

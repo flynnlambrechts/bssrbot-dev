@@ -7,5 +7,39 @@
 + hello bot
 - Hello, human!
 
-+ tunksy
-- No you.
++ updog
+- What is updog?
+
++ feature
+- Message Flynn if you want a feature.
+
++ who made you
+- I was made by Flynn with help from Ethan and Yas.
+
++ who are you
+- I am BssrBot.
+
++ knock knock
+- Who's there?
+
++ *
+% who is there
+- <star> who?
+
++ *
+% * who
+- LOL! <star>! That's funny!
+
++ my name is *
+- <set name=<star>>It's nice to meet you, <get name>.
+
++ what is my name
+* <get name> == undefined => You never told me your name.
+- Your name is <get name>, silly!
+- Aren't you <get name>?!
+
++ i am # years old
+- <set age=<star>>I will remember that you are <get age> years old.
+
++ how old am i
+- You are <get age> years old.
