@@ -5,7 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
-from bot_functions import getCon
+from bot_functions import (PrintException, getCon)
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -21,6 +21,11 @@ from TheScrape3 import checkForDay
 from utils import wit_response
 
 from models import Sender
+
+from rivescript import RiveScript
+bot = RiveScript()
+bot.load_directory("./brain")
+bot.sort_replies()
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
@@ -111,21 +116,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	else:	
 		try:
-			entity, value, confidence = wit_response(message)
-			print(float(confidence))
-			if float(confidence) > 0.8:
-				print("confident")
-				#response.text  = " : ".join([str(entity), str(value), str(confidence)])
-				response.text = getResponse(entity, value, confidence)
-
-			else:
-				print("not confident")
-				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+			reply = bot.reply(str(recipient_id, message))
+			response.text = reply
 		except:
-			print("Wit error")
 			response.text = response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
-			pass
-
+			PrintException() 
 	response.addquick_replies(dino_quickreplies)
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
