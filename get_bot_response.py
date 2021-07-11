@@ -115,9 +115,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	else:
 		entity, value, confidence = wit_response(message)
 		if int(confidence) > 0.8:
+			print("confident")
 			#response.text  = " : ".join([str(entity), str(value), str(confidence)])
 			response.text = getResponse(entity, value, confidence)
 		else:
+			print("not confident")
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 
 	response.addquick_replies(dino_quickreplies)
