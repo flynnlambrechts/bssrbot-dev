@@ -1,5 +1,18 @@
 ! version = 2.0
 
+// Duty Tutor
++ [*] (duty tutor|locked out|can not get in) [*]
+- Locked out again?! The duty tutor's phone is: 02 9385 9786
+
+// Security
++ [*] (security|unsw security|call security) [*]
+- In case of emergency call UNSW Security on 9385 6666
+
+// Lifeline
++ [*] (lifeline) [*]
+- If you need help or someone to talk to, call Lifeline 13 11 14
+
+// Other Easter Eggs
 + [*] flynn [*]
 - Sounds like a cool dude
 
@@ -29,13 +42,13 @@
 - That's my Senior Shots Officer.
 
 + [*] who made you [*]
-- That's my Senior Shots Officer.
-
-+ [*] (jasmine|jas) [*]
 - I was made by Flynn with help from Ethan and Jas.
 
++ [*] (jasmine|jas) [*]
+- A valuable contributor.
+
 + [*] ethan [*]
-- A valuable contributor
+- A valuable contributor.
 
 + [*] sidd [*]
 - Best med student.
@@ -78,5 +91,8 @@
 
 + [*] floor (4|four) [*]
 - the second best floor
+
++ [*] (vacuum|vacume|vac) [*]
+- Ask the 'Oi anybody at Bssr got' page.
 
 
