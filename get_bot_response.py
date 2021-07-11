@@ -5,6 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
+from bot_functions import getCon
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -20,15 +21,6 @@ from TheScrape3 import checkForDay
 from utils import wit_response
 
 from models import Sender
-
-def getCon(): #gets the connection  to the database when required
-    if "HEROKU" in os.environ:
-        DATABASE_URL =  os.environ['DATABASE_URL']
-        con = psycopg2.connect(DATABASE_URL, sslmode='require')
-    else:
-        con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
-        print("Local Database opened successfully")
-    return con
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
