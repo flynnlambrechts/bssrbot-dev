@@ -88,7 +88,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		user = Sender(recipient_id)
 		response.text = user.get_fullname()
 
-	elif "idiot" in message or "dumb" in message:
+	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()
 		picture.attachment = Image(link).get_image()
 		picture.send()
