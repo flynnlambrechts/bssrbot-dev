@@ -1,10 +1,12 @@
+! version = 2.0
+
 + [*] flynn [*]
 - Sounds like a cool dude
 
 + [*] molly [*]
 - Molly is a butt nug.
 
-+ [*] (benny|ben) (g|grant) [*]
++ [*] (benny g|ben grant) [*]
 - Time for the family man to return to his old ways...
 
 + [*] (crispy|brendan crisp) [*]
@@ -59,22 +61,22 @@
 + [*] room points [*]
 - Room points are a lie!
 
-+ [*] (floor 1|one) [*]
++ [*] floor (1|one) [*]
 - The dungeon...
 
-+ [*] (floor 5|five) [*]
++ [*] floor (5|five) [*]
 - Penthouse baby!!
 
 + [*] joe [*]
 - who is joe
 
-+ [*] (can you (hold|look after) my basketball [*]
++ [*] can you (hold|look after) my basketball [*]
 - Okay Benny G with the smooth moves.
 
 + [*] em col|emma collins [*]
 - Hold my bball?
 
-+ [*] (floor 4|four) [*]
++ [*] floor (4|four) [*]
 - the second best floor
 
 
