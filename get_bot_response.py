@@ -116,7 +116,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	else:	
 		try:
-			reply = bot.reply(str(recipient_id, message))
+			reply = bot.reply(str(recipient_id), message)
 			response.text = reply
 		except:
 			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
