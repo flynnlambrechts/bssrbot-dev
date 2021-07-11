@@ -49,31 +49,13 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif checkForDino(message): #rename to checkfordino later
 		value = checkForDino(message)
 		con = getCon()
-		response.text = getDino(message, value, con) #CURRENTLY CALLED checkForDino
+		response.text = getDino(message, value, con, recipient_id) #CURRENTLY CALLED checkForDino
 		con.close()
 
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 		response.addbutton(button)
-	    
-	elif "hello" in message or "hey" in message or "help" in message or "hi" in message:
-		greeting_message = f"Hello! Welcome to BssrBot! I'm here to help you with all your dino and calendar needs.\
-Here are some example questions:\
-\n1. What's for dino? \
-\n2. What's for lunch today? \
-\n3. Is shopen? \
-\n4. What's the shop catalogue? \
-\n5. What's on tonight? \
-\n6. Events on this week?"
-		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-		print(str(button) + " Button")
-		response.addbutton(button)
-		response.text = greeting_message
-		#Response.addbutton(button)
-
-	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 	elif checkForShopen(message, recipient_id):
 		response.text = checkForShopen(message, recipient_id)
@@ -98,6 +80,9 @@ Here are some example questions:\
 		response = "Order a late meal here:"
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
+
+	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
+		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 	elif "my name" in message:
 		user = Sender(recipient_id)
@@ -124,6 +109,14 @@ Here are some example questions:\
 			con.close()
 		else:
 			response.text = "You shall not, PASS: \n" + str(recipient_id)
+
+	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
+		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+		#print(str(button) + " Button")
+		response.addbutton(button)
+		response.text = greeting_message
+		#Response.addbutton(button)
+
 	else:
 		entity, value, confidence = wit_response(message)
 		if entity:
