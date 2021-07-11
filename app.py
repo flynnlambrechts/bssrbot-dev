@@ -4,14 +4,12 @@ import os, sys                          #for heroku env
 import psycopg2                         #database stuff
 import json
 
-
-
 from flask import Flask, request        #flask
 
 from response import Response
 from get_bot_response import get_bot_response
 from models import Sender
-from bot_constants import VERIFY_TOKEN
+from bot_constants import (VERIFY_TOKEN, Admin_ID)
 from bot_functions import (PrintException, getCon)
 
 app = Flask(__name__)
