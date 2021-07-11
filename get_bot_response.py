@@ -119,8 +119,8 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			reply = bot.reply(str(recipient_id, message))
 			response.text = reply
 		except:
-			response.text = response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
-			PrintException() 
+			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+			PrintException()
 	response.addquick_replies(dino_quickreplies)
 	response.send()
 	#--------------------------------------------------------------------------------------------------------------------------------------------------------
