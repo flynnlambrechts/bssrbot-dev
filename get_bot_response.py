@@ -114,6 +114,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	else:
 		entity, value, confidence = wit_response(message)
+		print(int(confidence))
 		if int(confidence) > 0.8:
 			print("confident")
 			#response.text  = " : ".join([str(entity), str(value), str(confidence)])
