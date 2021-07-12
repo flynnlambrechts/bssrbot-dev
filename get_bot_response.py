@@ -26,6 +26,9 @@ bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
 
+bot.set_subroutine("set_vacuum", functions.set_vacuum)
+bot.set_subroutine("set_vacuum", functions.get_vacuum)
+
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
 	message = message_text.lower()
