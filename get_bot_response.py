@@ -29,17 +29,17 @@ bot.load_directory("./brain")
 bot.sort_replies()
 
 def set_vacuum(rs, location):
-    bot.set_variable('vacuum', location)
-    if location:
-        bot.set_variable('vacuum', location)
-        return "Hope you had a good 'cuum. The location has been updated"
+	print(location)
+	bot.set_variable('vacuum', location)
+	return "Hope you had a good 'cuum. The location has been updated"
 
 def get_vacuum(rs, args):
-    if bot.get_variable('vacuum') != "undefined":
-        vacuum = bot.get_variable('vacuum')
-        return f"Vacuum was last left {vacuum}. Happy 'cuuming."
-    else:
-        return "Oh no, it seems I've got no idea where the 'cuum is. :("
+	if bot.get_variable('vacuum') != "undefined":
+		location = bot.get_variable('vacuum')
+		print(location)
+		return f"Vacuum was last left {vacuum}. Happy 'cuuming."
+	else:
+		return "Oh no, it seems I've got no idea where the 'cuum is. :("
 
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
@@ -161,16 +161,16 @@ def getTime(message):
 
 
 def checkForDino(message):
-        value = None
-        if "dino" in message:
-                value = "dino"
-        elif "breakfast" in message or "breaky" in message or "brekky" in message:
-                value = "breakfast"
-        elif "lunch" in message:
-                value = "lunch"
-        elif "dinner" in message or "dins" in message or "supper" in message:
-                value = "dinner"
-        return value
+	value = None
+	if "dino" in message:
+		value = "dino"
+	elif "breakfast" in message or "breaky" in message or "brekky" in message:
+		value = "breakfast"
+	elif "lunch" in message:
+		value = "lunch"
+	elif "dinner" in message or "dins" in message or "supper" in message:
+		value = "dinner"
+	return value
 
 def checkForShopen(message, recipient_id): #this can be mademore efficient
 	user = Sender(recipient_id)
