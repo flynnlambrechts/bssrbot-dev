@@ -37,7 +37,7 @@ def get_vacuum(rs, args):
 	if bot.get_variable('vacuum') != "undefined":
 		location = bot.get_variable('vacuum')
 		print(location)
-		return f"Vacuum was last left {vacuum}. Happy 'cuuming."
+		return f"Vacuum was last left {location}. Happy 'cuuming."
 	else:
 		return "Oh no, it seems I've got no idea where the 'cuum is. :("
 
