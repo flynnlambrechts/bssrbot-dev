@@ -208,11 +208,9 @@
 - What are your feelings now?
 
 + [*] (yes|yeah|yep|yup) [*]
-- Please go on.
-- Please tell me more about this.
-- Why don't you tell me a little more about this.
 - I see.
 - I understand.
+- Okay then.
 
 + [*] (nope|nah) [*]
 - Are you saying no just to be negative?

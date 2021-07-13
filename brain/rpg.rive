@@ -11,11 +11,11 @@
 //           trigger of simply *, it means NO triggers can possibly match on the
 //           inherited topic, because '*' goes higher in the match list.
 
-// Aliases
-! sub n = north
-! sub w = west
-! sub s = south
-! sub e = east
+// Aliases (disabled for now)
+// ! sub n = north
+// ! sub w = west
+// ! sub s = south
+// ! sub e = east
 
 // This gets us into the game.
 + rpg demo

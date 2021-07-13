@@ -5,7 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
-from bot_functions import (PrintException, getCon)
+from bot_functions import (PrintException, getCon, set_vacuum, get_vacuum)
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -26,8 +26,8 @@ bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
 
-bot.set_subroutine("set_vacuum", functions.set_vacuum)
-bot.set_subroutine("set_vacuum", functions.get_vacuum)
+bot.set_subroutine("set_vacuum", bot_functions.set_vacuum)
+bot.set_subroutine("set_vacuum", bot_functions.get_vacuum)
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
