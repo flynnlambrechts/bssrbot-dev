@@ -35,14 +35,14 @@ def set_vacuum(rs, location):
         return "Hope you had a good 'cuum. The location has been updated"
 
 def get_vacuum(rs, args):
-    if bot.get_variable('vacuum'):
+    if bot.get_variable('vacuum') != "undefined":
         vacuum = bot.get_variable('vacuum')
         return f"Vacuum was last left {vacuum}. Happy 'cuuming."
     else:
         return "Oh no, it seems I've got no idea where the 'cuum is. :("
 
 bot.set_subroutine("set_vacuum", set_vacuum)
-bot.set_subroutine("set_vacuum", get_vacuum)
+bot.set_subroutine("get_vacuum", get_vacuum)
 ## ----------------------------------------------------------------------- ##
 
 
