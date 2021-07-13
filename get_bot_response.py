@@ -21,13 +21,29 @@ from TheScrape3 import checkForDay
 
 from models import Sender
 
+
+## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 from rivescript import RiveScript
 bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
 
+def set_vacuum(rs, location):
+    bot.set_variable('vacuum', location)
+    if location:
+        bot.set_variable('vacuum', location)
+        return "Hope you had a good 'cuum. The location has been updated"
+
+def get_vacuum(rs, args):
+    if bot.get_variable('vacuum'):
+        vacuum = bot.get_variable('vacuum')
+        return f"Vacuum was last left {vacuum}. Happy 'cuuming."
+    else:
+        return "Oh no, it seems I've got no idea where the 'cuum is. :("
+
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("set_vacuum", get_vacuum)
+## ----------------------------------------------------------------------- ##
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
@@ -195,18 +211,3 @@ def checkForCalendar(message):
 		con.close()
 	return response
 
-
-## RIVESCRIPT FUNCTIONS: (MOVE THESE INTO BOT_FUNCTIONS)
-
-def set_vacuum(rs, location):
-    get_bot_response.bot.set_variable('vacuum', location)
-    if location:
-        get_bot_response.bot.set_variable('vacuum', location)
-        return "Hope you had a good 'cuum. The location has been updated"
-
-def get_vacuum(rs, args):
-    if get_bot_response.bot.get_variable('vacuum'):
-        vacuum = get_bot_response.bot.get_variable('vacuum')
-        return f"Vacuum was last left {vacuum}. Happy 'cuuming."
-    else:
-        return "Oh no, it seems I've got no idea where the 'cuum is. :("
