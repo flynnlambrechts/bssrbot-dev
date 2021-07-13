@@ -46,7 +46,7 @@ class GlobalVar:
 
 			con = getCon()
 			cur = con.cursor()
-			cur.execute('''INSERT INTO %s VALUES %s''' % (self.columns, self.inputvalues))
+			cur.execute('''INSERT INTO %s %s VALUES %s''' % (self.name, self.columns, self.inputvalues))
 			con.commit()
 			con.close()
 		except:
