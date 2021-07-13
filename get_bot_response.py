@@ -35,7 +35,7 @@ def set_vacuum(rs, location):
 
 def get_vacuum(rs, args):
 	if bot.get_variable('vacuum') != "undefined":
-		location = bot.get_variable('vacuum')
+		location = " ".join(bot.get_variable('vacuum'))
 		print(location)
 		return f"Vacuum was last left {location}. Happy 'cuuming."
 	else:
