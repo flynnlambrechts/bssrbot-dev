@@ -1,7 +1,8 @@
 // variables
 
 + [*] (vacuum|vacume|vac|cuum) is * {weight=20}
-- <call>set_vacuum <star1></call>
+- The star <star>
+- <call>set_vacuum <star></call>
 
 + [*] (vacuum|vacume|vac|cuum) [*] {weight=10}
 - <call>get_vacuum</call>
