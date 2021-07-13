@@ -29,7 +29,7 @@ def set_vacuum(rs, location):
         get_bot_response.bot.set_variable('vacuum', location)
         return "Hope you had a good 'cuum. The location has been updated"
 
-def get_hashbrowns(rs, args):
+def get_vacuum(rs, args):
     if get_bot_response.bot.get_variable('vacuum'):
         vacuum = get_bot_response.bot.get_variable('vacuum')
         return f"Vacuum was last left {vacuum}. Happy 'cuuming."
