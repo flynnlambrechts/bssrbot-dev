@@ -19,7 +19,7 @@ from users import *                     #for viewing users
 from TheScrape3 import checkForDay
 #from utils import wit_response
 
-from models import Sender
+from models import (Sender, GlobalVar)
 
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
@@ -94,9 +94,6 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 		response.addbutton(button)
 
-	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
-
 	elif "idiot" in message or "dumb" in message or "stupid" in message:
 		link = Sender(recipient_id).get_profile_pic()
 		picture.attachment = Image(link).get_image()
@@ -108,6 +105,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	elif "joke" in message:
 		response.text = getjoke()
+
+	elif "test" == message:
+		testy = GlobalVar("test1")
+		testy.update({'date':'26-05-21','column1':'hello','column2':'goodbye'})
+		testy.get()
 
 	elif "show me users" in message:
 
@@ -125,6 +127,9 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		response.addbutton(button)
 		response.text = greeting_message
 		#Response.addbutton(button)
+
+	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
+		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 	else:	
 		try:

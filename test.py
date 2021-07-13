@@ -1,8 +1,8 @@
+from models import GlobalVar
 
-Staff_ID = ["3963292617085764", #Kendy
-"4294576107270093", #Sam
-"4610989705596963", #Kyra
-"3890926854296476" #James
-]
+columns = {"Monday":1,"Tuesday":2,"Wednesday":3,"Thursday":4,"Friday":5,"Saturday":6,"Sunday":7}
+# values = ''.join(str(columns[x]) for x in columns)
+# print(values)
 
-print(Staff_ID)
+test = GlobalVar("test", "test", columns)
+test.update()

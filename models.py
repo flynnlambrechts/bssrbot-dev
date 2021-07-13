@@ -3,8 +3,9 @@ import os
 import requests
 
 from users import insert_user
+from bot_functions import (PrintException, getCon)
 
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+#ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 
 class Sender:
 	def __init__(self, recipient_id):
@@ -33,5 +34,32 @@ class Sender:
 		insert_user(self.full_name, self.first_name, self.last_name, self.psid, con)
 
 
-# user = Sender(recipient_id)
-# print(user.get_fullname())
+class GlobalVar:
+	def __init__(self, name):
+		self.name = name
+
+	def update(self, columns):
+		try:
+			self.columns = r"=%s, ".join(columns) + r"=%s"
+			self.values = tuple(columns.values())
+
+			con = getCon() 
+			cur = con.cursor()
+			cur.execute('''UPDATE %s SET %s''' % (self.name, self.columns % self.values))
+			con.commit()
+			con.close()
+			return f"{self.name} updated successfully."
+		except:
+			PrintException()	
+
+	def get(self):
+		try:
+			con = getCon()
+			cur = con.cursor()
+			cur.execute(f'''SELECT * FROM {self.name}''')
+			row = cur.fetchone()
+			con.close()
+			print(row)
+			return row
+		except:
+			PrintException()
