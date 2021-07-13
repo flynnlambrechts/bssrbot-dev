@@ -40,7 +40,7 @@ class GlobalVar:
 
 	def update(self, columns):
 		try:
-			self.columns = r"=%s, ".join(columns) + r"=%s"
+			self.columns = r" = %s, ".join(columns) + r" = %s"
 			self.values = tuple(columns.values())
 
 			con = getCon() 
