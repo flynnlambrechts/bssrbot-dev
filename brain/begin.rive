@@ -26,9 +26,6 @@
 ! var job      = robot
 ! var website  = https://www.facebook.com/BssrBot-107323461505853/
 
-// Basser Variables
-! var vacuum   = blank
-
 // Substitutions
 ! sub &quot;    = "
 ! sub &apos;    = '
