@@ -27,7 +27,7 @@ def getCon(): #gets the connection  to the database when required
 def set_vacuum(rs, location):
     bot.set_variable('vacuum', location)
     if location:
-        get_bot_response.bot.set_variable('vacuum', location)
+        bot.set_variable('vacuum', location)
         return "Hope you had a good 'cuum. The location has been updated"
 
 def get_vacuum(rs, args):
