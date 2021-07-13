@@ -30,7 +30,7 @@ bot.sort_replies()
 
 def set_vacuum(rs, location):
 	print(location)
-	bot.set_variable('vacuum', 'undefined')
+	bot.set_variable('vacuum', location)
 	bot.set_variable('vacuum', location)
 	return "Hope you had a good 'cuum. The location has been updated"
 
