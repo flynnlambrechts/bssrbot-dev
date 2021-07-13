@@ -51,3 +51,10 @@ date VARCHAR(50),
 column1 VARCHAR(100),
 column2 VARCHAR(100)
 );
+
+INSERT INTO test1 (
+index,
+date,
+column1,
+column2)
+VALUES ('1','blank','blank','blank')
