@@ -34,8 +34,8 @@ def set_vacuum(rs, location):
 	return "Hope you had a good 'cuum. The location has been updated"
 
 def get_vacuum(rs, args):
-	if bot.get_variable('vacuum') != "undefined":
-		location = " ".join(bot.get_variable('vacuum'))
+	if bot.get_global('vacuum') != "undefined":
+		location = " ".join(bot.get_global('vacuum'))
 		print(location)
 		return f"Vacuum was last left {location}. Happy 'cuuming."
 	else:
