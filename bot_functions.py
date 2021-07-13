@@ -21,17 +21,3 @@ def getCon(): #gets the connection  to the database when required
         con = psycopg2.connect(database="bssrbot1", user="flynnlambrechts", password="", host="127.0.0.1", port="5432")
         print("Local Database opened successfully")
     return con
-
-### ----------- RIVESCRIPT FUNCTIONS ---------- ###
-## ------------------- Vacuum  ----------------- ##
-def set_vacuum(rs, location):
-    get_bot_response.bot.set_variable('vacuum', location)
-    if location:
-        get_bot_response.bot.set_variable('vacuum', location)
-        return "Hope you had a good 'cuum. The location has been updated"
-def get_vacuum(rs, args):
-    if get_bot_response.bot.get_variable('vacuum'):
-        vacuum = get_bot_response.bot.get_variable('vacuum')
-        return f"Vacuum was last left {vacuum}. Happy 'cuuming."
-    else:
-        return "Oh no, it seems i've got no idea where the 'cuum is. :("

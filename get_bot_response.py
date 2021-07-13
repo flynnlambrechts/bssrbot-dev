@@ -5,7 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
-from bot_functions import (set_vacuum, get_vacuum)
+from bot_functions import *
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -196,8 +196,17 @@ def checkForCalendar(message):
 	return response
 
 
-# def getResponse(entity, value, confidence):
-# 	response = "blank"
-# 	if entity == "Praise:Praise":
-# 		response = f"No, you're {value}."
-# 	return response
+## RIVESCRIPT FUNCTIONS: (MOVE THESE INTO BOT_FUNCTIONS)
+
+def set_vacuum(rs, location):
+    get_bot_response.bot.set_variable('vacuum', location)
+    if location:
+        get_bot_response.bot.set_variable('vacuum', location)
+        return "Hope you had a good 'cuum. The location has been updated"
+
+def get_vacuum(rs, args):
+    if get_bot_response.bot.get_variable('vacuum'):
+        vacuum = get_bot_response.bot.get_variable('vacuum')
+        return f"Vacuum was last left {vacuum}. Happy 'cuuming."
+    else:
+        return "Oh no, it seems I've got no idea where the 'cuum is. :("
