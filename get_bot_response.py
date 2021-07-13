@@ -108,7 +108,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 	elif "test" == message:
 		testy = GlobalVar("test1")
-		testy.update({'index':1,'date':'26-05-21','column1':'hello','column2':'goodbye'})
+		testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
 		testy.get()
 
 	elif "show me users" in message:

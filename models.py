@@ -38,6 +38,20 @@ class GlobalVar:
 	def __init__(self, name):
 		self.name = name
 
+	def insert(self, columns):
+		try:
+			self.columns = tuple(columns.keys())
+			self.values = list(columns.values())
+			self.inputvalues = "(" + "".join(["'", "', '".join(self.values), "'"]) + ")"
+
+			con = getCon()
+			cur = con.cursor()
+			cur.execute('''INSERT INTO %s VALUES %s''' % (self.columns, self.inputvalues))
+			con.commit()
+			con.close()
+		except:
+			PrintException()
+
 	def update(self, columns):
 		try:
 			self.columns = r" = '%s', ".join(columns) + r" = '%s'" #quotes around %s as these will ensure postgresql recieves them as strings and not columns
