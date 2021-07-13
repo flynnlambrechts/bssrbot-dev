@@ -40,7 +40,7 @@ class GlobalVar:
 
 	def insert(self, columns):
 		try:
-			self.columns = tuple(columns.keys())
+			self.columns = tuple(columns.keys().replace("'",""))
 			self.values = list(columns.values())
 			self.inputvalues = "(" + "".join(["'", "', '".join(self.values), "'"]) + ")"
 
