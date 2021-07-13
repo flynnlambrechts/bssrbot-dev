@@ -40,7 +40,7 @@ class GlobalVar:
 
 	def update(self, columns):
 		try:
-			self.columns = r" = %s, ".join(columns) + r" = %s"
+			self.columns = r" = '%s', ".join(columns) + r" = '%s'" #quotes around %s as these will ensure postgresql recieves them as strings and not columns
 			self.values = tuple(columns.values())
 
 			con = getCon() 
