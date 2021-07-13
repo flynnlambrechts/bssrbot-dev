@@ -3,6 +3,7 @@ import os, sys
 import psycopg2
 from linecache import (checkcache, getline) # for error handling
 from bot_constants import DATABASE_URL
+from get_bot_response import bot
 
 def PrintException():
     exc_type, exc_obj, tb = sys.exc_info()
@@ -24,14 +25,14 @@ def getCon(): #gets the connection  to the database when required
 
 # Vacuum functions
 def set_vacuum(rs, location):
-    get_bot_response.bot.set_variable('vacuum', location)
+    bot.set_variable('vacuum', location)
     if location:
         get_bot_response.bot.set_variable('vacuum', location)
         return "Hope you had a good 'cuum. The location has been updated"
 
 def get_vacuum(rs, args):
-    if get_bot_response.bot.get_variable('vacuum'):
-        vacuum = get_bot_response.bot.get_variable('vacuum')
+    if bot.get_variable('vacuum'):
+        vacuum = bot.get_variable('vacuum')
         return f"Vacuum was last left {vacuum}. Happy 'cuuming."
     else:
         return "Oh no, it seems i've got no idea where the 'cuum is. :("
