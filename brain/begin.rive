@@ -27,7 +27,7 @@
 ! var website  = https://www.facebook.com/BssrBot-107323461505853/
 
 // Basser Variables
-! var vacuum   = undefined
+! var vacuum   = blank
 
 // Substitutions
 ! sub &quot;    = "
