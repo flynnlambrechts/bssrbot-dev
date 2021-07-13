@@ -5,7 +5,7 @@ import psycopg2
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
-from bot_functions import *
+from bot_functions import (set_vacuum, get_vacuum)
 
 #from TheScrape2 import checkForDino as getDino   #for scraping htmls
 from TheScrape3 import getDino
@@ -45,7 +45,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif "time" in message:
 		response.text = getTime(message)
 
-	elif checkForDino(message): #rename to checkfordino later
+	elif checkForDino(message):
 		value = checkForDino(message)
 		con = getCon()
 		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
