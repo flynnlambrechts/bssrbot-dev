@@ -4,4 +4,4 @@
 - <call>set_vacuum <star1></call>
 
 + [*] (vacuum|vacume|vac|cuum) [*] {weight=10}
-- <call>get_vacuum/call>
+- <call>get_vacuum</call>
