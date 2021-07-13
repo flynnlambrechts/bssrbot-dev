@@ -78,7 +78,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 	elif checkForCalendar(message):
 		response.text = checkForCalendar(message)
 
-	elif checkForDay(message) or "tomorrow" in message or "today" in message or "all" in message:
+	elif checkForDay(message) or "tomorrow" in message or "today" in message:
 		response.text = getDino(message, "breakfast", recipient_id)
 		response.send()
 		response.text = getDino(message, "lunch", recipient_id)
