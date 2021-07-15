@@ -39,18 +39,14 @@ class GlobalVar:
 		self.name = name
 
 	def insert(self, columns):
-		try:
-			self.columns = tuple(columns.keys().replace("'",""))
-			self.values = list(columns.values())
-			self.inputvalues = "(" + "".join(["'", "', '".join(self.values), "'"]) + ")"
+			self.columns = "(" + (", ".join(columns)) + ")"
+			self.values = tuple(columns.values())
 
 			con = getCon()
 			cur = con.cursor()
-			cur.execute('''INSERT INTO %s %s VALUES %s''' % (self.name, self.columns, self.inputvalues))
+			print('''INSERT INTO %s %s VALUES %s''' % (self.name, self.columns, self.values))
 			con.commit()
 			con.close()
-		except:
-			PrintException()
 
 	def update(self, columns):
 		try:
