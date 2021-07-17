@@ -4,7 +4,8 @@ import psycopg2
 from datetime import *
 from linecache import (checkcache, getline) # for error handling
 
-from bot_constants import DATABASE_URL
+from bot_constants import (DATABASE_URL, Admin_ID)
+from response import Response
 # from models import GlobalVar
 
 def PrintException():
@@ -15,6 +16,11 @@ def PrintException():
     checkcache(filename)
     line = getline(filename, lineno, f.f_globals)
     print(f'EXCEPTION IN ({filename}, LINE {lineno} "{line.strip()}"): {exc_obj}')
+    for ID in Admin_ID:
+            response = Response(ID)
+            response.text = "Oh no something went wrong :("
+            response.send()
+
 
 def getCon(): #gets the connection  to the database when required
     if "HEROKU" in os.environ:

@@ -6,7 +6,6 @@ import json
 
 from flask import Flask, request        #flask
 
-from response import Response
 from get_bot_response import get_bot_response
 from models import Sender
 from bot_constants import (VERIFY_TOKEN, Admin_ID)
@@ -59,11 +58,6 @@ def receive_message():
             print('PING!')
     except:
         PrintException()
-        for ID in Admin_ID:
-            response = Response(ID)
-            response.text = "Oh no something went wrong :("
-            response.send()
-        #maybe add func to text admin when error occurs
     return "Message Processed"
 
 
