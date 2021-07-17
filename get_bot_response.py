@@ -1,6 +1,7 @@
 #get_bot_response
 import os
 import psycopg2
+from datetime import *
 
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
@@ -32,6 +33,7 @@ def set_vacuum(rs, location):
     try:
         psid = bot.current_user()
         print(str(psid) + " PSID")
+        location = " ".join(location)
         print(str(location) + " LOCATION")
         person = Sender(psid).get_fullname()
         print(person + " PERSON")
