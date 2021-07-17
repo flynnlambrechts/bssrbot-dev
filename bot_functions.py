@@ -4,7 +4,7 @@ import psycopg2
 from datetime import *
 from linecache import (checkcache, getline) # for error handling
 
-from bot_constants import (DATABASE_URL, Admin_ID)
+from bot_constants import (DATABASE_URL, Admin_ID, TIMEZONE)
 from response import Response
 # from models import GlobalVar
 
