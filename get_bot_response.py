@@ -35,7 +35,7 @@ def set_vacuum(rs, location):
         psid = bot.current_user()
         location = " ".join(location)
         person = Sender(psid).get_fullname()
-        time_now = datetime.datetime.now(TIMEZONE) #.timestamp()
+        time_now = datetime.datetime.now(TIMEZONE)
         print(time_now)
         GlobalVar('vacuum').update({'index':1,'location':location,'person':person,'time':time_now})
         return "Hope you had a good 'cuum. The location has been updated"
@@ -44,8 +44,12 @@ def set_vacuum(rs, location):
     
 
 def get_vacuum(rs, args):
-    print(GlobalVar('vacuum').get())
-    return "check logs"
+    row = GlobalVar('vacuum').get()
+    location = row[1]
+    person = row[2]
+    time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S.%f')
+    time = time.strftime('%I:%M%p %d %b')
+    return f"The vacuum was left {location} at {time} by {person}."
 
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
