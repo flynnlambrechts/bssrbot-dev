@@ -71,54 +71,57 @@ class Dinner(Meal):
 
 
 def getDino(message, value, recipient_id, con=None):
-	time = datetime.now(TIMEZONE).time().hour
-	week = getmenuweek()
+	try:
+		time = datetime.now(TIMEZONE).time().hour
+		week = getmenuweek()
 
-	day, current_day, week = getDay(message, week)
+		day, current_day, week = getDay(message, week)
 
-	if value == "dino":
-		if day == "Tomorrow":
+		if value == "dino":
+			if day == "Tomorrow":
+				meal = Breakfast(week)
+			elif time < 10:
+				meal  = Breakfast(week)
+			elif time < 14:
+				meal = Lunch(week)
+			elif time < 19:
+				meal = Dinner(week)
+			else: #after 7pm
+				day, current_day, week = isTomorrow(day, current_day, week)
+				meal = Breakfast(week)
+
+		elif value == "breakfast":
+			if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Breakfast(week)
-		elif time < 10:
-			meal  = Breakfast(week)
-		elif time < 14:
+
+		elif value == "lunch":
+			if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Lunch(week)
-		elif time < 19:
+
+		elif value == "dinner":
+			if time > 21 and day == "Today":
+				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Dinner(week)
-		else: #after 7pm
-			day, current_day, week = isTomorrow(day, current_day, week)
-			meal = Breakfast(week)
 
-	elif value == "breakfast":
-		if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Breakfast(week)
+		response = meal.getresponse(value, day, current_day, week)
 
-	elif value == "lunch":
-		if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Lunch(week)
+		if con is not None:
+			note = addnote(con, meal, day, recipient_id)
+			if note is not None:
+				response = response + str(note)
 
-	elif value == "dinner":
-		if time > 21 and day == "Today":
-			day, current_day, week = isTomorrow(day, current_day, week)
-		meal = Dinner(week)
-
-	response = meal.getresponse(value, day, current_day, week)
-
-	if con is not None:
-		note = addnote(con, meal, day, recipient_id)
-		if note is not None:
-			response = response + str(note)
-
-	#COUNT DOWN TO SPECIFIC EVENT
-	day = date(2021, 9, 13)
-	if date.today() <= day:
-		response = " ".join([daysuntil(day), "Days until TRI 3"])
-	else:
-		print(False)
-
-	return response
+		#COUNT DOWN TO SPECIFIC EVENT
+		day = date(2021, 9, 13)
+		if date.today() <= day:
+			response = " ".join([daysuntil(day), "Days until TRI 3"])
+		else:
+			print(False)
+		return response
+	except:
+		PrintException()
+	
 
 def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
