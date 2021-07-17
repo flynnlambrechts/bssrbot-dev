@@ -47,7 +47,8 @@ def get_vacuum(rs, args):
     row = GlobalVar('vacuum').get()
     location = row[1]
     person = row[2]
-    time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S.%f')
+    print(row[3])
+    time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S.%f%z')
     time = time.strftime('%I:%M%p %d %b')
     return f"The vacuum was left {location} at {time} by {person}."
 
