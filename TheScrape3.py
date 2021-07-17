@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 modul
 
 from killswitch import read_custom_message
 from bot_constants import (week_days, Staff_ID)
-from bot_functions import PrintException
+from bot_functions import (PrintException, daysuntil)
 
 
 TIMEZONE = timezone('Australia/Sydney')
@@ -110,6 +110,13 @@ def getDino(message, value, recipient_id, con=None):
 		note = addnote(con, meal, day, recipient_id)
 		if note is not None:
 			response = response + str(note)
+
+	#COUNT DOWN TO SPECIFIC EVENT
+	day = date(2021, 9, 13)
+	if date.today() <= day:
+		response = " ".join([daysuntil(day), "Days until TRI 3"])
+	else:
+		print(False)
 
 	return response
 
