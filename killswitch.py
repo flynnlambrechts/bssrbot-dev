@@ -120,8 +120,6 @@ def read_custom_message(meal, con):
 			pass
 	except:
 			PrintException()
-
-
 	return note
 
 

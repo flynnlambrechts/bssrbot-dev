@@ -39,6 +39,7 @@ class GlobalVar:
 		self.name = name
 
 	def insert(self, columns):
+		try:
 			self.columns = "(" + (", ".join(columns)) + ")"
 			self.values = tuple(columns.values())
 
@@ -47,6 +48,8 @@ class GlobalVar:
 			print('''INSERT INTO %s %s VALUES %s''' % (self.name, self.columns, self.values))
 			con.commit()
 			con.close()
+		except:
+			PrintException()
 
 	def update(self, columns):
 		try:
