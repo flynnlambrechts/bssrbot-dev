@@ -115,7 +115,7 @@ def getDino(message, value, recipient_id, con=None):
 		#COUNT DOWN TO SPECIFIC EVENT
 		day = date(2021, 9, 13)
 		if date.today() <= day:
-			response = " ".join([daysuntil(day), "Days until TRI 3"])
+			response = " ".join([str(daysuntil(day)), "Days until TRI 3"])
 		else:
 			print(False)
 		return response
@@ -215,9 +215,12 @@ def addnote(con, meal, day, recipient_id):
 	if day == "Today" and recipient_id not in Staff_ID: #makes sure we are talking about the actual day e.g. not tommorrow or the coming wednesday
 		try: 
 			note = "".join([u"Note: \uE301 \n",read_custom_message(meal, con)])
+		except TypeError:
+			#PrintException()
+			print("Type Error in addnote: Probably no message.")
+			pass
 		except:
 			PrintException()
-			print("Probably no message.")
 	return note
 
 def openhtml(page):
