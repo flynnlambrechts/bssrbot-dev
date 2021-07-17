@@ -32,7 +32,7 @@ def set_vacuum(rs, location):
     try:
         psid = bot.current_user()
         print(str(psid) + " PSID")
-        print(location + " LOCATION")
+        print(str(location) + " LOCATION")
         person = Sender(psid).get_fullname()
         print(person + " PERSON")
         time = datetime.now(TIMEZONE).timestamp()
