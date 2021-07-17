@@ -43,6 +43,14 @@ VALUES ('26-06-21',
 
 SELECT day FROM custom_message WHERE day = '26-06-21';
 
+----------------Vacuum-----------------
+CREATE TABLE vacuum (
+index INTEGER NOT NULL PRIMARY KEY,
+location VARCHAR(250),
+person VARCHAR(100),
+time VARCHAR(100)
+);
+
 
 ----------------Test Table-------------
 CREATE TABLE test1 (

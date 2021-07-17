@@ -29,18 +29,22 @@ bot.load_directory("./brain")
 bot.sort_replies()
 
 def set_vacuum(rs, location):
-	print(location)
-	bot.set_variable('vacuum', location)
-	return "Hope you had a good 'cuum. The location has been updated"
+    try:
+        psid = bot.current_user()
+        print(str(psid) + " PSID")
+        print(location + " LOCATION")
+        person = Sender(psid).get_fullname()
+        print(person + " PERSON")
+        time = datetime.now(TIMEZONE).timestamp()
+        GlobalVar(vacuum).update({'index':1,'location':location,'person':person,'time':time})
+        return "Hope you had a good 'cuum. The location has been updated"
+    except:
+        PrintException()
+    
 
 def get_vacuum(rs, args):
-	print(bot.get_variable('vacuum'))
-	if bot.get_variable('vacuum') != "undefined":
-		location = " ".join(bot.get_variable('vacuum'))
-		print(location)
-		return f"Vacuum was last left {location}. Happy 'cuuming."
-	else:
-		return "Oh no, it seems I've got no idea where the 'cuum is. :("
+    print(GlobalVar(vacuum).get())
+    return "check logs"
 
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)

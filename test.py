@@ -17,5 +17,8 @@ def daysuntil(day): #date provided in date(YYYY,M,D) format
 # 	print(False)
 
 
-current_day = datetime.now(TIMEZONE).weekday()
-print(current_day.date())
+# current_day = datetime.now(TIMEZONE).weekday()
+# print(current_day.date())
+
+time = datetime.now(TIMEZONE).timestamp()
+print(time)

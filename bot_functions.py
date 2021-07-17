@@ -5,6 +5,7 @@ from datetime import *
 from linecache import (checkcache, getline) # for error handling
 
 from bot_constants import DATABASE_URL
+# from models import GlobalVar
 
 def PrintException():
     exc_type, exc_obj, tb = sys.exc_info()
