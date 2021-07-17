@@ -38,8 +38,5 @@ def getCon(): #gets the connection  to the database when required
 
 def daysuntil(future): #date provided in date(YYYY,M,D) format
     # today = date.today()
-    today = datetime.now(TIMEZONE)
-    today = int(today.strftime('%j'))
-    print(type(int(today)))
-    diff = int(future.strftime('%j')) - today
-    return diff
+    today = int(datetime.now(TIMEZONE).strftime('%j'))
+    return int(future.strftime('%j')) - today
