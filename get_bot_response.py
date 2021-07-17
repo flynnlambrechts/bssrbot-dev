@@ -2,6 +2,7 @@
 import os
 import psycopg2
 from datetime import *
+#from pytz import timezone
 
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
@@ -34,7 +35,7 @@ def set_vacuum(rs, location):
         psid = bot.current_user()
         location = " ".join(location)
         person = Sender(psid).get_fullname()
-        time_now = datetime.now(TIMEZONE).timestamp()
+        time_now = datetime.now().timestamp()
         GlobalVar('vacuum').update({'index':1,'location':location,'person':person,'time':time_now})
         return "Hope you had a good 'cuum. The location has been updated"
     except:
