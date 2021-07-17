@@ -2,9 +2,6 @@
 import os
 import psycopg2
 from datetime import *
-from pytz import timezone
-
-
 
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
@@ -28,9 +25,6 @@ from models import (Sender, GlobalVar)
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 from rivescript import RiveScript
-
-TIMEZONE = timezone('Australia/Sydney')
-
 bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
@@ -38,13 +32,10 @@ bot.sort_replies()
 def set_vacuum(rs, location):
     try:
         psid = bot.current_user()
-        print(str(psid) + " PSID")
         location = " ".join(location)
-        print(str(location) + " LOCATION")
         person = Sender(psid).get_fullname()
-        print(person + " PERSON")
-        time = datetime.now(TIMEZONE).timestamp()
-        GlobalVar(vacuum).update({'index':1,'location':location,'person':person,'time':time})
+        time_now = datetime.now(TIMEZONE).timestamp()
+        GlobalVar('vacuum').update({'index':1,'location':location,'person':person,'time':time_now})
         return "Hope you had a good 'cuum. The location has been updated"
     except:
         PrintException()
