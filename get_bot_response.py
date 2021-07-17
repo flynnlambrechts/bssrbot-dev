@@ -2,6 +2,9 @@
 import os
 import psycopg2
 from datetime import *
+from pytz import timezone
+
+
 
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
@@ -25,6 +28,9 @@ from models import (Sender, GlobalVar)
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 from rivescript import RiveScript
+
+TIMEZONE = timezone('Australia/Sydney')
+
 bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
