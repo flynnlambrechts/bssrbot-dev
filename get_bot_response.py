@@ -47,10 +47,9 @@ def get_vacuum(rs, args):
     row = GlobalVar('vacuum').get()
     location = row[1]
     person = row[2]
-    #print(row[3])
     time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S.%f%z')
-    time = time.strftime('%I:%M%p %d %b')
-    return f"Vacuum: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
+    time = time.strftime('%I:%M%p, %d %b')
+    return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)

@@ -91,17 +91,17 @@ def getDino(message, value, recipient_id, con=None):
 				meal = Breakfast(week)
 
 		elif value == "breakfast":
-			if time > 14 and day == "Today": #after 2pm will give the breakfast for the next day
+			if time > 14 and day == "Today" and "today" not in message: #after 2pm will give the breakfast for the next day
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Breakfast(week)
 
 		elif value == "lunch":
-			if time > 17 and day == "Today": #after 5pm will give the lunch for the next day
+			if time > 17 and day == "Today" and "today" not in message: #after 5pm will give the lunch for the next day
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Lunch(week)
 
 		elif value == "dinner":
-			if time > 21 and day == "Today":
+			if time > 21 and day == "Today" and "today" not in message:
 				day, current_day, week = isTomorrow(day, current_day, week)
 			meal = Dinner(week)
 
@@ -115,7 +115,7 @@ def getDino(message, value, recipient_id, con=None):
 		#COUNT DOWN TO SPECIFIC EVENT
 		if day == "Today":
 			future = date(2021, 9, 13)
-			if date.today() <= day:
+			if date.today() <= future:
 				response = " ".join([response, str(daysuntil(future)), "Days until TRI 3..."])
 			else:
 				print(False)
@@ -190,6 +190,11 @@ def isTomorrow(day, current_day, week):
 		current_day = 0 #sets it back to monday
 	return day, current_day, week
 	
+def isToday(day, current_day, week):
+	day = "Today"
+	current_day = datetime.now(TIMEZONE).weekday()
+	week = getmenuweek()
+	return day, current_day, week
 
 def addemojiscontent(content):
 	#content = content.replace("egg", u"egg \U0001F95A")

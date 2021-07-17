@@ -1,9 +1,9 @@
-# BssrBot 3.2.2
+# BssrBot 3.5.1
 > Basser's Dino Menu, Shop and Calendar Assistant
 
 ## Requirements
 
-Wit.ai - Language process
+Wit.ai - Language process (no longer used)
 Heroku - Hosting code
 NewRelic https://elements.heroku.com/addons/newrelic - Prevents code from idling
 Database: postgresql - stores information input by users
@@ -12,7 +12,7 @@ Database: postgresql - stores information input by users
 - Dino - done
 - Shopen - done
 - Add shop catalogue -done
-- Calendar - working on it
+- Calendar - done
 - Wildcat of the week nominations
 - Ressies
 
@@ -49,13 +49,10 @@ Database: postgresql - stores information input by users
 	- Days
 	- Week numbers
 	- next week
+- So much more
 
 ## Work On
-- calendar - IN PROGRESS
-	add day by day
-	add next week
-	maybe add week number
 - putting menu in db
-- getting dessert
+- clean up shopen
 
 Github# bssrbot-dev
