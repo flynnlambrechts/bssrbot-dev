@@ -158,6 +158,10 @@ def getTime(message):
 		notbassertimes = new_notbassertimes
 		bassertimes = new_notbassertimes
 		dinotimes = new_dinotimes
+	else:
+		notbassertimes = notbassertimes
+		bassertimes = bassertimes
+		dinotimes = dinotimes
 
 	response = ""
 	if "baxter" in message:
