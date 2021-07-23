@@ -154,7 +154,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 
 def getTime(message):
 	#updated dino times
-	if daysuntil(datetime.date(2021, 7, 26))<=0:
+	if daysuntil(datetime.date(2021, 7, 22))<=0:
 		global notbassertimes, bassertimes, dinotimes
 		notbassertimes = new_notbassertimes
 		bassertimes = new_notbassertimes
