@@ -69,7 +69,7 @@ notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:00-8:45am\nLunch:
 new_bassertimes = {"breakfast": "8:45-10:00am",\
 "lunch" : "1:15-2:15pm",\
 "dinner" : "6:15-7:15pm"}
-new_dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", bassertimes["breakfast"], "\nLunch: ", bassertimes["lunch"], "\nDinner: ", bassertimes["dinner"]])
+new_dinotimes = "".join(["Basser (and Baxter) Dino Times: \nBreakfast: ", new_bassertimes["breakfast"], "\nLunch: ", new_bassertimes["lunch"], "\nDinner: ", new_bassertimes["dinner"]])
 
 new_notbassertimes = {"Baxter" : "Baxter Dino Times:\nBreakfast: 8:45-10:00am\nLunch: 1:15-2:15pm\nDinner: 6:15-7:15pm",\
 "Goldstein" : "Goldstein Dino Times:\nBreakfast: 7:30-8:30am\nLunch: 12:00-1:00pm\nDinner: 5:00-6:00pm",\
