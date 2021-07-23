@@ -160,7 +160,7 @@ def getTime(message):
 	if daysuntil(datetime.date(2021, 7, 22))<=0:
 		global notbassertimes, bassertimes, dinotimes
 		notbassertimes = new_notbassertimes
-		bassertimes = new_notbassertimes
+		bassertimes = new_bassertimes
 		dinotimes = new_dinotimes
 
 	response = ""
