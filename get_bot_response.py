@@ -57,99 +57,102 @@ bot.set_subroutine("get_vacuum", get_vacuum)
 
 
 def get_bot_response(recipient_id, message_text="", attachment = ""):
-	message = message_text.lower()
-	response  = Response(recipient_id)
-	picture = Response(recipient_id)
-	if attachment != "":
-		response.text = "Nice pic!"
-	elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
-		con = getCon()
-		add_custom_message(message_text, con)
-		response.text = "Adding custom message..."
-		con.close()
-
-	elif "time" in message:
-		response.text = getTime(message)
-
-	elif checkForDino(message):
-		value = checkForDino(message)
-		con = getCon()
-		response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
-		con.close()
-
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-		response.addbutton(button)
-		button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
-		response.addbutton(button)
-
-	elif checkForShopen(message, recipient_id):
-		response.text = checkForShopen(message, recipient_id)
-
-	elif checkForCalendar(message):
-		response.text = checkForCalendar(message)
-
-	elif checkForDay(message) or "tomorrow" in message or "today" in message:
-		response.text = getDino(message, "breakfast", recipient_id)
-		response.send()
-		response.text = getDino(message, "lunch", recipient_id)
-		response.send()
-		response.text = getDino(message, "dinner", recipient_id)
-
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-		response.addbutton(button)
-
-	elif "latemeal" in message or "late" in message or "inloop" in message:
-		response = "Order a late meal here:"
-		button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-		response.addbutton(button)
-
-	elif "idiot" in message or "dumb" in message or "stupid" in message:
-		link = Sender(recipient_id).get_profile_pic()
-		picture.attachment = Image(link).get_image()
-		picture.send()
-		response.text = "This you?"
-
-	elif "gif" in message:
-		response.attachment = Gif("nice").get_gif()
-
-	elif "joke" in message:
-		response.text = getjoke()
-
-	elif "test" == message:
-		testy = GlobalVar("test1")
-		testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
-		testy.get()
-
-	elif "show me users" in message:
-
-		if str(recipient_id) in Admin_ID: 
+	try:
+		message = message_text.lower()
+		response  = Response(recipient_id)
+		picture = Response(recipient_id)
+		if attachment != "":
+			response.text = "Nice pic!"
+		elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 			con = getCon()
-			response.text = "Check the logs."
-			print("Users: \n" + view_users(con))
+			add_custom_message(message_text, con)
+			response.text = "Adding custom message..."
 			con.close()
-		else:
-			response.text = "You shall not, PASS: \n" + str(recipient_id)
 
-	elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
-		button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-		#print(str(button) + " Button")
-		response.addbutton(button)
-		response.text = greeting_message
-		#Response.addbutton(button)
+		elif "time" in message:
+			response.text = getTime(message)
 
-	elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
-		response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
+		elif checkForDino(message):
+			value = checkForDino(message)
+			con = getCon()
+			response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
+			con.close()
 
-	else:	
-		try:
-			reply = bot.reply(str(recipient_id), message)
-			response.text = reply
-		except:
-			response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
-			PrintException()
-	response.addquick_replies(dino_quickreplies)
-	response.send()
-	#--------------------------------------------------------------------------------------------------------------------------------------------------------
+			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+			response.addbutton(button)
+			button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
+			response.addbutton(button)
+
+		elif checkForShopen(message, recipient_id):
+			response.text = checkForShopen(message, recipient_id)
+
+		elif checkForCalendar(message):
+			response.text = checkForCalendar(message)
+
+		elif checkForDay(message) or "tomorrow" in message or "today" in message:
+			response.text = getDino(message, "breakfast", recipient_id)
+			response.send()
+			response.text = getDino(message, "lunch", recipient_id)
+			response.send()
+			response.text = getDino(message, "dinner", recipient_id)
+
+			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+			response.addbutton(button)
+
+		elif "latemeal" in message or "late" in message or "inloop" in message:
+			response = "Order a late meal here:"
+			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
+			response.addbutton(button)
+
+		elif "idiot" in message or "dumb" in message or "stupid" in message:
+			link = Sender(recipient_id).get_profile_pic()
+			picture.attachment = Image(link).get_image()
+			picture.send()
+			response.text = "This you?"
+
+		elif "gif" in message:
+			response.attachment = Gif("nice").get_gif()
+
+		elif "joke" in message:
+			response.text = getjoke()
+
+		elif "test" == message:
+			testy = GlobalVar("test1")
+			testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
+			testy.get()
+
+		elif "show me users" in message:
+
+			if str(recipient_id) in Admin_ID: 
+				con = getCon()
+				response.text = "Check the logs."
+				print("Users: \n" + view_users(con))
+				con.close()
+			else:
+				response.text = "You shall not, PASS: \n" + str(recipient_id)
+
+		elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
+			button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+			#print(str(button) + " Button")
+			response.addbutton(button)
+			response.text = greeting_message
+			#Response.addbutton(button)
+
+		elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
+			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
+
+		else:	
+			try:
+				reply = bot.reply(str(recipient_id), message)
+				response.text = reply
+			except:
+				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
+				PrintException()
+		response.addquick_replies(dino_quickreplies)
+		response.send()
+		#--------------------------------------------------------------------------------------------------------------------------------------------------------
+	except:
+		PrintException()
 	return "Response formulated"
 
 def getTime(message):
