@@ -1,6 +1,10 @@
 ##rive reply
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
+import datetime
+
 from rivescript import RiveScript
+from bot_functions import PrintException
+from models import (Sender, GlobalVar)
 
 bot = RiveScript()
 bot.load_directory("./brain")
