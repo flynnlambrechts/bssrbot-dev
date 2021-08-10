@@ -31,6 +31,6 @@ bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
 ## ----------------------------------------------------------------------- ##
 
-def rive_response(recipient_id, message)
+def rive_response(recipient_id, message):
 	response = bot.reply(recipient_id, message)
 	return response
