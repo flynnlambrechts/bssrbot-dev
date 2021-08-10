@@ -1,5 +1,4 @@
-  
-#Python libraries that we need to import for our bot
+  #Python libraries that we need to import for our bot
 import os, sys                          #for heroku env
 import psycopg2                         #database stuff
 import json

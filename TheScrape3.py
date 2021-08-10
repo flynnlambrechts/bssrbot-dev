@@ -7,8 +7,7 @@ from bs4 import BeautifulSoup # Importing BeautifulSoup class from the bs4 modul
 
 from killswitch import read_custom_message
 from bot_constants import (week_days, Staff_ID)
-from bot_functions import (PrintException, daysuntil)
-
+from bot_functions import (PrintException, days_until)
 
 TIMEZONE = timezone('Australia/Sydney')
 
@@ -116,13 +115,12 @@ def getDino(message, value, recipient_id, con=None):
 		if day == "Today":
 			future = date(2021, 9, 13)
 			if date.today() <= future:
-				response = " ".join([response, str(daysuntil(future)), "Days until TRI 3..."])
+				response = " ".join([response, str(days_until(future)), "Days until TRI 3..."])
 			else:
 				print(False)
 		return response
 	except:
-		PrintException()
-	
+		PrintException()	
 
 def getmenuweek(): #1-4 inclusive cycle
 	x = datetime.now(TIMEZONE)
@@ -142,23 +140,23 @@ def getDay(message, week): #here is where we get the day and current_day and som
 		day, current_day, week = isTomorrow(day, current_day, week)
 
 	#check if user has asked about a day of the week
-	elif checkForDay(message):
+	elif check_for_day(message):
 		print("Day Found!")
-		daynumber = int(checkForDay(message))
+		daynumber = int(check_for_day(message))
 		if current_day > daynumber:
-			print(str(week) + " week, checkForDay")
+			print(str(week) + " week, check_for_day")
 			if str(week)==str("4"):
 				week = 1
-				print(str(week) + " week, checkForDay if 4")
+				print(str(week) + " week, check_for_day if 4")
 			else:
 				week = week + 1
-				print(str(week) + " week, checkForDay else")
+				print(str(week) + " week, check_for_day else")
 		current_day = daynumber
 		day = str(week_days[current_day])
 	#otherwise must be today: and day and current_day are not updated from todays value
 	return day, current_day, week
 
-def checkForDay(message): #check of day of week specified
+def check_for_day(message): #check of day of week specified
 	day = ""
 	if "monday" in message or " mon" in message or "mon " in message:
 		day = str('0')
@@ -204,7 +202,6 @@ def addemojiscontent(content):
 	content = content.replace("chicken", u"chicken \U0001F357")
 	#content = content.replace("honey", u"honey \U0001F36F")
 	return content
-
 
 def columnlist(page, column, Range): #gets the info from each column as a list
 	rowcontents = []

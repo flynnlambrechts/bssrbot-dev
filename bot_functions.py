@@ -31,11 +31,11 @@ def getCon(): #gets the connection  to the database when required
         print("Local Database opened successfully")
     return con
 
-# def daysuntil(future): #date provided in date(YYYY,M,D) format
+# def days_until(future): #date provided in date(YYYY,M,D) format
 #     today = date.today()
 #     diff = future - today
 #     return (diff.days)
 
-def daysuntil(future): #date provided in date(YYYY,M,D) format
+def days_until(future): #date provided in date(YYYY,M,D) format
     today = int(datetime.now(TIMEZONE).strftime('%j'))
     return int(future.strftime('%j')) - today

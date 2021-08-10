@@ -2,30 +2,28 @@
 import os
 import psycopg2
 import datetime
-#from pytz import timezone
 
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 
 from bot_constants import *
 from bot_functions import *
+from rive_reply import rive_response
 
-#from TheScrape2 import checkForDino as getDino   #for scraping htmls
-from TheScrape3 import getDino
+#from TheScrape2 import check_for_dino as get_dino   #for scraping htmls
+from TheScrape3 import (get_dino, check_for_day)
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
-from jokes import getjoke               #for jokes
-
+from jokes import get_joke               #for jokes
 
 from users import *                     #for viewing users
-from TheScrape3 import checkForDay
+
 #from utils import wit_response
-
 from models import (Sender, GlobalVar)
-
 
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 from rivescript import RiveScript
+
 bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
@@ -72,16 +70,16 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		elif "time" in message:
 			response.text = getTime(message)
 
-		elif checkForDino(message):
-			value = checkForDino(message)
+		elif check_for_dino(message):
+			value = check_for_dino(message)
 			con = getCon()
-			response.text = getDino(message, value, recipient_id, con) #CURRENTLY CALLED checkForDino
+			response.text = get_dino(message, value, recipient_id, con) #CURRENTLY CALLED check_for_dino
 			con.close()
 
 			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-			response.addbutton(button)
+			response.add_button(button)
 			button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
-			response.addbutton(button)
+			response.add_button(button)
 
 		elif checkForShopen(message, recipient_id):
 			response.text = checkForShopen(message, recipient_id)
@@ -89,20 +87,20 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		elif checkForCalendar(message):
 			response.text = checkForCalendar(message)
 
-		elif checkForDay(message) or "tomorrow" in message or "today" in message:
-			response.text = getDino(message, "breakfast", recipient_id)
+		elif check_for_day(message) or "tomorrow" in message or "today" in message:
+			response.text = get_dino(message, "breakfast", recipient_id)
 			response.send()
-			response.text = getDino(message, "lunch", recipient_id)
+			response.text = get_dino(message, "lunch", recipient_id)
 			response.send()
-			response.text = getDino(message, "dinner", recipient_id)
+			response.text = get_dino(message, "dinner", recipient_id)
 
 			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-			response.addbutton(button)
+			response.add_button(button)
 
 		elif "latemeal" in message or "late" in message or "inloop" in message:
 			response = "Order a late meal here:"
 			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
-			response.addbutton(button)
+			response.add_button(button)
 
 		elif "idiot" in message or "dumb" in message or "stupid" in message:
 			link = Sender(recipient_id).get_profile_pic()
@@ -114,7 +112,7 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			response.attachment = Gif("nice").get_gif()
 
 		elif "joke" in message:
-			response.text = getjoke()
+			response.text = get_joke()
 
 		elif "test" == message:
 			testy = GlobalVar("test1")
@@ -134,30 +132,32 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 		elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
 			button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 			#print(str(button) + " Button")
-			response.addbutton(button)
+			response.add_button(button)
 			response.text = greeting_message
-			#Response.addbutton(button)
+			#Response.add_button(button)
 
 		elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 		else:	
 			try:
-				reply = bot.reply(str(recipient_id), message)
-				response.text = reply
+				#reply = bot.reply(str(recipient_id), message)
+				#response.text = reply
+
+				response.text = rive_response(str(recipient_id), message)
 			except:
 				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 				PrintException()
-		response.addquick_replies(dino_quickreplies)
+
+		response.add_quick_replies(dino_quickreplies)
 		response.send()
-		#--------------------------------------------------------------------------------------------------------------------------------------------------------
 	except:
 		PrintException()
 	return "Response formulated"
 
 def getTime(message):
 	# #updated dino times
-	# if daysuntil(datetime.date(2021, 7, 26))<=0:
+	# if days_until(datetime.date(2021, 7, 26))<=0:
 	# 	global notbassertimes, bassertimes, dinotimes
 	# 	notbassertimes = new_notbassertimes
 	# 	bassertimes = new_bassertimes
@@ -173,7 +173,7 @@ def getTime(message):
 	elif "hall" in message:
 		response = response + notbassertimes["Hall"]
 	else:
-		meal = checkForDino(message)
+		meal = check_for_dino(message)
 		if meal:
 			if meal == "dino":
 				response = response + dinotimes
@@ -184,7 +184,7 @@ def getTime(message):
 	return response
 
 
-def checkForDino(message):
+def check_for_dino(message):
 	value = None
 	if "dino" in message:
 		value = "dino"

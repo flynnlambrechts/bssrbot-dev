@@ -13,10 +13,10 @@ class Response:
 
 		self.buttons = []
 		
-	def addbutton(self,button): #requires individual dictionaries
+	def add_button(self,button): #requires individual dictionaries
 		self.buttons.append(button)
 
-	def addquick_replies(self,quick_replies): #requires a list of dictionaries
+	def add_quick_replies(self,quick_replies): #requires a list of dictionaries
 		self.quick_replies = quick_replies
 
 	def send(self):
