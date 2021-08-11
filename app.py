@@ -5,7 +5,7 @@ import json
 
 from flask import Flask, request        #flask
 
-from get_bot_response import get_bot_response
+from bot_response import bot_response
 from models import Sender
 from bot_constants import (VERIFY_TOKEN, Admin_ID)
 from bot_functions import (PrintException, getCon)
@@ -39,7 +39,7 @@ def receive_message():
                         if message['message'].get('text'):
                             message_text = message['message']['text']
                             print(message_text)
-                            get_bot_response(recipient_id, message_text)
+                            bot_response(recipient_id, message_text)
 
                             con = getCon()
                             Sender(recipient_id).adduser(con)
@@ -49,7 +49,7 @@ def receive_message():
                             print("Picture")
                             attachment = "blank for now"
                             message_text = ""
-                            get_bot_response(recipient_id, message_text, attachment)
+                            bot_response(recipient_id, message_text, attachment)
 
                         else:
                             print("No message?")

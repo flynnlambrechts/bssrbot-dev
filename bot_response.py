@@ -1,4 +1,4 @@
-#get_bot_response
+#bot_response
 import os
 import psycopg2
 import datetime
@@ -21,43 +21,11 @@ from users import *                     #for viewing users
 #from utils import wit_response
 from models import (Sender, GlobalVar)
 
-# ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
-# from rivescript import RiveScript
-
-# bot = RiveScript()
-# bot.load_directory("./brain")
-# bot.sort_replies()
-
-# def set_vacuum(rs, location):
-#     try:
-#         psid = bot.current_user()
-#         location = " ".join(location)
-#         person = Sender(psid).get_fullname()
-#         time_now = datetime.datetime.now(TIMEZONE)
-#         print(time_now)
-#         GlobalVar('vacuum').update({'index':1,'location':location,'person':person,'time':time_now})
-#         return "Hope you had a good 'cuum. The location has been updated"
-#     except:
-#         PrintException()
-    
-
-# def get_vacuum(rs, args):
-#     row = GlobalVar('vacuum').get()
-#     location = row[1]
-#     person = row[2]
-#     time = datetime.datetime.strptime(row[3], '%Y-%m-%d %H:%M:%S.%f%z')
-#     time = time.strftime('%I:%M%p, %d %b')
-#     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
-
-# bot.set_subroutine("set_vacuum", set_vacuum)
-# bot.set_subroutine("get_vacuum", get_vacuum)
-# ## ----------------------------------------------------------------------- ##
-
-
-def get_bot_response(recipient_id, message_text="", attachment = ""):
+def bot_response(recipient_id, message_text="", attachment = ""):
+	responded = False
 	try:
 		message = message_text.lower()
-		response  = Response(recipient_id)
+		response = Response(recipient_id)
 		picture = Response(recipient_id)
 		if attachment != "":
 			response.text = "Nice pic!"
@@ -81,11 +49,11 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			button = UrlButton("Leave Feedback","https://bit.ly/3hVT0DX").get_button()
 			response.add_button(button)
 
-		elif checkForShopen(message, recipient_id):
-			response.text = checkForShopen(message, recipient_id)
+		elif check_for_shopen(message, recipient_id):
+			response.text = check_for_shopen(message, recipient_id)
 
-		elif checkForCalendar(message):
-			response.text = checkForCalendar(message)
+		elif check_for_calendar(message):
+			response.text = check_for_calendar(message)
 
 		elif check_for_day(message) or "tomorrow" in message or "today" in message:
 			response.text = get_dino(message, "breakfast", recipient_id)
@@ -129,28 +97,25 @@ def get_bot_response(recipient_id, message_text="", attachment = ""):
 			else:
 				response.text = "You shall not, PASS: \n" + str(recipient_id)
 
-		elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
-			button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-			#print(str(button) + " Button")
-			response.add_button(button)
-			response.text = greeting_message
-			#Response.add_button(button)
+		# elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
+		# 	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+		# 	response.add_button(button)
+		# 	response.text = greeting_message
 
 		elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 		else:	
 			try:
-				#reply = bot.reply(str(recipient_id), message)
-				#response.text = reply
-
-				response.text = rive_response(str(recipient_id), message)
+				rive_response(recipient_id, message)
+				responded = True
 			except:
 				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 				PrintException()
-
-		response.add_quick_replies(dino_quickreplies)
-		response.send()
+		
+		if responded == False: #if a response has not already been sent then this will do so
+			response.add_quick_replies(dino_quickreplies)
+			response.send()
 	except:
 		PrintException()
 	return "Response formulated"
@@ -196,7 +161,7 @@ def check_for_dino(message):
 		value = "dinner"
 	return value
 
-def checkForShopen(message, recipient_id): #this can be mademore efficient
+def check_for_shopen(message, recipient_id): #this can be mademore efficient
 	user = Sender(recipient_id)
 	name =  user.get_fullname()
 	response = ""
@@ -222,7 +187,7 @@ def checkForShopen(message, recipient_id): #this can be mademore efficient
 		response = response + str(shop_catalogue)
 	return response
 
-def checkForCalendar(message):
+def check_for_calendar(message):
 	response = ""
 	if "events" in message \
 	or "event" in message \

@@ -54,7 +54,7 @@ Shapes $2.5\n\
 Cadbury Blocks $2.5\n\
 Red Rock Deli Chips $3"
 
-# #Basser used in get_bot_response
+# #Basser used in bot_response
 # bassertimes = {"breakfast": "7:00-7:45am",\
 # "lunch" : "11:45-12:30pm",\
 # "dinner" : "4:30-5:15pm"}
