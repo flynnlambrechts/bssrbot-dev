@@ -22,7 +22,6 @@ from users import *                     #for viewing users
 from models import (Sender, GlobalVar)
 
 def bot_response(recipient_id, message_text="", attachment = ""):
-	responded = False
 	try:
 		message = message_text.lower()
 		response = Response(recipient_id)
@@ -107,15 +106,13 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 
 		else:	
 			try:
-				rive_response(recipient_id, message)
-				responded = True
+				response.text = rive_response(recipient_id, message)
 			except:
 				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 				PrintException()
-		
-		if responded == False: #if a response has not already been sent then this will do so
-			response.add_quick_replies(dino_quickreplies)
-			response.send()
+				
+		response.add_quick_replies(dino_quickreplies)
+		response.send()
 	except:
 		PrintException()
 	return "Response formulated"
