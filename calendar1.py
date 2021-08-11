@@ -114,8 +114,8 @@ def get_events(message, con):
                 response = response + f"Events on {day}: \n" + str(row[column_value])
              
     except Exception as error:
-        PrintException()
+        #PrintException()
         #response = response + "Error in getting events: \n" + str(error)
-        response = response + "It's Holidays if go have fun."
+        response = response + "It's Holidays go have fun."
     return response
     
