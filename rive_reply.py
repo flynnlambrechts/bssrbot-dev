@@ -11,8 +11,6 @@ bot = RiveScript()
 bot.load_directory("./brain")
 bot.sort_replies()
 
-response = Response(recipient_id)
-
 def set_vacuum(rs, location):
     try:
         psid = bot.current_user()
@@ -33,17 +31,16 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
-def greetings(rs, args):
-	global response
-	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-	response.add_button(button)
-	return "HELLO THIS IS A TEST"
+# def greetings(rs, args):
+# 	global response
+# 	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
+# 	response.add_button(button)
+# 	return "HELLO THIS IS A TEST"
 
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
-bot.set_subroutine("greetings", greetings)
+# bot.set_subroutine("greetings", greetings)
 
 def rive_response(recipient_id, message):
-	global response
-	response.text = bot.reply(str(recipient_id), message)
-	return "rive responded"
+	response = bot.reply(str(recipient_id), message)
+	return response
