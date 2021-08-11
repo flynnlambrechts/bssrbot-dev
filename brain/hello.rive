@@ -9,6 +9,7 @@
 ^ 4. What's the shop catalogue?
 ^ 5. What's on tonight?
 ^ 6. Events on this week?
+^ - <call>greetings</call>
 
 + hello bot
 - Hello, human!
