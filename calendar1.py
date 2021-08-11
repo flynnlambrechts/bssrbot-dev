@@ -91,6 +91,7 @@ def get_events(message, con):
                 weekofterm = check_for_number(message)
             if "next" in message:
                 weekofterm+=1
+            print(weekofterm)
             cur.execute('''SELECT * FROM calendar WHERE week = %s''',str(weekofterm))
             row = cur.fetchone()
             headers = ["Whole Week: ","Monday: ", "Tuesday: ", "Wednesday: ", "Thursday: ", "Friday:  " ,"Saturday: ", "Sunday: "]
