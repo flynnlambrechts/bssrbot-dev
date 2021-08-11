@@ -35,7 +35,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			con.close()
 
 		elif "time" in message:
-			response.text = getTime(message)
+			response.text = get_time(message)
 
 		elif check_for_dino(message):
 			value = check_for_dino(message)
@@ -117,7 +117,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 		PrintException()
 	return "Response formulated"
 
-def getTime(message):
+def get_time(message):
 	# #updated dino times
 	# if days_until(datetime.date(2021, 7, 26))<=0:
 	# 	global notbassertimes, bassertimes, dinotimes
