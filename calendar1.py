@@ -7,6 +7,7 @@ TIMEZONE = timezone('Australia/Sydney')
 
 from TheScrape3 import check_for_day
 from bot_constants import week_days
+from bot_functions import PrintException
 
 def getDay(message):
     current_day = datetime.now(TIMEZONE).weekday()
@@ -113,7 +114,7 @@ def get_events(message, con):
                 response = response + f"Events on {day}: \n" + str(row[column_value])
              
     except Exception as error:
-        print("Error: " + str(error) + "\n" + str(type(error)))
+        PrintException()
         response = response + "Error in getting events: \n" + str(error)
     return response
     
