@@ -10,7 +10,7 @@ from bot_functions import *
 from rive_reply import rive_response
 
 #from TheScrape2 import check_for_dino as get_dino   #for scraping htmls
-from TheScrape3 import (get_dino, check_for_day)
+from TheScrape3 import (get_dino, check_for_day, getmenuweek)
 from shopen import *                    #for all shopen related
 from killswitch import add_custom_message
 from calendar1 import get_events
@@ -104,6 +104,8 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 		elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
+		elif "/week" in message:
+			response.text = str(getmenuweek())
 		else:	
 			try:
 				response.text = rive_response(recipient_id, message)
