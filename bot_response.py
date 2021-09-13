@@ -105,7 +105,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
 		elif "/week" in message:
-			response.text = str(getmenuweek())
+			response.text = "Menuweek is " + str(getmenuweek())
 		else:	
 			try:
 				response.text = rive_response(recipient_id, message)
