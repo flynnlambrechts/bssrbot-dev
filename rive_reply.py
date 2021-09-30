@@ -7,7 +7,7 @@ from rivescript import RiveScript
 from bot_functions import PrintException
 from models import (Sender, GlobalVar)
 from response import (Response, UrlButton, QuickReply, Gif, Image)
-from coffee_night import (add_nomination, add_quote)
+#from coffee_night import (add_nomination, add_quote)
 
 bot = RiveScript()
 bot.load_directory("./brain")
@@ -33,13 +33,30 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
+#--- Wildcat Nominations
+def add_nomination(rs, args): 
+# Recieves a list of words containing the persons name first followed by the reason
+# E.g. ["Flynn", "for", "making", "BssrBot"]
+    nominee = args[0]
+    reason = " ".join(args[1:])
+    date = datetime.datetime.now(TIMEZONE)
+    psid = bot.current_user()
+    person = Sender(psid).get_fullname()
 
-# Vacuum Functions
+    print("%s by %s for %s at %s",nominee, person, reason, date)
+
+#--- Quote Submission
+def add_quote(rs, args):
+    return args
+
+
+
+#--- Vacuum Functions
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
 # bot.set_subroutine("greetings", greetings)
 
-# Coffee Night Functions
+#--- Coffee Night Functions
 bot.set_subroutine("add_nomination", add_nomination)
 bot.set_subroutine("add_quote", add_quote)
 #bot.set_subroutine("add_quote", add_quote)
