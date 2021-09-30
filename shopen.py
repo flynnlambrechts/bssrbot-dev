@@ -5,15 +5,6 @@ from pytz import timezone
 
 TIMEZONE = timezone('Australia/Sydney')
 
-person = str("Mike Hunt")
-index = int(1)
-
-# date_and_time = datetime.datetime.now(TIMEZONE)
-# current_time = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d %H:%M:%S')
-# end_time = (date_and_time + datetime.timedelta(hours=3)).strftime('%Y-%m-%d %H:%M:%S')
-# date = str(datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d'))
-
-
 def open_shopen(name, con):
     try: 
         global index
