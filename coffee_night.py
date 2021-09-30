@@ -22,7 +22,7 @@ def get_coffee(item): #item is either quotes or wildcats
 		for row in rows:
 			print(row)
 			for i in row:
-				print(i)
+				print(i, " ")
 			# 	print(row[i])
 			# 	print(" ")
 			print("\n")
