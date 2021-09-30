@@ -43,7 +43,7 @@ def add_nomination(rs, args):
     psid = bot.current_user()
     person = Sender(psid).get_fullname()
 
-    print(f"{nomiee} by {person} for {reason} on {date}")
+    print(f"{nominee} by {person} for {reason} on {date}")
 
 #--- Quote Submission
 def add_quote(rs, args):
