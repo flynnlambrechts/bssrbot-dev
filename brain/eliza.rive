@@ -3,6 +3,10 @@
 //- Sorry I don't understand: "<star>".
 //- That didn't make sense to me.
 
+// Coffee Night
++ [*] nominate [*] {weight = 10} 
+- Please send through your coffee night nominations in the format
+^ "Nominate <person> for <reason>." 
 
 + [*] (sorry|apologize|apology) [*]
 - Please don't apologize.
