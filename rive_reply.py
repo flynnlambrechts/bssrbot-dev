@@ -4,7 +4,7 @@ import datetime
 
 from bot_constants import TIMEZONE
 from rivescript import RiveScript
-from bot_functions import PrintException
+from bot_functions import (PrintException, getCon)
 from models import (Sender, GlobalVar)
 from response import (Response, UrlButton, QuickReply, Gif, Image)
 #from coffee_night import (add_nomination, add_quote)
@@ -43,12 +43,37 @@ def add_nomination(rs, args):
     psid = bot.current_user()
     person = Sender(psid).get_fullname()
 
+    con = getCon()
+    cur = con.cursor()
+    cur.execute('''INSERT INTO wildcats
+        (nominee, reason, date, person)
+        VALUES (%s,%s,%s,%s)''',
+        (nominee, reason, date, person)
+    )
+    con.commit()
+    con.close()
+
     print(f"{nominee} by {person} for {reason} on {date}")
 
 #--- Quote Submission
-def add_quote(rs, args):
-    return args
+def add_quote(rs, args): #virtually the same as add_nomination, maybe combine
+    quotee = args[0] #person being quoted
+    quote = " ".join(args[1:])
+    date = datetime.datetime.now(TIMEZONE).strftime('%d-%m-%y')
+    psid = bot.current_user()
+    person = Sender(psid).get_fullname() #person doing the quoting
 
+    con = getCon()
+    cur = con.cursor()
+    cur.execute('''INSERT INTO quotes
+        (nominee, quote, date, person)
+        VALUES (%s,%s,%s,%s)''',
+        (quotee, quote, date, person)
+    )
+    con.commit()
+    con.close()
+
+    print(f"{quotee} by {person} for {quote} on {date}")
 
 
 #--- Vacuum Functions
