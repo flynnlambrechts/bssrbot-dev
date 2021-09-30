@@ -4,9 +4,12 @@
 #Photos
 
 #--- Wildcat Nominations
-def add_nomination(rs, args): #Given two arguments [person, reason]
-	value = " ".join(args[1:])
-	print(value)
+def add_nomination(rs, args): 
+# Recieves a list of words containing the persons name first followed by the reason
+# E.g. ["Flynn", "for", "making", "BssrBot"]
+	person = args[0]
+	reason = " ".join(args[1:])
+	print(Person + "For" + reason)
 	return args
 
 #--- Quote Submission
