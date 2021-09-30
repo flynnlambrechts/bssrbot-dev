@@ -16,7 +16,7 @@ def get_coffee(item): #item is either quotes or wildcats
 
 		con = getCon()
 		cur = con.cursor()
-		cur.execute('''SELECT * FROM %s WHERE date >= '2021-09-29'::DATE''', (str(item))) #change this to the previous coffee night
+		cur.execute('''SELECT * FROM wildcats WHERE date >= '2021-09-29'::DATE''') #change this to the previous coffee night
 		
 		rows = cur.fetchall()
 		for row in rows:
