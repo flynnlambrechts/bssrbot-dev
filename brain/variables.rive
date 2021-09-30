@@ -7,7 +7,7 @@
 - <call>get_vacuum</call>
 
 // Coffee Night
-+ nominate
++ [*] nominate [*]
 - There we go
 
 + [*] nominate [*] {weight = 10} 
