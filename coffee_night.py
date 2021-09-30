@@ -4,8 +4,9 @@
 #Photos
 
 #--- Wildcat Nominations
-#integrate with rive
 def add_nomination(rs, args): #Given two arguments [person, reason]
+	value = " ".join(args[1:])
+	print(value)
     return args
 
 #--- Quote Submission
