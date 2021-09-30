@@ -6,6 +6,7 @@ from rivescript import RiveScript
 from bot_functions import PrintException
 from models import (Sender, GlobalVar)
 from response import (Response, UrlButton, QuickReply, Gif, Image)
+from coffee_night import (add_nomination, add_quote)
 
 bot = RiveScript()
 bot.load_directory("./brain")
@@ -31,11 +32,6 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
-def add_nomination(rs, args): #Given two arguments [person, reason]
-    return args
-
-def add_quote(rs, args):
-    return args
 
 # Vacuum Functions
 bot.set_subroutine("set_vacuum", set_vacuum)
