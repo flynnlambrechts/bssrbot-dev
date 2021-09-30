@@ -2,6 +2,8 @@
 #Wildcat Nominations
 #Quote Nominations
 #Photos
+import datetime
+from bot_constants import TIMEZONE
 
 from models import Sender
 
@@ -11,11 +13,11 @@ def add_nomination(rs, args):
 # E.g. ["Flynn", "for", "making", "BssrBot"]
 	nominee = args[0]
 	reason = " ".join(args[1:])
-
+	date = datetime.datetime.now(TIMEZONE)
 	psid = bot.current_user()
 	person = Sender(psid).get_fullname()
 
-	print(nomiee + " For " + reason + " By " + person)
+	print("%s by %s for %s at %s",nominee, person, reason, date)
 
 #--- Quote Submission
 def add_quote(rs, args):

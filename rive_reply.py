@@ -2,6 +2,7 @@
 ## RIVESCRIPT STUFF MOVE FUNCTIONS INTO SEPERATE FILE
 import datetime
 
+from bot_constants import TIMEZONE
 from rivescript import RiveScript
 from bot_functions import PrintException
 from models import (Sender, GlobalVar)
