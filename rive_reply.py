@@ -31,9 +31,11 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
-def add_nomination(rs, args):
-    return str(args)
+def add_nomination(rs, args): #Given two arguments [person, reason]
+    return args
 
+def add_quote(rs, args):
+    return args
 
 # Vacuum Functions
 bot.set_subroutine("set_vacuum", set_vacuum)
@@ -42,6 +44,7 @@ bot.set_subroutine("get_vacuum", get_vacuum)
 
 # Coffee Night Functions
 bot.set_subroutine("add_nomination", add_nomination)
+bot.set_subroutine("add_quote", add_quote)
 #bot.set_subroutine("add_quote", add_quote)
 
 def rive_response(recipient_id, message):
