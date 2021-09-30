@@ -7,6 +7,9 @@
 - <call>get_vacuum</call>
 
 // Coffee Night
++ nominate
+- There we go
+
 + [*] nominate [*] {weight = 10} 
 - Please send through your coffee night nominations in the format
 ^ "Nominate <person> for <reason>." 
