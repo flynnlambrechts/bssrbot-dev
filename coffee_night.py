@@ -21,7 +21,8 @@ def get_coffee(item): #item is either quotes or wildcats
 		rows = cur.fetchall()
 		for row in rows:
 			print(row)
-			# for i in row:
+			for i in row:
+				print(i)
 			# 	print(row[i])
 			# 	print(" ")
 			print("\n")
