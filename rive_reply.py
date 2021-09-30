@@ -39,7 +39,7 @@ def add_nomination(rs, args):
 # E.g. ["Flynn", "making", "BssrBot"]
     nominee = args[0]
     reason = " ".join(args[1:])
-    date = datetime.datetime.now(TIMEZONE).strftime('%d-%m-%y')
+    date = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d')
     psid = bot.current_user()
     person = Sender(psid).get_fullname()
 
@@ -59,7 +59,7 @@ def add_nomination(rs, args):
 def add_quote(rs, args): #virtually the same as add_nomination, maybe combine
     quotee = args[0] #person being quoted
     quote = " ".join(args[1:])
-    date = datetime.datetime.now(TIMEZONE).strftime('%d-%m-%y')
+    date = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d')
     psid = bot.current_user()
     person = Sender(psid).get_fullname() #person doing the quoting
 
@@ -73,7 +73,7 @@ def add_quote(rs, args): #virtually the same as add_nomination, maybe combine
     con.commit()
     con.close()
 
-    print(f"{quotee} by {person} for {quote} on {date}")
+    print(f"{person} said {quotee} said {quote} on {date}")
 
 
 #--- Vacuum Functions
