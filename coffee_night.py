@@ -20,9 +20,10 @@ def get_coffee(item): #item is either quotes or wildcats
 		
 		rows = cur.fetchall()
 		for row in rows:
-			for i in row:
-				print(row[i])
-				print(" ")
+			print(row)
+			# for i in row:
+			# 	print(row[i])
+			# 	print(" ")
 			print("\n")
 
 		con.close()
