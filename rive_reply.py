@@ -36,14 +36,14 @@ def get_vacuum(rs, args):
 #--- Wildcat Nominations
 def add_nomination(rs, args): 
 # Recieves a list of words containing the persons name first followed by the reason
-# E.g. ["Flynn", "for", "making", "BssrBot"]
+# E.g. ["Flynn", "making", "BssrBot"]
     nominee = args[0]
     reason = " ".join(args[1:])
-    date = datetime.datetime.now(TIMEZONE)
+    date = datetime.datetime.now(TIMEZONE).strftime('%d-%m-%y')
     psid = bot.current_user()
     person = Sender(psid).get_fullname()
 
-    print("%s by %s for %s at %s",nominee, person, reason, date)
+    print(f"{nomiee} by {person} for {reason} on {date}")
 
 #--- Quote Submission
 def add_quote(rs, args):
