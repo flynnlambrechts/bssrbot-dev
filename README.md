@@ -15,6 +15,7 @@ Database: postgresql - stores information input by users
 - Calendar - done
 - Wildcat of the week nominations
 - Ressies
+- BssrBot v4
 
 
 ## To Update menu
@@ -52,7 +53,17 @@ Database: postgresql - stores information input by users
 - So much more
 
 ## Work On
-- putting menu in db
 - clean up shopen
+
+## BssrBot v4 Coming Features
+### Coffee Night
+- Wildcat of the week Nominations
+- Quote of the week submission
+- Photo submissions (for slide show)
+- Coffee Night Notificaitons? (Opt in and opt out)
+### Usability
+- Set week of term easier (admin)
+- Set week of dino easier (admin)
+- Register users college
 
 Github# bssrbot-dev

@@ -8,7 +8,7 @@ from bot_constants import (DATABASE_URL, Admin_ID, TIMEZONE)
 from response import Response
 # from models import GlobalVar
 
-def PrintException():
+def PrintException(): #Prints Error messaged used in many places 
     exc_type, exc_obj, tb = sys.exc_info()
     f = tb.tb_frame
     lineno = tb.tb_lineno
@@ -22,7 +22,7 @@ def PrintException():
             response.send()
 
 
-def getCon(): #gets the connection  to the database when required
+def getCon(): #gets the connection to the database when required
     if "HEROKU" in os.environ:
         DATABASE_URL =  os.environ['DATABASE_URL']
         con = psycopg2.connect(DATABASE_URL, sslmode='require')

@@ -6,3 +6,11 @@
 + [*] (vacuum|vaccum|vacume|vac|cuum) [*] {weight=10}
 - <call>get_vacuum</call>
 
+// Coffee Night
++ [*] nominate [*] {weight = 10} 
+- Please send through your coffee night nominations in the format
+^ "Nominate <person> for <>." 
+
++ [*] nominate * for * {weight = 20}
+- <call>add_nomination <star2, star3></call>
+

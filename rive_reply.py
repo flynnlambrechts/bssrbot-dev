@@ -31,15 +31,18 @@ def get_vacuum(rs, args):
     time = time.strftime('%I:%M%p, %d %b')
     return f"Vacuum Logs: \nLast Used by: {person} \nTime: {time} \nLocation left: {location}"
 
-# def greetings(rs, args):
-# 	global response
-# 	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
-# 	response.add_button(button)
-# 	return "HELLO THIS IS A TEST"
+def add_nomination(rs, args):
+    return str(args)
 
+
+# Vacuum Functions
 bot.set_subroutine("set_vacuum", set_vacuum)
 bot.set_subroutine("get_vacuum", get_vacuum)
 # bot.set_subroutine("greetings", greetings)
+
+# Coffee Night Functions
+bot.set_subroutine("add_nomination", add_nomination)
+bot.set_subroutine("add_quote", add_quote)
 
 def rive_response(recipient_id, message):
 	response = bot.reply(str(recipient_id), message)
