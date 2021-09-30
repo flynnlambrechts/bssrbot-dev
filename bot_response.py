@@ -83,7 +83,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			response.text = get_joke()
 
 		elif "coffee" in message:
-			item = "wildcats"
+			item = 'wildcats'
 			get_coffee(item)
 
 		elif "test" == message:
