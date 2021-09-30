@@ -66,7 +66,7 @@ def add_quote(rs, args): #virtually the same as add_nomination, maybe combine
     con = getCon()
     cur = con.cursor()
     cur.execute('''INSERT INTO quotes
-        (nominee, quote, date, person)
+        (quotee, quote, date, person)
         VALUES (%s,%s,%s,%s)''',
         (quotee, quote, date, person)
     )
