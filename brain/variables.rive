@@ -10,10 +10,10 @@
 + [*] nominate [*]
 - There we go
 
-+ [*] nominate [*] {weight = 10} 
++ [*] nominate [*] {weight=10} 
 - Please send through your coffee night nominations in the format
 ^ "Nominate <person> for <reason>." 
 
-+ [*] nominate * for * {weight = 30}
++ [*] nominate * for * {weight=30}
 - Nominated <star2> for <star3>.<call>add_nomination <star2> <star3></call>
 
