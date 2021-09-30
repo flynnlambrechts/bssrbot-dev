@@ -42,7 +42,7 @@ bot.set_subroutine("get_vacuum", get_vacuum)
 
 # Coffee Night Functions
 bot.set_subroutine("add_nomination", add_nomination)
-bot.set_subroutine("add_quote", add_quote)
+#bot.set_subroutine("add_quote", add_quote)
 
 def rive_response(recipient_id, message):
 	response = bot.reply(str(recipient_id), message)
