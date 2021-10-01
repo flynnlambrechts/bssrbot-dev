@@ -25,11 +25,12 @@ def get_coffee(item): #item is either quotes or wildcats
 		cur.execute(f'''SELECT * FROM {item} WHERE date >= '{start_date}'::DATE''') #change this to the previous coffee night
 		rows = cur.fetchall()
 
-		f = open(f"coffee_{item}_{date}.txt", "w+")
+		#f = open(f"coffee_{item}_{date}.txt", "w+")
 		
-		for row in rows:
-			f.write(f"{row[0]} | {row[1]} | {row[2]} | {row[3]}")
-			print(row)
+		with open(f"coffee_{item}_{date}.txt", "w+") as f:
+			for row in rows:
+				f.write(f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n")
+				print(row)
 
 		f.close()
 		con.close()
