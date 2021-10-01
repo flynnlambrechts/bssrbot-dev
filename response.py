@@ -90,8 +90,8 @@ class Response:
 		#data = json.dumps(data)
 		#files = json.dumps(files)
 		#print(data)
-		if self.files == None:
-			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
+		if files == None:
+			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 class Button:
 	def __init__(self,title):
