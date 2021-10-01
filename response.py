@@ -4,11 +4,12 @@ import requests
 import json
 
 class Response:
-	def __init__(self,recipient_id,text=None,attachment=None):
+	def __init__(self,recipient_id, text=None, attachment=None, file=None):
 		self.recipient_id = recipient_id
 
 		self.text = text
 		self.attachment = attachment
+		self.file = file
 		self.quick_replies = []
 
 		self.buttons = []
@@ -18,6 +19,11 @@ class Response:
 
 	def add_quick_replies(self,quick_replies): #requires a list of dictionaries
 		self.quick_replies = quick_replies
+
+	def add_file(self, file):
+		# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
+		# see below for more details
+		self.file = file
 
 	def send(self):
 		recipient_id = self.recipient_id
@@ -29,12 +35,28 @@ class Response:
 			"Content-Type": "application/json"
 		}
 
-		if self.attachment != None:
+		if self.attachment != None: 
+			#https://developers.facebook.com/docs/messenger-platform/send-messages#file
+			#For attachment format
 			data = {
 		    	"recipient": {"id": recipient_id},
 		    	"message": {
 		            "attachment": self.attachment
             	}
+			}
+		elif self.file != None:
+			data = {
+				"recipient": {"id": recipient_id},
+				"message": {
+					"attachment": {
+						"type":"file", 
+						"payload":{}
+					}
+				}
+				file 
+				# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
+				# type could also be 'text/html' but see here for more 
+				#https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
 			}
 		else: #must be text
 			if self.buttons != []:

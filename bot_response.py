@@ -84,7 +84,12 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 
 		elif "coffee" in message:
 			item = 'wildcats'
-			response.text = get_coffee(item)
+			response.text = f"Getting {item} for this week."
+			response.send()
+
+			file = get_coffee(item)
+			response = Response(recipient_id)
+			response.add_file(file)
 
 		elif "test" == message:
 			testy = GlobalVar("test1")

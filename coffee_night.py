@@ -30,14 +30,14 @@ def get_coffee(item): #item is either quotes or wildcats
 		rows = cur.fetchall()
 
 		# path in the repository
-		filename = 'coffee.html'
+		filename = f'coffee_{item}_{date}.html'
 
 		#f = open(f"coffee_{item}_{date}.txt", "w+")
-		result = f"{date} --- {item}\n"
+		#result = f"{date} --- {item}\n"
 		table = [["Nominee","Reason/Quote","Date","Nominator"]]
 		for row in rows:
 			table.append(list(row))
-			result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
+			#result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
 			print(row)
 
 		content = tabulate(table, tablefmt='html')
@@ -47,9 +47,13 @@ def get_coffee(item): #item is either quotes or wildcats
 		# create with commit message
 		f = repository.create_file(filename, "Coffee Night", content)
 
+		file = generate_file(filename)
 	except:
 		PrintException()
-	return result
+	return file #result
 
+def generate_file(filename): #creates the file in a form that can be handled by fb in form # e.g. 'filedata=@/tmp/shirt.png;type=image/png'
+	file = f"'filedata=@/{filename};type=text/html'"
+	return file
 
 #--- Photo Submission
