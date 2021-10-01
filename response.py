@@ -47,7 +47,7 @@ class Response:
 		            "attachment": self.attachment
             	}
 			}
-		elif self.file != None:
+		elif self.file != None: #doesnt work
 			headers = {}
 
 			data = {
@@ -60,7 +60,7 @@ class Response:
 				}
 			}
 			#files = {"filedata": (self.file, open(self.file,'rb'), 'text/html')} #(os.path.basename(self.file), open(self.file, "rb")) 
-			files = {'file': open(self.file, 'rb')}
+			files = {'file': (self.file, open(self.file, 'rb'), 'text/html')}
 			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, files=files)
 			r.text
 		else: #must be text
