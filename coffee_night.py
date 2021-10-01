@@ -45,7 +45,10 @@ def get_coffee(item): #item is either quotes or wildcats
 		con.close()
 
 		# create with commit message
-		f = repository.create_file(filename, "Coffee Night", content)
+		try:
+			repository.create_file(filename, f"Coffee Night {item}", content)
+		except:
+			repository.update_file(filename, f"Coffee Night {item}", content, contents.sha, branch="test")
 
 		file = f"/{filename}" #the filepath
 		return file
