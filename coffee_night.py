@@ -40,7 +40,7 @@ def get_coffee(item): #item is either quotes or wildcats
 			result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
 			print(row)
 
-		tabulate(table, tablefmt='html')
+		content = tabulate(table, tablefmt='html')
 
 		con.close()
 
