@@ -45,10 +45,12 @@ def get_coffee(item): #item is either quotes or wildcats
 		con.close()
 
 		# create with commit message
-		try:
+		try: #potentially flip the order of these two
 			repository.create_file(filename, f"Coffee Night {item}", content)
 		except:
-			repository.update_file(filename, f"Coffee Night {item}", content, contents.sha, branch="test")
+			print("Create Failed, Trying updating instead")
+			contents = repository.get_contents("")
+			repository.update_file(filename, f"Coffee Night {item}", content, content.sha, branch="test")
 
 		file = f"/{filename}" #the filepath
 		return file
