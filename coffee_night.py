@@ -34,7 +34,7 @@ def get_coffee(item): #item is either quotes or wildcats
 
 		#f = open(f"coffee_{item}_{date}.txt", "w+")
 		result = f"{date} --- {item}\n"
-		table = []
+		table = [["Nominee","Reason/Quote","Date","Nominator"]]
 		for row in rows:
 			table.append(list(row))
 			result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
