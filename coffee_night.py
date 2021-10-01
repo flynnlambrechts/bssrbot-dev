@@ -10,23 +10,28 @@ from bot_functions import (getCon, PrintException)
 
 from models import Sender
 
+
+
 # Getting qutoes or wildcat nominations
 # Inputing into here is done through rive_reply.py
 def get_coffee(item): #item is either quotes or wildcats
 	try:
 		date = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d')
 		start_date = datetime.datetime.now(TIMEZONE) + relativedelta(weekday=WE(-1)) #Finds date of last coffee night (assuming it's wednesday)
-		print(start_date)
+		#print(start_date)
+
 		con = getCon()
 		cur = con.cursor()
 		cur.execute(f'''SELECT * FROM {item} WHERE date >= '{start_date}'::DATE''') #change this to the previous coffee night
-		
 		rows = cur.fetchall()
+
+		f = open(f"coffee_{item}_{date}.txt", "w+")
+		
 		for row in rows:
-			
+			f.write(f"{row[0]} | {row[1]} | {row[2]} | {row[3]}")
 			print(row)
 
-
+		f.close()
 		con.close()
 	except:
 		PrintException()
