@@ -49,8 +49,9 @@ def get_coffee(item): #item is either quotes or wildcats
 			repository.create_file(filename, f"Coffee Night {item}", content)
 		except:
 			print("Create Failed, Trying updating instead")
+			file = repo.get_file_contents(filename)
 			contents = repository.get_contents("")
-			repository.update_file(filename, f"Coffee Night {item}", content)
+			repository.update_file(filename, f"Coffee Night {item}",content, file.sha)
 
 		file = f"/{filename}" #the filepath
 		return file
