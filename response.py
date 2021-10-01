@@ -1,6 +1,5 @@
 #response
 from bot_constants import ACCESS_TOKEN
-from bot_functions import PrintException
 import requests
 import json
 import os #test check if still needed
