@@ -2,6 +2,7 @@
 from bot_constants import ACCESS_TOKEN
 import requests
 import json
+import os #test check if still needed
 
 class Response:
 	def __init__(self,recipient_id, text=None, attachment=None, file=None):
@@ -9,7 +10,8 @@ class Response:
 
 		self.text = text
 		self.attachment = attachment
-		self.file = file
+		 
+		self.file = file #a file path
 		self.quick_replies = []
 
 		self.buttons = []
@@ -20,7 +22,7 @@ class Response:
 	def add_quick_replies(self,quick_replies): #requires a list of dictionaries
 		self.quick_replies = quick_replies
 
-	def add_file(self, file):
+	def add_file(self, file): #takes file path
 		# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
 		# see below for more details
 		self.file = file
@@ -39,25 +41,26 @@ class Response:
 			#https://developers.facebook.com/docs/messenger-platform/send-messages#file
 			#For attachment format
 			data = {
-		    	"recipient": {"id": recipient_id},
+		    	"recipient": {"id": self.recipient_id},
 		    	"message": {
 		            "attachment": self.attachment
             	}
 			}
 		elif self.file != None:
 			data = {
-				"recipient": {"id": recipient_id},
+				"recipient": {"id": self.recipient_id},
 				"message": {
 					"attachment": {
 						"type":"file", 
 						"payload":{}
 					}
-				}
-				file 
+				},
+				"filedata" = (os.path.basename(file), open(file, "rb")) 
+			} 
+				# IGNORE THIS (JUST A NOTE FROM THE PAST) 
 				# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
 				# type could also be 'text/html' but see here for more 
 				#https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-			}
 		else: #must be text
 			if self.buttons != []:
 				data = {

@@ -14,7 +14,7 @@ from models import Sender
 
 # https://medium.com/geekculture/files-on-heroku-cd09509ed285
 github = Github(PAT)
-repository = github.get_user().get_repo('bssrbot3') #maybe make so this knows whether its in bssrbot or bssrbot-dev
+repository = github.get_user().get_repo('bssrbot-dev') #maybe make so this knows whether its in bssrbot or bssrbot-dev
 
 # Getting qutoes or wildcat nominations
 # Inputing into here is done through rive_reply.py
@@ -47,13 +47,11 @@ def get_coffee(item): #item is either quotes or wildcats
 		# create with commit message
 		f = repository.create_file(filename, "Coffee Night", content)
 
-		file = generate_file(filename)
+		file = "/coffee.html" #the filepath
 	except:
 		PrintException()
 	return file #result
 
-def generate_file(filename): #creates the file in a form that can be handled by fb in form # e.g. 'filedata=@/tmp/shirt.png;type=image/png'
-	file = f"'filedata=@/{filename};type=text/html'"
-	return file
+
 
 #--- Photo Submission
