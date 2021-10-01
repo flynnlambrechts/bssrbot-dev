@@ -5,7 +5,8 @@
 import datetime
 from dateutil.relativedelta import relativedelta, WE
 from tabulate import tabulate
-from github import Github
+#from github import Github
+import github
 
 from bot_constants import (TIMEZONE, PAT)
 from bot_functions import (getCon, PrintException)
@@ -13,7 +14,7 @@ from bot_functions import (getCon, PrintException)
 from models import Sender
 
 # https://medium.com/geekculture/files-on-heroku-cd09509ed285
-github = Github(PAT)
+github = github.Github(PAT)
 repository = github.get_user().get_repo('bssrbot-dev') #maybe make so this knows whether its in bssrbot or bssrbot-dev
 
 # Getting qutoes or wildcat nominations
