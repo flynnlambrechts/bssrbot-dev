@@ -5,8 +5,7 @@
 import datetime
 from dateutil.relativedelta import relativedelta, WE
 from tabulate import tabulate
-#from PyGithub import Github
-import Github
+from github import Github
 
 from bot_constants import (TIMEZONE, PAT)
 from bot_functions import (getCon, PrintException)
