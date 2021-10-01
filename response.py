@@ -55,7 +55,7 @@ class Response:
 						"type":"file", 
 						"payload":{}
 					}
-				},
+				}
 			}
 			files = {
 				"filedata": (self.file, open(self.file,'rb'), 'text/html') #(os.path.basename(self.file), open(self.file, "rb")) 
@@ -89,6 +89,7 @@ class Response:
 			data["message"]["quick_replies"] = self.quick_replies #a list
 
 		data = json.dumps(data)
+		files = json.dumps(files)
 		#print(data)
 		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
 
