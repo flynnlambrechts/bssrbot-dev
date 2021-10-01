@@ -34,11 +34,9 @@ class Response:
 		   "access_token": ACCESS_TOKEN
 		}
 
-		# headers = {
-		# 	"Content-Type": "application/json"
-		# }
-
-		headers = {}
+		headers = {
+			"Content-Type": "application/json"
+		}
 
 		if self.attachment != None: 
 			#https://developers.facebook.com/docs/messenger-platform/send-messages#file
@@ -50,6 +48,8 @@ class Response:
             	}
 			}
 		elif self.file != None:
+			headers = {}
+
 			data = {
 				"recipient": {"id": self.recipient_id},
 				"message": {
@@ -61,10 +61,8 @@ class Response:
 			}
 			#files = {"filedata": (self.file, open(self.file,'rb'), 'text/html')} #(os.path.basename(self.file), open(self.file, "rb")) 
 			files = {'file': open(self.file, 'rb')}
-				# IGNORE THIS (JUST A NOTE FROM THE PAST) 
-				# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
-				# type could also be 'text/html' but see here for more 
-				#https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, files=files)
+			r.text
 		else: #must be text
 			if self.buttons != []:
 				data = {
@@ -92,7 +90,8 @@ class Response:
 		#data = json.dumps(data)
 		#files = json.dumps(files)
 		#print(data)
-		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
+		if self.file = None:
+			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
 
 class Button:
 	def __init__(self,title):
