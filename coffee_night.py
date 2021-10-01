@@ -15,7 +15,7 @@ from models import Sender
 def get_coffee(item): #item is either quotes or wildcats
 	try:
 		date = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d')
-		start_date = date + relativedelta(weekday=WE(-1))
+		start_date = datetime.datetime.now(TIMEZONE) + relativedelta(weekday=WE(-1))
 		print(start_date)
 		con = getCon()
 		cur = con.cursor()
