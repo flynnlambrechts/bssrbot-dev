@@ -38,7 +38,7 @@ def get_coffee(item): #item is either quotes or wildcats
 		for row in rows:
 			table.append(list(row))
 			#result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
-			print(row)
+			#print(row)
 
 		content = tabulate(table, tablefmt='html')
 
@@ -47,10 +47,11 @@ def get_coffee(item): #item is either quotes or wildcats
 		# create with commit message
 		f = repository.create_file(filename, "Coffee Night", content)
 
-		file = "/coffee.html" #the filepath
+		file = f"/{filename}" #the filepath
+		return file
 	except:
 		PrintException()
-	return file #result
+
 
 
 
