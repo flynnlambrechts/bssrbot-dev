@@ -34,9 +34,11 @@ class Response:
 		   "access_token": ACCESS_TOKEN
 		}
 
-		headers = {
-			"Content-Type": "application/json"
-		}
+		# headers = {
+		# 	"Content-Type": "application/json"
+		# }
+
+		headers = {}
 
 		if self.attachment != None: 
 			#https://developers.facebook.com/docs/messenger-platform/send-messages#file
@@ -87,7 +89,7 @@ class Response:
 		if self.quick_replies != []:
 			data["message"]["quick_replies"] = self.quick_replies #a list
 
-		data = json.dumps(data)
+		#data = json.dumps(data)
 		#files = json.dumps(files)
 		#print(data)
 		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
