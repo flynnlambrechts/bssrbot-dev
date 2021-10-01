@@ -55,7 +55,7 @@ class Response:
 						"payload":{}
 					}
 				},
-				"filedata": (os.path.basename(file), open(file, "rb")) 
+				"filedata": (os.path.basename(self.file), open(self.file, "rb")) 
 			} 
 				# IGNORE THIS (JUST A NOTE FROM THE PAST) 
 				# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
