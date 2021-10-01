@@ -7,6 +7,7 @@ TIMEZONE = timezone('Australia/Sydney')
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] #used for fb connection
 VERIFY_TOKEN = os.environ['VERIFY_TOKEN'] #used to verify fb
 DATABASE_URL = os.environ['DATABASE_URL']
+PAT = os.environ['PAT'] #Personal Access Token for Flynn needs to be updated to add more admins
 
 Admin_ID = ["4409117335852974", #Flynn-DEV
             "3760608700732342" #Flynn-REAL
