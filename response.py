@@ -29,6 +29,7 @@ class Response:
 
 	def send(self):
 		recipient_id = self.recipient_id
+		files = None
 		params = {
 		   "access_token": ACCESS_TOKEN
 		}
@@ -55,6 +56,8 @@ class Response:
 						"payload":{}
 					}
 				},
+			}
+			files = {
 				"filedata": (self.file, open(self.file,'rb'), 'text/html') #(os.path.basename(self.file), open(self.file, "rb")) 
 			} 
 				# IGNORE THIS (JUST A NOTE FROM THE PAST) 
@@ -82,13 +85,12 @@ class Response:
 					"message": {
 						"text": self.text}
 				}
-
 		if self.quick_replies != []:
 			data["message"]["quick_replies"] = self.quick_replies #a list
 
 		data = json.dumps(data)
 		#print(data)
-		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data, files=files)
 
 class Button:
 	def __init__(self,title):
