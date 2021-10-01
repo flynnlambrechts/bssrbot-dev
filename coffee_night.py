@@ -3,6 +3,8 @@
 #Quote Nominations
 #Photos
 import datetime
+from dateutil.relativedelta import relativedelta, WE
+
 from bot_constants import TIMEZONE
 from bot_functions import (getCon, PrintException)
 
@@ -13,14 +15,17 @@ from models import Sender
 def get_coffee(item): #item is either quotes or wildcats
 	try:
 		date = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d')
-
+		start_date = date + relativedelta(weekday=FR(-1))
+		print(start_date)
 		con = getCon()
 		cur = con.cursor()
-		cur.execute(f'''SELECT * FROM {item} WHERE date >= '2021-10-01'::DATE''') #change this to the previous coffee night
+		cur.execute(f'''SELECT * FROM {item} WHERE date >= '{start_date}'::DATE''') #change this to the previous coffee night
 		
 		rows = cur.fetchall()
 		for row in rows:
+			
 			print(row)
+
 
 		con.close()
 	except:
