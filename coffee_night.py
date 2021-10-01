@@ -54,8 +54,8 @@ def get_coffee(item): #item is either quotes or wildcats
 			contents = repository.get_contents("")
 			repository.update_file(filename, f"Coffee Night {item}",content, file.sha)
 
-		file = f"/{filename}" #the filepath
-		return file
+		file_path = str(filename) #the filepath
+		return file_path
 	except:
 		PrintException()
 

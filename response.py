@@ -28,71 +28,67 @@ class Response:
 		self.file = file
 
 	def send(self):
-		try:
-			recipient_id = self.recipient_id
-			params = {
-			   "access_token": ACCESS_TOKEN
-			}
+		recipient_id = self.recipient_id
+		params = {
+		   "access_token": ACCESS_TOKEN
+		}
 
-			headers = {
-				"Content-Type": "application/json"
-			}
+		headers = {
+			"Content-Type": "application/json"
+		}
 
-			if self.attachment != None: 
-				#https://developers.facebook.com/docs/messenger-platform/send-messages#file
-				#For attachment format
+		if self.attachment != None: 
+			#https://developers.facebook.com/docs/messenger-platform/send-messages#file
+			#For attachment format
+			data = {
+		    	"recipient": {"id": self.recipient_id},
+		    	"message": {
+		            "attachment": self.attachment
+            	}
+			}
+		elif self.file != None:
+			data = {
+				"recipient": {"id": self.recipient_id},
+				"message": {
+					"attachment": {
+						"type":"file", 
+						"payload":{}
+					}
+				},
+				"filedata": (os.path.basename(self.file), open(self.file, "rb")) 
+			} 
+				# IGNORE THIS (JUST A NOTE FROM THE PAST) 
+				# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
+				# type could also be 'text/html' but see here for more 
+				#https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+		else: #must be text
+			if self.buttons != []:
 				data = {
-			    	"recipient": {"id": self.recipient_id},
-			    	"message": {
-			            "attachment": self.attachment
-	            	}
-				}
-			elif self.file != None:
-				data = {
-					"recipient": {"id": self.recipient_id},
+					"recipient": {"id": recipient_id},
 					"message": {
-						"attachment": {
-							"type":"file", 
-							"payload":{}
-						}
-					},
-					"filedata": (os.path.basename(self.file), open(self.file, "rb")) 
-				} 
-					# IGNORE THIS (JUST A NOTE FROM THE PAST) 
-					# e.g. 'filedata=@/tmp/shirt.png;type=image/png'
-					# type could also be 'text/html' but see here for more 
-					#https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
-			else: #must be text
-				if self.buttons != []:
-					data = {
-						"recipient": {"id": recipient_id},
-						"message": {
-							"attachment":{
-								"type":"template",
-								"payload":{
-									"template_type":"button",
-									"text": self.text,
-									"buttons": self.buttons
-								}
+						"attachment":{
+							"type":"template",
+							"payload":{
+								"template_type":"button",
+								"text": self.text,
+								"buttons": self.buttons
 							}
 						}
 					}
-				else: #No buttons
-					data = {
-						"recipient": {"id": recipient_id},
-						"message": {
-							"text": self.text}
-					}
+				}
+			else: #No buttons
+				data = {
+					"recipient": {"id": recipient_id},
+					"message": {
+						"text": self.text}
+				}
 
-			if self.quick_replies != []:
-				data["message"]["quick_replies"] = self.quick_replies #a list
+		if self.quick_replies != []:
+			data["message"]["quick_replies"] = self.quick_replies #a list
 
-			data = json.dumps(data)
-			#print(data)
-			r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
-		except:
-			PrintException()
-
+		data = json.dumps(data)
+		#print(data)
+		r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
 
 class Button:
 	def __init__(self,title):
