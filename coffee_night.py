@@ -26,17 +26,18 @@ def get_coffee(item): #item is either quotes or wildcats
 		rows = cur.fetchall()
 
 		#f = open(f"coffee_{item}_{date}.txt", "w+")
-		
+		result = f"{date} --- {item}\n"
+
 		with open(f"coffee_{item}_{date}.txt", "w+") as f:
 			for row in rows:
-				f.write(f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n")
+				result = result + f"{row[0]} | {row[1]} | {row[2]} | {row[3]}\n"
 				print(row)
 
 		f.close()
 		con.close()
 	except:
 		PrintException()
-	return 0
+	return result
 
 
 #--- Photo Submission

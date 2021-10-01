@@ -84,7 +84,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 
 		elif "coffee" in message:
 			item = 'wildcats'
-			get_coffee(item)
+			response.text = get_coffee(item)
 
 		elif "test" == message:
 			testy = GlobalVar("test1")
