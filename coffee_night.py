@@ -30,7 +30,7 @@ def get_coffee(item): #item is either quotes or wildcats
 		rows = cur.fetchall()
 
 		# path in the repository
-		filename = f'coffee_{item}_{date}.html'
+		filename = f'coffee_{item}.html'
 
 		#f = open(f"coffee_{item}_{date}.txt", "w+")
 		#result = f"{date} --- {item}\n"
