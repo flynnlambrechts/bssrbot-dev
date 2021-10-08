@@ -17,6 +17,19 @@ Database: postgresql - stores information input by users
 - Ressies
 - BssrBot v4
 
+## On Boarding of New Admin
+1. Facebook for Developers
+- Add admin to app roles as administrator for both BssrBot and BssrBot-Dev
+2. Heroku
+- Add as collaborator on both BssrBot and BssrBot-Dev
+	- app -> overview -> collaborator activity -> manage access -> add collaborator
+3. GitHub
+- Add as collaborator on both bssrbot3 and bssrbot-dev
+	- settings -> manage access -> add people
+4. Hard code
+- Add psid as seen from both bssrbot and bssrbot-dev to ADMIN_ID in ./bot_constants
+5. Run through updating process and supply camelot.py file to extract dino meals
+
 
 ## To Update menu
 1. Name menu "menu.pdf" and place and in menu folder (remove old menu items)
