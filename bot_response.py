@@ -28,6 +28,7 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 		response = Response(recipient_id)
 		picture = Response(recipient_id)
 		if attachment != "":
+			print(attachment[0]['payload']['sticker_id'])
 			if attachment[0]['payload']['sticker_id'] == "369239263222822":
 				response.text = "Thumbs up to you too 👍"
 			else:
