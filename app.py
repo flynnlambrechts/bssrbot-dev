@@ -47,7 +47,6 @@ def receive_message():
 
                         elif message['message'].get('attachments'):
                             print(message['message'].get('attachments'))
-                            print("Picture")
                             attachment = message['message'].get('attachments')
                             message_text = "blank"
                             bot_response(recipient_id, message_text, attachment)
