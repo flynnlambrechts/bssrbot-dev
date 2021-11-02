@@ -131,13 +131,14 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 
 def get_time(message):
 	# #updated dino times
-	# if days_until(datetime.date(2021, 7, 26))<=0:
+	# if daysuntil(datetime.date(2021, 7, 26))<=0:
 	# 	global notbassertimes, bassertimes, dinotimes
 	# 	notbassertimes = new_notbassertimes
 	# 	bassertimes = new_bassertimes
 	# 	dinotimes = new_dinotimes
 
 	response = ""
+	''' THIS WAS USED IN COVID WHEN DIFFERENT COLLEGES HAD DIFFERENT MEAL TIMES
 	if "baxter" in message:
 		response = response + notbassertimes["Baxter"]
 	elif "goldstein" in message or "goldie" in message or "goldy" in message:
@@ -147,14 +148,24 @@ def get_time(message):
 	elif "hall" in message:
 		response = response + notbassertimes["Hall"]
 	else:
-		meal = check_for_dino(message)
+		meal = checkForDino(message)
 		if meal:
 			if meal == "dino":
 				response = response + dinotimes
 			else:
-				response = "".join([response, f"Basser {meal} is at ",bassertimes[meal],"."])
+				response = "".join([response, f"{meal} is at ",bassertimes[meal],"."])
 		else :
 			response = response + dinotimes
+	''' 
+
+	meal = checkForDino(message)
+	if meal:
+		if meal == "dino":
+			response = response + dinotimes
+		else:
+			response = "".join([response, f"{meal} is at ",bassertimes[meal],"."]).capitalize()
+	else :
+		response = response + dinotimes
 	return response
 
 

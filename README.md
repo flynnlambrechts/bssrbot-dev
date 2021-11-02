@@ -28,7 +28,8 @@ Database: postgresql - stores information input by users
 	- settings -> manage access -> add people
 4. Hard code
 - Add psid as seen from both bssrbot and bssrbot-dev to ADMIN_ID in ./bot_constants
-5. Run through updating process and supply camelot.py file to extract dino meals
+5. Add to facebook pages for both forms of the bot.
+6. Run through updating process and supply camelot.py file to extract dino meals. Also ensure set up with postgresql to connect and manage DB.
 
 
 ## To Update menu

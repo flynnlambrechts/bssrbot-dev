@@ -46,6 +46,7 @@ def receive_message():
                             con.close()
 
                         elif message['message'].get('attachments'):
+                            print(message['message'].get('attachments'))
                             print("Picture")
                             attachment = "blank for now"
                             message_text = ""
