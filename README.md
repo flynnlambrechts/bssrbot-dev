@@ -72,6 +72,7 @@ Database: postgresql - stores information input by users
 ## BssrBot v4 Coming Features
 ### Coffee Night
 - Wildcat of the week Nominations
+	- working just need to find a way to send back
 - Quote of the week submission
 - Photo submissions (for slide show)
 - Coffee Night Notificaitons? (Opt in and opt out)

@@ -29,9 +29,12 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 		picture = Response(recipient_id)
 		if attachment != "":
 			#print(attachment[0]['payload']['sticker_id'])
-			if attachment[0]['payload']['sticker_id'] == 369239263222822:
-				response.text = "Thumbs up to you too 👍"
-			else:
+			try:
+				if attachment[0]['payload']['sticker_id'] == 369239263222822:
+					response.text = "Thumbs up to you too 👍"
+				else:
+					response.text = "Nice pic!"
+			except:
 				response.text = "Nice pic!"
 		elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
 			con = getCon()
