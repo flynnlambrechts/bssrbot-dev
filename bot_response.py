@@ -89,8 +89,8 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 			response.add_button(button)
 
-		elif "washing" in message or "laundry" in message:
-			reponse = "Click here to view the status of the washers and dryers:"
+		elif "washing" in message or "laundry" in message or "dryer" in message :
+			response = "Click here to view the status of the washers and dryers:"
 			button = UrlButton("Laundry Status", "https://recharge.it.unsw.edu.au/LaundryMonitor/").get_button()
 			response.add_button(button)
 
