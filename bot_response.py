@@ -24,19 +24,31 @@ from models import (Sender, GlobalVar)
 
 def bot_response(recipient_id, message_text="", attachment = ""):
 	try:
+		## sets the message received to complete lowercase
 		message = message_text.lower()
+
+		## declares a text response
 		response = Response(recipient_id)
+		## declares a response used for pictures
 		picture = Response(recipient_id)
+
+		## if there is an attachment
 		if attachment != "":
 			#print(attachment[0]['payload']['sticker_id'])
+			## this needs to be sorted out its pre poor code
 			try:
+				## this checks if the attachment is the thumbs up sticker
 				if attachment[0]['payload']['sticker_id'] == 369239263222822:
 					response.text = "Thumbs up to you too 👍"
 				else:
 					response.text = "Nice pic!"
 			except:
 				response.text = "Nice pic!"
-		elif "dookie:" in message and str(recipient_id) in Admin_ID: #for adding custom messages
+
+		## used for commands such as adding a custome message to dino meals
+		## custom message format is for example "dookie: dinner <Dinner is great>"
+		## OR "dookie: all <All the meals are bad today go roundy>"
+		elif "dookie:" in message and str(recipient_id) in Admin_ID:
 			con = getCon()
 			add_custom_message(message_text, con)
 			response.text = "Adding custom message..."
@@ -77,19 +89,30 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			button = UrlButton("Latemeal","https://user.resi.inloop.com.au/home").get_button()
 			response.add_button(button)
 
+		elif "washing" in message or "laundry" in message:
+			reponse = "Click here to view the status of the washers and dryers:"
+			button = UrlButton("Laundry Status", "https://recharge.it.unsw.edu.au/LaundryMonitor/").get_button()
+			response.add_button(button)
+
+		## clapback to insults
 		elif "idiot" in message or "dumb" in message or "stupid" in message:
 			link = Sender(recipient_id).get_profile_pic()
 			picture.attachment = Image(link).get_image()
 			picture.send()
 			response.text = "This you?"
 
+		## sends a random gif to the user if requested
 		elif "gif" in message:
 			response.attachment = Gif("nice").get_gif()
 
+		## these jokes are all shocking
 		elif "joke" in message:
 			response.text = get_joke()
 
+		## prelimary testing for wildcat nominations
+		## and quote submission
 		elif "coffee" in message:
+			## this will always get the result for wildcat nomiations
 			item = 'wildcats'
 			response.text = f"Getting {item} for this week."
 			response.send()
@@ -99,12 +122,15 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			response.add_file(file)
 
 		elif "test" == message:
-			testy = GlobalVar("test1")
-			testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
-			testy.get()
+			response.text = "Don't test me."
 
+			## A test variable used
+			# testy = GlobalVar("test1")
+			# testy.insert({'index':2,'date':'27-05-21','column1':'hello1','column2':'goodbye1'})
+			# testy.get()
+
+		## no longer responds because the list of users is too long
 		elif "show me users" in message:
-
 			if str(recipient_id) in Admin_ID: 
 				con = getCon()
 				response.text = "Check the logs."
@@ -113,14 +139,17 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			else:
 				response.text = "You shall not, PASS: \n" + str(recipient_id)
 
+		## now dealt with in rive
 		# elif "hello" in message or "hey" in message or "help" in message or "hi" in message: #hi sometimes causes conflicts
 		# 	button = UrlButton("BssrBot Page","https://www.facebook.com/BssrBot-107323461505853/").get_button()
 		# 	response.add_button(button)
 		# 	response.text = greeting_message
 
+		## maybe move this into rive
 		elif "thx" in message or "thanks" in message or "thank you" in message or "thankyou" in message:
 			response.text =  " ".join(["You're welcome!", u"\U0001F60B"]) #tongue out emoji
 
+		## a small command to check where we are at in the cycle of the 4 month menu cycle
 		elif "/week" in message:
 			response.text = "Menuweek is " + str(getmenuweek())
 		else:	
@@ -129,8 +158,11 @@ def bot_response(recipient_id, message_text="", attachment = ""):
 			except:
 				response.text = "'".join(["Sorry, I don't understand: ",message_text,""])
 				PrintException()
-				
+		
+		## adds the dino quickreplies to all messages		
 		response.add_quick_replies(dino_quickreplies)
+
+		## sends the response
 		response.send()
 	except:
 		PrintException()
